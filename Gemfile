@@ -7,6 +7,8 @@ gem 'devise', github: 'plataformatec/devise'
 gem 'pg'
 gem 'puma'
 gem 'rails_12factor'
+gem 'rails_stdout_logging'
+gem 'rails3_serve_static_assets'
 
 # Gems used only for assets and not required
 # in production environments by default.
