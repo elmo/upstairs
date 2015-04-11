@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2'
+ruby "2.1.5"
 
+gem 'rails', '4.2'
 gem 'devise', github: 'plataformatec/devise'
 gem 'pg'
+gem 'puma'
+gem 'rails_12factor'
 
 # Gems used only for assets and not required
 # in production environments by default.
