@@ -161,5 +161,6 @@ DEPENDENCIES
   puma
   rails (= 4.2)
   rails_12factor
+  rails_stdout_logging
   sass-rails!
   uglifier (>= 1.0.3)
