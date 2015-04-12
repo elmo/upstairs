@@ -10,6 +10,7 @@ Upstairs::Application.configure do
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_files = true
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -19,6 +20,7 @@ Upstairs::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
