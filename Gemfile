@@ -12,11 +12,9 @@ gem 'rails_12factor'
 gem 'rails_stdout_logging'
 gem 'refills'
 
-group :assets do
-  gem 'sass-rails', github: 'rails/sass-rails'
-  gem 'coffee-rails', '~> 4.0.0'
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'sass-rails', github: 'rails/sass-rails'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.0.3'
 
 group :development do
  gem 'rspec'
