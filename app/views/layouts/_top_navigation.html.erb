@@ -1,0 +1,22 @@
+<header class="centered-navigation" role="banner">
+  <div class="centered-navigation-wrapper">
+    <nav role="navigation">
+      <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
+        <li class='nav-link'><%= link_to 'about',  about_path -%></li>
+        <li class='nav-link'><%= link_to 'contact',  contact_path -%></li>
+        <li class="nav-link logo">
+        <%= link_to home_path do -%>
+          <%= image_tag "logo.png", alt: "Logo" %> 
+        <% end %> 
+        </li>
+        <% if current_user.blank? %>
+        <li class='nav-link'><%= link_to 'sign up',  new_user_registration_path -%></li>
+        <li class='nav-link'><%= link_to 'log in',  new_user_session_path -%></li>
+        <% else  %>
+		<li class='nav-link'><%= current_user.email -%></li>
+        <li class='nav-link'><%= link_to 'log out', destroy_user_session_path, method: :delete  -%></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
