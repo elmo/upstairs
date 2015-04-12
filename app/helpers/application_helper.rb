@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def footer
-    ['home'].include?(controller_name) ? narrow_footer : narrow_footer
+    (['home'].include?(controller_name)  and action_name == 'index') ? big_footer : narrow_footer
   end
 
   def big_footer
