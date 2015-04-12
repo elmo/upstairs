@@ -3,11 +3,17 @@ source 'https://rubygems.org'
 ruby "2.1.5"
 
 gem 'rails', '4.2'
+
+
+gem 'bitters'
+gem 'bourbon'
 gem 'devise', github: 'plataformatec/devise'
+gem 'neat'
 gem 'pg'
 gem 'puma'
 gem 'rails_12factor'
 gem 'rails_stdout_logging'
+gem 'refills'
 
 # Gems used only for assets and not required
 # in production environments by default.
