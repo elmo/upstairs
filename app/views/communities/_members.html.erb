@@ -1,0 +1,8 @@
+<ul>
+<% @community.users.each do |user| %>
+  <li>
+    <%= user.email -%>
+    send message
+  </li>
+<% end %>
+</ul>

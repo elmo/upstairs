@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :authenticate_account!
+  before_action :authenticate_user!
   before_action :set_community, only: [:create,:destroy]
 
   def create
@@ -9,13 +9,13 @@ class MembershipsController < ApplicationController
 
   def destroy
     current_user.leave(@community)
-    redirect_to current_user
+    redirect_to user_home_path
   end
 
   private
 
   def set_community
-    @community = Community.friendly.find(params[:id])
+    @community = Community.friendly.find(params[:community_id])
   end
 
 

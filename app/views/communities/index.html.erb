@@ -1,0 +1,11 @@
+<section>
+<ol>
+<% @communities.each do |community|%>
+  <li>
+     <%= address(community, ' ') %> 
+     <%= form_tag  community_memberships_path(community), method: :post do %>
+       <%= submit_tag 'join' -%>
+     <% end %>	
+  </li>
+<%end%>
+</section>

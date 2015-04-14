@@ -1,0 +1,16 @@
+<p>You are a member of <%= pluralize(current_user.memberships.count, 'community')-%> </p>
+
+<% if current_user.memberships.any? %>
+ <% current_user.memberships.each do |membership| %>
+   <%= link_to membership.community.address_line_one, community_path(membership.community)-%>
+   <%= link_to 'leave', community_membership_path(membership.community, membership), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
+   <br>
+  <% end %>
+   <br>
+  <%= link_to 'join another community', communities_path -%>
+<% else %>
+   <br>
+  <%= link_to 'find a community to join', communities_path -%>
+<% end %>
+
+

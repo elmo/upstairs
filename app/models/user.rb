@@ -9,11 +9,15 @@ class User < ActiveRecord::Base
 
 
   def join(community)
-    self.memberships.create(community_id: community.id) if !memberships.where(community_id: community.id).exists?
+    self.memberships.create(community_id: community.id) unless member_of?(community)
   end
 
   def leave(community)
     memberships.where(community_id: community.id).destroy_all
+  end
+
+  def member_of?(community)
+    memberships.where(community_id: community.id).exists?
   end
 
 end

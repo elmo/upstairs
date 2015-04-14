@@ -14,4 +14,8 @@ class Community < ActiveRecord::Base
       [:address_line_one, :city, :state, :postal_code]
     ]
   end
+
+  def membership(user)
+    user.memberships.where(user_id: user.id).first
+  end
 end

@@ -1,5 +1,9 @@
 <home>
 
-<h1><%= @community.address_line_one -%></h1>
+<h1><%= address(@community) -%></h1>
+
+<%= render partial: 'membership' -%>
+
+<%= render partial: 'members' -%>
 
 </home>
