@@ -3,6 +3,8 @@
 <% if current_user.memberships.any? %>
  <% current_user.memberships.each do |membership| %>
    <%= link_to membership.community.address_line_one, community_path(membership.community)-%>
+   (<%=pluralize(membership.community.users.count, 'member') -%>)
+   1 new message
    <%= link_to 'leave', community_membership_path(membership.community, membership), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
    <br>
   <% end %>
