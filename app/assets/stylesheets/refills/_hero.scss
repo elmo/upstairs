@@ -9,7 +9,7 @@
   $hero-background-bottom: #20392B;
   $hero-color: white;
   $gradient-angle: 10deg;
-  $hero-image: 'splash.jpg';
+  $hero-image: 'https://res.cloudinary.com/hu7ymj5fv/image/upload/v1429380225/wga8pf0fa9dhgdyzowgg.jpg';
 
   @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
   background-color: #324766;
