@@ -25,7 +25,7 @@
   }
 
   .images-wrapper {
-    @include background(url('no_smoking.jpg'), linear-gradient($side-image-background-top, $side-image-background-bottom), no-repeat $side-image-background-top scroll);
+    @include background(url('https://res.cloudinary.com/hu7ymj5fv/image/upload/v1429380207/fdbbdq6lbcchoclweuda.jpg'), linear-gradient($side-image-background-top, $side-image-background-bottom), no-repeat $side-image-background-top scroll);
     background-color: $side-image-background-top;
     background-size: cover;
     border-bottom: $side-image-border;

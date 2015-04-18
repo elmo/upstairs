@@ -1,0 +1,14 @@
+development: 
+  cloud_name: "hu7ymj5fv"
+  api_key: "127991223569326"
+  api_secret: "PSZJBKKITBJPGJ0AIbRVa01jKEM"
+    
+development: 
+  cloud_name: "hu7ymj5fv"
+  api_key: "127991223569326"
+  api_secret: "PSZJBKKITBJPGJ0AIbRVa01jKEM"
+
+production:
+  cloud_name: "hu7ymj5fv"
+  api_key: "127991223569326"
+  api_secret: "PSZJBKKITBJPGJ0AIbRVa01jKEM"
