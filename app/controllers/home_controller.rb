@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-    layout false
+    layout false, only: [:splash]
 
   def splash
   end
