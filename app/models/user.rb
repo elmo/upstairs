@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :communities, through: :memberships
 
+  has_paper_trail
+
 
   def join(community)
     self.memberships.create(community_id: community.id) unless member_of?(community)
@@ -18,6 +20,10 @@ class User < ActiveRecord::Base
 
   def member_of?(community)
     memberships.where(community_id: community.id).exists?
+  end
+
+  def admin?
+    true
   end
 
 end
