@@ -2,6 +2,7 @@
 <% if comment.replies.any?  %>
   <% comment.replies.each do |reply| %>
    <p><%= reply.body -%></p> 
+   by <%= reply.user.email -%> @ <%= reply.created_at.strftime(upstairs_time_format) -%>
   <% end %>
 <% end %>
 

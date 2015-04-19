@@ -68,4 +68,9 @@ module ApplicationHelper
       ['Wyoming', 'WY']
     ]
   end
+
+  def upstairs_time_format
+    "%B %d, %Y %I:%S %p"
+  end
+
 end

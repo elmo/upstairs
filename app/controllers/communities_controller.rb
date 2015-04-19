@@ -7,7 +7,7 @@ class CommunitiesController < ApplicationController
 
   # GET /communities/1
   def show
-   @posts = @community.posts
+   @posts = @community.posts.page(params[:page]).per(10).order('created_at desc')
   end
 
   # GET /communities/new

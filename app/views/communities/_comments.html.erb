@@ -2,6 +2,7 @@
 <% if commentable.comments.any?  %>
   <% commentable.comments.each do |comment| %>
    <p><%= comment.body -%></p> 
+   by <%= comment.user.email -%> @ <%= comment.created_at.strftime(upstairs_time_format) -%>
    <%= render partial: 'replies', locals: {comment: comment } %>
   <% end %>
 <% end %>
