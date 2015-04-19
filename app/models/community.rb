@@ -1,6 +1,8 @@
 class Community < ActiveRecord::Base
   has_many :memberships
   has_many :users, through: :memberships
+  has_many :posts, as: :postable
+  has_many :comments, through: :posts
   validates_presence_of :address_line_one
   validates_presence_of :city
   validates_presence_of :state
