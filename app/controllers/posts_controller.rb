@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_postable
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -12,7 +14,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = @postable.posts.new(user: current_user)
   end
 
   # GET /posts/1/edit
@@ -21,7 +23,8 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
+    @post = @postable.posts.new(post_params)
+    @post.user = current_user
 
     if @post.save
       redirect_to @post, notice: 'Post was successfully created.'
@@ -47,12 +50,17 @@ class PostsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def set_postable
+      @postable = Community.friendly.find(params[:community_id])
+    end
+
     def set_post
       @post = Post.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params[:post]
+      params[:post].permit(:title, :body)
     end
 end

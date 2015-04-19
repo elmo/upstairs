@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_commentable
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   # GET /comments
@@ -12,7 +14,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @comment = @commentable.comments.new(user: current_user)
   end
 
   # GET /comments/1/edit
@@ -21,10 +23,11 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @commentable.comments.new(comment_params)
+    @comment.user = current_user
 
     if @comment.save
-      redirect_to @comment, notice: 'Comment was successfully created.'
+      redirect_to community_path(@commentable.postable), notice: 'Comment was successfully created.'
     else
       render :new
     end
@@ -51,8 +54,12 @@ class CommentsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
 
+    def set_commentable
+      @commentable = Post.find(params[:post_id])
+    end
+
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params[:comment]
+      params[:comment].permit(:body)
     end
 end

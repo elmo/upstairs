@@ -1,0 +1,8 @@
+<%= pluralize(comment.replies.count, 'reply' ) -%>
+<% if comment.replies.any?  %>
+  <% comment.replies.each do |reply| %>
+   <p><%= reply.body -%></p> 
+  <% end %>
+<% end %>
+
+<p><%= link_to 'reply', new_comment_reply_path(comment) -%></p>

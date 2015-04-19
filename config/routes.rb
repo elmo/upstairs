@@ -15,5 +15,15 @@ Upstairs::Application.routes.draw do
 
   resources :communities do
     resources :memberships, only: [:create, :destroy]
+    resources :posts
   end
+
+  resources :posts do
+    resources :comments
+  end
+
+  resources :comments do
+    resources :replies
+  end
+
 end

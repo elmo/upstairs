@@ -1,0 +1,18 @@
+<h2>Posts</h2>
+<% if @posts.empty? %>
+<p>There are no messages for this community.<p>
+<% else %>
+
+<% @posts.each do |post|%>
+  <p>
+  <%= post.title -%> <%= link_to 'comment', new_post_comment_path(post) -%><br />
+  <%= post.body -%>
+  <%= render partial: 'comments', locals: {commentable: post }  -%>
+  <% end %>
+  </p>
+<% end %>
+
+<p>
+<%= link_to 'add a message', new_community_post_path(@community) -%>
+</p>
+

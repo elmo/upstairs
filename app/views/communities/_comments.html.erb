@@ -1,0 +1,7 @@
+<p%= pluralize(commentable.comments.count, 'comment' ) -%>
+<% if commentable.comments.any?  %>
+  <% commentable.comments.each do |comment| %>
+   <p><%= comment.body -%></p> 
+   <%= render partial: 'replies', locals: {comment: comment } %>
+  <% end %>
+<% end %>

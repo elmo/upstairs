@@ -7,6 +7,7 @@ class CommunitiesController < ApplicationController
 
   # GET /communities/1
   def show
+   @posts = @community.posts
   end
 
   # GET /communities/new

@@ -1,4 +1,7 @@
 <section>
+<% if @communities.empty? %>
+ <p>There are no communities in the system.</p>
+<% end %>
 <ol>
 <% @communities.each do |community|%>
   <li>
@@ -8,4 +11,5 @@
      <% end %>	
   </li>
 <%end%>
+<%= link_to 'add a new community', new_community_path -%>
 </section>

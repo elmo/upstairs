@@ -1,10 +1,5 @@
-<%= simple_form_for(@comment) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+<p>Add new comment for <strong><%= @comment.commentable.title -%></strong>.</p>
+<%= simple_form_for([@commentable, @comment]) do |f| %>
+  <%= f.input :body %>
+  <%= f.button :submit %>
 <% end %>
