@@ -2,14 +2,21 @@
 <% if @communities.empty? %>
  <p>There are no communities in the system.</p>
 <% end %>
-<ol>
+
 <% @communities.each do |community|%>
-  <li>
-     <%= address(community, ' ') %> 
-     <%= form_tag  community_memberships_path(community), method: :post do %>
+  <p> <%= address(community, ' ') %> 
+    <% if current_user.member_of?(community) %>
+      <%= link_to 'leave', community_membership_path(community, community.membership(current_user) ), 
+        method: :delete, 
+	confirm: "Are your sure that you want to leave this coummnity?" -%>
+     <% else %>
+       <%= form_tag community_memberships_path(community), method: :post do %>
        <%= submit_tag 'join' -%>
      <% end %>	
-  </li>
-<%end%>
-<%= link_to 'add a new community', new_community_path -%>
+  </p>
+   <% end %>
+<% end %>
+
+<p><%= link_to 'add a new community', new_community_path -%></p>
+
 </section>
