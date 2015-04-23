@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to community_post_path(@postable, @post), notice: 'Post was successfully created.'
     else
       render :new
     end
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to community_post_path(@postable, @post), notice: 'Post was successfully created.'
     else
       render :edit
     end
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
     end
 
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
