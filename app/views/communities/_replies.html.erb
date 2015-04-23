@@ -1,9 +1,11 @@
-<%= pluralize(comment.replies.count, 'reply' ) -%>
-<% if comment.replies.any?  %>
-  <% comment.replies.each do |reply| %>
-   <p><%= reply.body -%></p> 
-   by <%= reply.user.email -%> @ <%= reply.created_at.strftime(upstairs_time_format) -%>
-  <% end %>
+<p><%= pluralize(comment.replies.count, 'reply' ) -%> <%= link_to 'reply', new_comment_reply_path(comment) -%>
+</p>
+
+<% comment.replies.each do |reply| %>
+<p class="by-line"><%= reply.user.email -%> replied @ <%= reply.created_at.strftime(upstairs_time_format) -%></p>
+<p class="reply-body">
+<%= reply.body -%>
+</p>
+<br>
 <% end %>
 
-<p><%= link_to 'reply', new_comment_reply_path(comment) -%></p>

@@ -1,11 +1,16 @@
-<home>
+<center>
+<h2><%= address(@community, ' ') -%></h2>
+<br /><%= render partial: 'membership' -%>
+</center>
 
-<h1><%= address(@community) -%></h1>
+<dashboard>
 
-<%= render partial: 'membership' -%>
-
-<%= render partial: 'members' -%>
-
+<left>
 <%= render partial: 'posts' -%>
+</left>
 
-</home>
+<right>
+<%= render partial: 'members' -%>
+</right>
+
+</dashboard>

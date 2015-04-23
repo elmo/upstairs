@@ -1,8 +1,9 @@
-<p%= pluralize(commentable.comments.count, 'comment' ) -%>
-<% if commentable.comments.any?  %>
-  <% commentable.comments.each do |comment| %>
-   <p><%= comment.body -%></p> 
-   by <%= comment.user.email -%> @ <%= comment.created_at.strftime(upstairs_time_format) -%>
-   <%= render partial: 'replies', locals: {comment: comment } %>
-  <% end %>
+<p><%= pluralize(commentable.comments.count, 'comment' ) -%></p>
+
+<% commentable.comments.each do |comment| %>
+ <p class="by-line"><%= comment.user.email -%> commented at <%= comment.created_at.strftime(upstairs_time_format) -%></p>
+  <div class="comment-body">
+   <%= comment.body -%>
+  </div>
+  <%= render partial: 'replies', locals: {comment: comment } %>
 <% end %>

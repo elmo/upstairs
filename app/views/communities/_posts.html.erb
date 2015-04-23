@@ -1,20 +1,18 @@
-<p> <%= link_to 'add a new post', new_community_post_path(@community) -%> </p>
-
+<p><%= link_to 'add a new post', new_community_post_path(@community) -%> </p>
 <% if @posts.empty? %>
 <p>There are no messages for this community.<p>
 <% else %>
 
 <% @posts.each do |post|%>
-  <p>
-  <h2><%= post.title -%></h2> 
+  <h3><%= post.title -%></h3> 
+  <p class="byline"><%= post.user.email -%> posted @ <%= post.created_at.strftime(upstairs_time_format) -%></p>
+  <div class="post-body">
   <%= post.body -%>
-  <br />
-  by <%= post.user.email -%> @ <%= post.created_at.strftime(upstairs_time_format) -%>
+  </div>
   <%= link_to 'comment', new_post_comment_path(post) -%>
-  <%= render partial: 'comments', locals: {commentable: post }  -%>
+  <br />
+    <%= render partial: 'comments', locals: {commentable: post }  -%>
   <% end %>
-  </p>
 <% end %>
-
-
+<br>
 <%= paginate(@posts) -%>

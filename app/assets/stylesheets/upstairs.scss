@@ -1,9 +1,16 @@
-section {
+#main {
   @include outer-container;
+}
+section {
   aside { @include span-columns(4); }
   article { @include span-columns(8); }
 }
 
+dashboard {
+  @include outer-container;
+  left { @include span-columns(8); } 
+  right { @include span-columns(4); }
+}
 
 home {
   @include outer-container;
