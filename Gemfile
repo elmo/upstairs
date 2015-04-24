@@ -19,6 +19,7 @@ gem 'rails_admin'
 gem 'rails_stdout_logging'
 gem 'rollbar'
 gem 'refills'
+gem 'sidekiq'
 gem 'simple_form'
 
 gem 'sass-rails', github: 'rails/sass-rails'
