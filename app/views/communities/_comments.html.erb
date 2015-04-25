@@ -5,5 +5,5 @@
   <div class="comment-body">
    <%= comment.body -%>
   </div>
-  <%= render partial: 'replies', locals: {comment: comment } %>
+  <%= render partial: '/communities/replies', locals: {comment: comment } %>
 <% end %>

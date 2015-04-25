@@ -28,4 +28,8 @@ class Comment < ActiveRecord::Base
     parent_comment_id.present?
   end
 
+  def name
+    "comment"
+  end
+
 end

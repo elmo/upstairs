@@ -8,4 +8,8 @@ class Reply < Comment
     comment.commenters.each { |user| Notification.create(notifiable: self, user: user) }
   end
 
+  def name
+    "reply"
+  end
+
 end

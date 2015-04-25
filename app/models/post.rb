@@ -28,4 +28,12 @@ class Post < ActiveRecord::Base
     " posted "
   end
 
+  def grandparent
+   self
+  end
+
+  def name
+    title
+  end
+
 end

@@ -26,4 +26,6 @@ Upstairs::Application.routes.draw do
     resources :replies
   end
 
+  resources :users , only: :show
+
 end

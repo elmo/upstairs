@@ -74,15 +74,27 @@ module ApplicationHelper
   end
 
   def by_line(obj)
-   username_or_anonymous(obj.user) + obj.verb + obj.created_at.strftime(upstairs_time_format)
+   link_to(username_or_anonymous(obj.user), obj.user)  + obj.verb + obj.created_at.strftime(upstairs_time_format)
   end
 
   def username_or_anonymous(user)
-   usable_username?(user) ? user.username : 'Anonymous'
+   (usable_username?(user))  ? user.username : 'Anonymous'
   end
 
   def usable_username?(user)
     user.use_my_username? and user.username.present?
+  end
+
+  def user_mini_summary(user)
+    username_or_anonymous(user) + ' joined ' +  user.created_at.strftime(upstairs_time_format)
+  end
+
+  def notification_summary(notification)
+    link_to(username_or_anonymous(notification.user) , user_path(notification.user) ) +
+    notification.notifiable.verb  +
+    notification.notifiable.class.to_s.downcase +  ' ' +
+    link_to(notification.notifiable.name, [notification.notifiable.grandparent.postable, notification.notifiable.grandparent]) + ' on ' +
+    notification.notifiable.created_at.strftime(upstairs_time_format)
   end
 
 end
