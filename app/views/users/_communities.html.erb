@@ -8,6 +8,7 @@
    (<%=pluralize(membership.community.posts.count, 'comments') -%>)
    <br />
    <%= link_to 'leave', community_membership_path(membership.community, membership), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
+    <%= link_to 'edit', edit_community_path(membership.community) -%>
    <br>
   <% end %>
    <br>
@@ -16,5 +17,3 @@
    <br>
   <%= link_to 'find a community to join', communities_path -%>
 <% end %>
-
-

@@ -1,5 +1,10 @@
 <center>
 <h2><%= address(@community, ' ') -%></h2>
+
+<% if @community.photos.any? %>
+ <%= cl_image_tag(@community.photos.last.path, { size: '200x200', crop: :fit }) %>
+<% end %>
+
 <br /><%= render partial: 'membership' -%>
 </center>
 

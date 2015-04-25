@@ -27,7 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_permitted_parameters
-     registration_params = [:email, :password, :password_confirmation, :username, :phone]
+     registration_params = [:email, :password, :password_confirmation, :username, :phone,:avatar, :use_my_username, :ok_to_send_text_messages]
      if params[:action] == 'update'
        devise_parameter_sanitizer.for(:user_update) { |u| u.permit(registration_params << :current_password) }
      elsif params[:action] == 'create'
@@ -42,7 +42,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    user_home_path
+    edit_user_registration_path
   end
 
   def update_resource(resource, params)
@@ -51,9 +51,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
-
   def user_params
-    params.require(:user).permit(:email, :password, :current_password, :password_confirmation, :username, :phone)
+    params.require(:user).permit(:email, :password, :current_password, :password_confirmation, :username, :phone, :avatar, :use_my_username, :ok_to_send_text_messages)
   end
 
 end

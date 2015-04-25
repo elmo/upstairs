@@ -9,8 +9,10 @@ class Community < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
-
   has_paper_trail
+
+  has_attachments :photos
+
 
   def slug_candidates
     [

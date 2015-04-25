@@ -27,6 +27,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.attachinary_file_field :avatar %>
+  </div>
+
+  <div class="field">
     <%= f.label :username %>Optional (This is how other users will know you)<br />
     <%= f.password_field :username, autocomplete: "off" %>
   </div>

@@ -1,9 +1,8 @@
 Upstairs::Application.routes.draw do
-  resources :comments
-
-  resources :posts
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount Attachinary::Engine => "/attachinary"
+
   devise_for :users, :controllers => {:registrations => "registrations"}
   root to: "home#splash"
   get '/' => "home#splash", as: :home
@@ -17,6 +16,9 @@ Upstairs::Application.routes.draw do
     resources :memberships, only: [:create, :destroy]
     resources :posts
   end
+
+  resources :comments
+  resources :posts
 
   resources :posts do
     resources :comments

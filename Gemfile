@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby "2.1.6"
 gem 'rails', '4.2'
+
+gem 'attachinary'
 gem 'bitters'
 gem 'bourbon'
 gem 'cancan'
