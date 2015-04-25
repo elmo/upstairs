@@ -20,4 +20,12 @@ class Comment < ActiveRecord::Base
     replies.collect(&:user).uniq
   end
 
+  def verb
+    (reply?) ? " replied " : " commented "
+  end
+
+  def reply?
+    parent_comment_id.present?
+  end
+
 end

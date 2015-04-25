@@ -5,4 +5,5 @@ class ApplicationController < ActionController::Base
     redirect_to '/welcome', :alert => exception.message
   end
 
+
 end

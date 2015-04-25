@@ -4,7 +4,7 @@ Upstairs::Application.routes.draw do
   resources :posts
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   root to: "home#splash"
   get '/' => "home#splash", as: :home
   get '/about' => "home#about", as: :about

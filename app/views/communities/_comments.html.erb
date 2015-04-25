@@ -1,7 +1,7 @@
 <p><%= pluralize(commentable.comments.count, 'comment' ) -%></p>
 
 <% commentable.comments.each do |comment| %>
- <p class="by-line"><%= comment.user.email -%> commented at <%= comment.created_at.strftime(upstairs_time_format) -%></p>
+ <p class="by-line"><%= by_line(comment) -%></p>
   <div class="comment-body">
    <%= comment.body -%>
   </div>

@@ -5,7 +5,7 @@
 
 <% @posts.each do |post|%>
   <h3><%= post.title -%></h3> 
-  <p class="byline"><%= post.user.email -%> posted @ <%= post.created_at.strftime(upstairs_time_format) -%></p>
+  <p class="byline"><%= by_line(post)-%><p>
   <div class="post-body">
   <%= post.body -%>
   </div>

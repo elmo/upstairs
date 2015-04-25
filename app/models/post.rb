@@ -24,4 +24,8 @@ class Post < ActiveRecord::Base
     [ :title ]
   end
 
+  def verb
+    " posted "
+  end
+
 end
