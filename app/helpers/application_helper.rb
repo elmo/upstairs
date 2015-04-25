@@ -78,7 +78,11 @@ module ApplicationHelper
   end
 
   def username_or_anonymous(user)
-    (user.use_my_username?) ? user.username : 'Anonymous'
+   usable_username?(user) ? user.username : 'Anonymous'
+  end
+
+  def usable_username?(user)
+    user.use_my_username? and user.username.present?
   end
 
 end
