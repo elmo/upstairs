@@ -16,6 +16,11 @@ RSpec.describe Comment, :type => :model do
     expect { Comment.create(commentable: @post, user: @commenter) }.to change(Comment,:count).by(1)
   end
 
+  #it "creates and actionable" do
+  #  @commenter  = create(:user, email: "commenter@email.com" )
+  #  expect { Comment.create(commentable: @post, user: @commenter) }.to change(Activty,:count).by(1)
+  #end
+
   it "does not create a comment with out user" do
     expect { Comment.create(commentable: @post) }.to change(Comment,:count).by(0)
   end

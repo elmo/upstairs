@@ -1,11 +1,13 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable, polymorphic: true
+  belongs_to :actionable, polymorphic: true
   has_many :replies, class_name: 'Comment', foreign_key: "parent_comment_id"
   has_many :notifications, as: :notifiable
   validates_presence_of :user
   belongs_to :comment, foreign_key: "parent_comment_id"
   after_create :create_notifications
+  after_create :create_actionable
   has_paper_trail
 
   def grandparent
@@ -29,7 +31,22 @@ class Comment < ActiveRecord::Base
   end
 
   def name
-    "comment"
+    ""
+  end
+
+  def noun
+    ""
+  end
+
+  def preposition
+    " commented on #{grandparent.name} "
+  end
+
+
+  private
+
+  def create_actionable
+   Activity.create(actionable: self, user: self.user, community: self.grandparent.postable)
   end
 
 end
