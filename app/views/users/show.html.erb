@@ -1,1 +1,5 @@
 <h1><%= username_or_anonymous(@user) -%> </h1>
+
+<% @user.activities.limit(20).order('created_at desc').each do |activity| %>
+  <%= activity_summary(activity) -%> <br> 
+<% end %>
