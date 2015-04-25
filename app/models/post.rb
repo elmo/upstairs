@@ -9,8 +9,8 @@ class Post < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
-
   has_paper_trail
+  has_attachments :photos
 
   def commenters
     comments.collect(&:user).uniq

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :communities, through: :memberships
 
   has_paper_trail
-
+  has_attachment :avatar, accept: [:jpg, :png, :gif]
 
   def join(community)
     self.memberships.create(community_id: community.id) unless member_of?(community)

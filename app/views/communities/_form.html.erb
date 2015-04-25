@@ -4,5 +4,7 @@
   <%= f.input :city %>
   <%= f.input :state, collection: us_states %>
   <%= f.input :postal_code %>
+  <%= f.input :photos, as: :attachinary %>
   <%= f.button :submit %>
+
 <% end %>

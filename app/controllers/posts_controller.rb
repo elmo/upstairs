@@ -19,6 +19,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @post = @postable.posts.friendly.find(params[:id])
   end
 
   # POST /posts
@@ -49,6 +50,7 @@ class PostsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
 
     def set_postable
@@ -61,6 +63,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params[:post].permit(:title, :body)
+      params[:post].permit(:title, :body, photos: [])
     end
 end

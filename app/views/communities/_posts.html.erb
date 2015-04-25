@@ -6,7 +6,11 @@
 <% @posts.each do |post|%>
   <h3><%= post.title -%></h3> 
   <p class="byline"><%= by_line(post)-%><p>
+  <%= link_to 'view', community_post_path(@community, post) -%>
   <div class="post-body">
+  <% if post.photos.any? -%>
+    <%= cl_image_tag(post.photos.first.path, { size: '250x250', crop: :fit }) %>
+  <% end %>
   <%= post.body -%>
   </div>
   <%= link_to 'comment', new_post_comment_path(post) -%>

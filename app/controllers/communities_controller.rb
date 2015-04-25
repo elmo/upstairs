@@ -1,5 +1,5 @@
 class CommunitiesController < ApplicationController
-  before_action :set_community, only: [:show]
+  before_action :set_community, only: [:show, :edit, :update]
 
   def index
     @communities= Community.all
@@ -14,6 +14,18 @@ class CommunitiesController < ApplicationController
   # GET /communities/new
   def new
     @community = Community.new
+  end
+
+  # GET /communities/1/edit
+  def edit
+  end
+
+  def update
+    if @community.update(community_params)
+      redirect_to edit_community_path(@community), notice: 'Community was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   # POST /communities
@@ -35,6 +47,6 @@ class CommunitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def community_params
-      params.require(:community).permit(:address_line_one, :address_line_two, :city,:state, :postal_code)
+      params.require(:community).permit(:address_line_one, :address_line_two, :city,:state, :postal_code, photos: [])
     end
 end

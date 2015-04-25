@@ -1,3 +1,7 @@
 <h1>Welcome, <%=current_user.email-%> </h1>
 
+<% if current_user.avatar? %>
+  <%= cl_image_tag(current_user.avatar.path, { size: '50x50', crop: :thumb, gravity: :face }) %>
+<% end %>
+
 <%= render partial: 'communities' -%>
