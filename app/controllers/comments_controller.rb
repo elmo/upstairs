@@ -55,7 +55,7 @@ class CommentsController < ApplicationController
     end
 
     def set_commentable
-      @commentable = Post.find(params[:post_id])
+      @commentable = Post.friendly.find(params[:post_id])
     end
 
     # Only allow a trusted parameter "white list" through.

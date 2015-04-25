@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.1.5"
+ruby "2.1.6"
 gem 'rails', '4.2'
 gem 'bitters'
 gem 'bourbon'
@@ -19,6 +19,7 @@ gem 'rails_admin'
 gem 'rails_stdout_logging'
 gem 'rollbar'
 gem 'refills'
+gem 'sidekiq'
 gem 'simple_form'
 
 gem 'sass-rails', github: 'rails/sass-rails'
