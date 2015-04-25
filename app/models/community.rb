@@ -9,8 +9,6 @@ class Community < ActiveRecord::Base
   validates_presence_of :city
   validates_presence_of :state
 
-  after_create :create_actionable
-
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
   has_paper_trail
