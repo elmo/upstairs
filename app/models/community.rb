@@ -3,9 +3,13 @@ class Community < ActiveRecord::Base
   has_many :users, through: :memberships
   has_many :posts, as: :postable
   has_many :comments, through: :posts
+  has_many :activities
+  belongs_to :actionable, polymorphic: true
   validates_presence_of :address_line_one
   validates_presence_of :city
   validates_presence_of :state
+
+  after_create :create_actionable
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
@@ -25,4 +29,5 @@ class Community < ActiveRecord::Base
   def membership(user)
     user.memberships.where(user_id: user.id).first
   end
+
 end

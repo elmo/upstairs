@@ -1,11 +1,13 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :postable, polymorphic: true
+  belongs_to :actionable, polymorphic: true
   has_many :comments, as: :commentable
   has_many :notifications, as: :notifiable
   validates_presence_of :user
   validates_presence_of :title
   after_create :create_notifications
+  after_create :create_actionable
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
@@ -24,9 +26,18 @@ class Post < ActiveRecord::Base
     [ :title ]
   end
 
+  def noun
+    " "
+  end
+
   def verb
     " posted "
   end
+
+  def preposition
+    " posted "
+  end
+
 
   def grandparent
    self
@@ -35,5 +46,11 @@ class Post < ActiveRecord::Base
   def name
     title
   end
+
+   private
+
+   def create_actionable
+     Activity.create(actionable: self, user: self.user, community: self.postable)
+   end
 
 end

@@ -97,4 +97,11 @@ module ApplicationHelper
     notification.notifiable.created_at.strftime(upstairs_time_format)
   end
 
+  def activity_summary(activity)
+    link_to(username_or_anonymous(activity.user) , user_path(activity.user) ) +
+    activity.actionable.preposition + activity.actionable.noun + ' ' +
+    link_to(activity.actionable.name, [activity.actionable.grandparent.postable, activity.actionable.grandparent]) + ' ' +
+    activity.actionable.created_at.strftime(upstairs_time_format)
+  end
+
 end

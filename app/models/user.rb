@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :memberships
   has_many :communities, through: :memberships
+  has_many :activities
 
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
