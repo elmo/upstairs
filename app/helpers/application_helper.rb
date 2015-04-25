@@ -73,4 +73,12 @@ module ApplicationHelper
     "%B %d, %Y %I:%S %p"
   end
 
+  def by_line(obj)
+   username_or_anonymous(obj.user) + obj.verb + obj.created_at.strftime(upstairs_time_format)
+  end
+
+  def username_or_anonymous(user)
+    (user.use_my_username?) ? user.username : 'Anonymous'
+  end
+
 end
