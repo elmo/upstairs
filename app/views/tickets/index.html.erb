@@ -1,0 +1,18 @@
+<h1>Maintenance issues for <%= @community.address_line_one -%></h1>
+
+<tickets>
+<% @tickets.each do |ticket| %>
+<left>
+<%= link_to ticket.title, community_ticket_path(@community, ticket )  %>
+</left>
+
+<middle>
+<%= ticket.severity %>
+</middle>
+<right>
+<%= ticket.status %>
+</right>
+<% end %>
+</tickets>
+
+<p><%= link_to 'Create a New Maintence Request', new_community_ticket_path(@community) %></p>

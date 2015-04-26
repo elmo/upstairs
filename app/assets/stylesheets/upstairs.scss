@@ -33,3 +33,16 @@ gallery {
   left  { @include span-columns(8); }
   right { @include span-columns(4); }
 }
+
+tickets {
+  @include outer-container;
+  left  { @include span-columns(6); }
+  middle { @include span-columns(2); }
+  right { @include span-columns(2); }
+}
+
+ticket {
+  @include outer-container;
+  left  { @include span-columns(6); }
+  right { @include span-columns(6); }
+}

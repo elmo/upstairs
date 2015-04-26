@@ -15,7 +15,11 @@ class Comment < ActiveRecord::Base
   end
 
   def create_notifications
-    commentable.commenters.each { |user| Notification.create(notifiable: self, user: user) } if commentable.present?
+   if commentable.present? and commentable.class.to_s != 'Ticket'
+      commentable.commenters.each { |user| Notification.create(notifiable: self, user: user) }
+   else
+      commentable.community.users.each { |user| Notification.create(notifiable: self, user: user) }
+   end
   end
 
   def commenters
@@ -29,7 +33,11 @@ class Comment < ActiveRecord::Base
   private
 
   def create_actionable
-   Activity.create(actionable: self, user: self.user, community: self.grandparent.postable)
+   if commentable.present? and commentable.class.to_s != 'Ticket'
+    Activity.create(actionable: self, user: self.user, community: self.grandparent.postable)
+   else
+    Activity.create(actionable: self, user: self.user, community: self.commentable.community) if !reply?
+   end
   end
 
 end

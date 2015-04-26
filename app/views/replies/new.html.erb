@@ -2,4 +2,8 @@
 
 <%= render 'form' %>
 
-<%= link_to 'back', community_path(@comment.commentable.postable )%>
+<% if @comment.commentable.class.to_s != 'Ticket'%>
+  <%= link_to 'back', community_path(@comment.commentable.postable )%>
+<% else %>
+  <%= link_to 'back', community_ticket_path(@comment.commentable.community, @comment.commentable )%>
+<% end %>
