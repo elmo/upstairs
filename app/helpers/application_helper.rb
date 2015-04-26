@@ -106,8 +106,10 @@ module ApplicationHelper
         comment_summary(actionable)
       when "Post"
         post_summary(actionable)
+      when "Ticket"
+        ticket_summary(actionable)
       else
-        raise "Unknown ativity type"
+        raise "Unknown activity type"
       end.html_safe
   end
 
@@ -124,6 +126,10 @@ module ApplicationHelper
       link_to(username_or_anonymous(comment.comment.user) , user_path(comment.comment.user) ) + "'s comment on " +
       link_to(username_or_anonymous(comment.comment.commentable.user), user_path(comment.comment.commentable.user) ) + "'s post: "  +
       link_to(comment.comment.commentable.title, community_post_path( comment.comment.commentable.postable, comment.comment.commentable))
+    elsif comment.commentable.class.to_s == 'Ticket'
+      comment.created_at.strftime(upstairs_time_format) + " commented on " +
+      link_to(username_or_anonymous(comment.commentable.user), user_path(comment.commentable.user)  ) + "'s ticket: " +
+      link_to(comment.commentable.title, community_ticket_path(comment.commentable.community, comment.commentable))
     else
       comment.created_at.strftime(upstairs_time_format) + " commented on " +
       link_to(username_or_anonymous(comment.commentable.user), user_path(comment.commentable.user)  ) + "'s post:"  +
@@ -136,6 +142,13 @@ module ApplicationHelper
    link_to(username_or_anonymous(post.user), user_path(post.user)) +
    " posted " +
    link_to( post.title, community_post_path(post.postable, post))
+  end
+
+  def ticket_summary(ticket)
+   ticket.created_at.strftime(upstairs_time_format) + " " +
+   link_to(username_or_anonymous(ticket.user), user_path(ticket.user)) +
+   " opened ticket " +
+   link_to( ticket.title, community_ticket_path(ticket.community, ticket))
   end
 
 end

@@ -1,0 +1,13 @@
+<%= simple_form_for([@community, @ticket]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :body %>
+    <%= f.input :severity, collection: ticket_severities %>
+    <%= f.input :photos, as: :attachinary %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -27,7 +27,11 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to community_path(@commentable.postable), notice: 'Comment was successfully created.'
+      if @commentable.class.to_s == 'Post'
+        redirect_to community_path(@commentable.postable), notice: 'Comment was successfully created.'
+      else
+        redirect_to community_ticket_path(@commentable.community,@commentable), notice: 'Comment was successfully created.'
+      end
     else
       render :new
     end
@@ -55,7 +59,8 @@ class CommentsController < ApplicationController
     end
 
     def set_commentable
-      @commentable = Post.friendly.find(params[:post_id])
+      @commentable = Post.friendly.find(params[:post_id]) if params[:post_id]
+      @commentable = Ticket.find(params[:ticket_id]) if params[:ticket_id]
     end
 
     # Only allow a trusted parameter "white list" through.

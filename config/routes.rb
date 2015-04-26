@@ -1,5 +1,6 @@
 Upstairs::Application.routes.draw do
 
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary"
 
@@ -16,6 +17,7 @@ Upstairs::Application.routes.draw do
     resources :memberships, only: [:create, :destroy]
     resources :posts
     resources :alerts
+    resources :tickets
     member do
      get 'gallery'
     end
@@ -24,6 +26,10 @@ Upstairs::Application.routes.draw do
   resources :comments
   resources :posts
   resources :notifications, only: [:show, :destroy]
+
+  resources :tickets do
+      resources :comments
+  end
 
   resources :posts do
     resources :comments
