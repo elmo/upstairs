@@ -1,14 +1,18 @@
-<section>
-<left>
 <h1>Photos</h1>
+<gallery>
+<left>
 <% @community.photos.each do |photo| %>
  <%= cl_image_tag(photo.path, { size: '400x600', crop: :fit }) %>
 <% end %>
 
 <p><%= link_to 'back', community_path( @community) -%> </p>
 </left>
-<right>
-Comments?
-</right>
-</section>
 
+<right>
+
+<% @community.photos.each do |photo| -%>
+  <%= cl_image_tag(photo.path, { size: '100x100', crop: :scale}) %>
+<% end %>
+</right>
+
+</gallery>

@@ -29,4 +29,7 @@ nav {
   navright { @include span-columns(2);}
 }
 
-
+gallery {
+  left  { @include span-columns(8); }
+  right { @include span-columns(4); }
+}
