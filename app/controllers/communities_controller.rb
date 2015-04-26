@@ -1,5 +1,5 @@
 class CommunitiesController < ApplicationController
-  before_action :set_community, only: [:show, :edit, :update]
+  before_action :set_community, only: [:show, :edit, :update, :gallery]
 
   def index
     @communities= Community.all
@@ -37,6 +37,9 @@ class CommunitiesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def gallery
   end
 
   private

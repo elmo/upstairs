@@ -16,6 +16,9 @@ Upstairs::Application.routes.draw do
     resources :memberships, only: [:create, :destroy]
     resources :posts
     resources :alerts
+    member do
+     get 'gallery'
+    end
   end
 
   resources :comments

@@ -6,7 +6,6 @@ class NotificationsController < ApplicationController
   end
 
   def destroy
-    #@notification.try(:destroy)
     @notification.destroy
     redirect_to :back
   end
@@ -14,7 +13,7 @@ class NotificationsController < ApplicationController
   private
 
   def get_notification
-    @notification = Notification.where(user_id: current_user.id, notifiable_id: params[:id]).first
+    @notification = Notification.where(user_id: current_user.id, notifiable_id: params[:id], notifiable_type: params[:notifiable_type]).first
   end
 
 end

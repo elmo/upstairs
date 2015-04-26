@@ -1,11 +1,17 @@
-<membership>
-<% if current_user.member_of?(@community)  %>
-  <%= link_to 'leave', community_membership_path(@community, @community.membership(current_user)), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
- <%= link_to 'create a community alert', new_community_alert_path(@community) -%>
-<% else %>
-  <%= form_tag  community_memberships_path(@community), method: :post do %>
+<ul>
+<% if !current_user.member_of?(@community) %>
+<li>
+<%= form_tag  community_memberships_path(@community), method: :post do %>
   <%= submit_tag 'join' -%> 
   <% end %>
+</li>
 <% end %>
-</membership>
 
+<li>
+<%= link_to 'create a community alert', new_community_alert_path(@community) -%>
+</li>
+
+<li>
+<%= link_to 'photos', gallery_community_path(@community) -%> 
+</li>
+</ul>

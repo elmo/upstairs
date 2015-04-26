@@ -1,4 +1,4 @@
-<h3>Activity </h3>
-<% @community.activities.limit(20).order('created_at desc').each do |activity| %>
+<h5>Activity </h5>
+<% @community.activities.limit(6).order('created_at desc').each do |activity| %>
   <%= activity_summary(activity) -%> <br> 
 <% end %>

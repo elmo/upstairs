@@ -1,8 +1,11 @@
-<h3>Members</h3>
+<h5>Members</h5>
 <ul>
 <% @community.users.each do |user| %>
   <li>
     <%= user_mini_summary(user) -%>
+    <% if current_user.member_of?(@community)%>
+    <%= link_to 'leave', community_membership_path(@community, @community.membership(current_user)), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
+    <% end %>
   </li>
 <% end %>
 </ul>

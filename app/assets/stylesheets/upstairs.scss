@@ -2,8 +2,8 @@
   @include outer-container;
 }
 section {
-  aside { @include span-columns(4); }
-  article { @include span-columns(8); }
+  left  { @include span-columns(4); }
+  right { @include span-columns(6); }
 }
 
 dashboard {
@@ -14,6 +14,19 @@ dashboard {
 
 home {
   @include outer-container;
-  left { @include span-columns(4); }
-  right { @include span-columns(8); }
+  left { @include span-columns(4);}
+  right { @include span-columns(8);}
 }
+
+community {
+  left { @include span-columns(5);}
+  middle { @include span-columns(4);}
+  right { @include span-columns(3);}
+}
+
+nav {
+  navleft { @include span-columns(2);}
+  navright { @include span-columns(2);}
+}
+
+
