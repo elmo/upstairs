@@ -74,7 +74,7 @@ module ApplicationHelper
   end
 
   def by_line(obj)
-   link_to(username_or_anonymous(obj.user), obj.user)  + obj.verb + obj.created_at.strftime(upstairs_time_format)
+   link_to(username_or_anonymous(obj.user), obj.user) + ' at '+  obj.created_at.strftime(upstairs_time_format)
   end
 
   def username_or_anonymous(user)
@@ -98,10 +98,44 @@ module ApplicationHelper
   end
 
   def activity_summary(activity)
-    link_to(username_or_anonymous(activity.user) , user_path(activity.user) ) +
-    activity.actionable.preposition + activity.actionable.noun + ' ' +
-    link_to(activity.actionable.name, [activity.actionable.grandparent.postable, activity.actionable.grandparent]) + ' ' +
-    activity.actionable.created_at.strftime(upstairs_time_format)
+    actionable = activity.actionable
+    case activity.actionable.class.to_s
+      when "Alert"
+        alert_summary(actionable)
+      when "Comment"
+        comment_summary(actionable)
+      when "Post"
+        post_summary(actionable)
+      else
+        raise "Unknown ativity type"
+      end.html_safe
+  end
+
+  def alert_summary(alert)
+   alert.created_at.strftime(upstairs_time_format) + " " +
+   link_to(username_or_anonymous(alert.user), user_path(alert.user)) + " created " + link_to('alert', community_alert_path(alert.community, alert)) +
+   " " + alert.message
+  end
+
+  def comment_summary(comment)
+    if comment.reply?
+      comment.created_at.strftime(upstairs_time_format) + " " +
+      link_to(username_or_anonymous(comment.user), user_path(comment.user)) + " replied to " +
+      link_to(username_or_anonymous(comment.comment.user) , user_path(comment.comment.user) ) + "'s comment on " +
+      link_to(username_or_anonymous(comment.comment.commentable.user), user_path(comment.comment.commentable.user) ) + "'s post: "  +
+      link_to(comment.comment.commentable.title, community_post_path( comment.comment.commentable.postable, comment.comment.commentable))
+    else
+      comment.created_at.strftime(upstairs_time_format) + " commented on " +
+      link_to(username_or_anonymous(comment.commentable.user), user_path(comment.commentable.user)  ) + "'s post:"  +
+      link_to(comment.commentable.title, community_post_path(comment.commentable.postable, comment.commentable))
+    end
+  end
+
+  def post_summary(post)
+   post.created_at.strftime(upstairs_time_format) + " " +
+   link_to(username_or_anonymous(post.user), user_path(post.user)) +
+   " posted " +
+   link_to( post.title, community_post_path(post.postable, post))
   end
 
 end

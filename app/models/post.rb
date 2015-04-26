@@ -26,31 +26,14 @@ class Post < ActiveRecord::Base
     [ :title ]
   end
 
-  def noun
-    " "
-  end
-
-  def verb
-    " posted "
-  end
-
-  def preposition
-    " posted "
-  end
-
-
   def grandparent
    self
   end
 
-  def name
-    title
+  private
+
+  def create_actionable
+    Activity.create(actionable: self, user: self.user, community: self.postable)
   end
-
-   private
-
-   def create_actionable
-     Activity.create(actionable: self, user: self.user, community: self.postable)
-   end
 
 end

@@ -1,0 +1,7 @@
+<h1><%= @community.address_line_one -%> community Alert!</h1>
+
+<p class="alert">
+ <%= @alert.message -%>
+</p>
+
+<%= link_to 'community page', community_path(@community) -%>

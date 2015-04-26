@@ -22,26 +22,9 @@ class Comment < ActiveRecord::Base
     replies.collect(&:user).uniq
   end
 
-  def verb
-    (reply?) ? " replied " : " commented "
-  end
-
   def reply?
     parent_comment_id.present?
   end
-
-  def name
-    ""
-  end
-
-  def noun
-    ""
-  end
-
-  def preposition
-    " commented on #{grandparent.name} "
-  end
-
 
   private
 
