@@ -1,6 +1,10 @@
 Upstairs::Application.routes.draw do
 
 
+  resources :classifieds
+
+  resources :categories
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary"
 
@@ -18,6 +22,7 @@ Upstairs::Application.routes.draw do
     resources :posts
     resources :alerts
     resources :tickets
+    resources :classifieds
     member do
      get 'gallery'
     end

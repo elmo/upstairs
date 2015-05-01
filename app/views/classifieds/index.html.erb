@@ -1,0 +1,20 @@
+<h3><%= address(@community, ' ') -%></h3>
+<h2>Classifieds</h2>
+<ul id="classifieds">
+<% @classifieds.each do |classified| %>
+<li> 
+
+<% if classified.photos.any? %>
+ <%= cl_image_tag(classified.photos.first.path, { size: '30x40', crop: :fit }) %>
+<% end %>
+
+<strong> <%= link_to classified.title, community_classified_path(@community, classified) %> </strong>
+<% if current_user.owns?(classified)%>
+<%= link_to 'edit', edit_community_classified_path(@community, classified) %>
+<%= link_to 'destroy', community_classified_path(@community, classified), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+</li> 
+<% end %>
+</ul>
+
+<%= link_to 'Post a new  Ad', new_community_classified_path(@community) %>

@@ -23,7 +23,7 @@ class Post < ActiveRecord::Base
   end
 
   def slug_candidates
-    [ :title ]
+    [:title]
   end
 
   def grandparent

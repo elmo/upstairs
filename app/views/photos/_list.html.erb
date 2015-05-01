@@ -1,0 +1,7 @@
+<ul>
+<% photos.each do |photo| %>
+  <li id="photo_<%=photo.id-%>">
+    <%= cl_image_tag(photo.path, { size: '150x200', crop: :fit }) %>
+  </li>
+<% end %>
+</ul>

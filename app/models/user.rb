@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :communities, through: :memberships
   has_many :activities
+  has_many :notifications
 
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
@@ -25,6 +26,10 @@ class User < ActiveRecord::Base
 
   def admin?
     true
+  end
+
+  def owns?(obj)
+    id == obj.user_id
   end
 
 end

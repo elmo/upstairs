@@ -8,7 +8,8 @@ class CommunitiesController < ApplicationController
   # GET /communities/1
   def show
    @posts = @community.posts.page(params[:page]).per(10).order('created_at desc')
-   @notifications = Notification.all
+   @classifieds = @community.classifieds.page(params[:page]).per(10).order('created_at desc')
+   @notifications = @community.notifications.order("created_at desc").limit(5)
   end
 
   # GET /communities/new
