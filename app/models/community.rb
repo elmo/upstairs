@@ -6,6 +6,8 @@ class Community < ActiveRecord::Base
   has_many :activities
   has_many :alerts
   has_many :tickets
+  has_many :classifieds
+  has_many :notifications, through: :users
   belongs_to :actionable, polymorphic: true
   validates_presence_of :address_line_one
   validates_presence_of :city

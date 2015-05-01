@@ -1,0 +1,13 @@
+<h1><%= @classified.category.name%></h1>
+<h2><%= @classified.title %></h2>
+
+<p>
+  <%= @classified.body %>
+</p>
+
+<%= render partial: '/photos/list', locals: {photos: @classified.photos } %>
+
+<p>
+<%= link_to 'edit', edit_community_classified_path(@community, @classified) %>
+<%= link_to 'back', community_classifieds_path(@community) %>
+</p>
