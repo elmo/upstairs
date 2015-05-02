@@ -25,6 +25,7 @@ gem 'rollbar'
 gem 'refills'
 gem 'sidekiq'
 gem 'simple_form'
+gem 'twilio-ruby'
 
 gem 'sass-rails', github: 'rails/sass-rails'
 gem 'coffee-rails', '~> 4.0.0'
