@@ -32,4 +32,8 @@ class Community < ActiveRecord::Base
     user.memberships.where(user_id: user.id).first
   end
 
+  def public_name
+    [name, address_line_one, address_line_two, city, state, postal_code].join(' ')
+  end
+
 end

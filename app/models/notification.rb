@@ -9,15 +9,20 @@ class Notification < ActiveRecord::Base
 
   def deliver
     if notifiable.class.to_s == 'Post'
-      p "notifying #{user.email} about Post #{notifiable.title}"
+    elsif notifiable.class.to_s == 'Alert'
+       user.receives_text_messages? && TwilioMessage.new(user.phone,
+			 notifiable.message  + "\n" +  Rails.application.routes.url_helpers.community_alert_url(
+				 notifiable.community,notifiable,
+				 host: "http://www.upstairs.io") ).deliver
+       UserMailer.alert(self).deliver
     elsif notifiable.class.to_s == 'Comment'
       if notifiable.parent_comment_id.present?
-         p "notifying #{user.email} about Reply #{notifiable.body}"
+         #p "notifying #{user.email} about Reply #{notifiable.body}"
       else
-         p "notifying #{user.email} about Comment #{notifiable.body}"
+         #p "notifying #{user.email} about Comment #{notifiable.body}"
       end
      else
-       p "unknown notifiable"
+       #p "unknown notifiable"
      end
    end
 end

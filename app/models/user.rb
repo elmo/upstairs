@@ -24,12 +24,24 @@ class User < ActiveRecord::Base
     memberships.where(community_id: community.id).exists?
   end
 
+  def receives_text_messages?
+   ok_to_send_text_messages? && phone_valid?
+  end
+
+  def phone_valid?
+    phone.present? && phone.length >=10 and phone.length <= 12
+  end
+
   def admin?
     true
   end
 
   def owns?(obj)
     id == obj.user_id
+  end
+
+  def public_name
+    use_my_username? && username.present? ? username : 'anonymous'
   end
 
 end
