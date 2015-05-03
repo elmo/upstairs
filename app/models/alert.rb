@@ -18,7 +18,7 @@ class Alert < ActiveRecord::Base
   end
 
   def create_notifications
-    community.users.each { |user| Notification.create(notifiable: self, user: self.user) }
+    community.users.each { |user| Notification.create(notifiable: self, user: user) }
   end
 
 end
