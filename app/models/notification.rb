@@ -9,20 +9,57 @@ class Notification < ActiveRecord::Base
 
   def deliver
     if notifiable.class.to_s == 'Post'
+       user.receives_text_messages?  &&
+	  TwilioMessage.new(user.phone,
+			    "#{notifiable.user.public_name} posted #{notifiable.title} view here:\n" +
+			    Rails.application.routes.url_helpers.community_post_url(
+		               notifiable.postable,
+			       notifiable,
+			       host: "http://www.upstairs.io")
+          ).deliver
+          UserMailer.post(self).deliver
+    elsif notifiable.class.to_s == 'Classified'
+       user.receives_text_messages? &&
+	 TwilioMessage.new(user.phone,
+	   notifiable.title + "\n" +  Rails.application.routes.url_helpers.community_classified_url(
+           notifiable.community,
+	   notifiable,
+	   host: "http://www.upstairs.io")
+        ).deliver
+        UserMailer.classified(self).deliver
     elsif notifiable.class.to_s == 'Alert'
-       user.receives_text_messages? && TwilioMessage.new(user.phone,
-			 notifiable.message  + "\n" +  Rails.application.routes.url_helpers.community_alert_url(
-				 notifiable.community,notifiable,
-				 host: "http://www.upstairs.io") ).deliver
-       UserMailer.alert(self).deliver
+       user.receives_text_messages? &&
+	 TwilioMessage.new(user.phone,
+	   notifiable.message  + "\n" +  Rails.application.routes.url_helpers.community_alert_url(
+           notifiable.community,
+	   notifiable,
+	   host: "http://www.upstairs.io")
+        ).deliver
+        UserMailer.alert(self).deliver
     elsif notifiable.class.to_s == 'Comment'
       if notifiable.parent_comment_id.present?
-         #p "notifying #{user.email} about Reply #{notifiable.body}"
+        user.receives_text_messages?  &&
+	  TwilioMessage.new(user.phone,
+			    "#{notifiable.user.public_name} commented on #{notifiable.comment.commentable.title}:\n" +
+			       Rails.application.routes.url_helpers.community_post_url(
+		                 notifiable.comment.commentable.postable,
+			         notifiable.comment.commentable,
+			         host: "http://www.upstairs.io")
+	  ).deliver
+          UserMailer.reply(self).deliver
       else
-         #p "notifying #{user.email} about Comment #{notifiable.body}"
+        user.receives_text_messages? &&
+	  TwilioMessage.new(user.phone,
+			    "#{notifiable.user.public_name} commented on #{notifiable.commentable.title}:\n" +
+			       Rails.application.routes.url_helpers.community_post_url(
+		                  notifiable.commentable.postable,
+				  notifiable.commentable,
+				  host: "http://www.upstairs.io")
+	  ).deliver
+          UserMailer.comment(self).deliver
       end
      else
-       #p "unknown notifiable"
+       raise "unknown notifiable"
      end
    end
 end
