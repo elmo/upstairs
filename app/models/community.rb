@@ -37,8 +37,8 @@ class Community < ActiveRecord::Base
   end
 
   def alerts_for_user(user)
-    alerts.joins(:notifications)
-     .where(["notifications.notifiable_type = 'Alert' and notifications.user_id = ? ", user.id] )
+    alerts.recent.joins(:notifications)
+     .where(["notifications.notifiable_id = alerts.id and notifications.notifiable_type = 'Alert' and notifications.user_id = ? ", user.id] )
   end
 
 end
