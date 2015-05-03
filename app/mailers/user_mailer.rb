@@ -6,6 +6,6 @@ class UserMailer < ApplicationMailer
     @community_name = notification.notifiable.community.public_name
     @url = Rails.application.routes.url_helpers.community_alert_url(notification.notifiable.community, notification.notifiable, host: "http://www.upstairs.io")
     @alert_text = notification.notifiable.message
-    mail(to: notification.notifiable.user.username, subject: "Upstairs.io Coummunity Alert:" )
+    mail(to: notification.notifiable.user.email, subject: "Upstairs.io Coummunity Alert:" )
   end
 end
