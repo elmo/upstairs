@@ -1,5 +1,5 @@
 <% if current_user.present? %>
-  <% @community.alerts.recent.for_user(current_user).each do |alert| %>
+  <% @community.alerts_for_user(current_user).each do |alert| %>
     <div class="flash-error"> 
       <span><%=link_to alert.message, community_alert_path(@community, alert ) -%> </span> 
         <%= link_to 'dismiss', notification_path(alert.id, notifiable_type: 'Alert'), method: :delete -%>

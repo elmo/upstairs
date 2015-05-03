@@ -36,4 +36,9 @@ class Community < ActiveRecord::Base
     [name, address_line_one, address_line_two, city, state, postal_code].join(' ')
   end
 
+  def alerts_for_user(user)
+    alerts.joins(:notifications)
+     .where(["notifications.notifiable_type = 'Alert' and notifications.user_id = ? ", user.id] )
+  end
+
 end
