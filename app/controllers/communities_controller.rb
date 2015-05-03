@@ -1,4 +1,5 @@
 class CommunitiesController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   before_action :set_community, only: [:show, :edit, :update, :gallery]
 
   def index
