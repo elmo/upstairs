@@ -4,6 +4,11 @@ Upstairs::Application.routes.draw do
   mount Attachinary::Engine => "/attachinary"
 
   devise_for :users, :controllers => {:registrations => "registrations"}
+
+  devise_scope :user do
+    get "/join" => "devise/registrations#new"
+  end
+
   root to: "home#splash"
   get '/' => "home#splash", as: :home
   get '/about' => "home#about", as: :about
