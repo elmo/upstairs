@@ -1,0 +1,15 @@
+<header class="centered-sub-navigation" role="banner">
+  <div class="centered-navigation-sub-wrapper">
+    <nav role="sub-navigation">
+      <ul id="js-centered-sub-navigation-menu" class="centered-sub-navigation-menu show">
+        <li class='nav-link'><%= link_to "home",  community_path(@community) -%></li>
+        <li class='nav-link'><%= link_to 'posts',  community_posts_path(@community) -%></li>
+        <li class='nav-link'><%= link_to 'alerts', community_alerts_path(@community) -%></li>
+        <li class='nav-link'><%= link_to 'photos', gallery_community_path(@community) -%></li>
+        <li class='nav-link'><%= link_to 'maintenance requests', community_tickets_path(@community) -%></li>
+        <li class='nav-link'><%= link_to 'classifieds', community_classifieds_path(@community) -%></li>
+        <li class='nav-link'><%= link_to 'members', community_memberships_path(@community) -%></li>
+      </ul>
+    </nav>
+  </div>
+</header>

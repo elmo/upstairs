@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Comments</h1>
+<h1>Alerts</h1>
 
 <table>
   <thead>
@@ -10,16 +8,15 @@
   </thead>
 
   <tbody>
-    <% @comments.each do |comment| %>
+    <% @alerts.each do |alert| %>
       <tr>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to alert.message, community_alert_path(@community, alert) %> </td>
+	<td><%= link_to alert.user.public_name, community_user_path(@community, alert.user) %> 
+	    <%= alert.created_at.strftime(upstairs_time_format) %>
+	</td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Comment', new_comment_path %>
+<%= paginate(@alerts) -%>

@@ -1,0 +1,8 @@
+<h5>Members</h5>
+<ul>
+<% @memberships.each do |membership| %>
+  <li>
+    <%= user_mini_summary(membership.user) -%>
+  </li>
+<% end %>
+</ul>

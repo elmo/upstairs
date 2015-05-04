@@ -1,10 +1,5 @@
 Upstairs::Application.routes.draw do
 
-
-  resources :classifieds
-
-  resources :categories
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary"
 
@@ -18,11 +13,12 @@ Upstairs::Application.routes.draw do
   get '/welcome' => "users#home", as: :user_home
 
   resources :communities do
-    resources :memberships, only: [:create, :destroy]
+    resources :memberships, only: [:create, :destroy, :index]
     resources :posts
     resources :alerts
     resources :tickets
     resources :classifieds
+    resources :users, only: [:show]
     member do
      get 'gallery'
     end
