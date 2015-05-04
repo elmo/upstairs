@@ -7,7 +7,6 @@ section {
 }
 
 dashboard {
-  @include outer-container;
   left { @include span-columns(8); } 
   right { @include span-columns(4); }
 }
@@ -22,6 +21,11 @@ community {
   left { @include span-columns(5);}
   middle { @include span-columns(4);}
   right { @include span-columns(3);}
+  dashboard { 
+    @include span-columns(10); 
+    mainleft { @include span-columns(7); } 
+    mainright{ @include span-columns(3); } 
+  }
 }
 
 nav {
@@ -46,3 +50,4 @@ ticket {
   left  { @include span-columns(6); }
   right { @include span-columns(6); }
 }
+

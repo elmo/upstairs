@@ -1,30 +1,8 @@
-<community>
-<left>
-<h2><%= address(@community, ' ') -%></h2>
-<% if @community.photos.any? %>
- <%= cl_image_tag(@community.photos.last.path, { width: '270', crop: :scale}) %>
-<% end %>
-<%= render partial: 'membership' -%>
-</left>
-
-<middle>
-<%= render partial: 'activity' -%>
-</middle>
-
-<right>
-<%= render partial: 'members' -%>
-</right>
-
-</community>
-
-<dashboard>
-<left>
+<mainleft>
 <%= render partial: 'posts' -%>
-</left>
+</mainleft>
 
-<right>
-  <%= render partial: 'categories' %>
-  <%= render partial: 'classifieds' %>
-</right>
-
-</dashboard>
+<mainright>
+<%= render partial: 'categories' %>
+<%= render partial: 'classifieds' %>
+</mainright>

@@ -1,6 +1,7 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_community, only: [:show, :edit, :update, :gallery]
+  layout :get_layout
 
   def index
     @communities= Community.all
@@ -54,4 +55,9 @@ class CommunitiesController < ApplicationController
     def community_params
       params.require(:community).permit(:address_line_one, :address_line_two, :city,:state, :postal_code, photos: [])
     end
+
+   def get_layout
+     ['show', 'gallery'].include?(action_name) ? 'community' : 'application'
+   end
+
 end

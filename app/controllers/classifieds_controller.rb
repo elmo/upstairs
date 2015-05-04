@@ -2,6 +2,7 @@ class ClassifiedsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_community
   before_action :set_classified, only: [:show, :edit, :update, :destroy]
+  layout 'community'
 
   # GET /classifieds
   def index

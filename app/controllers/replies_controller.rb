@@ -2,6 +2,7 @@ class RepliesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_comment
   before_action :set_reply, only: [:show, :edit, :update, :destroy]
+  layout 'community'
 
   # GET /replies
   def index
@@ -57,6 +58,7 @@ class RepliesController < ApplicationController
 
     def set_comment
       @comment = Comment.find(params[:comment_id])
+      @community = @comment.commentable.postable
     end
 
     def set_reply

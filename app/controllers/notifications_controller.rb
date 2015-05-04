@@ -1,6 +1,7 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
   before_action :get_notification
+  layout 'commnity'
 
   def show
   end

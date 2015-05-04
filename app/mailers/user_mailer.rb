@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
 								    notification.notifiable,
 								    host: "http://www.upstairs.io")
     @alert_text = notification.notifiable.message
-    mail(to: notification.notifiable.user.email,
+    mail(to: notification.user.email,
 	 subject: "Upstairs.io Coummunity Alert: #{notification.notifiable.message}" )
   end
 
@@ -20,7 +20,7 @@ class UserMailer < ApplicationMailer
 								   notification.notifiable,
 								   host: "http://www.upstairs.io")
     @post_title = notification.notifiable.title
-    mail(to: notification.notifiable.user.email,
+    mail(to: notification.user.email,
 	 subject: "#{notification.notifiable.user.public_name} posted #{notification.notifiable.title}" )
   end
 
@@ -32,7 +32,7 @@ class UserMailer < ApplicationMailer
 								   notification.notifiable.commentable,
 								   host: "http://www.upstairs.io")
     @comment_text = notification.notifiable.body
-    mail(to: notification.notifiable.user.email,
+    mail(to: notification.user.email,
 	 subject: "#{notification.notifiable.user.public_name} commented on #{notification.notifiable.commentable.title}" )
   end
 
@@ -44,7 +44,7 @@ class UserMailer < ApplicationMailer
 								    notification.notifiable,
 								    host: "http://www.upstairs.io")
     @reply_text = notification.notifiable.body
-    mail(to: notification.notifiable.user.email,
+    mail(to: notification.user.email,
 	 subject: "#{notification.notifiable.user.public_name} replied to a comment on #{notification.notifiable.comment.commentable.title}" )
   end
 
@@ -56,7 +56,7 @@ class UserMailer < ApplicationMailer
 								    notification.notifiable,
 								    host: "http://www.upstairs.io")
     @classified_text = notification.notifiable.body
-    mail(to: notification.notifiable.user.email,
+    mail(to: notification.user.email,
 	 subject: "#{notification.notifiable.user.public_name} posted classified #{notification.notifiable.title}" )
   end
 

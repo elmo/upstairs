@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_postable
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  layout 'community'
 
   # GET /posts
   def index
@@ -55,6 +56,7 @@ class PostsController < ApplicationController
 
     def set_postable
       @postable = Community.friendly.find(params[:community_id])
+      @community = @postable
     end
 
     def set_post

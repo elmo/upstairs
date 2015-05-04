@@ -2,6 +2,7 @@ class AlertsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_community
   before_action :set_alert, only: [:show, :edit, :update, :destroy]
+  layout 'community'
 
   # GET /alerts
   def index

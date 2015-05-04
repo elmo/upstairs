@@ -108,6 +108,8 @@ module ApplicationHelper
         post_summary(actionable)
       when "Ticket"
         ticket_summary(actionable)
+      when "Classified"
+        ticket_summary(actionable)
       else
         raise "Unknown activity type"
       end.html_safe
@@ -149,6 +151,13 @@ module ApplicationHelper
    link_to(username_or_anonymous(ticket.user), user_path(ticket.user)) +
    " opened ticket " +
    link_to( ticket.title, community_ticket_path(ticket.community, ticket))
+  end
+
+  def classified_summary(classified)
+   classified.created_at.strftime(upstairs_time_format) + " " +
+   link_to(username_or_anonymous(classified.user), user_path(classified.user)) +
+   " created classified " +
+   link_to(classified.title, community_classified_path(classified.community, classified))
   end
 
 end

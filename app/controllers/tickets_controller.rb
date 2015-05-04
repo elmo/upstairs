@@ -2,6 +2,7 @@ class TicketsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_community
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  layout 'community'
 
   # GET /tickets
   def index

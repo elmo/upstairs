@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_commentable
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  layout 'community'
 
   # GET /comments
   def index
@@ -61,6 +62,7 @@ class CommentsController < ApplicationController
     def set_commentable
       @commentable = Post.friendly.find(params[:post_id]) if params[:post_id]
       @commentable = Ticket.find(params[:ticket_id]) if params[:ticket_id]
+      @community = @commentable.postable
     end
 
     # Only allow a trusted parameter "white list" through.

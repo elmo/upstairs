@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upstairs</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= cloudinary_js_config %>
+</head>
+<body>
+
+<%= render partial: '/layouts/top_navigation' %>
+<%= render partial: '/layouts/flash' %>
+
+<div id= "main">
+<community>
+<left>
+<h2><%= address(@community, ' ') -%></h2>
+<% if @community.photos.any? %>
+  <%= cl_image_tag(@community.photos.last.path, { width: '270', crop: :scale}) %>
+<% end %>
+ <%= render partial: '/communities/membership' -%>
+ </left>
+
+ <middle>
+ <%= render partial: '/communities/activity' -%>
+ </middle>
+
+ <right>
+ <%= render partial: '/communities/members' -%>
+ </right>
+
+<dashboard>
+<%= yield %>
+</dashboard>
+
+</community>
+
+</div>
+<%= footer %>
+</body>
+</html>
