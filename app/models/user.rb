@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   has_many :communities, through: :memberships
   has_many :activities
   has_many :notifications
+  has_many :invitations
+  belongs_to :invitation
+  after_create :apply_invitation
 
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
@@ -42,6 +45,10 @@ class User < ActiveRecord::Base
 
   def public_name
     use_my_username? && username.present? ? username : 'anonymous'
+  end
+
+  def apply_invitation
+    join(invitation.community) if invitation.present?
   end
 
 end

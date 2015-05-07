@@ -90,7 +90,7 @@ module ApplicationHelper
   end
 
   def notification_summary(notification)
-    link_to(username_or_anonymous(notification.user) , user_path(notification.user) ) +
+    link_to(username_or_anonymous(notification.user) , community_user_path(notification.community, notification.user) ) +
     notification.notifiable.verb  +
     notification.notifiable.class.to_s.downcase +  ' ' +
     link_to(notification.notifiable.name, [notification.notifiable.grandparent.postable, notification.notifiable.grandparent]) + ' on ' +
@@ -117,7 +117,7 @@ module ApplicationHelper
 
   def alert_summary(alert)
    alert.created_at.strftime(upstairs_time_format) + " " +
-   link_to(username_or_anonymous(alert.user), user_path(alert.user)) + " created " + link_to('alert', community_alert_path(alert.community, alert)) +
+   link_to(username_or_anonymous(alert.user), community_user_path(alert.community, alert.user)) + " created " + link_to('alert', community_alert_path(alert.community, alert)) +
    " " + alert.message
   end
 

@@ -6,6 +6,11 @@
 
 <article>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <% if params[:invitation_id].present? %>
+    <% @invitation = Invitation.where(token: params[:invitation_id] ).first %>
+    <% resource.invitation_id = @invitation.id if @invitation.present? %>
+  <% end %>
+  <%= f.hidden_field :invitation_id %>
   <%= devise_error_messages! %>
 
   <div class="field">

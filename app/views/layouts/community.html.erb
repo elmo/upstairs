@@ -22,6 +22,7 @@
 <% if @community.photos.any? %>
   <%= cl_image_tag(@community.photos.last.path, { width: '270', crop: :scale}) %>
 <% end %>
+ <%= render partial: '/communities/invitations' -%>
  <%= render partial: '/communities/membership' -%>
  </left>
 
