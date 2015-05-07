@@ -7,3 +7,5 @@
   </div>
   <%= render partial: '/communities/replies', locals: {comment: comment } %>
 <% end %>
+
+<p><%= link_to "add a new comment" , new_polymorphic_path([commentable, Comment.new]) -%></p>

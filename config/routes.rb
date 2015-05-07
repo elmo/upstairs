@@ -29,8 +29,6 @@ Upstairs::Application.routes.draw do
     end
   end
 
-  resources :comments
-  resources :posts
   resources :notifications, only: [:show, :destroy]
 
   resources :tickets do

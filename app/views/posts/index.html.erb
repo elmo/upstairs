@@ -1,25 +1,11 @@
-<p id="notice"><%= notice %></p>
+<ul>
+<% @posts.each do |post| %>
+  <%= raw(post_thumbnail(post)) %>
+  <%= cl_image_tag(post.photos.first.path, { size: '250x250', crop: :fit } ) if post.photos.any? %>
+  <%= link_to 'more', community_post_path(@community, post)-%>
+<% end %>
+</ul>
 
-<h1>Listing Posts</h1>
+<%= paginate(@posts) -%>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+ <p><%= link_to 'add a new post', new_community_post_path(@community) %></p>

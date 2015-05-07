@@ -1,4 +1,5 @@
 <p><%= link_to 'add a new post', new_community_post_path(@community) -%> </p>
+
 <% if @posts.empty? %>
 <p>There are no messages for this community.<p>
 <% else %>
@@ -13,7 +14,6 @@
   <% end %>
   <%= post.body -%>
   </div>
-  <%= link_to 'comment', new_post_comment_path(post) -%>
   <br />
     <%= render partial: 'comments', locals: {commentable: post }  -%>
   <% end %>

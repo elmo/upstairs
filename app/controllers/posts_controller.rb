@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = @community.posts.page(params[:page]).per(10)
   end
 
   # GET /posts/1
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
     end
 
     def set_post
-      @post = Post.friendly.find(params[:id])
+      @post = @postable.posts.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
