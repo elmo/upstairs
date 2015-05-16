@@ -74,7 +74,7 @@ module ApplicationHelper
   end
 
   def by_line(obj)
-   link_to(username_or_anonymous(obj.user), obj.user) + ' at '+  obj.created_at.strftime(upstairs_time_format)
+   link_to(username_or_anonymous(obj.user), community_user_path(obj.community, obj.user)) + ' at '+  obj.created_at.strftime(upstairs_time_format)
   end
 
   def username_or_anonymous(user)

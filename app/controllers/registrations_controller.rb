@@ -52,7 +52,7 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :current_password, :password_confirmation, :username, :phone, :avatar, :use_my_username, :ok_to_send_text_messages)
+    params.require(:user).permit(:email, :password, :current_password, :password_confirmation, :username, :phone, :avatar, :use_my_username, :ok_to_send_text_messages, :invitation_id)
   end
 
 end

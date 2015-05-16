@@ -14,6 +14,10 @@ class Post < ActiveRecord::Base
   has_paper_trail
   has_attachments :photos
 
+  def community
+    postable
+  end
+
   def commenters
     comments.collect(&:user).uniq
   end

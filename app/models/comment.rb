@@ -10,8 +10,13 @@ class Comment < ActiveRecord::Base
   after_create :create_actionable
   has_paper_trail
 
+  # TODO deprecate
   def grandparent
     (parent_comment_id.present?) ? comment.commentable : commentable
+  end
+
+  def community
+     (reply?) ? comment.commentable.postable : commentable.postable
   end
 
   def create_notifications
