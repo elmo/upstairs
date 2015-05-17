@@ -164,4 +164,12 @@ module ApplicationHelper
    link_to(classified.title, community_classified_path(classified.community, classified))
   end
 
+  def ticket_status_badge(ticket)
+   content_tag(:span , ticket.status, class: "badge badge-status-#{ticket.status.downcase}")
+  end
+
+  def ticket_severity_badge(ticket)
+   content_tag(:span,  ticket.severity, class: "badge badge-severity-#{ticket.severity.downcase}")
+  end
+
 end

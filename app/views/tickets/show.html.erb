@@ -1,19 +1,13 @@
-<h2>Ticket #<%= @ticket.id -%></h2>
-
-<h3><%= @ticket.title %></h3>
-<p> <%= @ticket.body %> </p>
-<p> <strong> <%= @ticket.severity %> </strong> </p>
-<p>
-  <strong>Status:</strong>
-  <%= @ticket.status %>
-</p>
+<div class="ticket">
+<h4><%= @ticket.title %> <%= ticket_severity_badge(@ticket) -%> <%= ticket_status_badge(@ticket)-%> </h4>
+<%= @ticket.body %> 
+<br >
 <% @ticket.photos.each do |photo| %>
-   <%= cl_image_tag(photo.path, { size: '200x300', crop: :fit }) %>
+  <%= cl_image_tag(photo.path, { size: '200x300', crop: :fit }) %>
 <% end %>
+<br clear="all">
+<%= render partial: '/comments/comments', locals: {commentable: @ticket}  %>
 
-<p>
-<%= link_to 'back to community' , community_path(@community) -%>
-</p>
-<br />
-<%= link_to 'comment', new_ticket_comment_path(@ticket) -%>
-<%= render partial: '/communities/comments', locals: {commentable: @ticket}  %>
+<p> <%= link_to 'all repair requests' , community_tickets_path(@community) -%> </p>
+
+</div>

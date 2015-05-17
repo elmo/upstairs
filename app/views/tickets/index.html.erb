@@ -6,16 +6,9 @@
 <right><strong>status</strong></right>
 
 <% @tickets.each do |ticket| %>
-<left>
-<%= link_to ticket.title, community_ticket_path(@community, ticket )  %>
-</left>
-
-<middle>
-<%= ticket.severity %>
-</middle>
-<right>
-<%= ticket.status %>
-</right>
+<left> <%= link_to ticket.title, community_ticket_path(@community, ticket) %></left>
+<middle><%= ticket_severity_badge(ticket) -%></middle>
+<right><%= ticket_status_badge(ticket)-%> </right>
 <% end %>
 </tickets>
 

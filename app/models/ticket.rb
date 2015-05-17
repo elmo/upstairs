@@ -14,6 +14,10 @@ class Ticket < ActiveRecord::Base
 
   has_attachments :photos, dependent: :destroy
 
+  def postable
+    community
+  end
+
   private
 
   def create_notifications
