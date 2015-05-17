@@ -6,10 +6,7 @@
 <span class="post-image"> <%= cl_image_tag(post.photos.first.path, { size: '300x500', crop: :fit }) %> </span>
 <% end %>
 <%= post.body  -%>
-<% post.photos.order('created_at asc').each_with_index do |photo,i| %>
-   <% next if i == 0 %>
-   <%= cl_image_tag(photo.path, { size: '300x500', crop: :fit }) %>
-<% end %>
+<br clear="both">
 <%= render partial: '/comments/comments', locals: { commentable: post}  %>
 </div>
 
