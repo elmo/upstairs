@@ -19,6 +19,10 @@ class Classified < ActiveRecord::Base
     [:title]
   end
 
+  def owned_by?(user)
+    user_id == user.id
+  end
+
   private
 
   def create_actionable

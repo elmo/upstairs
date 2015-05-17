@@ -1,4 +1,5 @@
 <h1><%= @post.title -%></h1>
+<%= by_line(@post) -%>
 
 <%= link_to 'edit', edit_community_post_path(@postable, @post ) -%>
 

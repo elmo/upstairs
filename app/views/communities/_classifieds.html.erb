@@ -1,5 +1,5 @@
 <ul id="classifieds">
-<% @classifieds.each do |classified| %>
+<% Classified.all.each do |classified| %>
 <li> 
 
 <% if classified.photos.any? %>

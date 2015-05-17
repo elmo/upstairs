@@ -6,7 +6,7 @@
 
 <% @posts.each do |post|%>
   <h3><%= post.title -%></h3> 
-  <p class="byline"><%= by_line(post)-%><p>
+  <%= by_line(post)-%>
   <%= link_to 'view', community_post_path(@community, post) -%>
   <div class="post-body">
   <% if post.photos.any? -%>

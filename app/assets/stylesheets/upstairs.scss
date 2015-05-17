@@ -18,13 +18,15 @@ home {
 }
 
 community {
-  left { @include span-columns(5);}
-  middle { @include span-columns(4);}
-  right { @include span-columns(3);}
-  dashboard { 
-    @include span-columns(10); 
-    mainleft { @include span-columns(7); } 
-    mainright{ @include span-columns(3); } 
+   @include span-columns(12);
+  communityleft {
+   @include span-columns(6 of 12);
+   communityimage { @include span-columns(2 of 6); } 
+   communitymembership{ @include span-columns(3 of 6); } 
+   communityfeed{ @include span-columns(6 of 6); } 
+  }
+  communityright {
+    @include span-columns(6 of 12)
   }
 }
 
@@ -51,3 +53,11 @@ ticket {
   right { @include span-columns(6); }
 }
 
+.byline {
+  font-size: small;
+  display:block;
+}
+
+.activity{
+  font-size: small;
+}

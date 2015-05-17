@@ -8,37 +8,36 @@
   <%= cloudinary_js_config %>
 </head>
 <body>
-
 <%= render partial: '/layouts/top_navigation' %>
 <%= render partial: '/layouts/community_subnav' -%>
 <%= render partial: '/layouts/flash' %>
+<%= render partial: '/communities/alerts' %>
 
 <div id= "main">
 <community>
-
-<left>
-<h2><%= address(@community, ' ') -%></h2>
+<h4><%= address(@community, ' ') -%></h4>
+<communityleft>
+<communityimage>
 <% if @community.photos.any? %>
-  <%= cl_image_tag(@community.photos.last.path, { width: '270', crop: :scale}) %>
+  <%= cl_image_tag(@community.photos.last.path, { width: '170', crop: :scale}) %>
 <% end %>
- <%= render partial: '/communities/invitations' -%>
- <%= render partial: '/communities/membership' -%>
- </left>
+</communityimage>
+<communitymembership>
+<%= render partial: '/communities/membership' -%>
+<%= render partial: '/communities/invitations' -%>
+</communitymembership>
 
- <middle>
- <%= render partial: '/communities/activity' -%>
- </middle>
-
- <right>
- <%= render partial: '/communities/members' -%>
- </right>
-
-<dashboard>
+<communityfeed>
 <%= yield %>
-</dashboard>
+</communityfeed>
 
+</communityleft>
+<communityright>
+ <%= render partial: '/communities/members' -%>
+ <%= render partial: '/communities/activity' -%>
+ <%= render partial: '/communities/categories' %>
+</communityright>
 </community>
-
 </div>
 <%= footer %>
 </body>

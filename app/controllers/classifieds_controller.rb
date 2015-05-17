@@ -6,7 +6,12 @@ class ClassifiedsController < ApplicationController
 
   # GET /classifieds
   def index
-    @classifieds = @community.classifieds.page(params[:page]).per(10)
+    scope = @community.classifieds
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      scope = scope.where(category_id: @category.id)
+    end
+    @classifieds = scope.page(params[:page]).per(10)
   end
 
   # GET /classifieds/1

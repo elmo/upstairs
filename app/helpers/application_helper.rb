@@ -74,7 +74,11 @@ module ApplicationHelper
   end
 
   def by_line(obj)
-   link_to(username_or_anonymous(obj.user), community_user_path(obj.community, obj.user)) + ' at '+  obj.created_at.strftime(upstairs_time_format)
+   content_tag(:span, class: 'byline') do
+   link_to( username_or_anonymous(obj.user), community_user_path(obj.community, obj.user) ) +
+	   ' at '+
+	   obj.created_at.strftime(upstairs_time_format)
+   end
   end
 
   def username_or_anonymous(user)
@@ -99,6 +103,7 @@ module ApplicationHelper
 
   def activity_summary(activity)
     actionable = activity.actionable
+    content_tag(:span, class: 'activity') do
     case activity.actionable.class.to_s
       when "Alert"
         alert_summary(actionable)
@@ -113,12 +118,12 @@ module ApplicationHelper
       else
         raise "Unknown activity type"
       end.html_safe
+    end
   end
 
   def alert_summary(alert)
    alert.created_at.strftime(upstairs_time_format) + " " +
-   link_to(username_or_anonymous(alert.user), community_user_path(alert.community, alert.user)) + " created " + link_to('alert', community_alert_path(alert.community, alert)) +
-   " " + alert.message
+   link_to(username_or_anonymous(alert.user), community_user_path(alert.community, alert.user)) + " created " + link_to('alert', community_alert_path(alert.community, alert))
   end
 
   def comment_summary(comment)
@@ -134,23 +139,23 @@ module ApplicationHelper
       link_to(comment.commentable.title, community_ticket_path(comment.commentable.community, comment.commentable))
     else
       comment.created_at.strftime(upstairs_time_format) + " commented on " +
-      link_to(username_or_anonymous(comment.commentable.user), community_user_path(comment.commentable.postable, comment.commentable.user)  ) + "'s post:"  +
-      link_to(comment.commentable.title, community_post_path(comment.commentable.postable, comment.commentable))
+      link_to(username_or_anonymous(comment.commentable.user), community_user_path(comment.commentable.postable, comment.commentable.user)  ) + "'s "  +
+      link_to('post', community_post_path(comment.commentable.postable, comment.commentable))
     end
   end
 
   def post_summary(post)
    post.created_at.strftime(upstairs_time_format) + " " +
    link_to(username_or_anonymous(post.user), community_user_path(post.postable, post.user)) +
-   " posted " +
-   link_to( post.title, community_post_path(post.postable, post))
+   " posted a " +
+   link_to( "message", community_post_path(post.postable, post))
   end
 
   def ticket_summary(ticket)
    ticket.created_at.strftime(upstairs_time_format) + " " +
    link_to(username_or_anonymous(ticket.user), community_user_path(ticket.community, ticket.user)) +
    " opened ticket " +
-   link_to( ticket.title, community_ticket_path(ticket.community, ticket))
+   link_to(ticket.title, community_ticket_path(ticket.community, ticket))
   end
 
   def classified_summary(classified)
