@@ -54,7 +54,16 @@ community {
   margin: 12px 12px;
 }
 
-.post-body{
+.post-body {
+  padding:10px;
+  min-height:250px;
+  background-color: lightyellow;
+  display:block;
+}
+
+.post-body-thumb {
+  padding:10px;
+  min-height:150px;
   background-color: lightyellow;
   display:block;
 }

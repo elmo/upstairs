@@ -1,11 +1,6 @@
-<ul>
 <% @posts.each do |post| %>
-  <%= raw(post_thumbnail(post)) %>
-  <%= cl_image_tag(post.photos.first.path, { size: '250x250', crop: :fit } ) if post.photos.any? %>
-  <%= link_to 'more', community_post_path(@community, post)-%>
+  <%= render partial: '/posts/post', locals: { post: post }  -%>
 <% end %>
-</ul>
-
 <%= paginate(@posts) -%>
 
  <p><%= link_to 'add a new post', new_community_post_path(@community) %></p>

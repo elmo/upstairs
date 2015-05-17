@@ -12,14 +12,14 @@
     <span class="post-image">
     <%= cl_image_tag(post.photos.first.path, { size: '175x175', crop: :fit }) %>
     </span>
-  <span class="post-body">
+  <% end %>
+
+  <span class="post-body-thumb">
   <%= post.body -%>
   </span>
-  <% end %>
-  </div>
   <%= render partial: 'comments', locals: {commentable: post }  -%>
-  <% end %>
+  </div>
   </post>
-  <br />
+  <% end %>
 <% end %>
 <%= paginate(@posts) -%>
