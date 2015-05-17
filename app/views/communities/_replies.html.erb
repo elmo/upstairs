@@ -1,11 +1,8 @@
-<p><%= pluralize(comment.replies.count, 'reply' ) -%> <%= link_to 'reply', new_comment_reply_path(comment) -%>
-</p>
-
+<%= pluralize(comment.replies.count, 'reply' ) -%> 
 <% comment.replies.each do |reply| %>
- <p class="by-line"><%= by_line(reply) -%></p>
-<p class="reply-body">
+<div class="reply-body">
+<p class="by-line"><%= by_line(reply) -%></p>
 <%= reply.body -%>
-</p>
-<br>
+</div>
 <% end %>
 

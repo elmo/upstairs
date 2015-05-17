@@ -51,8 +51,26 @@ community {
 
 .post-image {
   float:left;
-  margin: 10px;
+  margin: 12px 12px;
 }
+
+.post-body{
+  background-color: lightyellow;
+}
+
+.comment-body {
+  margin-top:5px;
+  padding:5px;
+  background-color: #ddd;
+}
+
+.reply-body {
+  margin-left:20px;
+  padding:5px;
+  background-color: #eee;
+}
+
+
 
 nav {
   navleft { @include span-columns(2);}
