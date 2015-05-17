@@ -1,0 +1,12 @@
+<% if comment.replies.any? %>
+<%= pluralize(comment.replies.count, 'reply' ) -%> 
+<% end %>
+<br>
+<%= link_to 'reply to comment', new_comment_reply_path(comment) -%>
+<% comment.replies.each do |reply| %>
+ <div class="reply-body">
+    <%= by_line(reply) -%>
+   <%= reply.body -%>
+</div>
+<% end %>
+

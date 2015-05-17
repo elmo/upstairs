@@ -2,5 +2,5 @@
 <posts>
 <%= link_to 'post a note' , new_community_post_path(@community) -%>
 <br>
-<%= render partial: 'posts' -%>
+<%= render partial: 'posts', locals: {posts: @posts} -%>
 </posts>

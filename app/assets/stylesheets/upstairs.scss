@@ -22,7 +22,7 @@ community {
    @include span-columns(12);
   communityleft {
    @include pad();
-   @include span-columns(6 of 12);
+   @include span-columns(7 of 12);
    communityimage { @include span-columns(3 of 6); } 
    communitymembership{ @include span-columns(2 of 6); } 
    communityfeed { 
@@ -38,7 +38,7 @@ community {
   }
   communityright {
     @include pad();
-    @include span-columns(6 of 12); 
+    @include span-columns(5 of 12); 
     categories { }
     members {
       @include pad();
@@ -63,19 +63,21 @@ community {
 
 .post-body-thumb {
   padding:10px;
-  min-height:150px;
+  min-height:60px;
   background-color: lightyellow;
   display:block;
 }
 
 .comment-body {
-  margin-top:5px;
+  border: 1px dotted #ccc;
+  margin:5px;
   padding:5px;
-  background-color: #ddd;
+  background-color: #eee;
 }
 
 .reply-body {
-  margin-left:20px;
+  border: 1px dotted #ccc;
+  margin:20px 5px;
   padding:5px;
   background-color: #eee;
 }

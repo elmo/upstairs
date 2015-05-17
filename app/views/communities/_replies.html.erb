@@ -1,8 +1,0 @@
-<%= pluralize(comment.replies.count, 'reply' ) -%> 
-<% comment.replies.each do |reply| %>
-<div class="reply-body">
-<p class="by-line"><%= by_line(reply) -%></p>
-<%= reply.body -%>
-</div>
-<% end %>
-

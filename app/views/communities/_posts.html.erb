@@ -7,17 +7,15 @@
   <h4> <%= link_to post.title , community_post_path(@community, post) -%> </h4> 
   <%= by_line(post)-%>
   <%= edit_post_link(post, current_user) -%>
-  <div class="post-body">
+  <div class="post-body-thumb">
   <% if post.photos.any? -%>
     <span class="post-image">
     <%= cl_image_tag(post.photos.first.path, { size: '175x175', crop: :fit }) %>
     </span>
   <% end %>
-
-  <span class="post-body-thumb">
   <%= post.body -%>
-  </span>
-  <%= render partial: 'comments', locals: {commentable: post }  -%>
+  <br clear="all">
+  <%= render partial: '/comments/comments', locals: { commentable: post }  -%>
   </div>
   </post>
   <% end %>

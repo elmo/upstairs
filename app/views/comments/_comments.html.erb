@@ -4,13 +4,13 @@
 <% end %>
 <p><%= link_to "comment" , new_polymorphic_path([commentable, Comment.new]) -%></p>
 <% commentable.comments.each do |comment| %>
+ <% next if comment.id.blank? %>
  <div class="comment-body">
- <p class="by-line"><%= by_line(comment) -%></p>
+ <%= by_line(comment) -%>
  <%= comment.body -%>
- <br />
- <%= link_to 'reply', new_comment_reply_path(comment) -%>
+ <br clear="both">
+ <%= render partial: '/replies/replies', locals: { comment: comment} %>
  </div>
-<%= render partial: '/communities/replies', locals: {comment: comment } %>
 <% end %>
 </div>
 <br clear="all">
