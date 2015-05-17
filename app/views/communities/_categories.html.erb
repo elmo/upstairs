@@ -1,4 +1,4 @@
-<h3>Classifieds</h3>
+<h4>Classifieds</h4>
 <ul>
 <% Category.root.each do |category| -%>
   <li><%= link_to category.name, community_classifieds_path(@community, category_id: category.id)-%> </li>

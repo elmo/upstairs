@@ -8,15 +8,12 @@
 <% end %>
 
 <li>
+<%= link_to 'report a maintenance issue', community_tickets_path(@community) -%> 
+</li>
+
+<li>
 <%= link_to 'create a community alert', new_community_alert_path(@community) -%>
 </li>
 
-<li>
-<%= link_to 'photos', gallery_community_path(@community) -%> 
-</li>
-
-<li>
-<%= link_to 'report a maintenance issue', community_tickets_path(@community) -%> 
-</li>
 
 </ul>

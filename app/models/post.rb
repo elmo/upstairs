@@ -34,6 +34,10 @@ class Post < ActiveRecord::Base
    self
   end
 
+  def owned_by?(user)
+    user_id == user.id
+  end
+
   private
 
   def create_actionable

@@ -15,11 +15,11 @@
 
 <div id= "main">
 <community>
-<h4><%= address(@community, ' ') -%></h4>
+<h1><%= address(@community, ' ') -%></h1>
 <communityleft>
 <communityimage>
 <% if @community.photos.any? %>
-  <%= cl_image_tag(@community.photos.last.path, { width: '170', crop: :scale}) %>
+  <%= cl_image_tag(@community.photos.last.path, { width: '220', crop: :scale}) %>
 <% end %>
 </communityimage>
 <communitymembership>
@@ -33,9 +33,15 @@
 
 </communityleft>
 <communityright>
- <%= render partial: '/communities/members' -%>
- <%= render partial: '/communities/activity' -%>
+ <categories>
  <%= render partial: '/communities/categories' %>
+ </categories>
+ <members>
+ <%= render partial: '/communities/members' -%>
+ </members>
+ <activity>
+ <%= render partial: '/communities/activity' -%>
+ </activity>
 </communityright>
 </community>
 </div>

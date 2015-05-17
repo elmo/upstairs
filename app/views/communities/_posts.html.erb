@@ -1,22 +1,22 @@
-<p><%= link_to 'add a new post', new_community_post_path(@community) -%> </p>
-
 <% if @posts.empty? %>
 <p>There are no messages for this community.<p>
 <% else %>
 
 <% @posts.each do |post|%>
-  <h3><%= post.title -%></h3> 
+  <post>
+  <h4> <%= link_to post.title , community_post_path(@community, post) -%> </h4> 
   <%= by_line(post)-%>
-  <%= link_to 'view', community_post_path(@community, post) -%>
+  <%= edit_post_link(post, current_user) -%>
   <div class="post-body">
   <% if post.photos.any? -%>
-    <%= cl_image_tag(post.photos.first.path, { size: '250x250', crop: :fit }) %>
-  <% end %>
+    <span class="post-image">
+    <%= cl_image_tag(post.photos.first.path, { size: '175x175', crop: :fit }) %>
+    </span>
   <%= post.body -%>
-  </div>
-  <br />
-    <%= render partial: 'comments', locals: {commentable: post }  -%>
   <% end %>
+  </div>
+  <%= render partial: 'comments', locals: {commentable: post }  -%>
+  <% end %>
+  </post>
 <% end %>
-<br>
 <%= paginate(@posts) -%>

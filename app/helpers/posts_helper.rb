@@ -11,4 +11,8 @@ module PostsHelper
     end
   end
 
+  def edit_post_link(post,user)
+    link_to 'edit', edit_community_post_path(post.community,post) if post.owned_by?(user)
+  end
+
 end

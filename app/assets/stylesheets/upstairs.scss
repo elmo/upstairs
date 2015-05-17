@@ -18,16 +18,40 @@ home {
 }
 
 community {
+   @include pad();
    @include span-columns(12);
   communityleft {
+   @include pad();
    @include span-columns(6 of 12);
-   communityimage { @include span-columns(2 of 6); } 
-   communitymembership{ @include span-columns(3 of 6); } 
-   communityfeed{ @include span-columns(6 of 6); } 
+   communityimage { @include span-columns(3 of 6); } 
+   communitymembership{ @include span-columns(2 of 6); } 
+   communityfeed { 
+     @include pad();
+     @include span-columns(6 of 6); 
+     posts {
+       @include pad();
+       post {
+         @include pad();
+       }
+     }
+    } 
   }
   communityright {
-    @include span-columns(6 of 12)
+    @include pad();
+    @include span-columns(6 of 12); 
+    categories { }
+    members {
+      @include pad();
+    }
+    activity {
+      @include pad();
+    }
   }
+}
+
+.post-image {
+  float:left;
+  margin: 10px;
 }
 
 nav {
