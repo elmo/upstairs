@@ -1,5 +1,5 @@
-<h1>New Comment</h1>
-
+<h4>post your comment:</h4>
 <%= render 'form' %>
+<%= render partial: '/posts/post', locals: {post: @commentable} %>
 
-<%= link_to 'Back', community_path(@community) %>
+<%= link_to 'back', community_post_path(@community, @commentable) %>

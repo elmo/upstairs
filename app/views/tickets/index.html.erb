@@ -1,6 +1,10 @@
-<h1>Maintenance issues for <%= @community.address_line_one -%></h1>
-
+<h3>repair requests</h3> 
+<p><%= link_to 'Open a new repair request', new_community_ticket_path(@community) %></p>
 <tickets>
+<left><strong>summary</strong></left>
+<middle><strong>severity</strong></middle>
+<right><strong>status</strong></right>
+
 <% @tickets.each do |ticket| %>
 <left>
 <%= link_to ticket.title, community_ticket_path(@community, ticket )  %>
@@ -15,4 +19,3 @@
 <% end %>
 </tickets>
 
-<p><%= link_to 'Create a New Maintence Request', new_community_ticket_path(@community) %></p>

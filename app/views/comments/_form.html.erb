@@ -1,4 +1,4 @@
-<p>Add new comment for <strong><%= @comment.commentable.title -%></strong>.</p>
+
 <%= simple_form_for([@commentable, @comment]) do |f| %>
   <%= f.input :body %>
   <%= f.button :submit %>

@@ -16,7 +16,8 @@ class Comment < ActiveRecord::Base
   end
 
   def community
-     (reply?) ? comment.commentable.postable : commentable.postable
+    return commentable.community if commentable.class.to_s == 'Ticket'
+    return (reply?) ?  comment.commentable.community : commentable.community
   end
 
   def create_notifications

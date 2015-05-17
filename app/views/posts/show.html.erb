@@ -1,12 +1,2 @@
-<h1><%= @post.title -%></h1>
-<%= by_line(@post) -%>
-
-<%= link_to 'edit', edit_community_post_path(@postable, @post ) -%>
-
-<%= @post.body  -%>
-
-<% @post.photos.each do |photo| %>
-   <%= cl_image_tag(photo.path, { size: '400x600', crop: :fit }) %>
-<% end %>
-
+<%= render partial: '/posts/post', locals: { post: @post } %>
 <%= render partial: '/communities/comments', locals: {commentable: @post}  %>

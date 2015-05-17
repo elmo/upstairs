@@ -29,9 +29,9 @@ class RepliesController < ApplicationController
     @reply.user = current_user
     if @reply.save
       if @comment.commentable.class.to_s != 'Ticket'
-        redirect_to community_path(@comment.commentable.postable), notice: "Your comment has been saved."
+        redirect_to community_post_path(@comment.commentable.postable, @comment.commentable) , notice: "Your reply has been saved."
       else
-        redirect_to community_ticket_path(@comment.commentable.community, @comment.commentable), notice: "Your comment has been saved."
+        redirect_to community_ticket_path(@comment.commentable.community, @comment.commentable), notice: "Your reply has been saved."
       end
     else
       render :new

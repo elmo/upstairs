@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       if @commentable.class.to_s == 'Post'
-        redirect_to community_path(@commentable.postable), notice: 'Comment was successfully created.'
+        redirect_to community_post_path(@commentable.postable, @commentable), notice: 'Comment was successfully created.'
       else
         redirect_to community_ticket_path(@commentable.community,@commentable), notice: 'Comment was successfully created.'
       end

@@ -1,16 +1,16 @@
+<div class="comments-list">
 <% if commentable.comments.any? %>
 <p><%= pluralize(commentable.comments.count, 'comment' ) -%></p>
 <% end %>
-
 <p><%= link_to "comment" , new_polymorphic_path([commentable, Comment.new]) -%></p>
-
 <% commentable.comments.each do |comment| %>
  <div class="comment-body">
  <p class="by-line"><%= by_line(comment) -%></p>
-   <%= comment.body -%>
-   <br />
-   <%= link_to 'reply', new_comment_reply_path(comment) -%>
-  </div>
-  <%= render partial: '/communities/replies', locals: {comment: comment } %>
+ <%= comment.body -%>
+ <br />
+ <%= link_to 'reply', new_comment_reply_path(comment) -%>
+ </div>
+<%= render partial: '/communities/replies', locals: {comment: comment } %>
 <% end %>
-
+</div>
+<br clear="all">
