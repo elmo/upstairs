@@ -130,12 +130,17 @@ module ApplicationHelper
       comment.created_at.strftime(upstairs_time_format) + " " +
       link_to(username_or_anonymous(comment.user), community_user_path(comment.comment.commentable.postable, comment.user)) + " replied to " +
       link_to(username_or_anonymous(comment.comment.user) , user_path(comment.comment.user) ) + "'s comment on " +
-      link_to(username_or_anonymous(comment.comment.commentable.user), user_path(comment.comment.commentable.user) ) + "'s note: "  +
-      link_to(comment.comment.commentable.title, community_post_path( comment.comment.commentable.postable, comment.comment.commentable))
+      link_to(username_or_anonymous(comment.comment.commentable.user), user_path(comment.comment.commentable.user) ) + "'s "  +
+      link_to('note', community_post_path( comment.comment.commentable.postable, comment.comment.commentable))
     elsif comment.commentable.class.to_s == 'Ticket'
       comment.created_at.strftime(upstairs_time_format) + " commented on " +
-      link_to(username_or_anonymous(comment.user), community_user_path(comment.commentable.community, comment.commentable.user)  ) + "'s ticket: " +
-      link_to(comment.commentable.title, community_ticket_path(comment.commentable.community, comment.commentable))
+      link_to(username_or_anonymous(comment.user), community_user_path(comment.commentable.community, comment.commentable.user)) + "'s " +
+      link_to('ticket', community_ticket_path(comment.commentable.community, comment.commentable))
+
+    elsif comment.commentable.class.to_s == 'Classified'
+      comment.created_at.strftime(upstairs_time_format) + " commented on " +
+      link_to(username_or_anonymous(comment.user), community_user_path(comment.commentable.community, comment.commentable.user)) + "'s " +
+      link_to('classified ad', community_ticket_path(comment.commentable.community, comment.commentable))
     else
       comment.created_at.strftime(upstairs_time_format) + " " +
       link_to(username_or_anonymous(comment.user), community_user_path(comment.community, comment.user)) + " commented on "  +
@@ -154,8 +159,8 @@ module ApplicationHelper
   def ticket_summary(ticket)
    ticket.created_at.strftime(upstairs_time_format) + " " +
    link_to(username_or_anonymous(ticket.user), community_user_path(ticket.community, ticket.user)) +
-   " opened ticket " +
-   link_to(ticket.title, community_ticket_path(ticket.community, ticket))
+   " opened " +
+   link_to('repair request', community_ticket_path(ticket.community, ticket))
   end
 
   def classified_summary(classified)

@@ -18,6 +18,10 @@ class Ticket < ActiveRecord::Base
     community
   end
 
+  def owned_by?(user)
+    user_id == user.id
+  end
+
   private
 
   def create_notifications

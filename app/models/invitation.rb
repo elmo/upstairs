@@ -10,7 +10,6 @@ class Invitation < ActiveRecord::Base
     token
   end
 
-
   private
 
   def set_token
