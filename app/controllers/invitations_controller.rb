@@ -9,7 +9,6 @@ class InvitationsController < ApplicationController
   end
 
   def redeem
-    #http://localhost:3000/communities/401-43rd-avenue-san-francisco/invitations/f97d74d562e3f01aaf920a42bd2369f4/redeem
     @invitation = @community.invitations.where(token: params[:invitation_id]).first
     session[:invitation_code]  = @invitation.token
     redirect_to join_path
@@ -27,7 +26,7 @@ class InvitationsController < ApplicationController
     @invitation.community = @community
 
     if @invitation.save
-      redirect_to @invitation, notice: 'Invitation was successfully created.'
+      redirect_to @invitation.community, notice: 'Invitation was successfully created.'
     else
       render :new
     end
