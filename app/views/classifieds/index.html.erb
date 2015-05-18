@@ -10,9 +10,6 @@
 <% end %>
 <strong><%= link_to classified.title, community_classified_path(@community, classified) %> </strong>
 <%= by_line(classified) %>
-<%= edit_link(classified, current_user) %>
-<%= delete_link(classified, current_user) %>
-
 </li> 
 <% end %>
 </ul>

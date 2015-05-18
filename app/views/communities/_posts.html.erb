@@ -1,12 +1,11 @@
 <% if @posts.empty? %>
-<p>There are no messages for this community.<p>
+<p>There are no notes for this community.<p>
 <% else %>
 
 <% @posts.each do |post|%>
   <post>
   <h4> <%= link_to post.title , community_post_path(@community, post) -%> </h4> 
   <%= by_line(post)-%>
-  <%= edit_post_link(post, current_user) -%>
   <div class="post-body-thumb">
   <% if post.photos.any? -%>
     <span class="post-image">

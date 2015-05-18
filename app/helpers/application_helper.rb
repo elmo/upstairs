@@ -70,13 +70,13 @@ module ApplicationHelper
   end
 
   def upstairs_time_format
-    "%B %d, %Y %I:%S %p"
+    "%m/%d %I:%S %p"
   end
 
   def by_line(obj)
    content_tag(:span, class: 'byline') do
    link_to( username_or_anonymous(obj.user), community_user_path(obj.community, obj.user) ) +
-	   ' at ' + obj.created_at.strftime(upstairs_time_format)
+	   ' at ' + obj.created_at.strftime(upstairs_time_format) + ' ' +  edit_link(obj, current_user) + ' '  + delete_link(obj, current_user)
    end
   end
 
@@ -130,14 +130,15 @@ module ApplicationHelper
       comment.created_at.strftime(upstairs_time_format) + " " +
       link_to(username_or_anonymous(comment.user), community_user_path(comment.comment.commentable.postable, comment.user)) + " replied to " +
       link_to(username_or_anonymous(comment.comment.user) , user_path(comment.comment.user) ) + "'s comment on " +
-      link_to(username_or_anonymous(comment.comment.commentable.user), user_path(comment.comment.commentable.user) ) + "'s post: "  +
+      link_to(username_or_anonymous(comment.comment.commentable.user), user_path(comment.comment.commentable.user) ) + "'s note: "  +
       link_to(comment.comment.commentable.title, community_post_path( comment.comment.commentable.postable, comment.comment.commentable))
     elsif comment.commentable.class.to_s == 'Ticket'
       comment.created_at.strftime(upstairs_time_format) + " commented on " +
       link_to(username_or_anonymous(comment.user), community_user_path(comment.commentable.community, comment.commentable.user)  ) + "'s ticket: " +
       link_to(comment.commentable.title, community_ticket_path(comment.commentable.community, comment.commentable))
     else
-      comment.created_at.strftime(upstairs_time_format) + " commented on " +
+      comment.created_at.strftime(upstairs_time_format) + " " +
+      link_to(username_or_anonymous(comment.user), community_user_path(comment.community, comment.user)) + " commented on "  +
       link_to(username_or_anonymous(comment.commentable.user), community_user_path(comment.commentable.postable, comment.commentable.user)  ) + "'s "  +
       link_to('post', community_post_path(comment.commentable.postable, comment.commentable))
     end
@@ -147,7 +148,7 @@ module ApplicationHelper
    post.created_at.strftime(upstairs_time_format) + " " +
    link_to(username_or_anonymous(post.user), community_user_path(post.postable, post.user)) +
    " posted a " +
-   link_to( "message", community_post_path(post.postable, post))
+   link_to( "note", community_post_path(post.postable, post))
   end
 
   def ticket_summary(ticket)

@@ -1,17 +1,12 @@
+<h5>Recent Ads</h5>
+
 <ul id="classifieds">
-<% Classified.all.each do |classified| %>
+<% Classified.order('created_at desc').limit(5).each do |classified| %>
 <li> 
-
-<% if classified.photos.any? %>
- <%= cl_image_tag(classified.photos.first.path, { size: '30x40', crop: :fit }) %>
-<% end %>
-
-<strong> <%= link_to classified.title, community_classified_path(@community, classified) %> </strong>
-<% if current_user.owns?(classified)%>
-<%= link_to 'edit', edit_community_classified_path(@community, classified) %>
-<%= link_to 'destroy', community_classified_path(@community, classified), method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+<strong><%= link_to classified.title, community_classified_path(@community, classified) %> </strong>
+<small><%= edit_link(classified, current_user) %> <%= delete_link(classified, current_user)%></small>
 </li> 
 <% end %>
 </ul>
-<%= link_to 'Post a new  Ad', new_community_classified_path(@community) %>
+
+<p><%= link_to 'Post a new  Ad', new_community_classified_path(@community) %></p>

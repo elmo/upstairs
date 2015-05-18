@@ -36,6 +36,10 @@ class Comment < ActiveRecord::Base
     parent_comment_id.present?
   end
 
+  def owned_by?(user)
+    user_id == user.id
+  end
+
   private
 
   def create_actionable
