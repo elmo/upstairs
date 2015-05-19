@@ -1,5 +1,6 @@
 <%= simple_form_for([@community, @invitation] ) do |f| %>
   <%= f.error_notification %>
+  <%= f.hidden_field :type %>
 
   <div class="form-inputs">
     <%= f.input :email %>

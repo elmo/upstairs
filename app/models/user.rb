@@ -49,6 +49,11 @@ class User < ActiveRecord::Base
 
   def apply_invitation
     join(invitation.community) if invitation.present?
+    if invitation.type == 'LandlordInvitation'
+      community = invitation.community
+      community.landlord = self
+      community.save
+    end
   end
 
 end

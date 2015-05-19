@@ -1,0 +1,2 @@
+class ManagerInvitation < Invitation
+end

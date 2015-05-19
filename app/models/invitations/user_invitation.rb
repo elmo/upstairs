@@ -1,0 +1,2 @@
+class UserInvitation < Invitation
+end

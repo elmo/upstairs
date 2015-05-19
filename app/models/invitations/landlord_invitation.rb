@@ -1,0 +1,2 @@
+class LandlordInvitation < Invitation
+end

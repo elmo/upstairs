@@ -1,5 +1,9 @@
-<h1>Invite someone to join <%= @community.public_name -%></h1>
-
+<% if @invitation.type == 'UserInvitation' %>
+<h5>Invite another resident someone to join <%= @community.public_name -%></h5>
+<% elsif @invitation.type == 'LandlordInvitation' %>
+<h5>Invite your landlord to join <%= @community.public_name -%></h5>
+<% elsif @invitation.type == 'ManagerInvitation' %>
+<h5>Invite a manager to manage <%= @community.public_name -%></h5>
+<% end %>
 <%= render 'form' %>
-
-<%= link_to 'back', community_path(@community) %>
+<%= link_to 'home', community_path(@community) %>

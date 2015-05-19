@@ -13,6 +13,7 @@ class Community < ActiveRecord::Base
   validates_presence_of :address_line_one
   validates_presence_of :city
   validates_presence_of :state
+  belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged

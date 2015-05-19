@@ -16,6 +16,14 @@
 <div id= "main">
 <community>
 <h1><%= address(@community, ' ') -%></h1>
+<% if @community.landlord.blank? %>
+<div class="flash-notice"> 
+<p>Your landlord is not currently a member of this community. Once your landlord has registered, they will be able to respond to your repair requests.</p>
+<span> <%= link_to "invite your landlord",  new_community_landlord_invitation_path(@community) -%> </span> 
+</div>
+<% end %>
+
+</p>
 <communityleft>
 
 <communityimage>

@@ -25,6 +25,10 @@ Upstairs::Application.routes.draw do
     resources :invitations do
       get 'redeem'
     end
+    resources :user_invitations, controller: 'invitations', type: 'UserInvitation'
+    resources :landlord_invitations, controller: 'invitations', type: 'LandlordInvitation'
+    resources :manager_invitations, controller: 'invitations', type: 'ManagerInvitation'
+
     resources :users, only: [:show]
     member do
      get 'gallery'
