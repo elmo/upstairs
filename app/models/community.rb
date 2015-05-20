@@ -14,6 +14,7 @@ class Community < ActiveRecord::Base
   validates_presence_of :city
   validates_presence_of :state
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
+  resourcify
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged

@@ -21,6 +21,7 @@ gem 'quiet_assets'
 gem 'rails_12factor'
 gem 'rails_admin'
 gem 'rails_stdout_logging'
+gem "rolify"
 gem 'rollbar'
 gem 'refills'
 gem 'sidekiq'

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -36,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    true
+    has_role?(:admin)
   end
 
   def owns?(obj)
@@ -47,12 +48,23 @@ class User < ActiveRecord::Base
     use_my_username? && username.present? ? username : 'anonymous'
   end
 
+  def manager_of?(community)
+    has_role?(:landlord, community) or has_role?(:manager, community)
+  end
+
+  def created?(object)
+    id == object.user_id
+  end
+
   def apply_invitation
-    join(invitation.community) if invitation.present?
-    if invitation.type == 'LandlordInvitation'
+    if invitation.present?
       community = invitation.community
-      community.landlord = self
+      join(invitation.community)
+      self.add_role(:landlord, community) if invitation.type == 'LandlordInvitation'
+      self.add_role(:manager, community)  if invitation.type == 'ManagerInvitation'
+      community = invitation.community
       community.save
+      self.save
     end
   end
 

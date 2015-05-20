@@ -12,6 +12,7 @@ class Ticket < ActiveRecord::Base
   after_create :create_notifications
   after_create :create_actionable
 
+  resourcify
   has_attachments :photos, dependent: :destroy
 
   def postable
