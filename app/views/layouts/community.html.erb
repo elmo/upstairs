@@ -25,7 +25,12 @@
 
 </p>
 <communityleft>
+<communityfeed>
+<%= yield %>
+</communityfeed>
+</communityleft>
 
+<communityright>
 <communityimage>
 <% if @community.photos.any? %>
   <%= cl_image_tag(@community.photos.last.path, { width: '220', crop: :scale}) %>
@@ -33,24 +38,16 @@
 </communityimage>
 <communitymembership>
 <%= render partial: '/communities/membership' -%>
- <activity>
- <%= render partial: '/communities/activity' -%>
- </activity>
 </communitymembership>
-
-<communityfeed>
-<%= yield %>
-</communityfeed>
-</communityleft>
-
-<communityright>
  <categories> <%= render partial: '/communities/categories' %> </categories>
  <classifieds> <%= render partial: '/communities/classifieds' %> </classifieds>
  <members><%= render partial: '/communities/members' -%> </members>
+ <activity> <%= render partial: '/communities/activity' -%> </activity>
 </communityright>
-
 </community>
 </div>
+
 <%= footer %>
+
 </body>
 </html>
