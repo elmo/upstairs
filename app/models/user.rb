@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -13,6 +12,7 @@ class User < ActiveRecord::Base
   belongs_to :invitation
   after_create :apply_invitation
 
+  rolify
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
 

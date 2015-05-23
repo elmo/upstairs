@@ -11,7 +11,8 @@ class InvitationsController < ApplicationController
   def redeem
     @invitation = @community.invitations.where(token: params[:invitation_id]).first
     session[:invitation_code]  = @invitation.token
-    redirect_to join_path
+    user = User.find_by_email(@invitation.email)
+    redirect_to (user.present?) ? new_user_session_path : join_path
   end
 
   # GET /invitations/new

@@ -2,7 +2,7 @@ Upstairs::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary"
 
-  devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
 
   devise_scope :user do
     get "/join" => "devise/registrations#new"
