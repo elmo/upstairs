@@ -1,7 +1,7 @@
 <h5>Recent Ads</h5>
 
 <ul id="classifieds">
-<% Classified.order('created_at desc').limit(5).each do |classified| %>
+<% @community.classifieds.order('created_at desc').limit(5).each do |classified| %>
 <li> 
 <strong><%= link_to classified.title, community_classified_path(@community, classified) %> </strong>
 <small><%= edit_link(classified, current_user) %> <%= delete_link(classified, current_user)%></small>
