@@ -60,7 +60,10 @@ class User < ActiveRecord::Base
     if invitation.present?
       community = invitation.community
       join(invitation.community)
-      self.add_role(:landlord, community) if invitation.type == 'LandlordInvitation'
+      if invitation.type == 'LandlordInvitation'
+        self.add_role(:landlord, community) if invitation.type == 'LandlordInvitation'
+        community.landlord = self
+      end
       self.add_role(:manager, community)  if invitation.type == 'ManagerInvitation'
       community = invitation.community
       community.save
