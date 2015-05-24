@@ -1,22 +1,12 @@
-<h1>Alerts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @alerts.each do |alert| %>
-      <tr>
-        <td><%= link_to alert.message, community_alert_path(@community, alert) %> </td>
-	<td><%= link_to alert.user.public_name, community_user_path(@community, alert.user) %> 
-	    <%= alert.created_at.strftime(upstairs_time_format) %>
-	</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h1 class="inline">Alerts</h1>
+<%= link_to 'Create A New Community Alert', new_community_alert_path(@community) -%>
+<h2>All Alerts</h2>
+<ul>
+<% @alerts.each do |alert| %>
+<li><%= link_to alert.message, community_alert_path(@community, alert) %>
+<%= link_to alert.user.public_name, community_user_path(@community, alert.user) %> 
+<%= alert.created_at.strftime(upstairs_time_format) %>
+</li>
+<% end %>
+</ul>
 <%= paginate(@alerts) -%>
