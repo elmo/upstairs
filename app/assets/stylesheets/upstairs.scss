@@ -21,7 +21,7 @@ community {
    @include span-columns(12);
   communityleft {
    @include pad();
-   @include span-columns(7 of 12);
+   @include span-columns(4 of 12);
    communityimage { @include span-columns(2 of 7); } 
    communitymembership{ 
      @include span-columns(4 of 7); 
@@ -39,7 +39,7 @@ community {
   }
   communityright {
     @include pad();
-    @include span-columns(5 of 12); 
+    @include span-columns(7 of 12); 
     categories { 
       @include pad();
     }

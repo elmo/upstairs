@@ -25,13 +25,6 @@
 </div>
 <% end %>
 <communityleft>
-
-<communityfeed>
-<%= yield %>
-</communityfeed>
-</communityleft>
-
-<communityright>
 <h3><strong><%= address(@community, ' ') -%></strong></h3>
 <communityimage>
 <% if @community.photos.any? %>
@@ -45,11 +38,14 @@
  <classifieds> <%= render partial: '/communities/classifieds' %> </classifieds>
  <members><%= render partial: '/communities/members' -%> </members>
  <activity> <%= render partial: '/communities/activity' -%> </activity>
+</communityleft>
+<communityright>
+<communityfeed>
+<%= yield %>
+</communityfeed>
 </communityright>
 </community>
 </div>
-
 <%= footer %>
-
 </body>
 </html>
