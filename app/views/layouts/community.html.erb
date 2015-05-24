@@ -25,7 +25,10 @@
 </div>
 <% end %>
 <communityleft>
-<h3><strong><%= address(@community, ' ') -%></strong></h3>
+<h3><strong><%= @community.name-%></strong></h3>
+<small><%= address(@community, ' ')-%></small>
+<br clear="all">
+
 <communityimage>
 <% if @community.photos.any? %>
   <%= cl_image_tag(@community.photos.last.path, { width: '220', crop: :scale}) %>
@@ -33,10 +36,10 @@
 </communityimage>
 <communitymembership>
 <%= render partial: '/communities/membership' -%>
+<br clear="all">
 </communitymembership>
  <categories> <%= render partial: '/communities/categories' %> </categories>
  <classifieds> <%= render partial: '/communities/classifieds' %> </classifieds>
- <members><%= render partial: '/communities/members' -%> </members>
  <activity> <%= render partial: '/communities/activity' -%> </activity>
 </communityleft>
 <communityright>

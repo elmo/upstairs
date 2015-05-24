@@ -4,7 +4,7 @@
 <% @posts.each do |post|%>
   <post>
   <div class="type-system-geometric">
-  <h1> <%= link_to post.title , community_post_path(@community, post) -%> </h1> 
+  <h3> <%= link_to post.title , community_post_path(@community, post) -%> </h3> 
   <%= by_line(post)-%>
   <div class="post-body-thumb">
   <% if false and post.photos.any? -%>

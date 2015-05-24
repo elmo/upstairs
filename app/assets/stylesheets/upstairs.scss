@@ -24,6 +24,7 @@ community {
    @include span-columns(4 of 12);
    communityimage { @include span-columns(2 of 7); } 
    communitymembership{ 
+     @include pad();
      @include span-columns(4 of 7); 
    } 
    communityfeed { 
@@ -40,16 +41,13 @@ community {
   communityright {
     @include pad();
     @include span-columns(7 of 12); 
+      @include pad();
     categories { 
       @include pad();
     }
     classifieds {
       @include pad();
     }
-    members {
-      @include pad();
-    }
-
   }
 }
 
