@@ -1,12 +1,23 @@
 <h1 class="inline">Alerts</h1>
-<%= link_to 'Create A New Community Alert', new_community_alert_path(@community) -%>
-<h2>All Alerts</h2>
+
+<h2>Create a new Alert</h2>
+
+<%= render 'form' %>
+
+<br />
+
+<h3>Past Alerts</h3>
+
 <ul>
 <% @alerts.each do |alert| %>
-<li><%= link_to alert.message, community_alert_path(@community, alert) %>
-<%= link_to alert.user.public_name, community_user_path(@community, alert.user) %> 
-<%= alert.created_at.strftime(upstairs_time_format) %>
-</li>
+  <li>
+    <%= alert.created_at.strftime(upstairs_time_format) %>
+    by <%= link_to alert.user.public_name, community_user_path(@community, alert.user) %> 
+    <%= link_to alert.message, community_alert_path(@community, alert) %>
+  </li>
 <% end %>
 </ul>
+
+<br />
+
 <%= paginate(@alerts) -%>

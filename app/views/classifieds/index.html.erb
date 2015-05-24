@@ -1,18 +1,30 @@
 <h1 class="inline">Classifieds</h1>
 <%= link_to 'Post an ad', new_community_classified_path(@community) -%>
 
-<h2><%= @category.present? ? @category.name : 'All Categories' -%></h2>
+<h2>Category: <strong><%= @category.present? ? @category.name : 'All' -%></strong></h2>
+
+<% if @classifieds.empty? %>
+<p>There are no ads <%= (@category.present?) ? "in this category." : "."  %></p>
+<% end %>
 
 <ul id="classifieds">
 <% @classifieds.each do |classified| %>
-<li> 
+<li class="classified"> 
 <% if classified.photos.any? %>
  <%= cl_image_tag(classified.photos.first.path, { size: '30x40', crop: :fit }) %>
 <% end %>
+
 <strong><%= link_to classified.title, community_classified_path(@community, classified) %> </strong>
 <%= by_line(classified) %>
+
+<%= classified.body %>
+
 </li> 
 <% end %>
 </ul>
 
 <%= paginate(@classifieds)-%>
+
+<br />
+
+<p><%= list_all_classifieds_link(@community) -%></p>

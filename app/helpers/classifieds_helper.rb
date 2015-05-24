@@ -11,4 +11,8 @@ module ClassifiedsHelper
    link_to 'edit', edit_community_classified_path(classified.community, classified) if classified.owned_by?(user)
  end
 
+ def list_all_classifieds_link(community)
+  link_to 'list all community classifieds', community_classifieds_path(community)
+ end
+
 end

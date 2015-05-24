@@ -18,35 +18,30 @@ home {
 }
 
 community {
-   @include span-columns(12);
+  @include span-columns(12);
   communityleft {
-   @include pad();
-   @include span-columns(4 of 12);
-   communityimage { @include span-columns(2 of 7); } 
-   communitymembership{ 
-     @include pad();
-     @include span-columns(4 of 7); 
-   } 
-   communityfeed { 
-     @include pad();
-     @include span-columns(7 of 7); 
-     posts {
-       @include pad();
-       post {
-         @include pad();
-       }
-     }
-    } 
-  }
-  communityright {
     @include pad();
-    @include span-columns(7 of 12); 
+    @include span-columns(4 of 12);
+    communityimage { @include span-columns(4 of 4); } 
+    communitymembership { 
       @include pad();
-    categories { 
+      @include span-columns(4 of 7);  
       @include pad();
-    }
-    classifieds {
+      categories { 
+        @include pad(); 
+      }
+      classifieds { 
       @include pad();
+      }
+      activities { 
+        @include pad(); 
+      }
+    } 
+  } 
+  communityright {
+    communityfeed { 
+      @include pad();
+      @include span-columns(7 of 12); 
     }
   }
 }
@@ -123,3 +118,8 @@ ticket {
   display: inline;
 }
 
+.classified {
+  border: 2px dotted #ccc;
+  margin: 1em;
+  padding: 1em;
+}

@@ -1,5 +1,8 @@
 <h1>Post a New Classified</h1>
 
+<div class="classified">
 <%= render 'form' %>
+</div>
 
-<%= link_to 'Back', community_classifieds_path(@community) %>
+<br />
+<p><%= list_all_classifieds_link(@community) -%></p>

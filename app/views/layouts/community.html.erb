@@ -26,8 +26,7 @@
 <% end %>
 <communityleft>
 <h3><strong><%= @community.name-%></strong></h3>
-<small><%= address(@community, ' ')-%></small>
-<br clear="all">
+<%= address(@community, ' ')-%>
 
 <communityimage>
 <% if @community.photos.any? %>
@@ -39,8 +38,13 @@
 <br clear="all">
 </communitymembership>
  <categories> <%= render partial: '/communities/categories' %> </categories>
+
+<br clear="all">
  <classifieds> <%= render partial: '/communities/classifieds' %> </classifieds>
+
+<br clear="all">
  <activity> <%= render partial: '/communities/activity' -%> </activity>
+
 </communityleft>
 <communityright>
 <communityfeed>

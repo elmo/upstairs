@@ -6,7 +6,8 @@ class AlertsController < ApplicationController
 
   # GET /alerts
   def index
-    @alerts = @community.alerts.order('created_at desc').page(params[:page]).per(10)
+    @alert = @community.alerts.new
+    @alerts = @community.alerts.order('created_at desc').page(params[:page]).per(20)
   end
 
   # GET /alerts/1

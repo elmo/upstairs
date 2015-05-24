@@ -1,4 +1,3 @@
-<p>Add new alert for <strong><%= @community.address_line_one -%></strong>.</p>
 <%= simple_form_for([@community, @alert]) do |f| %>
   <%= f.input :message %>
   <%= f.button :submit %>
