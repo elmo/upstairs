@@ -1,6 +1,9 @@
-<h1 style="display:inline;">Bulletin Board</h1>
-<posts>
+<h1 class="inline">Bulletin Board</h1>
 <%= link_to 'post a note' , new_community_post_path(@community) -%>
+
+<br />
+
+<posts>
 <br>
 <%= render partial: 'posts', locals: {posts: @posts} -%>
 </posts>
