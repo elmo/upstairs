@@ -4,16 +4,18 @@
   <title>Upstairs</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <link href='//fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Sanchez:400italic,400' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
   <%= cloudinary_js_config %>
 </head>
-<body>
+<body class="type-system-geometric">
 <%= render partial: '/layouts/top_navigation' %>
 <%= render partial: '/layouts/community_subnav' -%>
 <%= render partial: '/layouts/flash' %>
 <%= render partial: '/communities/alerts' %>
 
-<div id= "main">
+<div id= "main" class="type-system-geometric">
 <community>
 <h1><%= address(@community, ' ') -%></h1>
 <% if @community.landlord.blank? %>
@@ -25,6 +27,7 @@
 
 </p>
 <communityleft>
+
 <communityfeed>
 <%= yield %>
 </communityfeed>

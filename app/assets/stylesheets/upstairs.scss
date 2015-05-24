@@ -62,29 +62,25 @@ community {
 .post-body {
   padding:10px;
   min-height:250px;
-  background-color: lightyellow;
   display:block;
 }
 
 .post-body-thumb {
   padding:10px;
   min-height:60px;
-  background-color: lightyellow;
   display:block;
 }
 
 .comment-body {
-  border: 1px dotted #ccc;
+  border-left: 1px dotted #ccc;
   margin:5px;
   padding:5px;
-  background-color: #eee;
 }
 
 .reply-body {
-  border: 1px dotted #ccc;
+  border-left: 1px dotted #ccc;
   margin:20px 5px;
   padding:5px;
-  background-color: #eee;
 }
 
 .comments-list {

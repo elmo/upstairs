@@ -38,6 +38,10 @@ class Post < ActiveRecord::Base
     user_id == user.id
   end
 
+  def words(max = nil)
+    (max.present?) ?  body.split[0..max].join(' ') : body
+  end
+
   private
 
   def create_actionable

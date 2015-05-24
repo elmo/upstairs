@@ -16,6 +16,8 @@ class Community < ActiveRecord::Base
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   resourcify
 
+  HOMEPAGE_WORD_MAX = 80
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
   has_paper_trail

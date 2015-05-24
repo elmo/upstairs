@@ -4,7 +4,8 @@
 
 <% @posts.each do |post|%>
   <post>
-  <h4> <%= link_to post.title , community_post_path(@community, post) -%> </h4> 
+  <div class="type-system-geometric">
+  <h1> <%= link_to post.title , community_post_path(@community, post) -%> </h1> 
   <%= by_line(post)-%>
   <div class="post-body-thumb">
   <% if post.photos.any? -%>
@@ -12,9 +13,9 @@
     <%= cl_image_tag(post.photos.first.path, { size: '175x175', crop: :fit }) %>
     </span>
   <% end %>
-  <%= post.body -%>
-  <br clear="all">
-  <%= render partial: '/comments/comments', locals: { commentable: post }  -%>
+  <%= post.words(Community::HOMEPAGE_WORD_MAX) -%>
+  <%= link_to 'continue reading...', community_post_path(@community, post)   %>
+  </div>
   </div>
   </post>
   <% end %>
