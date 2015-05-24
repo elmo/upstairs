@@ -1,10 +1,11 @@
-<h2>Classifieds</h2>
-<h3><%= @category.present? ? @category.name : 'All Categories' -%></h3>
+<h1 class="inline">Classifieds</h1>
+<%= link_to 'Post an ad', new_community_classified_path(@community) -%>
+
+<h2><%= @category.present? ? @category.name : 'All Categories' -%></h2>
 
 <ul id="classifieds">
 <% @classifieds.each do |classified| %>
 <li> 
-
 <% if classified.photos.any? %>
  <%= cl_image_tag(classified.photos.first.path, { size: '30x40', crop: :fit }) %>
 <% end %>
@@ -14,4 +15,4 @@
 <% end %>
 </ul>
 
-<%= link_to 'post a new classified', new_community_classified_path(@community) %>
+<%= paginate(@classifieds)-%>

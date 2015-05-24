@@ -88,7 +88,8 @@ module ApplicationHelper
     user.use_my_username? and user.username.present?
   end
 
-  def user_mini_summary(user)
+  def user_mini_summary(community,user)
+    ((user.avatar.present?) ?  cl_image_tag(user.avatar.path, { size: '30x40', crop: :fit }) : '') +
     username_or_anonymous(user) + ' joined ' +  user.created_at.strftime(upstairs_time_format)
   end
 

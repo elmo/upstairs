@@ -1,6 +1,8 @@
-<h1><%= @classified.category.name %></h1>
+<h1>Classifieds</h1>
 
-<h2><%= @classified.title %></h2>
+<h2><%= @classified.category.name %></h2>
+
+<h3><%= @classified.title %></h3>
 <%= by_line(@classified)-%>
 
 <p>

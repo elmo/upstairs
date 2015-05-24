@@ -2,7 +2,7 @@
 <ul>
 <% @community.users.each do |user| %>
   <li>
-    <%= user_mini_summary(user) -%>
+    <%= user_mini_summary(@community, user) -%>
     <% if current_user.member_of?(@community)%>
     <%= link_to 'leave', community_membership_path(@community, @community.membership(current_user)), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
     <% end %>
