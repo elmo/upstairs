@@ -56,6 +56,14 @@ class User < ActiveRecord::Base
     id == object.user_id
   end
 
+  def sent_messages
+    Message.where(sender_id: self.id)
+  end
+
+  def received_messages
+    Message.where(recipient_id: self.id)
+  end
+
   def apply_invitation
     if invitation.present?
       community = invitation.community

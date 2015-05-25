@@ -9,6 +9,7 @@
 </p>
 <%= render partial: '/photos/list', locals: {photos: @classified.photos } %>
 <p><%= edit_link(@classified, current_user) -%></p>
+<%= link_to "send message", new_community_message_path(@community, messageable_id: @classified.id, messagable_type: 'Classified'  ) -%>
 </div>
 <br />
 <p><%= list_all_classifieds_link(@community) -%></p>

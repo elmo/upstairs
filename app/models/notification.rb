@@ -58,6 +58,13 @@ class Notification < ActiveRecord::Base
 	  ).deliver
           UserMailer.comment(self).deliver
       end
+     elsif notifiable.class.to_s == 'Message'
+       user.receives_text_messages? &&
+       notifiable.recipient.receives_text_messages? &&
+         TwilioMessage.new(notifiable.recipient.phone,
+           "Upstairs.io: #{notifiable.sender.public_name} has sent you a message" +
+           Rails.application.routes.url_helpers.community_url(notifiable.community, host: "http://www.upstairs.com" ))
+        MessageMailer.message(self.notifiable)
      else
        raise "unknown notifiable"
      end

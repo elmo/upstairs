@@ -34,17 +34,15 @@
 <% end %>
 </communityimage>
 <communitymembership>
+<%= render partial: '/communities/messages' -%>
 <%= render partial: '/communities/membership' -%>
 <br clear="all">
 </communitymembership>
  <categories> <%= render partial: '/communities/categories' %> </categories>
-
 <br clear="all">
  <classifieds> <%= render partial: '/communities/classifieds' %> </classifieds>
-
 <br clear="all">
  <activity> <%= render partial: '/communities/activity' -%> </activity>
-
 </communityleft>
 <communityright>
 <communityfeed>

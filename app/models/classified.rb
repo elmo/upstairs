@@ -23,6 +23,10 @@ class Classified < ActiveRecord::Base
     user_id == user.id
   end
 
+  def messagable_name
+    title
+  end
+
   private
 
   def create_actionable

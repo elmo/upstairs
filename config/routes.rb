@@ -1,4 +1,6 @@
 Upstairs::Application.routes.draw do
+  resources :messages
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary"
 
@@ -24,6 +26,9 @@ Upstairs::Application.routes.draw do
     resources :classifieds
     resources :invitations do
       get 'redeem'
+    end
+    resources :messages do
+     put 'read'
     end
     resources :user_invitations, controller: 'invitations', type: 'UserInvitation'
     resources :landlord_invitations, controller: 'invitations', type: 'LandlordInvitation'

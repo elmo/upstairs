@@ -19,6 +19,8 @@
 
 <%= classified.body %>
 
+<br/ >
+<%= link_to "send message", new_community_message_path(@community, messageable_id: classified.id, messagable_type: 'Classified'  ) -%>
 </li> 
 <% end %>
 </ul>
