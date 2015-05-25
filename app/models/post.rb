@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
+  belongs_to :category
   belongs_to :postable, polymorphic: true
   belongs_to :actionable, polymorphic: true
   has_many :comments, as: :commentable

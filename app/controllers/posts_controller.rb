@@ -6,7 +6,12 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = @community.posts.page(params[:page]).per(10)
+    scope = @community.posts
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      scope = scope.where(category_id: @category.id)
+    end
+    @posts = scope.page(params[:page]).per(10)
   end
 
   # GET /posts/1
@@ -65,6 +70,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params[:post].permit(:title, :body, photos: [])
+      params[:post].permit(:title, :body, :category_id,  photos: [])
     end
 end
