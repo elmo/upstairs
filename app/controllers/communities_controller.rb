@@ -4,7 +4,6 @@ class CommunitiesController < ApplicationController
   layout :get_layout
 
   def index
-    @communities= Community.all
   end
 
   # GET /communities/1
@@ -61,11 +60,11 @@ class CommunitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def community_params
-      params.require(:community).permit(:address, photos: [])
+      params.require(:community).permit(:name, :address, photos: [])
     end
 
    def get_layout
-     ['show', 'gallery'].include?(action_name) ? 'community' : 'application'
+     ['show', 'gallery', 'edit'].include?(action_name) ? 'community' : 'application'
    end
 
 end

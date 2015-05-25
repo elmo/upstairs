@@ -65,9 +65,19 @@
     font-weight: 600;
     line-height: 1.9em;
     margin-bottom: 1.1em;
-
     @include media($medium-screen) {
       font-size: 1.3em;
+    }
+  }
+
+  h2.community-name {
+    font-family: $serif;
+    font-size: 1.4em;
+    font-weight: 600;
+    line-height: 1.9em;
+    margin-bottom: .5em;
+    @include media($medium-screen) {
+      font-size: 1.5em;
     }
   }
 

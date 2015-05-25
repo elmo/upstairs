@@ -1,4 +1,6 @@
 <%= simple_form_for @community do |f| %>
   <%= f.hidden_field :address %>
-  <%= f.button :submit, 'join' %>
+  <%= f.input :name %>
+  <%= f.input :photos, as: :attachinary %>
+  <%= f.button :submit, 'save' %>
 <% end %>

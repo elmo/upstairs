@@ -1,6 +1,20 @@
+<h1>Bulletin Board</h1>
+
+<h2>Notes</h2>
+
+<% if @posts.empty? %>
+<p> There are no posts <%= (@category.present?) ? " within category #{@category.name}" : "" -%>. </p>
+<% else %>
+
 <% @posts.each do |post| %>
   <%= render partial: '/posts/post', locals: { post: post }  -%>
 <% end %>
+
 <%= paginate(@posts) -%>
 
- <p><%= link_to 'add a new post', new_community_post_path(@community) %></p>
+<% end %>
+
+<br />
+<p>
+<%= link_to 'add a new post', new_community_post_path(@community) %>
+</p>

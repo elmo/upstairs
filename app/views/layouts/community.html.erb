@@ -19,21 +19,9 @@
 <community>
 
 <communityleft>
-<h3><strong><%= @community.name-%></strong></h3>
-<%= @community.address -%>
 
-<% if @community.landlord.blank? %>
-Your landlord is not currently not associated with this community.
-<%= link_to "invite your landlord",  new_community_landlord_invitation_path(@community) -%>
-</p>
-<% end %>
+<%= render partial: '/communities/name' %>
 
-<communityimage>
-<% if @community.photos.any? %>
-  <%= cl_image_tag(@community.photos.last.path, { width: '220', crop: :scale}) %>
-<% end %>
-</communityimage>
-<communitymembership>
 <%= render partial: '/communities/messages' -%>
 <%= render partial: '/communities/membership' -%>
 <br clear="all">

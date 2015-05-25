@@ -1,0 +1,23 @@
+<% if  @community.name.present? %>
+<h2 class="community-name"><%= @community.name-%> </h2>	
+<% else %>
+  <%= link_to 'give your community a name' , edit_community_path(@community) -%> 
+<% end %>
+
+<h3><%= @community.address -%></h3>
+
+<communityimage>
+<% if @community.photos.any? %>
+  <%= cl_image_tag(@community.photos.last.path, { width: '220', crop: :scale}) %>
+<% else %>
+  <%= link_to 'add a photo', edit_community_path(@community) -%> 
+<% end %>
+</communityimage>
+
+<communitymembership>
+
+<% if @community.landlord.blank? %>
+Your landlord is not currently not associated with this community.
+<%= link_to "invite your landlord",  new_community_landlord_invitation_path(@community) -%>
+</p>
+<% end %>
