@@ -116,8 +116,11 @@ GEM
       railties (>= 3.2, < 5.0)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
+    geocoder (1.2.7)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    gmaps-autocomplete-rails (0.1.4)
+      rails (>= 3.1.0)
     haml (4.0.6)
       tilt
     hike (1.2.3)
@@ -306,6 +309,8 @@ DEPENDENCIES
   factory_girl
   factory_girl_rails
   friendly_id
+  geocoder
+  gmaps-autocomplete-rails
   jquery-rails
   neat
   paper_trail

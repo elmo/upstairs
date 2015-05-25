@@ -10,13 +10,16 @@ class CommunitiesController < ApplicationController
   # GET /communities/1
   def show
    @posts = @community.posts.page(params[:page]).per(10).order('created_at desc')
-   @classifieds = @community.classifieds.page(params[:page]).per(10).order('created_at desc')
    @notifications = @community.notifications.order("created_at desc").limit(5)
+  end
+
+  def choose
+    @address = params[:address]
   end
 
   # GET /communities/new
   def new
-    @community = Community.new
+    @community = Community.new(address: params[:address])
   end
 
   # GET /communities/1/edit
@@ -33,10 +36,15 @@ class CommunitiesController < ApplicationController
 
   # POST /communities
   def create
+    @community = Community.where(address: community_params[:address]).first
+    if @community.present?
+      current_user.join(@community)
+      redirect_to @community, notice: "Welcome, to #{@community.address}. You are now a member." and return false
+    end
     @community = Community.new(community_params)
-
     if @community.save
-      redirect_to @community, notice: 'Community was successfully created.'
+      current_user.join(@community)
+      redirect_to @community, notice: "Welcome, to #{@community.address}. You are now a member." and return false
     else
       render :new
     end
@@ -53,7 +61,7 @@ class CommunitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def community_params
-      params.require(:community).permit(:address_line_one, :address_line_two, :city,:state, :postal_code, photos: [])
+      params.require(:community).permit(:address, photos: [])
     end
 
    def get_layout

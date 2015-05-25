@@ -18,15 +18,6 @@ class Notification < ActiveRecord::Base
 			       host: "http://www.upstairs.io")
           ).deliver
           UserMailer.post(self).deliver
-    elsif notifiable.class.to_s == 'Classified'
-       user.receives_text_messages? &&
-	 TwilioMessage.new(user.phone,
-	   notifiable.title + "\n" +  Rails.application.routes.url_helpers.community_classified_url(
-           notifiable.community,
-	   notifiable,
-	   host: "http://www.upstairs.io")
-        ).deliver
-        UserMailer.classified(self).deliver
     elsif notifiable.class.to_s == 'Alert'
        user.receives_text_messages? &&
 	 TwilioMessage.new(user.phone,

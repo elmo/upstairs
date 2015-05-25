@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  #before_action :authenticate_user!, except: :redeem
+  before_action :authenticate_user!, except: :redeem
   before_action :set_invitation, only: [:show, :edit, :update, :destroy]
   before_action :set_community
   layout 'community'

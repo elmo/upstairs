@@ -1,6 +1,14 @@
 #main {
   @include outer-container;
 }
+
+
+centered {
+ @include pad();
+ @include span-columns(8);
+ @include shift(2);
+}
+
 section {
   left  { @include span-columns(4); }
   right { @include span-columns(6); }

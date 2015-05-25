@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525050021) do
+ActiveRecord::Schema.define(version: 20150524172432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,17 +61,6 @@ ActiveRecord::Schema.define(version: 20150525050021) do
     t.datetime "updated_at",         null: false
   end
 
-  create_table "classifieds", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "community_id"
-    t.integer  "category_id"
-    t.string   "title"
-    t.text     "body"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "slug"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "parent_comment_id"
@@ -88,16 +77,15 @@ ActiveRecord::Schema.define(version: 20150525050021) do
 
   create_table "communities", force: :cascade do |t|
     t.string   "name"
-    t.string   "address_line_one"
-    t.string   "address_line_two"
-    t.string   "city"
-    t.string   "state"
-    t.string   "postal_code"
-    t.boolean  "status"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "slug"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "float"
+    t.float    "longitude"
+    t.boolean  "active",      default: true
     t.integer  "landlord_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "slug"
   end
 
   add_index "communities", ["slug"], name: "index_communities_on_slug", using: :btree
@@ -121,9 +109,9 @@ ActiveRecord::Schema.define(version: 20150525050021) do
     t.string   "token"
     t.string   "email"
     t.datetime "redeemed_at"
+    t.string   "type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.string   "type"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -162,15 +150,17 @@ ActiveRecord::Schema.define(version: 20150525050021) do
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "category_id"
     t.integer  "postable_id"
     t.string   "postable_type"
     t.string   "title"
+    t.string   "posts"
+    t.string   "slug"
+    t.string   "string"
     t.text     "body"
     t.boolean  "flagged",       default: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.string   "slug"
-    t.integer  "category_id"
   end
 
   add_index "posts", ["postable_id"], name: "index_posts_on_postable_id", using: :btree
@@ -212,12 +202,13 @@ ActiveRecord::Schema.define(version: 20150525050021) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "username"
     t.string   "phone"
     t.boolean  "use_my_username",          default: true
     t.boolean  "ok_to_send_text_messages", default: true
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "invitation_id"
   end
 

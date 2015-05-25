@@ -1,0 +1,7 @@
+<h1>Choose your community </h1>
+
+<h2><%= @address -%></h2>
+
+<%= link_to "No, this is not my address.", communities_path %>
+
+<%= link_to "Yes, this is my address.", new_community_path(address: @address) %>

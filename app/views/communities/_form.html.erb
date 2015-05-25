@@ -1,10 +1,4 @@
 <%= simple_form_for @community do |f| %>
-  <%= f.input :address_line_one %>
-  <%= f.input :address_line_two %>
-  <%= f.input :city %>
-  <%= f.input :state, collection: us_states %>
-  <%= f.input :postal_code %>
-  <%= f.input :photos, as: :attachinary %>
-  <%= f.button :submit %>
-
+  <%= f.hidden_field :address %>
+  <%= f.button :submit, 'join' %>
 <% end %>

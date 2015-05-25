@@ -1,22 +1,10 @@
 <section>
-<% if @communities.empty? %>
- <p>There are no communities in the system.</p>
-<% end %>
 
-<% @communities.each do |community|%>
-  <p> <%= address(community, ' ') %> 
-    <% if current_user.member_of?(community) %>
-      <%= link_to 'leave', community_membership_path(community, community.membership(current_user) ), 
-        method: :delete, 
-	confirm: "Are your sure that you want to leave this coummnity?" -%>
-     <% else %>
-       <%= form_tag community_memberships_path(community), method: :post do %>
-       <%= submit_tag 'join' -%>
-     <% end %>	
-  </p>
-   <% end %>
-<% end %>
+<h1>Find your community</h1>
 
-<p><%= link_to 'add a new community', new_community_path -%></p>
+<%= form_tag find_community_path , method: :get do |f| %>
+  <%= text_field_tag :address, params[:address], id: 'gmaps-input-address', placeholder: 'Start typing a place...' -%>
+  <%=  submit_tag 'find'  %>
+<% end %>
 
 </section>

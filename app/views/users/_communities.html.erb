@@ -2,7 +2,7 @@
 
 <% if current_user.memberships.any? %>
  <% current_user.memberships.each do |membership| %>
-   <%= link_to membership.community.address_line_one, community_path(membership.community)-%>
+   <%= link_to membership.community.address, community_path(membership.community)-%>
    (<%=pluralize(membership.community.users.count, 'member') -%>)
    (<%=pluralize(membership.community.posts.count, 'post') -%>)
    (<%=pluralize(membership.community.posts.count, 'comments') -%>)

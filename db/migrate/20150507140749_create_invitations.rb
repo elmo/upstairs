@@ -6,6 +6,7 @@ class CreateInvitations < ActiveRecord::Migration
       t.string :token
       t.string :email
       t.datetime :redeemed_at
+      t.string :type
       t.timestamps null: false
     end
     add_column :users, :invitation_id, :integer

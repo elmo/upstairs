@@ -2,12 +2,11 @@ class CreateCommunities < ActiveRecord::Migration
   def change
     create_table :communities do |t|
       t.string :name
-      t.string :address_line_one
-      t.string :address_line_two
-      t.string :city
-      t.string :state
-      t.string :postal_code
-      t.boolean :status
+      t.string :address
+      t.float :latitude, :float
+      t.float :longitude
+      t.boolean :active, default: true
+      t.integer :landlord_id
       t.timestamps null: false
     end
   end

@@ -1,5 +1,10 @@
 <h1 class="inline">Tickets</h1>
-<p><%= link_to 'New Ticket', new_community_ticket_path(@community) %></p>
+
+<p><%= link_to 'File a New Ticket', new_community_ticket_path(@community) %></p>
+
+<%= render partial: '/communities/no_landlord' %>
+
+<br>
 
 <tickets>
 <left><strong>summary</strong></left>

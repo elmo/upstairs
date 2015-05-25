@@ -137,11 +137,6 @@ module ApplicationHelper
       comment.created_at.strftime(upstairs_time_format) + " commented on " +
       link_to(username_or_anonymous(comment.user), community_user_path(comment.commentable.community, comment.commentable.user)) + "'s " +
       link_to('ticket', community_ticket_path(comment.commentable.community, comment.commentable))
-
-    elsif comment.commentable.class.to_s == 'Classified'
-      comment.created_at.strftime(upstairs_time_format) + " commented on " +
-      link_to(username_or_anonymous(comment.user), community_user_path(comment.commentable.community, comment.commentable.user)) + "'s " +
-      link_to('classified ad', community_ticket_path(comment.commentable.community, comment.commentable))
     else
       comment.created_at.strftime(upstairs_time_format) + " " +
       link_to(username_or_anonymous(comment.user), community_user_path(comment.community, comment.user)) + " commented on "  +
@@ -162,13 +157,6 @@ module ApplicationHelper
    link_to(username_or_anonymous(ticket.user), community_user_path(ticket.community, ticket.user)) +
    " opened " +
    link_to('repair request', community_ticket_path(ticket.community, ticket))
-  end
-
-  def classified_summary(classified)
-   classified.created_at.strftime(upstairs_time_format) + " " +
-   link_to(username_or_anonymous(classified.user), community_user_path(classified.community, classified.user)) +
-   " created classified " +
-   link_to(classified.title, community_classified_path(classified.community, classified))
   end
 
   def ticket_status_badge(ticket)

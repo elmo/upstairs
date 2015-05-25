@@ -1,0 +1,5 @@
+<% if @community.landlord.blank?  %>
+<p> There is no landlord associated with this community. To have your repairs acted up, please invite your landlord to join this community.
+<%= link_to "invite your landlord to join",  new_community_landlord_invitation_path(@community) -%>
+</p>
+<% end %>

@@ -48,16 +48,4 @@ class UserMailer < ApplicationMailer
 	 subject: "#{notification.notifiable.user.public_name} replied to a comment on #{notification.notifiable.comment.commentable.title}" )
   end
 
-  def classified(notification)
-    @sender_name = notification.notifiable.user.public_name
-    @receipient_name = notification.user.public_name
-    @community_name = notification.notifiable.community.public_name
-    @url = Rails.application.routes.url_helpers.community_classified_url(notification.notifiable.community,
-								    notification.notifiable,
-								    host: "http://www.upstairs.io")
-    @classified_text = notification.notifiable.body
-    mail(to: notification.user.email,
-	 subject: "#{notification.notifiable.user.public_name} posted classified #{notification.notifiable.title}" )
-  end
-
 end

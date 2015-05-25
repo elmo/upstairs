@@ -24,17 +24,11 @@ RSpec.describe CommunitiesController, :type => :controller do
   # Community. As you add validations to Community, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {address_line_one: "410-43rd Avenue",
-     city: "San Francisco",
-     state: "CA",
-     postal_code: "94121"}
+    {address: "410-43rd Avenue"}
   }
 
   let(:invalid_attributes) {
-   {address_line_one: "",
-    city: "",
-    state: "",
-    postal_code: ""}
+   {address: "" }
   }
 
   # This should return the minimal set of values that should be in the session

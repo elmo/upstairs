@@ -1,5 +1,10 @@
-<h1>New Community</h1>
+<h1>Join Community</h1>
+
+<h2><%= @community.address -%></h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', communities_path %>
+<br />
+
+<p><%= link_to 'join a different community', communities_path %></p>
+
