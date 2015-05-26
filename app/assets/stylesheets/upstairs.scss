@@ -131,3 +131,16 @@ ticket {
   margin: 1em;
   padding: 1em;
 }
+
+#pac-container {
+  background-color: red;
+} 
+
+div #find-your-community {
+  min-height: 500px;
+}
+
+.pac-container, .pac-item {
+  width: inherit !important;
+}
+

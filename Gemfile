@@ -14,6 +14,7 @@ gem 'cloudinary'
 gem 'devise', github: 'plataformatec/devise'
 gem 'friendly_id'
 gem 'geocoder'
+gem 'gmapsjs'
 gem 'neat'
 gem 'paper_trail'
 gem 'pg'
@@ -32,6 +33,7 @@ gem 'gmaps-autocomplete-rails'
 
 gem 'sass-rails', github: 'rails/sass-rails'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'underscore-rails'
 gem 'uglifier', '>= 1.0.3'
 
 group :development do

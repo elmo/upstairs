@@ -18,6 +18,7 @@
 //= require jquery.fileupload
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
+//= require underscore
 //= require gmaps-auto-complete
 //= require_tree .
 

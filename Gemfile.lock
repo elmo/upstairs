@@ -121,6 +121,7 @@ GEM
       activesupport (>= 4.1.0)
     gmaps-autocomplete-rails (0.1.4)
       rails (>= 3.1.0)
+    gmapsjs (0.4.16)
     haml (4.0.6)
       tilt
     hike (1.2.3)
@@ -285,6 +286,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    underscore-rails (1.8.2)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
@@ -311,6 +313,7 @@ DEPENDENCIES
   friendly_id
   geocoder
   gmaps-autocomplete-rails
+  gmapsjs
   jquery-rails
   neat
   paper_trail
@@ -333,3 +336,4 @@ DEPENDENCIES
   spring
   twilio-ruby
   uglifier (>= 1.0.3)
+  underscore-rails
