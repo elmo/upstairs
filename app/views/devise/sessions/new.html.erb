@@ -1,9 +1,7 @@
-<section>
-<aside>
-<h2>Log in</h2>
-</aside>
+<h1>Log in</h2>
 
-<article>
+<h2>Sign in to your account and you'll be on your way.</h2>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -29,6 +27,3 @@
 
 <%= render "devise/shared/links" %>
 
-</article>
-
-</section>

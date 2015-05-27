@@ -8,10 +8,11 @@ Upstairs::Application.routes.draw do
 
   devise_scope :user do
     get "/join" => "devise/registrations#new"
+    get "/login" => "devise/sessions#new"
   end
 
-  root to: "home#splash"
-  get '/' => "home#splash", as: :home
+  root to: "home#home"
+  get '/' => "home#home", as: :home
   get '/about' => "home#about", as: :about
   get '/contact' => "home#contact", as: :contact
   get '/terms' => "home#terms_of_service", as: :terms_of_service

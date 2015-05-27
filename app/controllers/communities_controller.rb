@@ -1,5 +1,5 @@
 class CommunitiesController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
   before_action :set_community, only: [:show, :edit, :update, :gallery]
   layout :get_layout
 
@@ -15,10 +15,17 @@ class CommunitiesController < ApplicationController
 
   def choose
     @address = params[:address]
+    @community = Community.where(address: params[:address] ).first
+    redirect_to community_path(@community) and return false if current_user.member_of?(@community)
   end
 
   # GET /communities/new
   def new
+    @community = Community.where(address: params[:address]).first
+    if @community.present?
+      current_user.join(@community)
+      redirect_to community_path(@community)
+    end
     @community = Community.new(address: params[:address])
   end
 

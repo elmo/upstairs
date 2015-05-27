@@ -1,10 +1,7 @@
-<section>
+<h1>Join Upstairs.io!</h1>
 
-<aside>
-<h2>Sign up for upstairs.io</h2>
-</aside>
+<h2>Register for an account, and let the happiness begin</h2>
 
-<article>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <% if params[:invitation_id].present? %>
     <% @invitation = Invitation.where(token: params[:invitation_id] ).first %>
@@ -53,5 +50,3 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
-</article>
-</section>

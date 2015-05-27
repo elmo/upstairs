@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
     Message.where(recipient_id: self.id)
   end
 
+  def default_community
+    (communities.any?) ? communities.first : nil
+  end
+
   def apply_invitation
     if invitation.present?
       community = invitation.community

@@ -1,4 +1,6 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h1>Update Your Profile</h1>
+
+<h2>Set your Upstairs.io preferences here.</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -38,7 +40,7 @@
   </div>
 
   <div class="field">
-	  <%= f.label :use_my_username%> Check this box if you would like to use your user name when posting and commenting. Uncheck this box if you would like to be anonymouns.<br />
+	  <%= f.label :use_my_username%> Check this box if you would like to use your user name when posting and commenting. Uncheck this box if you would like to be anonymous.<br />
     <%= f.check_box :use_my_username %>
   </div>
 

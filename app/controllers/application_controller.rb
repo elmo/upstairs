@@ -13,10 +13,9 @@ class ApplicationController < ActionController::Base
     end
     sign_in_url = new_user_session_url
     if request.referer == sign_in_url
-      super
+     return stored_location_for(resource) || root_path
     else
-     return stored_location_for(resource) if stored_location_for(resource).present?
-     return (resource.communities.any?) ? community_path(resource.communities.first) : request.referer || root_path
+     return stored_location_for(resource) || root_path
     end
   end
 

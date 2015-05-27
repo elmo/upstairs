@@ -10,8 +10,8 @@
         <% end %> 
         </li>
         <% if current_user.blank? %>
-        <li class='nav-link'><%= link_to 'sign up',  new_user_registration_path -%></li>
-        <li class='nav-link'><%= link_to 'log in',  new_user_session_path -%></li>
+        <li class='nav-link'><%= link_to 'sign up',  '/join' -%></li>
+        <li class='nav-link'><%= link_to 'log in',  '/login' -%></li>
         <% else  %>
 		<li class='nav-link'><%= link_to current_user.public_name, user_home_path -%></li>
 		<li class='nav-link'><%= link_to 'update my profile', edit_user_registration_path -%></li>

@@ -19,7 +19,7 @@ class SessionsController < Devise::SessionsController
       resource.apply_invitation
       redirect_to community_path(invitation.community)
     else
-      respond_with resource, location: after_sign_in_path_for(resource)
+      respond_with resource, location: root_path
     end
 
   end
