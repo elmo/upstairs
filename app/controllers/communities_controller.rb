@@ -16,7 +16,9 @@ class CommunitiesController < ApplicationController
   def choose
     @address = params[:address]
     @community = Community.where(address: params[:address] ).first
-    redirect_to community_path(@community) and return false if current_user.member_of?(@community)
+    redirect_to community_path(@community) and return false if @community.present? and current_user.member_of?(@community)
+    @community = Community.new(address: params[:address])
+    @community.geocode
   end
 
   # GET /communities/new
@@ -27,6 +29,7 @@ class CommunitiesController < ApplicationController
       redirect_to community_path(@community)
     end
     @community = Community.new(address: params[:address])
+    @community.geocode
   end
 
   # GET /communities/1/edit

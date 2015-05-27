@@ -133,15 +133,17 @@ ticket {
   padding: 1em;
 }
 
-#pac-container {
+.pac-container {
   background-color: red;
 } 
 
+.ui-widget-content {
+  background-color: #eeeeee;
+  width: 40%;
+}
+
+//.ul-menu-item { }
+
 div #find-your-community {
-  min-height: 500px;
+  min-height: 800px;
 }
-
-.pac-container, .pac-item {
-  width: inherit !important;
-}
-
