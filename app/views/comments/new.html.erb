@@ -1,4 +1,7 @@
-<h4>post your comment:</h4>
-<%= render 'form' %>
+<h1>New Comment</h1>
+
 <%= render partial: '/posts/post', locals: { post: @commentable } %>
-<%= link_to 'back', community_post_path(@commentable.community, @commentable ) %>
+
+<%= render 'form' %>
+
+<%= link_to 'back bulletin board', community_path(@commentable.community) %>

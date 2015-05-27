@@ -60,24 +60,25 @@ community {
 }
 
 .post-body {
+  background-color: #ffffff;
   padding:10px;
-  min-height:250px;
   display:block;
 }
 
 .post-body-thumb {
   padding:10px;
-  min-height:60px;
   display:block;
 }
 
 .comment-body {
+  background-color: #eeeeee;
   border-left: 1px dotted #ccc;
   margin:5px;
   padding:5px;
 }
 
 .reply-body {
+  background-color: #dddddd;
   border-left: 1px dotted #ccc;
   margin:20px 5px;
   padding:5px;

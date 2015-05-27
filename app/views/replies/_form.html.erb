@@ -1,4 +1,4 @@
 <%= simple_form_for([@comment, @reply] ) do |f| %>
-  <%= f.input :body %>
+  <%= f.input :body, label: 'Enter your reply' %>
   <%= f.button :submit, 'Reply' %>
 <% end %>

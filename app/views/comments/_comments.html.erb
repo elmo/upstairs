@@ -1,8 +1,9 @@
 <div class="comments-list">
 <% if commentable.comments.any? %>
-<p><%= pluralize(commentable.comments.count, 'comment' ) -%></p>
+<%= pluralize(commentable.comments.count, 'comment' ) %>
 <% end %>
-<p><%= link_to "comment" , new_polymorphic_path([commentable, Comment.new]) -%></p>
+<%= link_to "add your comment" , new_polymorphic_path([commentable, Comment.new]) -%>
+
 <% commentable.comments.each do |comment| %>
  <% next if comment.id.blank? %>
  <div class="comment-body">
@@ -13,4 +14,3 @@
  </div>
 <% end %>
 </div>
-<br clear="all">

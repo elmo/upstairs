@@ -1,8 +1,7 @@
-<div class="type-system-geometric">
-<h1><%= post.title -%></h1>
+<h2 class="inline"><%= post.title -%></h2>
 <%= by_line(post) -%>
-<%= link_to 'edit', edit_community_post_path(post.postable, post ) -%>
-<div class="post-body typ">
+
+<div class="post-body">
 <% if post.photos.any? %>
 <span class="post-image"> <%= cl_image_tag(post.photos.first.path, { size: '300x500', crop: :fit }) %> </span>
 <% end %>
@@ -10,5 +9,3 @@
 <br clear="both">
 <%= render partial: '/comments/comments', locals: { commentable: post}  %>
 </div>
-</div>
-
