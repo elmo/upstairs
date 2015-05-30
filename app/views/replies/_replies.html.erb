@@ -1,12 +1,18 @@
-<% if comment.replies.any? %>
-<%= pluralize(comment.replies.count, 'reply' ) -%> 
-<% end %>
-<br>
-<%= link_to 'reply to comment', new_comment_reply_path(comment) -%>
+<p><%= pluralize(comment.replies.count, 'reply' ) %> <%= link_to 'post your reply', new_comment_reply_path(comment) -%></p>
+
 <% comment.replies.each do |reply| %>
- <div class="reply-body">
-    <%= by_line(reply) -%>
-   <%= reply.body -%>
+<div class="reply">
+<div class="reply-image">
+  <% if reply.user.avatar.present? %>
+    <%= cl_image_tag(reply.user.avatar.path, { size: '60x60', crop: :fit }) %>
+   <% else %>
+     <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
+  <% end %>
+</div> 
+
+<div class="reply-content">
+<h1 class="reply"><%= username_or_anonymous(reply.user) -%> </h1>
+<p><%= reply.body -%></p>
+</div>
 </div>
 <% end %>
-

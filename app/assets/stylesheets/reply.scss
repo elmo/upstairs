@@ -1,0 +1,66 @@
+.reply {
+  $base-border-radius: 3px !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $reply-gutter: 1.4em;
+  $reply-image-padding: 0.3em;
+  $reply-image-width: 4em;
+  $reply-color: $base-font-color;
+  $reply-background: lighten($action-color, 15%);
+  $reply-detail-color: transparentize($reply-color, 0.5);
+  $reply-image-vert-alignment: top;
+
+  border-bottom: 1px solid transparentize($reply-color, 0.9);
+  display: table;
+  margin-bottom: $base-spacing;
+  margin-left: 2em;
+  padding-bottom: 1em;
+  width: 100%;
+
+  .reply-image,
+  .reply-content {
+    display: table-cell;
+    vertical-align: $reply-image-vert-alignment;
+  }
+
+  .reply-image {
+    padding-right: $reply-gutter;
+
+    > img {
+      background: $reply-background;
+      border-radius: $base-border-radius;
+      display: block;
+      height: auto;
+      max-width: none;
+      padding: $reply-image-padding;
+      width: $reply-image-width;
+    }
+
+    .reply-reverse-order & {
+      padding-right: 0;
+      padding-left: 10px;
+    }
+  }
+
+  .reply-content {
+    width: 100%;
+
+    h1.reply {
+      font-size: 1em;
+      margin: 0 0 0.5em 0;
+    }
+
+    p {
+      line-height: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p.reply-detail {
+      color: $reply-detail-color;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+  }
+}

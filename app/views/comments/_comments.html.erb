@@ -1,16 +1,28 @@
-<div class="comments-list">
-<% if commentable.comments.any? %>
-<%= pluralize(commentable.comments.count, 'comment' ) %>
-<% end %>
-<%= link_to "add your comment" , new_polymorphic_path([commentable, Comment.new]) -%>
+<div id="comments">
+
+<br>
+<p> <%= pluralize(commentable.comments.count, 'comment' ) %> <%= link_to "add your comment" , new_polymorphic_path([commentable, Comment.new]) -%>
+</p>
 
 <% commentable.comments.each do |comment| %>
- <% next if comment.id.blank? %>
- <div class="comment-body">
- <%= by_line(comment) -%>
- <%= comment.body -%>
- <br clear="both">
- <%= render partial: '/replies/replies', locals: { comment: comment} %>
- </div>
-<% end %>
+<div class="comment">
+<div class="comment-image">
+  <% if comment.user.avatar.present? %>
+   <%= cl_image_tag(comment.user.avatar.path, { size: '80x80', crop: :fit }) %>
+   <% else %> 
+     <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
+  <% end %> 
 </div>
+ <div class="comment-content">
+ <h1 class="comment"><%= username_or_anonymous(comment.user) -%> </h1>
+ <p>
+ <%= comment.body -%>
+ </p>
+
+ </div>
+ </div>
+ <%= render partial: '/replies/replies', locals: { comment: comment} %>
+<% end %>
+ </div>
+
+ </div>

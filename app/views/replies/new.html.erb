@@ -1,8 +1,9 @@
 <h1>Your Reply</h1>
 
+<%= render 'form' %>
+
 <%= render partial: '/posts/post', locals: {post: @comment.commentable} %>
 
-<%= render 'form' %>
 
 <% if @comment.commentable.class.to_s != 'Ticket'%>
    <%= link_to 'back to original comment', community_post_path(@community, @comment.commentable) %>

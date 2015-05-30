@@ -114,11 +114,6 @@ ticket {
   right { @include span-columns(6); }
 }
 
-.byline {
-  font-size: small;
-  display:block;
-}
-
 .activity{
   font-size: small;
 }
@@ -127,22 +122,10 @@ ticket {
   display: inline;
 }
 
-.classified {
-  border: 2px dotted #ccc;
-  margin: 1em;
-  padding: 1em;
-}
-
-.pac-container {
-  background-color: red;
-} 
-
 .ui-widget-content {
   background-color: #eeeeee;
   width: 40%;
 }
-
-//.ul-menu-item { }
 
 div #find-your-community {
   min-height: 800px;

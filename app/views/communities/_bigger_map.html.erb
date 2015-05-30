@@ -1,14 +1,15 @@
-<div id="map" style='width: 400px; height: 300px; margin:10px;'></div>
+<div id="map_canvas" style='width: 500px; height: 300px; margin:10px;'></div>
 <script>
 $(document).ready(function(){
- initialize($("div#map").get(0));
+ initialize($("div#map_canvas").get(0));
 });
 
 function initialize(element) {
   var latlng = new google.maps.LatLng(<%= @community.latitude-%>, <%= @community.longitude -%>);
+   mapCenter = new google.maps.LatLng(<%= @community.latitude-%>, <%= @community.longitude -%>);
   var myOptions = {
-    zoom: 19,
-    center: latlng,
+    zoom: 18,
+    center: mapCenter,
     mapTypeId: google.maps.MapTypeId.HYBRID
   };
   var map = new google.maps.Map(element, myOptions);
