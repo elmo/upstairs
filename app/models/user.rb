@@ -4,11 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :communities, through: :memberships
-  has_many :activities
-  has_many :notifications
-  has_many :invitations
+  has_many :activities, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+  has_many :invitations, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :replies, dependent: :destroy
   belongs_to :invitation
   after_create :apply_invitation
 

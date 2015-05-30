@@ -3,8 +3,8 @@ class Post < ActiveRecord::Base
   belongs_to :category
   belongs_to :postable, polymorphic: true
   belongs_to :actionable, polymorphic: true
-  has_many :comments, as: :commentable
-  has_many :notifications, as: :notifiable
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
   validates_presence_of :user
   validates_presence_of :title
   after_create :create_notifications

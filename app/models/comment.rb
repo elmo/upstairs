@@ -2,8 +2,8 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable, polymorphic: true
   belongs_to :actionable, polymorphic: true
-  has_many :replies, class_name: 'Comment', foreign_key: "parent_comment_id"
-  has_many :notifications, as: :notifiable
+  has_many :replies, class_name: 'Comment', foreign_key: "parent_comment_id", dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
   validates_presence_of :user
   belongs_to :comment, foreign_key: "parent_comment_id"
   after_create :create_notifications

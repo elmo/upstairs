@@ -2,7 +2,7 @@ class Alert < ActiveRecord::Base
   belongs_to :user
   belongs_to :community
   belongs_to :actionable, polymorphic: true
-  has_many :notifications, as: :notifiable
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   after_create :create_notifications
   after_create :create_actionable

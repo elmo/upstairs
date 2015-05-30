@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
   validates_presence_of :recipient
   validates_presence_of :community
   validates_presence_of :body, message: "Your message is empty."
-  has_many :notifications, as: :notifiable
+  has_many :notifications, as: :notifiable, dependent: :destroy
   after_create :create_notifications
 
   private
