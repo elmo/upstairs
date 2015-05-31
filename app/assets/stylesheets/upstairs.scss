@@ -1,3 +1,7 @@
+body {
+  background-color: #E4DCD4; 
+}
+
 #main {
   @include outer-container;
 }
@@ -60,7 +64,6 @@ community {
 }
 
 .post-body {
-  background-color: #ffffff;
   padding:10px;
   display:block;
 }
@@ -71,14 +74,12 @@ community {
 }
 
 .comment-body {
-  background-color: #eeeeee;
   border-left: 1px dotted #ccc;
   margin:5px;
   padding:5px;
 }
 
 .reply-body {
-  background-color: #dddddd;
   border-left: 1px dotted #ccc;
   margin:20px 5px;
   padding:5px;
@@ -123,10 +124,13 @@ ticket {
 }
 
 .ui-widget-content {
-  background-color: #eeeeee;
   width: 40%;
 }
 
 div #find-your-community {
   min-height: 800px;
+}
+
+p.reply-summary{
+  margin-left:2em; 
 }

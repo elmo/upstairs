@@ -27,7 +27,7 @@
 .footer-2 {
   ///////////////////////////////////////////////////////////////////////////////////
   $base-spacing: 1.5em !default;
-  $base-accent-color: #477DCA !default;
+  $base-accent-color: #7A5229;
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
   
@@ -46,6 +46,7 @@
   }
   //////////////////////////////////////////////////////////////////////////////////
 
+  //$footer-background: desaturate(darken($base-accent-color, 10%), 10%);
   $footer-background: desaturate(darken($base-accent-color, 10%), 10%);
   $footer-color: white;
   $footer-link-color: transparentize($footer-color, 0.6);

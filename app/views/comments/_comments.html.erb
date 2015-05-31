@@ -1,25 +1,16 @@
 <div id="comments">
-
-<br>
-<p> <%= pluralize(commentable.comments.count, 'comment' ) %> <%= link_to "add your comment" , new_polymorphic_path([commentable, Comment.new]) -%>
-</p>
-
+<p> <%= pluralize(commentable.comments.count, 'comment' ) %> <%= link_to "add your comment" , new_polymorphic_path([commentable, Comment.new]) -%></p>
 <% commentable.comments.each do |comment| %>
+<% next if comment.new_record? %>
 <div class="comment">
 <div class="comment-image">
-  <% if comment.user.avatar.present? %>
-   <%= cl_image_tag(comment.user.avatar.path, { size: '80x80', crop: :fit }) %>
-   <% else %> 
-     <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
-  <% end %> 
-</div>
+   <%= user_profile_image(@community, comment.user, 'smallest', 'fit') -%>
+ </div>
  <div class="comment-content">
  <h1 class="comment-heading"><%= username_or_anonymous(comment.user) -%> </h1>
  <p> <%= comment.body -%> </p>
-
  </div>
  </div>
  <%= render partial: '/replies/replies', locals: { comment: comment} %>
 <% end %>
-
  </div>

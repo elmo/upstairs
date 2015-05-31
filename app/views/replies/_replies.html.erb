@@ -2,15 +2,12 @@
 <% comment.replies.each do |reply| %>
 <div class="reply">
   <div class="reply-image">
-  <% if reply.user.avatar.present? %>
-    <%= cl_image_tag(reply.user.avatar.path, { size: '60x60', crop: :fit }) %>
-   <% else %>
-     <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
-  <% end %>
+    <%= user_profile_image(@community, reply.user, 'smallest', 'fit') -%>
   </div> 
-<div class="reply-content">
-  <h1 class="reply-heading"><%= username_or_anonymous(reply.user) -%> </h1>
-  <p><%= reply.body -%></p>
-</div>
+  <div class="reply-content">
+    <h1 class="reply-heading"><%= username_or_anonymous(reply.user)-%> </h1>
+     <p><%= reply.body -%></p>
+  </div>
 </div>
 <% end %>
+</div>

@@ -1,39 +1,45 @@
-.centered-sub-navigation {
+.centered-navigation {
   ///////////////////////////////////////////////////////////////////////////////////
   $base-border-radius: 3px !default;
-  $dark-gray: #333 !default;
+  $dark-gray: #ccc;
   $large-screen: em(860) !default;
-  $base-font-color: $dark-gray !default;
+  $base-font-color: white;
   //////////////////////////////////////////////////////////////////////////////////
 
-  $centered-sub-navigation-padding: 1em;
-  $centered-sub-navigation-logo-height: 2em;
-  $centered-sub-navigation-background: #477DCA;
-  $centered-sub-navigation-color: transparentize($base-font-color, 0.3);
-  $centered-sub-navigation-color-hover: $base-font-color;
-  $centered-sub-navigation-height: 60px;
-  $centered-sub-navigation-item-padding: 1em;
-  $centered-sub-navigation-submenu-padding: 1em;
-  $centered-sub-navigation-submenu-width: 12em;
-  $centered-sub-navigation-item-nudge: 2.2em;
+  $centered-navigation-padding: 1em;
+  $centered-navigation-logo-height: 2em;
+  $centered-navigation-background: #7A5229;
+  $centered-navigation-color: transparentize($base-font-color, 0.3);
+  //$centered-navigation-color: white; 
+  $centered-navigation-color-hover: $base-font-color;
+  $centered-navigation-height: 100px;
+  $centered-navigation-item-padding: 1em;
+  $centered-navigation-submenu-padding: 1em;
+  $centered-navigation-submenu-width: 12em;
+  $centered-navigation-item-nudge: 2.2em;
   $horizontal-bar-mode: $large-screen;
 
-  background-color:  desaturate(darken($centered-sub-navigation-background, 0%), 0%); 
-  border-bottom: 1px solid darken($centered-sub-navigation-background, 6%);
-  min-height: $centered-sub-navigation-height;
+  background-color:  desaturate(darken($centered-navigation-background, 10%), 10%); 
+  border-bottom: 1px solid darken($centered-navigation-background, 6%);
+  min-height: $centered-navigation-height;
   width: 100%;
   z-index: 9999;
+  font-weight: 800;
+
+  h1 {
+   color: white;
+  }
 
   // Mobile view
 
   .mobile-logo {
     display: inline;
     float: left;
-    max-height: $centered-sub-navigation-height;
-    padding-left: $centered-sub-navigation-padding;
+    max-height: $centered-navigation-height;
+    padding-left: $centered-navigation-padding;
 
     img {
-      max-height: $centered-sub-navigation-height;
+      max-height: $centered-navigation-height;
       opacity: .6;
       padding: .8em 0;
     }
@@ -43,14 +49,14 @@
     }
   }
 
-  .centered-sub-navigation-mobile-menu {
-    color: $centered-sub-navigation-color;
+  .centered-navigation-mobile-menu {
+    color: $centered-navigation-color;
     display: block;
     float: right;
     font-weight: 700;
-    line-height: $centered-sub-navigation-height;
+    line-height: $centered-navigation-height;
     margin: 0;
-    padding-right: $centered-sub-navigation-submenu-padding;
+    padding-right: $centered-navigation-submenu-padding;
     text-decoration: none;
     text-transform: uppercase;
 
@@ -60,20 +66,20 @@
 
     &:focus,
     &:hover {
-      color: $centered-sub-navigation-color-hover;
+      color: $centered-navigation-color-hover;
     }
   }
 
   // Nav menu
 
-  .centered-sub-navigation-wrapper {
+  .centered-navigation-wrapper {
     @include outer-container;
     @include clearfix;
     position: relative;
     z-index: 999;
   }
 
-  ul.centered-sub-navigation-menu {
+  ul.centered-navigation-menu {
     -webkit-transform-style: preserve-3d; // stop webkit flicker
     clear: both;
     display: none;
@@ -97,39 +103,39 @@
 
   .nav-link:first-child {
     @include media($horizontal-bar-mode) {
-      margin-left: $centered-sub-navigation-item-nudge;
+      margin-left: $centered-navigation-item-nudge;
     }
   }
 
   ul li.nav-link {
-    background: $centered-sub-navigation-background;
+    background: $centered-navigation-background;
     display: block;
-    line-height: $centered-sub-navigation-height;
+    line-height: $centered-navigation-height;
     overflow: hidden;
-    padding-right: $centered-sub-navigation-submenu-padding;
+    padding-right: $centered-navigation-submenu-padding;
     text-align: right;
     width: 100%;
     z-index: 9999;
 
     a {
-      color: $centered-sub-navigation-color;
+      color: $centered-navigation-color;
       display: inline-block;
       outline: none;
       text-decoration: none;
 
       &:focus,
       &:hover {
-        color: $centered-sub-navigation-color-hover;
+        color: $centered-navigation-color-hover;
       }
     }
 
     @include media($horizontal-bar-mode) {
       background: transparent;
       display: inline;
-      line-height: $centered-sub-navigation-height;
+      line-height: $centered-navigation-height;
 
       a {
-        padding-right: $centered-sub-navigation-item-padding;
+        padding-right: $centered-navigation-item-padding;
       }
     }
   }
@@ -144,8 +150,8 @@
   }
 
   .logo img {
-    margin-bottom: -$centered-sub-navigation-logo-height / 3;
-    max-height: $centered-sub-navigation-logo-height;
+    margin-bottom: -$centered-navigation-logo-height / 3;
+    max-height: $centered-navigation-logo-height;
     opacity: 0.6;
   }
 
@@ -155,7 +161,7 @@
     padding-right: 0;
 
     @include media($large-screen) {
-      padding-right: $centered-sub-navigation-submenu-padding;
+      padding-right: $centered-navigation-submenu-padding;
     }
 
     > ul > li:first-child a  {
@@ -163,7 +169,7 @@
     }
 
     a {
-      margin-right: $centered-sub-navigation-submenu-padding;
+      margin-right: $centered-navigation-submenu-padding;
     }
 
     > a {
@@ -172,7 +178,7 @@
 
     > a:after {
       @include position(absolute, auto -0.4em auto auto);
-      color: $centered-sub-navigation-color;
+      color: $centered-navigation-color;
       content: "\25BE";
     }
   }
@@ -182,7 +188,7 @@
     padding-right: 0;
 
     a {
-      padding-right: $centered-sub-navigation-submenu-padding;
+      padding-right: $centered-navigation-submenu-padding;
     }
 
     > a {
@@ -190,14 +196,14 @@
       position: relative;
 
       @include media($large-screen) {
-        margin-right: $centered-sub-navigation-submenu-padding;
+        margin-right: $centered-navigation-submenu-padding;
       }
 
       &:after {
         content: "›";
         font-size: 1.2em;
         position: absolute;
-        right: $centered-sub-navigation-submenu-padding / 2;
+        right: $centered-navigation-submenu-padding / 2;
       }
     }
 
@@ -207,7 +213,7 @@
     }
 
     @include media($horizontal-bar-mode) {
-      padding-right: $centered-sub-navigation-submenu-padding;
+      padding-right: $centered-navigation-submenu-padding;
       position: relative;
     }
   }
@@ -217,14 +223,14 @@
     padding-left: 0;
 
     @include media($horizontal-bar-mode) {
-      left: -$centered-sub-navigation-submenu-padding;
+      left: -$centered-navigation-submenu-padding;
       position: absolute;
       top: 1.5em;
     }
 
     .submenu {
       @include media($horizontal-bar-mode) {
-        left: $centered-sub-navigation-submenu-width - 0.2em;
+        left: $centered-navigation-submenu-width - 0.2em;
         top: 0;
       }
     }
@@ -234,7 +240,7 @@
       padding-right: 0;
 
       @include media($horizontal-bar-mode) {
-        line-height: $centered-sub-navigation-height / 1.3;
+        line-height: $centered-navigation-height / 1.3;
 
         &:first-child > a {
           border-top-left-radius: $base-border-radius;
@@ -249,17 +255,17 @@
       }
 
       a {
-        background-color: darken($centered-sub-navigation-background, 3%);
+        background-color: darken($centered-navigation-background, 3%);
         display: inline-block;
         text-align: right;
         text-decoration: none;
         width: 100%;
 
         @include media($horizontal-bar-mode) {
-          background-color: $centered-sub-navigation-background;
-          padding-left: $centered-sub-navigation-submenu-padding;
+          background-color: $centered-navigation-background;
+          padding-left: $centered-navigation-submenu-padding;
           text-align: left;
-          width: $centered-sub-navigation-submenu-width;
+          width: $centered-navigation-submenu-width;
         }
       }
     }

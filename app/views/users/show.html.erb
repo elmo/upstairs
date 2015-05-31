@@ -1,5 +1,9 @@
-<h1><%= username_or_anonymous(@user) -%> </h1>
+<h1><%= @community.address -%></h1>
 
+<h2><%= username_or_anonymous(@user) -%></h2>
+
+<%= user_profile_image(@community, @user, 'huge', 'fit') -%>
+<br clear="all">
 <% @user.activities.limit(20).order('created_at desc').each do |activity| %>
-  <%= activity_summary(activity) -%> <br> 
+<%= activity_summary(activity) -%> <br> 
 <% end %>

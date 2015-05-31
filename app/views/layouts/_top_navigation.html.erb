@@ -3,19 +3,20 @@
     <nav role="navigation">
       <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
         <li class="nav-link logo">
-        <%= link_to home_path do -%>
-          <%= image_tag "logo.png", alt: "Logo" %> 
-        <% end %> 
+         <h1 class="top-nav inline">Upstairs.io</h1>
         </li>
 	<% if @community.present? and @community.id.present? %>
+	 <% if @community.landlord.blank? %>
+	   <li class='nav-link'><%= link_to "invite landlord",  new_community_landlord_invitation_path(@community) -%></li>
+          <% end %>
           <li class='nav-link'><%= link_to "bulletin board",  community_path(@community) -%></li>
           <li class='nav-link'><%= link_to 'tickets', community_tickets_path(@community) -%></li>
           <li class='nav-link'><%= link_to 'alerts', community_alerts_path(@community) -%></li>
           <li class='nav-link'><%= link_to 'members', community_memberships_path(@community) -%></li>
 	<% end %>
         <% if current_user.blank? %>
-          <li class='nav-link'><%= link_to 'sign up',  '/join' -%></li>
-          <li class='nav-link'><%= link_to 'log in',  '/login' -%></li>
+          <li class='nav-link'><%= link_to 'join',  '/join' -%></li>
+          <li class='nav-link'><%= link_to 'login',  '/login' -%></li>
         <% else  %>
 	  <li class='nav-link'><%= link_to current_user.public_name, user_home_path -%></li>
           <li class='nav-link'><%= link_to 'profile', edit_user_registration_path -%></li>

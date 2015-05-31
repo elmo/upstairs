@@ -167,4 +167,38 @@ module ApplicationHelper
    content_tag(:span,  ticket.severity, class: "badge badge-severity-#{ticket.severity.downcase}")
   end
 
+  def smallest_image_dimensions
+    "40x40"
+  end
+
+  def small_image_dimensions
+    "60x60"
+  end
+
+  def medium_image_dimensions
+    "120x120"
+  end
+
+  def large_image_dimensions
+    "200x200"
+  end
+
+  def huge_image_dimensions
+    "400x400"
+  end
+
+  def user_profile_image(community, user, size = 'smallest', crop = 'fit' )
+    dimensions_method = size + "_image_dimensions"
+    dimensions = send(dimensions_method.to_sym)
+    image = (usable_username?(user) and user.avatar.present?) ?
+	    cl_image_tag(user.avatar.path, { size: dimensions , crop: crop} ) :
+	    anonymous_user_icon(dimensions)
+    image
+  end
+
+  def anonymous_user_icon(dimensions)
+    height, width = dimensions.split('x')
+    cl_image_tag("anonymous.png", width: width, height: height, crop: :fit)
+  end
+
 end

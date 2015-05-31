@@ -19,7 +19,5 @@
 <communitymembership>
 
 <% if @community.landlord.blank? %>
-Your landlord is not currently not associated with this community.
 <%= link_to "invite your landlord",  new_community_landlord_invitation_path(@community) -%>
-</p>
 <% end %>
