@@ -14,15 +14,12 @@
   <% end %> 
 </div>
  <div class="comment-content">
- <h1 class="comment"><%= username_or_anonymous(comment.user) -%> </h1>
- <p>
- <%= comment.body -%>
- </p>
+ <h1 class="comment-heading"><%= username_or_anonymous(comment.user) -%> </h1>
+ <p> <%= comment.body -%> </p>
 
  </div>
  </div>
  <%= render partial: '/replies/replies', locals: { comment: comment} %>
 <% end %>
- </div>
 
  </div>
