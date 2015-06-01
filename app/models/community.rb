@@ -14,6 +14,7 @@ class Community < ActiveRecord::Base
   validates_uniqueness_of :address
   validates_presence_of :latitude
   validates_presence_of :longitude
+  before_save :set_invitation_link
 
   resourcify
 
@@ -42,6 +43,12 @@ class Community < ActiveRecord::Base
   def alerts_for_user(user)
     alerts.recent.joins(:notifications)
      .where(["notifications.notifiable_id = alerts.id and notifications.notifiable_type = 'Alert' and notifications.user_id = ? ", user.id] )
+  end
+
+  private
+
+  def set_invitation_link
+    self.invitation_link = SecureRandom.hex(4)# if self.invitation_link.blank?
   end
 
 end

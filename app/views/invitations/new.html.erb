@@ -1,18 +1,9 @@
-<h1>
 <% if @invitation.type == 'UserInvitation' %>
-Invite another resident 
+<%= render partial: 'neighbor'  -%>
 <% elsif @invitation.type == 'LandlordInvitation' %>
-Invite your landlord
+<%= render partial: 'landlord'  -%>
 <% elsif @invitation.type == 'ManagerInvitation' %>
-Invite a manager to manage 
+<%= render partial: 'manager'  -%>
 <% end %>
-</h1>
-<h2><%= @community.address -%></h2>
 
-<p>It's easy to invite your landlord to join this community. Just enter your landlord's email address, and we'll take care of the rest.</p>
 
-<%= render 'form' %>
-
-<br />
-
-<p><%= link_to 'home', community_path(@community) %></p>

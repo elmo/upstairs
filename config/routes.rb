@@ -9,6 +9,7 @@ Upstairs::Application.routes.draw do
   devise_scope :user do
     get "/join" => "devise/registrations#new"
     get "/login" => "devise/sessions#new"
+    get "/invite/:id" => "invitations#welcome", as: :invite
   end
 
   root to: "home#home"

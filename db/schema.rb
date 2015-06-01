@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524172432) do
+ActiveRecord::Schema.define(version: 20150531203131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,13 +81,15 @@ ActiveRecord::Schema.define(version: 20150524172432) do
     t.float    "latitude"
     t.float    "float"
     t.float    "longitude"
-    t.boolean  "active",      default: true
+    t.boolean  "active",          default: true
     t.integer  "landlord_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "slug"
+    t.string   "invitation_link"
   end
 
+  add_index "communities", ["invitation_link"], name: "index_communities_on_invitation_link", using: :btree
   add_index "communities", ["slug"], name: "index_communities_on_slug", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|

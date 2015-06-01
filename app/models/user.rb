@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   belongs_to :invitation
   after_create :apply_invitation
+  before_save :set_slug
 
   rolify
   has_paper_trail
@@ -83,6 +84,12 @@ class User < ActiveRecord::Base
       community.save
       self.save
     end
+  end
+
+  private
+
+  def set_slug
+    self.slug = SecureRandom.hex(16) if self.slug.blank?
   end
 
 end

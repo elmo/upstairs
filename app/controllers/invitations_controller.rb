@@ -1,11 +1,22 @@
 class InvitationsController < ApplicationController
-  before_action :authenticate_user!, except: :redeem
+  before_action :authenticate_user!, except: [:redeem, :welcome]
   before_action :set_invitation, only: [:show, :edit, :update, :destroy]
-  before_action :set_community
+  before_action :set_community, except:  [:welcome]
   layout 'community'
 
   # GET /invitations/1
   def show
+  end
+
+  def welcome
+    @community = Community.where(invitation_link: params[:id] )
+    if @community.present?
+      session[:invitation_link] = params[:id]
+      redirect_to community_path(@community)
+    else
+      not_found
+    end
+
   end
 
   def redeem

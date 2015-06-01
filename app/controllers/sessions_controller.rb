@@ -18,6 +18,9 @@ class SessionsController < Devise::SessionsController
       resource.invitation = invitation
       resource.apply_invitation
       redirect_to community_path(invitation.community)
+    elsif session[:invitation_link].present?
+      community = resource.apply_invitation_link(session[:invitation_link])
+      redirect_to community_path(community)
     else
       respond_with resource, location: root_path
     end

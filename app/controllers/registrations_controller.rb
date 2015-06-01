@@ -11,11 +11,11 @@ class RegistrationsController < Devise::RegistrationsController
       @invitation = Invitation.find_by_token(session[:invitation_code])
       resource.invitation = @invitation
     end
+    resource.invitation_link = session[:invitation_link]
     resource.save
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
-        session[:invitation_code] = nil
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
@@ -60,7 +60,15 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_sign_in_path_for(resource)
-    user_home_path
+    if session[:invitation_link].present?
+      community = Community.where(invitation_link: session[:invitation_link]).first
+      resource.join(community) if community.present?
+      session[:invitation_code] = nil
+      session[:invitation_link] = nil
+      community_path(community)
+    else
+      home_path
+    end
   end
 
   def after_update_path_for(resource)

@@ -21,3 +21,5 @@
 <% if @community.landlord.blank? %>
 <%= link_to "invite your landlord",  new_community_landlord_invitation_path(@community) -%>
 <% end %>
+
+<%= link_to 'invite your neighbors', new_community_user_invitation_path(@community) -%>
