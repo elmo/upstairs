@@ -1,0 +1,6 @@
+<h1>Home</h1>
+
+<h2>My Properties</h2>
+<% current_user.owned_properties.each do |community| %>
+ <%= link_to community.address, community_path(community) -%>
+<% end %>

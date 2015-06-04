@@ -86,6 +86,27 @@ class User < ActiveRecord::Base
     end
   end
 
+  def landlord_or_manager?
+    landlord? or manager?
+  end
+
+  def landlord?
+    roles.where(name: 'Landlord').exists?
+  end
+
+  def manager?
+     roles.where(name: 'Manager').exists?
+  end
+
+  def owned_properties
+    roles.where(resource_type: 'Community', name: 'Landlord').collect(&:resource).uniq
+  end
+
+  def managed_properties
+    roles.where(resource_type: 'Community', name: 'Manager').collect(&:resource).uniq
+  end
+
+
   private
 
   def set_slug
