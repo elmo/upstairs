@@ -11,7 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
       @invitation = Invitation.find_by_token(session[:invitation_code])
       resource.invitation = @invitation
     end
-    resource.invitation_link = session[:invitation_link]
+    #resource.invitation_link = session[:invitation_link]
     resource.save
     yield resource if block_given?
     if resource.persisted?
