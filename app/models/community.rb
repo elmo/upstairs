@@ -15,6 +15,7 @@ class Community < ActiveRecord::Base
   validates_presence_of :latitude
   validates_presence_of :longitude
   before_save :set_invitation_link
+  attr_accessor :invitation_link
 
   resourcify
 
