@@ -1,0 +1,16 @@
+<h1>Photos</h1>
+<% @photos.each do |photo| %>
+   <%= cl_image_tag(photo.path, { width: '420', crop: :scale}) %>
+<% end %>
+
+<br />
+
+<% @community.photos.each_with_index do |photo, i| -%>
+  <%= link_to community_photos_path(page: i+1 ) do -%>
+   <%= cl_image_tag(photo.path, { width: '80', crop: :scale}) %>
+  <% end %>
+<%end%>
+
+<p>
+<%= link_to "Add another photo ", edit_community_path(@community) -%>
+</p>

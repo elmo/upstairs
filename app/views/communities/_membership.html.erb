@@ -1,12 +1,13 @@
 <ul>
 <% if !current_user.member_of?(@community) %>
+	<p> You are not currently a member of this community.</p>
 <li>
 <%= form_tag  community_memberships_path(@community), method: :post do %>
   <%= submit_tag 'join' -%> 
   <% end %>
 </li>
 <% end %>
-<li> <%= link_to 'request a repair', community_tickets_path(@community) -%> </li>
-<li> <%= link_to 'send alert', new_community_alert_path(@community) -%> </li>
-<li><%= link_to 'invite someone', new_community_invitation_path(@community)-%></li>
+<li><%= link_to 'Request a repair', community_tickets_path(@community) -%> </li>
+<li><%= link_to 'Send alert', new_community_alert_path(@community) -%> </li>
+<li><%= link_to 'Invite someone', new_community_invitation_path(@community)-%></li>
 </ul>

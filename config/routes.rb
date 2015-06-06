@@ -1,4 +1,6 @@
 Upstairs::Application.routes.draw do
+  resources :photos
+
   resources :messages
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -37,6 +39,7 @@ Upstairs::Application.routes.draw do
     resources :manager_invitations, controller: 'invitations', type: 'ManagerInvitation'
 
     resources :users, only: [:show]
+    resources :photos
     member do
      get 'gallery'
     end
