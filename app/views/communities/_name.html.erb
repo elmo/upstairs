@@ -9,6 +9,10 @@
 <h3><%= @community.address -%></h3>
 <small><%= link_to pluralize(@community.memberships.count, 'member'), community_memberships_path(@community) -%></small>
 
+<div id="landlord">
+<%= render partial: '/communities/landlord' %>
+</div>
+
 <div id="map" style='width: 200px; height: 200px; margin:10px;'></div>
 <communityimage>
 <% if @community.photos.any? %>
@@ -23,9 +27,5 @@
 </communityimage>
 
 <communitymembership>
-
-<% if @community.landlord.blank? %>
-<%= link_to "Invite your landlord",  new_community_landlord_invitation_path(@community) -%>
-<% end %>
 
 <%= link_to 'Invite your neighbors', new_community_user_invitation_path(@community) -%>

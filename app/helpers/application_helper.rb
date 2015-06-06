@@ -89,8 +89,8 @@ module ApplicationHelper
   end
 
   def user_mini_summary(community,user)
-    ((user.avatar.present?) ?  cl_image_tag(user.avatar.path, { size: '30x40', crop: :fit }) : '') +
-    username_or_anonymous(user) + ' joined ' +  user.created_at.strftime(upstairs_time_format)
+   link_to( ((user.avatar.present?) ?  cl_image_tag(user.avatar.path, { size: '60x80', crop: :fit }) : '') + username_or_anonymous(user) , community_user_path(user)) +
+    + ' joined ' +  user.created_at.strftime(upstairs_time_format)
   end
 
   def notification_summary(notification)

@@ -3,7 +3,9 @@
 <ul>
 <% @memberships.each do |membership| %>
   <li>
-    <%= user_mini_summary(@community, membership.user) -%>
+    <%= user_profile_image(@community, membership.user, 'small', 'fit') -%>
+    <%= link_to username_or_anonymous(membership.user),  community_user_path(@community, membership.user.slug) -%>
+    joined at <%= membership.user.created_at.strftime(upstairs_time_format) -%>.
   </li>
 <% end %>
 </ul>
