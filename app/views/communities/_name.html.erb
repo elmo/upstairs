@@ -2,13 +2,10 @@
 <h2 class="community-name inline"><%= @community.name-%> </h2>	
 <%= link_to 'Change name' , edit_community_path(@community) -%> 
 <% else %>
-  <%= link_to 'Give your community a name' , edit_community_path(@community) -%> 
+<%= link_to 'Give your community a name' , edit_community_path(@community) -%> 
 <% end %>
-
 <h3><%= @community.address -%></h3>
-
 <div id="map" style='width: 200px; height: 200px; margin:10px;'></div>
-
 <communityimage>
 <% if @community.photos.any? %>
   <%= cl_image_tag(@community.photos.first.path, { width: '220', crop: :scale}) %>

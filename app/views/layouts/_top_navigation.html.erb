@@ -16,7 +16,7 @@
           <li class='nav-link'><%= link_to 'Sign in',  '/login' -%></li>
         <% else  %>
           <% if @community.present? and !@community.new_record? %>
-	    <li class='nav-link'><%= link_to current_user.public_name, community_user_path(@community, current_user.slug ) -%></li>
+	    <li class='nav-link'><%= link_to 'profile', community_user_path(@community, current_user.slug ) -%></li>
           <% end%>
           <li class='nav-link'><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%></li>
         <% end %>
