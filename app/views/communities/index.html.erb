@@ -1,11 +1,9 @@
 <section>
-
 <div id="find-your-community">
-<h1>Find your community</h1>
-
+<h1>Now let's find your community.</h1>
 <%= form_tag find_community_path , method: :get do |f| %>
   <%= text_field_tag :address, params[:address], id: 'gmaps-input-address', placeholder: 'Start typing a place...' -%>
-  <%=  submit_tag 'find'  %>
+  <%=  submit_tag 'Search'  %>
 <% end %>
 </div>
 </section>

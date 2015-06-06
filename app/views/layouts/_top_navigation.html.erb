@@ -3,7 +3,7 @@
     <nav role="navigation">
       <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
         <li class="nav-link logo">
-         <h1 class="top-nav inline">Upstairs</h1>
+	<h1 class="top-nav inline"><%= link_to 'Upstairs', home_path-%></h1>
         </li>
 	<% if @community.present? and @community.id.present? %>
           <li class='nav-link'><%= link_to "bulletin board",  community_path(@community) -%></li>
@@ -13,10 +13,11 @@
 	<% end %>
         <% if current_user.blank? %>
           <li class='nav-link'><%= link_to 'Join',  '/join' -%></li>
-          <li class='nav-link'><%= link_to 'Login',  '/login' -%></li>
+          <li class='nav-link'><%= link_to 'Sign in',  '/login' -%></li>
         <% else  %>
-	  <li class='nav-link'><%= link_to current_user.public_name, user_home_path -%></li>
-          <li class='nav-link'><%= link_to 'profile', edit_user_registration_path -%></li>
+          <% if @community.present? and !@community.new_record? %>
+	    <li class='nav-link'><%= link_to current_user.public_name, community_user_path(@community, current_user.slug ) -%></li>
+          <% end%>
           <li class='nav-link'><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%></li>
         <% end %>
       </ul>

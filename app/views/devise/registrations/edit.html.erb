@@ -1,5 +1,18 @@
 <h1>Upstairs Profile</h1>
 
+<h2>My Communities</h2>
+
+<% @user.communities.each do |community|-%>
+   <strong><%= link_to community.address, community_path(community) -%></strong>
+    <% if current_user.member_of?(community)%>
+       <small><%= link_to 'leave', 
+		  community_membership_path(community, community.membership(current_user)), 
+		  method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%></small>
+  <% end %>
+<% end %>
+
+<br />
+
 <h2>Choose how your neighbors will see you.</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>

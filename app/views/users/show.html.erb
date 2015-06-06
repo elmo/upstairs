@@ -1,9 +1,20 @@
-<h1><%= @community.address -%></h1>
+<h1 class="inline"><%= username_or_anonymous(@user) -%></h1>
+<% if current_user == @user %>
+  <%= link_to 'Update my profile', edit_user_registration_path %>
+<h2><%= @community.address -%></h2>
+<div id="my-communities">
+<h2>My Communities</h2>
+<% @user.communities.each do |community| %>
+<%= link_to community.address, community_path(@community) %>
+<% end %>
+</div>
+<% end %>
 
-<h2><%= username_or_anonymous(@user) -%></h2>
-
+<h2>Photo</h2>
 <%= user_profile_image(@community, @user, 'huge', 'fit') -%>
+
 <br clear="all">
+<h2><%= username_or_anonymous(@user) %>'s activity </h2>
 <% @user.activities.limit(20).order('created_at desc').each do |activity| %>
 <%= activity_summary(activity) -%> <br> 
 <% end %>

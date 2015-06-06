@@ -20,7 +20,6 @@ Upstairs::Application.routes.draw do
   get '/contact' => "home#contact", as: :contact
   get '/terms' => "home#terms_of_service", as: :terms_of_service
   get '/privacy' => "home#privacy", as: :privacy
-  get '/welcome' => "users#home", as: :user_home
   get '/find' => "communities#choose", as: :find_community
 
   resources :communities do
