@@ -9,7 +9,7 @@
           <li class='nav-link'><%= link_to "bulletin board",  community_path(@community) -%></li>
           <li class='nav-link'><%= link_to 'tickets', community_tickets_path(@community) -%></li>
           <li class='nav-link'><%= link_to 'alerts', community_alerts_path(@community) -%></li>
-          <li class='nav-link'><%= link_to 'members', community_memberships_path(@community) -%></li>
+	  <li class='nav-link'><%= link_to "members (#{@community.memberships.count})", community_memberships_path(@community) -%></li>
 	<% end %>
         <% if current_user.blank? %>
           <li class='nav-link'><%= link_to 'Join',  '/join' -%></li>
