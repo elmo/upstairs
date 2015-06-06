@@ -4,5 +4,6 @@
 
 <%= render partial: 'bigger_map' -%>
 
-<%= link_to "No, this is not my address.", communities_path %>
-<%= link_to "Yes, this is my address.", new_community_path(address: @address) %>
+<%= link_to "Yes, this is it", new_community_path(address: @address), class: 'actions' %>
+
+<%= link_to "No, this isn't it", communities_path, class: 'actions' %>
