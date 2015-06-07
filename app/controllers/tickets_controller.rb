@@ -15,7 +15,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    @ticket = @community.tickets.new(severity: 'Minor', status: 'Open' )
+    @ticket = @community.tickets.new(severity: Ticket::SEVERITY_MINOR, status: Ticket::STATUS_OPEN)
   end
 
   # GET /tickets/1/edit

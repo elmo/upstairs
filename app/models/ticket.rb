@@ -12,6 +12,18 @@ class Ticket < ActiveRecord::Base
   after_create :create_notifications
   after_create :create_actionable
 
+  scope :open, -> { where(status: STATUS_OPEN )}
+  scope :closed, -> { where(status: STATUS_CLOSED)}
+  scope :minor, -> { where(status: SEVERITY_MINOR)}
+  scope :serious, -> { where(status: SEVERITY_SERIOUS)}
+  scope :severe, -> { where(status: SEVERITY_SEVERE)}
+
+  STATUS_OPEN = 'open'
+  STATUS_CLOSED = 'closed'
+  SEVERITY_MINOR = 'minor'
+  SEVERITY_SERIOUS = 'serious'
+  SEVERITY_SEVERE = 'severe'
+
   resourcify
   has_attachments :photos, dependent: :destroy
 

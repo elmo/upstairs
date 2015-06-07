@@ -7,6 +7,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.where(slug: params[:id]).last
+    if @user.landlord?
+      render template: '/users/landlord'
+    else
+      render template: '/users/show'
+    end
   end
 
   private

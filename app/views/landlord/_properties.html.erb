@@ -1,0 +1,7 @@
+<h3>My Buildings</h3>
+<% @user.properties.each do |community| %>
+  <%= link_to community.address, community_path(community) %>
+  <%= link_to "#{pluralize(community.tickets.open.count, 'open ticket')}", community_tickets_path(community) -%>
+<% end %>
+<p> <%= link_to 'Join another community', communities_path -%></p>
+

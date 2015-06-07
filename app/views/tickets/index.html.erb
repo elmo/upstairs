@@ -1,4 +1,6 @@
 <h1 class="inline">Tickets</h1>
+<small><%= pluralize(@community.tickets.open.count, 'open ticket')-%></small>
+<small><%= pluralize(@community.tickets.closed.count, 'closed ticket')-%></small>
 <p><%= link_to 'File a New Ticket', new_community_ticket_path(@community) %></p>
 <%= render partial: '/communities/no_landlord' %>
 <br/>
@@ -6,20 +8,12 @@
 <p>There are no tickets for this community.</p>
 <% else %>
 <tickets>
-<left><strong>summary</strong></left>
-<middle><strong>severity</strong></middle>
-<right><strong>status</strong></right>
-<% @tickets.each do |ticket| %>
-<left> <%= link_to ticket.title, community_ticket_path(@community, ticket) %>
-<% if can?(:manage, ticket) %> 
-  <small><%= link_to 'manage', edit_community_ticket_path(@community, ticket) -%></small>
-<% end%>
-</left>
-<middle><%= ticket_severity_badge(ticket) -%></middle>
-<right>
-<%= ticket_status_badge(ticket)-%> 
-</right>
-<% end %>
+  <left><strong>summary</strong></left>
+  <middle><strong>severity</strong></middle>
+  <right><strong>status</strong></right>
+  <% @tickets.each do |ticket| %>
+    <%= render partial: 'ticket', locals: {ticket: ticket } -%> 
+  <% end %>
 <% end %>
 </tickets>
 

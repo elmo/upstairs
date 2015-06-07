@@ -5,6 +5,9 @@
     <%= f.input :title %>
     <%= f.input :body %>
     <%= f.input :severity, collection: ticket_severities %>
+    <% if current_user.owner_or_manager_of?(@community) %>
+      <%= f.input :status, collection: ticket_statuses %>
+    <% end %>
     <%= f.input :photos, as: :attachinary %>
   </div>
   <div class="form-actions">

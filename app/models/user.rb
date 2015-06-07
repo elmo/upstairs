@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def landlord?
-    roles.where(name: 'Landlord').exists?
+    properties.any?
   end
 
   def manager?
@@ -116,6 +116,14 @@ class User < ActiveRecord::Base
 
   def to_param
     slug
+  end
+
+  def owner_or_manager_of?(community)
+    community.landlord_id == self.id
+  end
+
+  def properties
+    Community.where(landlord_id: self.id)
   end
 
   private
