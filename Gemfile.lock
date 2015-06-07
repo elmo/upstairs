@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/derekprior/momentjs-rails.git
+  revision: 9fac38f9b7603ad5da4cba4d971654370f9e2d7b
+  specs:
+    momentjs-rails (2.10.2)
+      railties (>= 3.1)
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: 2f0002a449a8b9616d51127dc6247bfd8414523d
   specs:
@@ -20,6 +27,15 @@ GIT
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+
+GIT
+  remote: git://github.com/zpaulovics/datetimepicker-rails.git
+  revision: 36d21cec5da7f5b214925804f60e63c61c747023
+  branch: master
+  submodules: true
+  specs:
+    datetimepicker-rails (4.7.16)
+      momentjs-rails (>= 2.9.0)
 
 GEM
   remote: https://rubygems.org/
@@ -83,6 +99,7 @@ GEM
       mime-types (>= 1.16)
     celluloid (0.14.1)
       timers (>= 1.0.0)
+    chronic (0.10.2)
     cloudinary (1.0.85)
       aws_cf_signer
       rest-client
@@ -258,6 +275,8 @@ GEM
       json
       redis (>= 3.0)
       redis-namespace
+    simple_calendar (1.1.10)
+      rails (>= 3.0)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -304,9 +323,11 @@ DEPENDENCIES
   byebug
   cancan
   carrierwave
+  chronic
   cloudinary
   coffee-rails (~> 4.0.0)
   country_select
+  datetimepicker-rails!
   devise!
   factory_girl
   factory_girl_rails
@@ -315,6 +336,7 @@ DEPENDENCIES
   gmaps-autocomplete-rails
   gmapsjs
   jquery-rails
+  momentjs-rails (~> 2.9)!
   neat
   paper_trail
   pg
@@ -332,6 +354,7 @@ DEPENDENCIES
   sass-rails!
   shoulda-matchers
   sidekiq
+  simple_calendar
   simple_form
   spring
   twilio-ruby

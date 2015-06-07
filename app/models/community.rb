@@ -6,6 +6,7 @@ class Community < ActiveRecord::Base
   has_many :activities
   has_many :alerts
   has_many :tickets
+  has_many :events
   has_many :notifications, through: :users
   has_many :invitations
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'

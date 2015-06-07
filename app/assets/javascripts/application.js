@@ -20,6 +20,9 @@
 //= require attachinary
 //= require underscore
 //= require gmaps-auto-complete
+//= require moment
+//= require bootstrap-datetimepicker
+//= require pickers
 //= require_tree .
 
 

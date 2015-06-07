@@ -1,0 +1,17 @@
+<h1>Community Event </h1>
+
+<h2 class="inline"><%= @event.title %></h2>
+<% if @event.owned_by?(current_user) %>
+  <small>posted by <%= link_to @event.user.public_name, community_user_path(@community, @event.user ) %> <%= @event.created_at.strftime(upstairs_time_format) -%></small> 
+  <small><%= link_to 'Edit', edit_community_event_path(@community, @event) %></small> 
+<% end %>
+
+
+<div class="event">
+<%= @event.body %>
+</div>
+
+<strong><%= @event.starts.strftime(upstairs_time_format) %></strong>
+</p>
+
+<%= link_to 'full calendar', calendar_path(@community) %>

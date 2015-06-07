@@ -1,0 +1,14 @@
+<h1>Calendar of Events </h1>
+
+<%= month_calendar events: @events, 
+                   title: month_calendar_header_options,
+                   td: month_calendar_td_options  do |date, events| %>
+  <%= date.day %>
+  <% events.each do |event| %>
+    <div>
+      <%= link_to event.title, community_event_path(@community, event), class: "calendar-event" %>
+    </div>
+  <% end %>
+<% end %>
+
+<p> <%= link_to 'Add new event', new_community_event_path(@community) -%></p>

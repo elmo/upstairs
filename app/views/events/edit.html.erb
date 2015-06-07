@@ -1,0 +1,13 @@
+<h1 class="inline">Editing Event</h1>
+
+<small><%= link_to 'delete', 
+	community_event_path(@community, @event), 
+	data: {confirm: "Are you sure that you want to delete tis event? " },
+	method: :delete -%><small>
+
+<%= render 'form' %>
+
+<p><%= link_to 'Add new event', new_community_event_path(@community) -%></p>
+
+<p><%= link_to 'return to calendar', community_events_path(@community) %></p>
+

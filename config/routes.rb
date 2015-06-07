@@ -1,4 +1,5 @@
 Upstairs::Application.routes.draw do
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary"
 
@@ -19,6 +20,7 @@ Upstairs::Application.routes.draw do
   get '/find' => "communities#choose", as: :find_community
   get '/communities/:community_id/inbox' => "messages#inbox", as: :inbox
   get '/communities/:community_id/outbox' => "messages#outbox", as: :outbox
+  get '/communities/:community_id/calendar' => "events#index", as: :calendar
 
   resources :communities do
     resources :memberships, only: [:create, :destroy, :index]
@@ -30,6 +32,7 @@ Upstairs::Application.routes.draw do
     end
 
     resources :photos
+    resources :events
     resources :user_invitations, controller: 'invitations', type: 'UserInvitation'
     resources :landlord_invitations, controller: 'invitations', type: 'LandlordInvitation'
     resources :manager_invitations, controller: 'invitations', type: 'ManagerInvitation'

@@ -137,3 +137,19 @@ div #find-your-community {
 p.reply-summary{
   margin-left:2em; 
 }
+
+td.calendar-date {
+  vertical-align:top;
+  height:150px; 
+  width:150px; 
+  border: 1px dotted #ccc;
+}
+
+strong.calendar-title {
+  font-size:24px;
+  margin:10px;
+}
+
+a.calendar-event {
+  font-size:12px;
+}
