@@ -43,6 +43,10 @@ class Post < ActiveRecord::Base
     (max.present?) ?  body.split[0..max].join(' ') : body
   end
 
+  def word_count
+    body.split.count
+  end
+
   private
 
   def create_actionable

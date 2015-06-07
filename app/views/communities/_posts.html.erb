@@ -13,7 +13,9 @@
     </span>
   <% end %>
   <%= post.words(Community::HOMEPAGE_WORD_MAX) -%>
-  <%= link_to 'continue reading...', community_post_path(@community, post)   %>
+  <% if post.word_count < Community::HOMEPAGE_WORD_MAX  %>
+     <p><%= link_to 'continue reading...', community_post_path(@community, post) %></p>
+   <% end %>
   </div>
   </div>
   </post>
