@@ -1,9 +1,7 @@
-<%= simple_form_for([@community, @message]) do |f| %>
-
-  <%= f.hidden_field :messageble_type -%>
-  <%= f.hidden_field :messageble_id -%>
-  <%= f.hidden_field :recipient_id -%>
-  <%= f.hidden_field :community_id , @community.-%>
+<%= simple_form_for([@community, @recipient, @message]) do |f| %>
+  <strong>From:</strong> <%= current_user.public_name %><br/>
+  <strong>To:</strong> <%= @recipient.public_name %>
+  </p>
 
   <%= f.error_notification %>
 
@@ -12,6 +10,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, 'Send' %>
   </div>
+
 <% end %>

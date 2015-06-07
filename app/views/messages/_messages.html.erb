@@ -1,0 +1,20 @@
+<% @messages.each do |message| %>
+
+<div id="message_#{message.id}">
+<%= message.created_at.strftime(upstairs_time_format) %> 
+<%= link_to message.sender.public_name , community_user_path(@community, message.sender )%>
+to 
+<%= link_to message.recipient.public_name , community_user_path(@community, message.recipient) %>
+
+<p><%= message.body -%></p>
+
+<% if message.sender != current_user %>
+<%= link_to 'reply', new_community_user_message_path(@community, message.sender, parent_id: message.id ) -%>
+<%end%>
+
+
+</div>
+
+<%end%>
+
+<%= paginate(@messages) -%>

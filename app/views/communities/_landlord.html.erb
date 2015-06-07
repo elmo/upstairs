@@ -5,6 +5,6 @@
 	<p> Your landlord is <strong><%= link_to @community.landlord.public_name, community_user_path(@community,@community.landlord.slug)  -%></strong><br/>
 <small><strong>Phone: </strong><%= @community.landlord.phone-%></small><br />
 <small><strong>Email: </strong><%= @community.landlord.email-%></small><br />
-<small><%= link_to 'send message', new_community_message_path(@community, @community.landlord.slug) -%></small>
+<small><%= link_to 'send message', new_community_user_message_path(@community, @community.landlord.slug) -%></small>
 </p>
 <% end %>

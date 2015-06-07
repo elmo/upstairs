@@ -67,6 +67,14 @@ class User < ActiveRecord::Base
     Message.where(recipient_id: self.id)
   end
 
+  def received_messages_count
+    Message.where(recipient_id: self.id).count
+  end
+
+  def sent_messages_count
+    Message.where(sender_id: self.id).count
+  end
+
   def default_community
     (communities.any?) ? communities.first : nil
   end
@@ -106,6 +114,9 @@ class User < ActiveRecord::Base
     roles.where(resource_type: 'Community', name: 'Manager').collect(&:resource).uniq
   end
 
+  def to_param
+    slug
+  end
 
   private
 

@@ -17,6 +17,8 @@ Upstairs::Application.routes.draw do
   get '/terms' => "home#terms_of_service", as: :terms_of_service
   get '/privacy' => "home#privacy", as: :privacy
   get '/find' => "communities#choose", as: :find_community
+  get '/communities/:community_id/inbox' => "messages#inbox", as: :inbox
+  get '/communities/:community_id/outbox' => "messages#outbox", as: :outbox
 
   resources :communities do
     resources :memberships, only: [:create, :destroy, :index]
@@ -26,16 +28,16 @@ Upstairs::Application.routes.draw do
     resources :invitations do
       get 'redeem'
     end
-    resources :messages do
-     put 'read'
-    end
-    resources :messages
+
     resources :photos
     resources :user_invitations, controller: 'invitations', type: 'UserInvitation'
     resources :landlord_invitations, controller: 'invitations', type: 'LandlordInvitation'
     resources :manager_invitations, controller: 'invitations', type: 'ManagerInvitation'
 
-    resources :users, only: [:show]
+    resources :users, only: [:show] do
+      resources :messages
+    end
+
     resources :photos
     member do
      get 'gallery'

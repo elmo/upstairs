@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   before_action :set_community
+  before_action :set_recipient, except: [:inbox, :outbox]
   layout 'community'
 
   # GET /messages
@@ -15,11 +16,8 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = Message.new
+    @message = Message.new(sender: current_user, recipient: @recipient)
     @message.community = @community
-    set_messegable
-    @message.sender = current_user
-    @message.recipient = @messegable.user
   end
 
   # GET /messages/1/edit
@@ -30,11 +28,21 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.sender = current_user
+    @message.recipient = @recipient
+    @message.community = @community
     if @message.save
-      redirect_to @message, notice: 'Message was successfully created.'
+      redirect_to outbox_path(@community, current_user) , notice: "Message to #{@recipient.public_name} was successfully has been sent."
     else
       render :new
     end
+  end
+
+  def outbox
+    @messages = current_user.sent_messages.order('created_at DESC').page(params[:page]).per(10)
+  end
+
+  def inbox
+    @messages = current_user.received_messages.order('created_at DESC').page(params[:page]).per(10)
   end
 
   # PATCH/PUT /messages/1
@@ -62,12 +70,8 @@ class MessagesController < ApplicationController
       @community = Community.friendly.find(params[:community_id])
     end
 
-    def set_messegable
-      if params[:messagable_type].present? and params[:messageable_id].present?
-        @messegable = params[:messagable_type].constantize.find(params[:messageable_id])
-      else
-        @community
-      end
+    def set_recipient
+      @recipient = User.find_by_slug(params[:user_id])
     end
 
     # Only allow a trusted parameter "white list" through.
