@@ -8,6 +8,11 @@ class EventsController < ApplicationController
   def index
     start_date = ( params[:start_date].present?) ? Chronic.parse( params[:start_date]) : Date.today
     @events = @community.events.where(["starts >= ? and starts < ?", start_date, start_date.next_month ])
+    if params[:view] and  params[:view]  == 'list'
+      render template: "/events/list"
+    else
+      render template: "/events/index"
+    end
   end
 
   # GET /events/1

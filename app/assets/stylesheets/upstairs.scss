@@ -153,3 +153,37 @@ strong.calendar-title {
 a.calendar-event {
   font-size:12px;
 }
+
+.container-datetime {
+  position: relative;
+  background-color: inherit;
+}
+
+.day {
+  vertical-align: top;
+  padding: 5px;
+  margin: 5px;
+  height: 100px;
+  width: 100px;
+  border: 1px dotted #ccc;
+}
+
+.today { 
+  background-color: yellow;
+}
+.past{  
+
+}
+
+.future{ 
+}
+
+.prev-month {
+  background-color: #ddd;
+}
+.next-month{ 
+  background-color: #ddd;
+}
+
+.current-month {
+}

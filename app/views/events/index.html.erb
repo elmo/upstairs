@@ -1,8 +1,14 @@
-<h1>Calendar of Events </h1>
+<h1 class="inline">Calendar of Events </h1> 
+<small> <%= link_to 'Add new event', new_community_event_path(@community) -%></small>
+
+<p>
+<%= link_to 'list view', params.merge(view: 'list') -%>
+</p>
 
 <%= month_calendar events: @events, 
-                   title: month_calendar_header_options,
-                   td: month_calendar_td_options  do |date, events| %>
+                   pevious_link: month_calendar_previous_link,  
+                   title: month_calendar_header_options do |date, events| 
+	   %>
   <%= date.day %>
   <% events.each do |event| %>
     <div>

@@ -5,7 +5,12 @@
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :body %>
-    <%= f.input :starts, as: :datetime_picker %>
+    <div class='input-group date container-datetime' >
+      <%= f.text_field :starts, placeholder: 'Date', class: 'form-control', id: "datetimepicker" %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+     </span>
+    </div>
   </div>
 
   <div class="form-actions">
@@ -14,5 +19,5 @@
 <% end %>
 
 <script type="text/javascript">
-   $('.datetimepicker').datetimepicker();
+   $('#datetimepicker').datetimepicker();
  </script>

@@ -14,4 +14,7 @@
 <strong><%= @event.starts.strftime(upstairs_time_format) %></strong>
 </p>
 
+<p>
+<%= link_to 'list view', calendar_path(@community, view: 'list') %>
 <%= link_to 'full calendar', calendar_path(@community) %>
+</p>

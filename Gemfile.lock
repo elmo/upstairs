@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/derekprior/momentjs-rails.git
-  revision: 9fac38f9b7603ad5da4cba4d971654370f9e2d7b
-  specs:
-    momentjs-rails (2.10.2)
-      railties (>= 3.1)
-
-GIT
   remote: git://github.com/plataformatec/devise.git
   revision: 2f0002a449a8b9616d51127dc6247bfd8414523d
   specs:
@@ -27,15 +20,6 @@ GIT
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-
-GIT
-  remote: git://github.com/zpaulovics/datetimepicker-rails.git
-  revision: 36d21cec5da7f5b214925804f60e63c61c747023
-  branch: master
-  submodules: true
-  specs:
-    datetimepicker-rails (4.7.16)
-      momentjs-rails (>= 2.9.0)
 
 GEM
   remote: https://rubygems.org/
@@ -85,6 +69,8 @@ GEM
       bourbon (>= 3.1)
       sass (>= 3.2)
       thor
+    bootstrap3-datetimepicker-rails (4.7.14)
+      momentjs-rails (>= 2.8.1)
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
@@ -164,6 +150,8 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
+    momentjs-rails (2.10.2)
+      railties (>= 3.1)
     multi_json (1.11.0)
     neat (1.6.0)
       bourbon (>= 3.1)
@@ -319,6 +307,7 @@ PLATFORMS
 DEPENDENCIES
   attachinary
   bitters
+  bootstrap3-datetimepicker-rails
   bourbon
   byebug
   cancan
@@ -327,7 +316,6 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 4.0.0)
   country_select
-  datetimepicker-rails!
   devise!
   factory_girl
   factory_girl_rails
@@ -336,7 +324,7 @@ DEPENDENCIES
   gmaps-autocomplete-rails
   gmapsjs
   jquery-rails
-  momentjs-rails (~> 2.9)!
+  momentjs-rails
   neat
   paper_trail
   pg

@@ -1,0 +1,16 @@
+<h1> Events </h1>
+
+<p>
+<%= link_to 'calendar view', params.merge(view: 'calendar') -%>
+</p>
+
+<% @events.each do |event| %>
+  <div class="event">
+     <%= event.starts.strftime(upstairs_time_format) -%>
+     <%= link_to event.title, community_event_path(@community, event, view: params[:view] )  %>
+     <p> <%= event.body -%>
+     </p>
+   </div>
+<% end %>
+
+<p> <%= link_to 'Add new event', new_community_event_path(@community) -%></p>
