@@ -6,7 +6,8 @@
 </p>
 
 <%= month_calendar events: @events, 
-                   pevious_link: month_calendar_previous_link,  
+                   previous_link: month_calendar_previous_link,  
+                   next_link: month_calendar_next_link,  
                    title: month_calendar_header_options do |date, events| 
 	   %>
   <%= date.day %>

@@ -9,7 +9,12 @@ module EventsHelper
    end
 
    def month_calendar_previous_link
-      ->(param, date_range)  { link_to raw("&laquo;"), { param => date_range.first - 1.day}}
+      ->(param, date_range)  { link_to raw("&laquo;"), { param => date_range.first.at_beginning_of_month }}
    end
+
+   def month_calendar_next_link
+      ->(param, date_range)  { link_to raw("&raquo;"), { param => date_range.last.at_beginning_of_month }}
+   end
+
 
 end
