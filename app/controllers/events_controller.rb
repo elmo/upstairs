@@ -6,8 +6,8 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    start_date = ( params[:start_date].present?) ? Chronic.parse( params[:start_date]) : Date.today
-    @events = @community.events.where(["starts >= ? and starts < ?", start_date, start_date.next_month ])
+    start_date = ( params[:start_date].present?) ? Chronic.parse( params[:start_date]) : Date.today.at_beginning_of_month
+    @events = @community.events.where(["starts >= ? and starts <= ?", start_date, start_date.next_month ])
     if params[:view] and  params[:view]  == 'list'
       render template: "/events/list"
     else
@@ -43,7 +43,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: 'Event was successfully updated.'
+      redirect_to community_events_path(@community), notice: 'Event was successfully updated.'
     else
       render :edit
     end
