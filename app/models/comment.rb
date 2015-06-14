@@ -16,12 +16,12 @@ class Comment < ActiveRecord::Base
   end
 
   def community
-    return commentable.community if commentable.class.to_s == 'Ticket'
+    return commentable.community if !['Ticket', 'Event'].include?(commentable.class.to_s)
     return (reply?) ?  comment.commentable.community : commentable.community
   end
 
   def create_notifications
-   if commentable.present? and commentable.class.to_s != 'Ticket'
+   if commentable.present? and !['Ticket', 'Event'].include?(commentable.class.to_s)
       commentable.commenters.each { |user| Notification.create(notifiable: self, user: user) }
    else
       commentable.community.users.each { |user| Notification.create(notifiable: self, user: user) }
@@ -43,7 +43,7 @@ class Comment < ActiveRecord::Base
   private
 
   def create_actionable
-   if commentable.present? and commentable.class.to_s != 'Ticket'
+   if commentable.present? and  !['Ticket', 'Event'].include?(commentable.class.to_s)
     Activity.create(actionable: self, user: self.user, community: self.grandparent.postable)
    else
     Activity.create(actionable: self, user: self.user, community: self.commentable.community) if !reply?

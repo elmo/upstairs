@@ -52,10 +52,14 @@ Upstairs::Application.routes.draw do
   resources :notifications, only: [:show, :destroy]
 
   resources :tickets do
-      resources :comments
+    resources :comments
   end
 
   resources :posts do
+    resources :comments
+  end
+
+  resources :events do
     resources :comments
   end
 

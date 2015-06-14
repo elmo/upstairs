@@ -1,5 +1,6 @@
-<h1>Community Event </h1>
-
+<h1 class="inline">Community Event </h1>
+<small> <%= link_to 'calendar', calendar_path(@community) %> </small>
+<br clear="all">
 <h2 class="inline"><%= @event.title %></h2>
 <% if @event.owned_by?(current_user) %>
   <small>posted by <%= link_to @event.user.public_name, community_user_path(@community, @event.user ) %> <%= @event.created_at.strftime(upstairs_time_format) -%></small> 
@@ -8,13 +9,14 @@
 
 
 <div class="event">
+<strong><%= @event.starts.strftime(upstairs_time_format) %></strong>
 <%= @event.body %>
+<div id="comments">
+<%= render partial: '/comments/comments', locals: { commentable: @event}  %>
+</div>
 </div>
 
-<strong><%= @event.starts.strftime(upstairs_time_format) %></strong>
-</p>
 
-<p>
-<%= link_to 'list view', calendar_path(@community, view: 'list') %>
-<%= link_to 'full calendar', calendar_path(@community) %>
-</p>
+
+
+

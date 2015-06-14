@@ -30,8 +30,10 @@ class CommentsController < ApplicationController
     if @comment.save
       if @commentable.class.to_s == 'Post'
         redirect_to community_post_path(@commentable.postable, @commentable), notice: 'Comment was successfully created.'
-      else
+      elsif @commentable.class.to_s == 'Ticket'
         redirect_to community_ticket_path(@commentable.community,@commentable), notice: 'Comment was successfully created.'
+      elsif @commentable.class.to_s == 'Event'
+        redirect_to community_event_path(@commentable.community,@commentable), notice: 'Comment was successfully created.'
       end
     else
       render :new
@@ -62,6 +64,7 @@ class CommentsController < ApplicationController
     def set_commentable
       @commentable = Post.friendly.find(params[:post_id]) if params[:post_id]
       @commentable = Ticket.find(params[:ticket_id]) if params[:ticket_id]
+      @commentable = Event.find(params[:event_id]) if params[:event_id]
       @community = @commentable.postable
     end
 

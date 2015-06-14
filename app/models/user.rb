@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :invitations, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_many :events, dependent: :destroy
   belongs_to :invitation
   after_create :apply_invitation
   before_save :set_slug
