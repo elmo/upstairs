@@ -28,10 +28,12 @@ class RepliesController < ApplicationController
     @reply.parent_comment_id = @comment.id
     @reply.user = current_user
     if @reply.save
-      if @comment.commentable.class.to_s != 'Ticket'
-        redirect_to community_post_path(@comment.commentable.postable, @comment.commentable) , notice: "Your reply has been saved."
-      else
+      if @comment.commentable.class.to_s == 'Ticket'
         redirect_to community_ticket_path(@comment.commentable.community, @comment.commentable), notice: "Your reply has been saved."
+      elsif @comment.commentable.class.to_s == 'Event'
+        redirect_to community_event_path(@comment.commentable.community, @comment.commentable), notice: "Your reply has been saved."
+      else
+        redirect_to community_post_path(@comment.commentable.postable, @comment.commentable) , notice: "Your reply has been saved."
       end
     else
       render :new
