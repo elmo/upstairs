@@ -5,18 +5,18 @@ RSpec.describe User , :type => :model do
 
   describe "join" do
     before(:each) do
-      load_user_and_community
+      load_user_and_building
     end
 
-    it "associates user with a community" do
-      expect { @user.join(@community)}.to change(Membership,:count).by(1)
-      expect(@user.communities.first).to eq @community
+    it "associates user with a building" do
+      expect { @user.join(@building)}.to change(Membership,:count).by(1)
+      expect(@user.communities.first).to eq @building
     end
 
     it "does not create duplicate membership records" do
-      @user.join(@community)
+      @user.join(@building)
       expect(Membership.count).to eq 1
-      expect { @user.join(@community)}.to change(Membership,:count).by(0)
+      expect { @user.join(@building)}.to change(Membership,:count).by(0)
     end
   end
 
@@ -25,8 +25,8 @@ RSpec.describe User , :type => :model do
        load_membership
      end
 
-    it "dis-associates user with a community" do
-      expect { @user.leave(@community)}.to change(Membership,:count).by(-1)
+    it "dis-associates user with a building" do
+      expect { @user.leave(@building)}.to change(Membership,:count).by(-1)
       expect(@user.communities).to be_empty
     end
   end

@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html>
 <head>
-  <title>Upstairs - <%= @community.address -%></title>
+  <title>Upstairs - <%= @building.address -%></title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
   <%= javascript_include_tag "application" %>
@@ -15,29 +15,29 @@
 <body class="type-system-geometric">
 <%= render partial: '/layouts/top_navigation' %>
 <%= render partial: '/layouts/flash' %>
-<%= render partial: '/communities/alerts' %>
+<%= render partial: '/buildings/alerts' %>
 
 <div id= "main" class="type-system-geometric">
-<community>
-<communityleft>
-<%= render partial: '/communities/messages' -%>
+<building>
+<buildingleft>
+<%= render partial: '/buildings/messages' -%>
 <br clear="all">
-<%= render partial: '/communities/name' %>
+<%= render partial: '/buildings/name' %>
 <br clear="all">
-<%= render partial: '/communities/membership' -%>
+<%= render partial: '/buildings/membership' -%>
 <br clear="all">
-</communitymembership>
+</buildingmembership>
 <br clear="all">
-<categories><%= render partial: '/communities/categories' %></categories>
+<categories><%= render partial: '/buildings/categories' %></categories>
 <br clear="all">
- <activity> <%= render partial: '/communities/activity' -%> </activity>
-</communityleft>
-<communityright>
-<communityfeed>
+ <activity> <%= render partial: '/buildings/activity' -%> </activity>
+</buildingleft>
+<buildingright>
+<buildingfeed>
 <%= yield %>
-</communityfeed>
-</communityright>
-</community>
+</buildingfeed>
+</buildingright>
+</building>
 </div>
 
 <%= footer %>
@@ -48,7 +48,7 @@ $(document).ready(function(){
 });
 
 function initialize(element) {
-  var latlng = new google.maps.LatLng(<%= @community.latitude-%>, <%= @community.longitude -%>);
+  var latlng = new google.maps.LatLng(<%= @building.latitude-%>, <%= @building.longitude -%>);
   var myOptions = {
     zoom: 19,
     center: latlng,

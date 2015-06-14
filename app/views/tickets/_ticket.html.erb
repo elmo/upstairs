@@ -1,6 +1,6 @@
-<left><%= link_to ticket.title, community_ticket_path(@community, ticket) %>
+<left><%= link_to ticket.title, building_ticket_path(@building, ticket) %>
 <% if can?(:manage, ticket) %> 
-  <small><%= link_to 'manage', edit_community_ticket_path(@community, ticket) -%></small>
+  <small><%= link_to 'manage', edit_building_ticket_path(@building, ticket) -%></small>
 <% end%>
 </left>
 <middle><%= ticket_severity_badge(ticket) -%></middle>

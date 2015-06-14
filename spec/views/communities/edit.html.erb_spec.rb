@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "communities/edit", :type => :view do
   before(:each) do
-    @community = assign(:community, Community.create!())
+    @building = assign(:building, Building.create!())
   end
 
-  it "renders the edit community form" do
+  it "renders the edit building form" do
     render
 
-    assert_select "form[action=?][method=?]", community_path(@community), "post" do
+    assert_select "form[action=?][method=?]", building_path(@building), "post" do
     end
   end
 end

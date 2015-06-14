@@ -18,10 +18,10 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe CommunitiesController, :type => :controller do
+RSpec.describe BuildingsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Community. As you add validations to Community, be sure to
+  # Building. As you add validations to Building, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {address: "410-43rd Avenue"}
@@ -33,52 +33,52 @@ RSpec.describe CommunitiesController, :type => :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # CommunitiesController. Be sure to keep this updated too.
+  # BuildingsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET show" do
-    it "assigns the requested community as @community" do
-      community = Community.create! valid_attributes
-      get :show, {:id => community.to_param}, valid_session
-      expect(assigns(:community)).to eq(community)
+    it "assigns the requested building as @building" do
+      building = Building.create! valid_attributes
+      get :show, {:id => building.to_param}, valid_session
+      expect(assigns(:building)).to eq(building)
     end
   end
 
   describe "GET new" do
-    it "assigns a new community as @community" do
+    it "assigns a new building as @building" do
       get :new, {}, valid_session
-      expect(assigns(:community)).to be_a_new(Community)
+      expect(assigns(:building)).to be_a_new(Building)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new Community" do
+      it "creates a new Building" do
         expect {
-          post :create, {:community => valid_attributes}, valid_session
-        }.to change(Community, :count).by(1)
+          post :create, {:building => valid_attributes}, valid_session
+        }.to change(Building, :count).by(1)
       end
 
-      it "assigns a newly created community as @community" do
-        post :create, {:community => valid_attributes}, valid_session
-        expect(assigns(:community)).to be_a(Community)
-        expect(assigns(:community)).to be_persisted
+      it "assigns a newly created building as @building" do
+        post :create, {:building => valid_attributes}, valid_session
+        expect(assigns(:building)).to be_a(Building)
+        expect(assigns(:building)).to be_persisted
       end
 
-      it "redirects to the created community" do
-        post :create, {:community => valid_attributes}, valid_session
-        expect(response).to redirect_to(Community.last)
+      it "redirects to the created building" do
+        post :create, {:building => valid_attributes}, valid_session
+        expect(response).to redirect_to(Building.last)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved community as @community" do
-        post :create, {:community => invalid_attributes}, valid_session
-        expect(assigns(:community)).to be_a_new(Community)
+      it "assigns a newly created but unsaved building as @building" do
+        post :create, {:building => invalid_attributes}, valid_session
+        expect(assigns(:building)).to be_a_new(Building)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:community => invalid_attributes}, valid_session
+        post :create, {:building => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
     end

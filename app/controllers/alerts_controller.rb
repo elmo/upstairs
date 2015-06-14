@@ -1,13 +1,13 @@
 class AlertsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_community
+  before_action :set_building
   before_action :set_alert, only: [:show, :edit, :update, :destroy]
-  layout 'community'
+  layout 'building'
 
   # GET /alerts
   def index
-    @alert = @community.alerts.new
-    @alerts = @community.alerts.order('created_at desc').page(params[:page]).per(20)
+    @alert = @building.alerts.new
+    @alerts = @building.alerts.order('created_at desc').page(params[:page]).per(20)
   end
 
   # GET /alerts/1
@@ -16,21 +16,21 @@ class AlertsController < ApplicationController
 
   # GET /alerts/new
   def new
-    @alert = @community.alerts.new(user: current_user)
+    @alert = @building.alerts.new(user: current_user)
   end
 
   # GET /alerts/1/edit
   def edit
-    @alert = @community.alerts.friendly.find(params[:id])
+    @alert = @building.alerts.friendly.find(params[:id])
   end
 
   # POST /alerts
   def create
-    @alert = @community.alerts.new(alert_params)
+    @alert = @building.alerts.new(alert_params)
     @alert.user = current_user
 
     if @alert.save
-      redirect_to community_alert_path(@community, @alert), notice: 'Alert was successfully created.'
+      redirect_to building_alert_path(@building, @alert), notice: 'Alert was successfully created.'
     else
       render :new
     end
@@ -39,7 +39,7 @@ class AlertsController < ApplicationController
   # PATCH/PUT /alerts/1
   def update
     if @alert.update(alert_params)
-      redirect_to community_alert_path(@community, @alert), notice: 'Alert was successfully created.'
+      redirect_to building_alert_path(@building, @alert), notice: 'Alert was successfully created.'
     else
       render :edit
     end
@@ -55,8 +55,8 @@ class AlertsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
 
-    def set_community
-      @community = Community.friendly.find(params[:community_id])
+    def set_building
+      @building = Building.friendly.find(params[:building_id])
     end
 
     def set_alert

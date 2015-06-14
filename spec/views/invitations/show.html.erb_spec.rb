@@ -4,7 +4,7 @@ RSpec.describe "invitations/show", :type => :view do
   before(:each) do
     @invitation = assign(:invitation, Invitation.create!(
       :user_id => "",
-      :community_id => "",
+      :building_id => "",
       :token => "",
       :email => ""
     ))

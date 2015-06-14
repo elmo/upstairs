@@ -1,12 +1,12 @@
 <h1>Upstairs Profile</h1>
 
-<h2>My Communities</h2>
+<h2>My Buildings</h2>
 
-<% @user.communities.each do |community|-%>
-   <strong><%= link_to community.address, community_path(community) -%></strong>
-    <% if current_user.member_of?(community)%>
+<% @user.buildings.each do |building|-%>
+   <strong><%= link_to building.address, building_path(building) -%></strong>
+    <% if current_user.member_of?(building)%>
        <small><%= link_to 'leave', 
-		  community_membership_path(community, community.membership(current_user)), 
+		  building_membership_path(building, building.membership(current_user)), 
 		  method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%></small>
   <% end %>
 <% end %>

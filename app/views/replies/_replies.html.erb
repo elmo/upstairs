@@ -2,7 +2,7 @@
 <% comment.replies.each do |reply| %>
 <div class="reply">
   <div class="reply-image">
-    <%= user_profile_image(@community, reply.user, 'smallest', 'fit') -%>
+    <%= user_profile_image(@building, reply.user, 'smallest', 'fit') -%>
   </div> 
   <div class="reply-content">
     <h1 class="reply-heading"><%= username_or_anonymous(reply.user)-%> </h1>

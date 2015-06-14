@@ -12,8 +12,8 @@
 <% @alerts.each do |alert| %>
   <li>
     <%= alert.created_at.strftime(upstairs_time_format) %>
-    by <%= link_to alert.user.public_name, community_user_path(@community, alert.user) %> 
-    <%= link_to alert.message, community_alert_path(@community, alert) %>
+    by <%= link_to alert.user.public_name, building_user_path(@building, alert.user) %> 
+    <%= link_to alert.message, building_alert_path(@building, alert) %>
   </li>
 <% end %>
 </ul>

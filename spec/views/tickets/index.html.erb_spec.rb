@@ -5,7 +5,7 @@ RSpec.describe "tickets/index", :type => :view do
     assign(:tickets, [
       Ticket.create!(
         :user_id => 1,
-        :community_id => 2,
+        :building_id => 2,
         :title => "Title",
         :body => "MyText",
         :severity => 3,
@@ -13,7 +13,7 @@ RSpec.describe "tickets/index", :type => :view do
       ),
       Ticket.create!(
         :user_id => 1,
-        :community_id => 2,
+        :building_id => 2,
         :title => "Title",
         :body => "MyText",
         :severity => 3,

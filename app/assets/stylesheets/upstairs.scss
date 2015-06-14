@@ -29,16 +29,16 @@ home {
   right { @include span-columns(8);}
 }
 
-community {
+building {
   @include span-columns(12);
-  communityleft {
+  buildingleft {
     @include pad();
     @include span-columns(4 of 12);
-    communityimage { 
+    buildingimage { 
      @include pad();
      @include span-columns(4 of 4); 
     }
-    communitymembership { 
+    buildingmembership { 
       @include pad();
       @include span-columns(4 of 7);  
       @include pad();
@@ -53,8 +53,8 @@ community {
       }
     } 
   } 
-  communityright {
-    communityfeed { 
+  buildingright {
+    buildingfeed { 
       @include pad();
       @include span-columns(7 of 12); 
     }
@@ -130,7 +130,7 @@ ticket {
   width: 40%;
 }
 
-div #find-your-community {
+div #find-your-building {
   min-height: 800px;
 }
 

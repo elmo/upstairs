@@ -5,13 +5,13 @@ RSpec.describe "invitations/index", :type => :view do
     assign(:invitations, [
       Invitation.create!(
         :user_id => "",
-        :community_id => "",
+        :building_id => "",
         :token => "",
         :email => ""
       ),
       Invitation.create!(
         :user_id => "",
-        :community_id => "",
+        :building_id => "",
         :token => "",
         :email => ""
       )

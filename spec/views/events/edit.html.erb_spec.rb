@@ -5,7 +5,7 @@ RSpec.describe "events/edit", :type => :view do
     @event = assign(:event, Event.create!(
       :title => "MyString",
       :body => "MyString",
-      :community_id => 1,
+      :building_id => 1,
       :user_id => 1
     ))
   end
@@ -19,7 +19,7 @@ RSpec.describe "events/edit", :type => :view do
 
       assert_select "input#event_body[name=?]", "event[body]"
 
-      assert_select "input#event_community_id[name=?]", "event[community_id]"
+      assert_select "input#event_building_id[name=?]", "event[building_id]"
 
       assert_select "input#event_user_id[name=?]", "event[user_id]"
     end

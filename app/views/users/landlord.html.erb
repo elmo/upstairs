@@ -1,12 +1,12 @@
-<%= user_profile_image(@community, @user, 'medium', 'fit') -%>
+<%= user_profile_image(@building, @user, 'medium', 'fit') -%>
 <h1 class="inline"><%= username_or_anonymous(@user) -%></h1>
-<small><%= link_to "inbox (#{@user.received_messages.count}) ", inbox_path(@community) -%></small>
+<small><%= link_to "inbox (#{@user.received_messages.count}) ", inbox_path(@building) -%></small>
 
 <% if current_user == @user %>
 <small><%= link_to 'Update my profile', edit_user_registration_path %></small>
 <% end %>
 
-<h2><%= @community.address -%></h2>
+<h2><%= @building.address -%></h2>
 
 <div id="my-properties">
 <%= render partial: '/landlord/properties'%>

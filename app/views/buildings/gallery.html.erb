@@ -1,16 +1,16 @@
 <h1>Photos</h1>
 <gallery>
 <left>
-<% @community.photos.each do |photo| %>
+<% @building.photos.each do |photo| %>
  <%= cl_image_tag(photo.path, { size: '400x600', crop: :fit }) %>
 <% end %>
 
-<p><%= link_to 'back', community_path( @community) -%> </p>
+<p><%= link_to 'back', building_path( @building) -%> </p>
 </left>
 
 <right>
 
-<% @community.photos.each do |photo| -%>
+<% @building.photos.each do |photo| -%>
   <%= cl_image_tag(photo.path, { size: '100x100', crop: :scale}) %>
 <% end %>
 </right>

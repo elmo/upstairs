@@ -1,11 +1,11 @@
-<%= simple_form_for([@community, @ticket]) do |f| %>
+<%= simple_form_for([@building, @ticket]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :body %>
     <%= f.input :severity, collection: ticket_severities %>
-    <% if current_user.owner_or_manager_of?(@community) %>
+    <% if current_user.owner_or_manager_of?(@building) %>
       <%= f.input :status, collection: ticket_statuses %>
     <% end %>
     <%= f.input :photos, as: :attachinary %>

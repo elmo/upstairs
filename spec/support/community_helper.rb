@@ -1,3 +1,3 @@
-def load_community
-  @community = create(:community)
+def load_building
+  @building = create(:building)
 end

@@ -5,19 +5,19 @@
         <li class="nav-link logo">
 	<h1 class="top-nav inline"><%= link_to 'Upstairs', home_path-%></h1>
         </li>
-	<% if @community.present? and @community.id.present? %>
-          <li class='nav-link'><%= link_to "bulletin board",  community_path(@community) -%></li>
-          <li class='nav-link'><%= link_to 'tickets', community_tickets_path(@community) -%></li>
-          <li class='nav-link'><%= link_to 'alerts', community_alerts_path(@community) -%></li>
-          <li class='nav-link'><%= link_to 'calendar', calendar_path(@community) -%></li>
-	  <li class='nav-link'><%= link_to "members (#{@community.memberships.count})", community_memberships_path(@community) -%></li>
+	<% if @building.present? and @building.id.present? %>
+          <li class='nav-link'><%= link_to "bulletin board",  building_path(@building) -%></li>
+          <li class='nav-link'><%= link_to 'tickets', building_tickets_path(@building) -%></li>
+          <li class='nav-link'><%= link_to 'alerts', building_alerts_path(@building) -%></li>
+          <li class='nav-link'><%= link_to 'calendar', calendar_path(@building) -%></li>
+	  <li class='nav-link'><%= link_to "members (#{@building.memberships.count})", building_memberships_path(@building) -%></li>
 	<% end %>
         <% if current_user.blank? %>
           <li class='nav-link'><%= link_to 'Join',  '/join' -%></li>
           <li class='nav-link'><%= link_to 'Sign in',  '/login' -%></li>
         <% else  %>
-          <% if @community.present? and !@community.new_record? %>
-	    <li class='nav-link'><%= link_to 'profile', community_user_path(@community, current_user.slug ) -%></li>
+          <% if @building.present? and !@building.new_record? %>
+	    <li class='nav-link'><%= link_to 'profile', building_user_path(@building, current_user.slug ) -%></li>
           <% end%>
           <li class='nav-link'><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%></li>
         <% end %>

@@ -17,12 +17,12 @@ class SessionsController < Devise::SessionsController
       invitation = Invitation.find_by_token(session[:invitation_code])
       resource.invitation = invitation
       resource.apply_invitation
-      redirect_to community_path(invitation.community)
+      redirect_to building_path(invitation.building)
     elsif session[:invitation_link].present?
-      community = resource.apply_invitation_link(session[:invitation_link])
-      redirect_to community_path(community)
-    elsif resource.communities.any?
-      redirect_to community_path(resource.communities.first)
+      building = resource.apply_invitation_link(session[:invitation_link])
+      redirect_to building_path(building)
+    elsif resource.buildings.any?
+      redirect_to building_path(resource.buildings.first)
     else
       respond_with resource, location: root_path
     end

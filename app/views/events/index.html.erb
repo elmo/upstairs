@@ -1,5 +1,5 @@
 <h1 class="inline">Calendar of Events </h1> 
-<small> <%= link_to 'Add new event', new_community_event_path(@community) -%></small>
+<small> <%= link_to 'Add new event', new_building_event_path(@building) -%></small>
 
 <p>
 <%= link_to 'list view', params.merge(view: 'list') -%>
@@ -13,9 +13,9 @@
   <%= date.day %>
   <% events.each do |event| %>
     <div>
-      <%= link_to event.title, community_event_path(@community, event), class: "calendar-event" %>
+      <%= link_to event.title, building_event_path(@building, event), class: "calendar-event" %>
     </div>
   <% end %>
 <% end %>
 
-<p> <%= link_to 'Add new event', new_community_event_path(@community) -%></p>
+<p> <%= link_to 'Add new event', new_building_event_path(@building) -%></p>

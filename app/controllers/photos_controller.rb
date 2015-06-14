@@ -1,12 +1,12 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_community
+  before_action :set_building
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  layout 'community'
+  layout 'building'
 
   # GET /photos
   def index
-    @photos = @community.photos.page(params[:page]).per(1)
+    @photos = @building.photos.page(params[:page]).per(1)
   end
 
   # GET /photos/1
@@ -54,8 +54,8 @@ class PhotosController < ApplicationController
       @photo = Photo.find(params[:id])
     end
 
-    def set_community
-      @community = Community.friendly.find(params[:community_id])
+    def set_building
+      @building = Building.friendly.find(params[:building_id])
     end
 
     # Only allow a trusted parameter "white list" through.

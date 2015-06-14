@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_community, only: [:show]
+  before_action :get_building, only: [:show]
 
   def home
   end
@@ -16,8 +16,8 @@ class UsersController < ApplicationController
 
   private
 
-  def get_community
-    @community = Community.friendly.find(params[:community_id])
+  def get_building
+    @building = Building.friendly.find(params[:building_id])
   end
 
 end

@@ -1,6 +1,6 @@
-class CreateCommunities < ActiveRecord::Migration
+class CreateBuildings < ActiveRecord::Migration
   def change
-    create_table :communities do |t|
+    create_table :buildings do |t|
       t.string :name
       t.string :address
       t.float :latitude, :float

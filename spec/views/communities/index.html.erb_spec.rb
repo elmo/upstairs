@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "communities/index", :type => :view do
   before(:each) do
     assign(:communities, [
-      Community.create!(),
-      Community.create!()
+      Building.create!(),
+      Building.create!()
     ])
   end
 

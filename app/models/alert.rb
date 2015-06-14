@@ -1,6 +1,6 @@
 class Alert < ActiveRecord::Base
   belongs_to :user
-  belongs_to :community
+  belongs_to :building
   belongs_to :actionable, polymorphic: true
   has_many :notifications, as: :notifiable, dependent: :destroy
 
@@ -14,11 +14,11 @@ class Alert < ActiveRecord::Base
   private
 
   def create_actionable
-   Activity.create(actionable: self, user: self.user, community: self.community)
+   Activity.create(actionable: self, user: self.user, building: self.building)
   end
 
   def create_notifications
-    community.users.each { |user| Notification.create(notifiable: self, user: user) }
+    building.users.each { |user| Notification.create(notifiable: self, user: user) }
   end
 
 end

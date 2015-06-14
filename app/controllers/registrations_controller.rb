@@ -61,11 +61,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_in_path_for(resource)
     if session[:invitation_link].present?
-      community = Community.where(invitation_link: session[:invitation_link]).first
-      resource.join(community) if community.present?
+      building = Building.where(invitation_link: session[:invitation_link]).first
+      resource.join(building) if building.present?
       session[:invitation_code] = nil
       session[:invitation_link] = nil
-      community_path(community)
+      building_path(building)
     else
       home_path
     end

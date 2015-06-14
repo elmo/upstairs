@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>User</th>
-      <th>Community</th>
+      <th>Building</th>
       <th>Token</th>
       <th>Email</th>
       <th>Redeemed at</th>
@@ -18,7 +18,7 @@
     <% @invitations.each do |invitation| %>
       <tr>
         <td><%= invitation.user_id %></td>
-        <td><%= invitation.community_id %></td>
+        <td><%= invitation.building_id %></td>
         <td><%= invitation.token %></td>
         <td><%= invitation.email %></td>
         <td><%= invitation.redeemed_at %></td>

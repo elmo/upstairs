@@ -6,7 +6,7 @@
 
 
 <% if @comment.commentable.class.to_s != 'Ticket'%>
-   <%= link_to 'back to original comment', community_post_path(@community, @comment.commentable) %>
+   <%= link_to 'back to original comment', building_post_path(@building, @comment.commentable) %>
 <% else %>
-  <%= link_to 'back to ticket', community_ticket_path(@comment.commentable.community, @comment.commentable )%>
+  <%= link_to 'back to ticket', building_ticket_path(@comment.commentable.building, @comment.commentable )%>
 <% end %>

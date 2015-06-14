@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614045625) do
+ActiveRecord::Schema.define(version: 20150614230717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "community_id"
+    t.integer  "building_id"
     t.integer  "actionable_id"
     t.string   "actionable_type"
     t.datetime "created_at",      null: false
@@ -27,15 +27,15 @@ ActiveRecord::Schema.define(version: 20150614045625) do
 
   add_index "activities", ["actionable_id"], name: "index_activities_on_actionable_id", using: :btree
   add_index "activities", ["actionable_type", "actionable_id"], name: "index_activities_on_actionable_type_and_actionable_id", using: :btree
-  add_index "activities", ["community_id"], name: "index_activities_on_community_id", using: :btree
+  add_index "activities", ["building_id"], name: "index_activities_on_building_id", using: :btree
   add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "alerts", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "community_id"
+    t.integer  "building_id"
     t.string   "message"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "attachinary_files", force: :cascade do |t|
@@ -53,6 +53,22 @@ ActiveRecord::Schema.define(version: 20150614045625) do
   end
 
   add_index "attachinary_files", ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
+
+  create_table "buildings", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "float"
+    t.float    "longitude"
+    t.boolean  "active",          default: true
+    t.integer  "landlord_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "slug"
+    t.string   "invitation_link"
+  end
+
+  add_index "buildings", ["slug"], name: "index_buildings_on_slug", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -75,31 +91,14 @@ ActiveRecord::Schema.define(version: 20150614045625) do
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
 
-  create_table "communities", force: :cascade do |t|
-    t.string   "name"
-    t.string   "address"
-    t.float    "latitude"
-    t.float    "float"
-    t.float    "longitude"
-    t.boolean  "active",          default: true
-    t.integer  "landlord_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "slug"
-    t.string   "invitation_link"
-  end
-
-  add_index "communities", ["invitation_link"], name: "index_communities_on_invitation_link", using: :btree
-  add_index "communities", ["slug"], name: "index_communities_on_slug", using: :btree
-
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "starts"
-    t.integer  "community_id"
+    t.integer  "building_id"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -117,28 +116,28 @@ ActiveRecord::Schema.define(version: 20150614045625) do
 
   create_table "invitations", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "community_id"
+    t.integer  "building_id"
     t.string   "token"
     t.string   "email"
     t.datetime "redeemed_at"
     t.string   "type"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "community_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "building_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "memberships", ["user_id", "community_id"], name: "index_memberships_on_user_id_and_community_id", unique: true, using: :btree
+  add_index "memberships", ["user_id", "building_id"], name: "index_memberships_on_user_id_and_building_id", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "community_id"
+    t.integer  "building_id"
     t.text     "body"
     t.boolean  "read",            default: false
     t.integer  "messageble_id"
@@ -203,16 +202,16 @@ ActiveRecord::Schema.define(version: 20150614045625) do
 
   create_table "tickets", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "community_id"
+    t.integer  "building_id"
     t.string   "title"
     t.text     "body"
     t.string   "severity"
     t.string   "status"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "tickets", ["community_id", "severity"], name: "index_tickets_on_community_id_and_severity", using: :btree
+  add_index "tickets", ["building_id", "severity"], name: "index_tickets_on_building_id_and_severity", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                    default: "",   null: false

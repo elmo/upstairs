@@ -4,7 +4,7 @@
 <% next if comment.new_record? %>
 <div class="comment">
 <div class="comment-image">
-   <%= user_profile_image(@community, comment.user, 'smallest', 'fit') -%>
+   <%= user_profile_image(@building, comment.user, 'smallest', 'fit') -%>
  </div>
  <div class="comment-content">
  <h1 class="comment-heading"><%= username_or_anonymous(comment.user) -%> </h1>

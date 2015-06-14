@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :memberships, dependent: :destroy
-  has_many :communities, through: :memberships
+  has_many :buildings, through: :memberships
   has_many :activities, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :invitations, dependent: :destroy
@@ -20,16 +20,16 @@ class User < ActiveRecord::Base
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
 
-  def join(community)
-    self.memberships.create(community_id: community.id) unless member_of?(community)
+  def join(building)
+    self.memberships.create(building_id: building.id) unless member_of?(building)
   end
 
-  def leave(community)
-    memberships.where(community_id: community.id).destroy_all
+  def leave(building)
+    memberships.where(building_id: building.id).destroy_all
   end
 
-  def member_of?(community)
-    memberships.where(community_id: community.id).exists?
+  def member_of?(building)
+    memberships.where(building_id: building.id).exists?
   end
 
   def receives_text_messages?
@@ -52,8 +52,8 @@ class User < ActiveRecord::Base
     use_my_username? && username.present? ? username : 'anonymous'
   end
 
-  def manager_of?(community)
-    has_role?(:landlord, community) or has_role?(:manager, community)
+  def manager_of?(building)
+    has_role?(:landlord, building) or has_role?(:manager, building)
   end
 
   def created?(object)
@@ -76,21 +76,21 @@ class User < ActiveRecord::Base
     Message.where(sender_id: self.id).count
   end
 
-  def default_community
-    (communities.any?) ? communities.first : nil
+  def default_building
+    (buildings.any?) ? buildings.first : nil
   end
 
   def apply_invitation
     if invitation.present?
-      community = invitation.community
-      join(invitation.community)
+      building = invitation.building
+      join(invitation.building)
       if invitation.type == 'LandlordInvitation'
-        self.add_role(:landlord, community) if invitation.type == 'LandlordInvitation'
-        community.landlord = self
+        self.add_role(:landlord, building) if invitation.type == 'LandlordInvitation'
+        building.landlord = self
       end
-      self.add_role(:manager, community)  if invitation.type == 'ManagerInvitation'
-      community = invitation.community
-      community.save
+      self.add_role(:manager, building)  if invitation.type == 'ManagerInvitation'
+      building = invitation.building
+      building.save
       self.save
     end
   end
@@ -108,23 +108,23 @@ class User < ActiveRecord::Base
   end
 
   def owned_properties
-    roles.where(resource_type: 'Community', name: 'Landlord').collect(&:resource).uniq
+    roles.where(resource_type: 'Building', name: 'Landlord').collect(&:resource).uniq
   end
 
   def managed_properties
-    roles.where(resource_type: 'Community', name: 'Manager').collect(&:resource).uniq
+    roles.where(resource_type: 'Building', name: 'Manager').collect(&:resource).uniq
   end
 
   def to_param
     slug
   end
 
-  def owner_or_manager_of?(community)
-    community.landlord_id == self.id
+  def owner_or_manager_of?(building)
+    building.landlord_id == self.id
   end
 
   def properties
-    Community.where(landlord_id: self.id)
+    Building.where(landlord_id: self.id)
   end
 
   private

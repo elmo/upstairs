@@ -2,7 +2,7 @@ class CreateInvitations < ActiveRecord::Migration
   def change
     create_table :invitations do |t|
       t.integer :user_id
-      t.integer :community_id
+      t.integer :building_id
       t.string :token
       t.string :email
       t.datetime :redeemed_at

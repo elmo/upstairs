@@ -1,4 +1,4 @@
 <h3>Open Tickets </h3>
-<% @community.tickets.open.order('created_at DESC').each do |ticket| -%>
+<% @building.tickets.open.order('created_at DESC').each do |ticket| -%>
   <%= render partial: '/tickets/ticket', locals: {ticket: ticket } %>
 <% end %>

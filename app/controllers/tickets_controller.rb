@@ -1,12 +1,12 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_community
+  before_action :set_building
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  layout 'community'
+  layout 'building'
 
   # GET /tickets
   def index
-    @tickets = @community.tickets.page(params[:page]).per(10)
+    @tickets = @building.tickets.page(params[:page]).per(10)
   end
 
   # GET /tickets/1
@@ -15,7 +15,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    @ticket = @community.tickets.new(severity: Ticket::SEVERITY_MINOR, status: Ticket::STATUS_OPEN)
+    @ticket = @building.tickets.new(severity: Ticket::SEVERITY_MINOR, status: Ticket::STATUS_OPEN)
   end
 
   # GET /tickets/1/edit
@@ -24,11 +24,11 @@ class TicketsController < ApplicationController
 
   # POST /tickets
   def create
-    @ticket = @community.tickets.new(ticket_params)
+    @ticket = @building.tickets.new(ticket_params)
     @ticket.status = 'Open'
     @ticket.user = current_user
     if @ticket.save
-      redirect_to community_ticket_path(@community, @ticket), notice: 'Ticket was successfully created.'
+      redirect_to building_ticket_path(@building, @ticket), notice: 'Ticket was successfully created.'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class TicketsController < ApplicationController
   # PATCH/PUT /tickets/1
   def update
     if @ticket.update(ticket_params)
-      redirect_to community_ticket_path(@community, @ticket), notice: 'Ticket was successfully updated.'
+      redirect_to building_ticket_path(@building, @ticket), notice: 'Ticket was successfully updated.'
     else
       render :edit
     end
@@ -46,21 +46,21 @@ class TicketsController < ApplicationController
   # DELETE /tickets/1
   def destroy
     @ticket.destroy
-    redirect_to community_tickets_path(@community), notice: 'Ticket was successfully updated.'
+    redirect_to building_tickets_path(@building), notice: 'Ticket was successfully updated.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
-      @ticket = @community.tickets.find(params[:id])
+      @ticket = @building.tickets.find(params[:id])
     end
 
-    def set_community
-      @community = Community.friendly.find(params[:community_id])
+    def set_building
+      @building = Building.friendly.find(params[:building_id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def ticket_params
-      params.require(:ticket).permit(:user_id, :community_id, :title, :body, :severity, :status, photos: [])
+      params.require(:ticket).permit(:user_id, :building_id, :title, :body, :severity, :status, photos: [])
     end
 end
