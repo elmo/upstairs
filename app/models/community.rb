@@ -16,7 +16,6 @@ class Community < ActiveRecord::Base
   validates_presence_of :latitude
   validates_presence_of :longitude
   before_save :set_invitation_link
-  attr_accessor :invitation_link
 
   resourcify
 
@@ -50,7 +49,7 @@ class Community < ActiveRecord::Base
   private
 
   def set_invitation_link
-    self.invitation_link = SecureRandom.hex(4)# if self.invitation_link.blank?
+    self.invitation_link = SecureRandom.hex(4) if self.invitation_link.blank?
   end
 
 end

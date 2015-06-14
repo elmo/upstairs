@@ -40,4 +40,5 @@ Upstairs::Application.configure do
 
   # as per Devise readme
   config.eager_load = false
+  Rails.application.routes.default_url_options[:host] = 'http://localhost:3000'
 end

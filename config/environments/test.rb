@@ -37,4 +37,6 @@ Upstairs::Application.configure do
 
   # Print deprecation notices to the stderr
   config.eager_load = false
+
+  Rails.application.routes.default_url_options[:host] = 'http://test.host'
 end

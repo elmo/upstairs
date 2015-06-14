@@ -71,4 +71,5 @@ Upstairs::Application.configure do
   #
   # As per Devise readme
   config.eager_load = true
+  Rails.application.routes.default_url_options[:host] = 'http://www.upstairs.io'
 end

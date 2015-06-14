@@ -9,7 +9,8 @@ class InvitationsController < ApplicationController
   end
 
   def welcome
-    @community = Community.where(invitation_link: params[:id] )
+    # user has shared static link for this community
+    @community = Community.where(invitation_link: params[:id] ).first
     if @community.present?
       session[:invitation_link] = params[:id]
       redirect_to community_path(@community)

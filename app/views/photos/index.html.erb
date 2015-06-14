@@ -1,4 +1,9 @@
 <h1>Photos</h1>
+
+<% if @photos.empty? %>
+<p> There are no photos or this building. Fee free to add some.</p>
+<% end %>
+
 <% @photos.each do |photo| %>
    <%= cl_image_tag(photo.path, { width: '420', crop: :scale}) %>
 <% end %>
@@ -12,5 +17,5 @@
 <%end%>
 
 <p>
-<%= link_to "Add another photo ", edit_community_path(@community) -%>
+<%= link_to "Add a photo ", edit_community_path(@community) -%>
 </p>

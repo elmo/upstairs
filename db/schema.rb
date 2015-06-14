@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608151313) do
+ActiveRecord::Schema.define(version: 20150614045625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,9 +145,11 @@ ActiveRecord::Schema.define(version: 20150608151313) do
     t.string   "messageble_type"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "slug"
   end
 
   add_index "messages", ["messageble_type", "messageble_id"], name: "index_messages_on_messageble_type_and_messageble_id", using: :btree
+  add_index "messages", ["slug"], name: "index_messages_on_slug", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id"
@@ -189,6 +191,15 @@ ActiveRecord::Schema.define(version: 20150608151313) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "short_urls", force: :cascade do |t|
+    t.string   "token"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "short_urls", ["token"], name: "index_short_urls_on_token", using: :btree
 
   create_table "tickets", force: :cascade do |t|
     t.integer  "user_id"

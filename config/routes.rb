@@ -13,6 +13,7 @@ Upstairs::Application.routes.draw do
 
   root to: "home#home"
   get '/' => "home#home", as: :home
+  get '/go/:id' => "dispatch#redirect", as: :dispatch
   get '/about' => "home#about", as: :about
   get '/contact' => "home#contact", as: :contact
   get '/terms' => "home#terms_of_service", as: :terms_of_service
@@ -27,6 +28,7 @@ Upstairs::Application.routes.draw do
     resources :posts
     resources :alerts
     resources :tickets
+    resources :messages
     resources :invitations do
       get 'redeem'
     end

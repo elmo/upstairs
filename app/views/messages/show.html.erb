@@ -1,19 +1,11 @@
-<p id="notice"><%= notice %></p>
+<h1>Message</h1>
+
+<h2><%= @message.sender.public_name %> sent you message:</h2>
 
 <p>
-  <strong>Sender:</strong>
-  <%= @message.sender_id %>
+<%= @message.body %>
 </p>
 
 <p>
-  <strong>Recipient:</strong>
-  <%= @message.recipient_id %>
+<%= link_to 'back to inbox', inbox_path(@community) -%>
 </p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @message.body %>
-</p>
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>

@@ -1,4 +1,7 @@
 <h1 class="inline">Inbox</h1>
+
 <small><%= pluralize(current_user.received_messages_count, 'message') -%> </small>
+
+<br />
 
 <%= render partial: 'messages' %>

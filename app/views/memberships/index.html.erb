@@ -6,6 +6,9 @@
     <%= user_profile_image(@community, membership.user, 'small', 'fit') -%>
     <%= link_to username_or_anonymous(membership.user),  community_user_path(@community, membership.user.slug) -%>
     joined at <%= membership.user.created_at.strftime(upstairs_time_format) -%>.
+    <% if membership.user != current_user %>
+    <%= link_to 'send message',  new_community_user_message_path(@community, membership.user.slug) %>
+    <% end %>
   </li>
 <% end %>
 </ul>
