@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
   has_paper_trail
   has_attachments :photos
 
-  def community
+  def building
     postable
   end
 
@@ -50,7 +50,7 @@ class Post < ActiveRecord::Base
   private
 
   def create_actionable
-    Activity.create(actionable: self, user: self.user, community: self.postable)
+    Activity.create(actionable: self, user: self.user, building: self.postable)
   end
 
 end

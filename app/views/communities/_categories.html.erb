@@ -1,7 +1,0 @@
-<h4>Bulletin Board</h4>
-<ul>
- <li><%= link_to 'All', community_posts_path(@community) -%> </li>
-<% Category.root.each do |category| -%>
-  <li><%= link_to category.name, community_posts_path(@community, category_id: category.id)-%> </li>
-<% end %>
-</ul>

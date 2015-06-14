@@ -5,8 +5,8 @@ $(document).ready(function(){
 });
 
 function initialize(element) {
-  var latlng = new google.maps.LatLng(<%= @community.latitude-%>, <%= @community.longitude -%>);
-   mapCenter = new google.maps.LatLng(<%= @community.latitude-%>, <%= @community.longitude -%>);
+  var latlng = new google.maps.LatLng(<%= @building.latitude-%>, <%= @building.longitude -%>);
+   mapCenter = new google.maps.LatLng(<%= @building.latitude-%>, <%= @building.longitude -%>);
   var myOptions = {
     zoom: 18,
     center: mapCenter,

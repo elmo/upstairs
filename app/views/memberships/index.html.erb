@@ -3,11 +3,11 @@
 <ul>
 <% @memberships.each do |membership| %>
   <li>
-    <%= user_profile_image(@community, membership.user, 'small', 'fit') -%>
-    <%= link_to username_or_anonymous(membership.user),  community_user_path(@community, membership.user.slug) -%>
+    <%= user_profile_image(@building, membership.user, 'small', 'fit') -%>
+    <%= link_to username_or_anonymous(membership.user),  building_user_path(@building, membership.user.slug) -%>
     joined at <%= membership.user.created_at.strftime(upstairs_time_format) -%>.
     <% if membership.user != current_user %>
-    <%= link_to 'send message',  new_community_user_message_path(@community, membership.user.slug) %>
+    <%= link_to 'send message',  new_building_user_message_path(@building, membership.user.slug) %>
     <% end %>
   </li>
 <% end %>

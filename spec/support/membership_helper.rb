@@ -1,9 +1,9 @@
-def load_user_and_community
+def load_user_and_building
   @user = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
-  @community = create(:community)
+  @building = create(:building)
 end
 
 def load_membership
-  load_user_and_community
-  @user.join(@community)
+  load_user_and_building
+  @user.join(@building)
 end

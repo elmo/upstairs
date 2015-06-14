@@ -10,12 +10,12 @@
 
 <br />
 
-<% @community.photos.each_with_index do |photo, i| -%>
-  <%= link_to community_photos_path(page: i+1 ) do -%>
+<% @building.photos.each_with_index do |photo, i| -%>
+  <%= link_to building_photos_path(page: i+1 ) do -%>
    <%= cl_image_tag(photo.path, { width: '80', crop: :scale}) %>
   <% end %>
 <%end%>
 
 <p>
-<%= link_to "Add a photo ", edit_community_path(@community) -%>
+<%= link_to "Add a photo ", edit_building_path(@building) -%>
 </p>

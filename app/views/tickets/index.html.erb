@@ -1,11 +1,11 @@
 <h1 class="inline">Tickets</h1>
-<small><%= pluralize(@community.tickets.open.count, 'open ticket')-%></small>
-<small><%= pluralize(@community.tickets.closed.count, 'closed ticket')-%></small>
-<p><%= link_to 'File a New Ticket', new_community_ticket_path(@community) %></p>
-<%= render partial: '/communities/no_landlord' %>
+<small><%= pluralize(@building.tickets.open.count, 'open ticket')-%></small>
+<small><%= pluralize(@building.tickets.closed.count, 'closed ticket')-%></small>
+<p><%= link_to 'File a New Ticket', new_building_ticket_path(@building) %></p>
+<%= render partial: '/buildings/no_landlord' %>
 <br/>
 <% if @tickets.empty? %>
-<p>There are no tickets for this community.</p>
+<p>There are no tickets for this building.</p>
 <% else %>
 <tickets>
   <left><strong>summary</strong></left>

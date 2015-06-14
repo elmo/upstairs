@@ -1,10 +1,10 @@
 <% if @posts.empty? %>
-<p>There are no notes for this community.<p>
+<p>There are no notes for this building.<p>
 <% else %>
 <% @posts.each do |post|%>
   <post>
   <div class="type-system-geometric">
-  <h3> <%= link_to post.title , community_post_path(@community, post) -%> </h3> 
+  <h3> <%= link_to post.title , building_post_path(@building, post) -%> </h3> 
   <%= by_line(post)-%>
   <div class="post-body-thumb">
   <% if false and post.photos.any? -%>
@@ -12,9 +12,9 @@
     <%= cl_image_tag(post.photos.first.path, { size: '175x175', crop: :fit }) %>
     </span>
   <% end %>
-  <%= post.words(Community::HOMEPAGE_WORD_MAX) -%>
-  <% if post.word_count > Community::HOMEPAGE_WORD_MAX  %>
-     <p><%= link_to 'continue reading...', community_post_path(@community, post) %></p>
+  <%= post.words(Building::HOMEPAGE_WORD_MAX) -%>
+  <% if post.word_count > Building::HOMEPAGE_WORD_MAX  %>
+     <p><%= link_to 'continue reading...', building_post_path(@building, post) %></p>
    <% end %>
   </div>
   </div>

@@ -1,6 +1,6 @@
 <h1 class="inline">Inbox</h1>
 <small><%= pluralize(current_user.received_messages_count, 'message') -%> </small>
-<small><%= link_to  "Sent mail: #{current_user.sent_messages.count}", outbox_path(@community) %></small>
+<small><%= link_to  "Sent mail: #{current_user.sent_messages.count}", outbox_path(@building) %></small>
 
 <br />
 <h2>Received Messages</h2>

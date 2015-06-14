@@ -6,9 +6,9 @@ RSpec.describe Comment, :type => :model do
   it { should have_many(:replies) }
 
   before(:each) do
-    @community = create(:community)
+    @building = create(:building)
     @user = create(:user, email: "user1@user.com")
-    @post = create(:post, user: @user, postable: @community)
+    @post = create(:post, user: @user, postable: @building)
   end
 
   it "creates a comment" do
@@ -32,7 +32,7 @@ RSpec.describe Comment, :type => :model do
     expect(@post.comments.count).to eq 1
     expect(@post.comments.first).to eq @comment
     expect(@post.user).to eq @user
-    expect(@community.comments.size).to eq 1
+    expect(@building.comments.size).to eq 1
   end
 
   describe "reply" do

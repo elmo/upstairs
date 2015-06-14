@@ -1,11 +1,11 @@
-<h1 class="inline">Community Event </h1>
-<small> <%= link_to 'calendar', calendar_path(@community) %> </small>
+<h1 class="inline">Building Event </h1>
+<small> <%= link_to 'calendar', calendar_path(@building) %> </small>
 <br clear="all">
 <h2 class="inline"><%= @event.title %></h2>
 <% if @event.owned_by?(current_user) %>
-  <small>posted by <%= link_to @event.user.public_name, community_user_path(@community, @event.user ) %> <%= @event.created_at.strftime(upstairs_time_format) -%></small> 
-  <small><%= link_to 'Edit', edit_community_event_path(@community, @event) %></small> 
-  <p><%= link_to 'send message to organizer', new_community_user_message_path(@community, @event.user) %></p> 
+  <small>posted by <%= link_to @event.user.public_name, building_user_path(@building, @event.user ) %> <%= @event.created_at.strftime(upstairs_time_format) -%></small> 
+  <small><%= link_to 'Edit', edit_building_event_path(@building, @event) %></small> 
+  <p><%= link_to 'send message to organizer', new_building_user_message_path(@building, @event.user) %></p> 
 <% end %>
 
 <div class="event">

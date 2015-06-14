@@ -75,7 +75,7 @@ module ApplicationHelper
 
   def by_line(obj)
    content_tag(:span, class: 'byline') do
-   link_to( username_or_anonymous(obj.user), community_user_path(obj.community, obj.user.slug) ) +
+   link_to( username_or_anonymous(obj.user), building_user_path(obj.building, obj.user.slug) ) +
 	   ' at ' + obj.created_at.strftime(upstairs_time_format)
    end
   end
@@ -88,13 +88,13 @@ module ApplicationHelper
     user.use_my_username? and user.username.present?
   end
 
-  def user_mini_summary(community,user)
-   link_to( ((user.avatar.present?) ?  cl_image_tag(user.avatar.path, { size: '60x80', crop: :fit }) : '') + username_or_anonymous(user) , community_user_path(user)) +
+  def user_mini_summary(building,user)
+   link_to( ((user.avatar.present?) ?  cl_image_tag(user.avatar.path, { size: '60x80', crop: :fit }) : '') + username_or_anonymous(user) , building_user_path(user)) +
     + ' joined ' +  user.created_at.strftime(upstairs_time_format)
   end
 
   def notification_summary(notification)
-    link_to(username_or_anonymous(notification.user) , community_user_path(notification.community, notification.user) ) +
+    link_to(username_or_anonymous(notification.user) , building_user_path(notification.building, notification.user) ) +
     notification.notifiable.verb  +
     notification.notifiable.class.to_s.downcase +  ' ' +
     link_to(notification.notifiable.name, [notification.notifiable.grandparent.postable, notification.notifiable.grandparent]) + ' on ' +
@@ -123,40 +123,40 @@ module ApplicationHelper
 
   def alert_summary(alert)
    alert.created_at.strftime(upstairs_time_format) + " " +
-   link_to(username_or_anonymous(alert.user), community_user_path(alert.community, alert.user.slug)) + " created " + link_to('alert', community_alert_path(alert.community, alert))
+   link_to(username_or_anonymous(alert.user), building_user_path(alert.building, alert.user.slug)) + " created " + link_to('alert', building_alert_path(alert.building, alert))
   end
 
   def comment_summary(comment)
     if comment.reply?
       comment.created_at.strftime(upstairs_time_format) + " " +
-      link_to(username_or_anonymous(comment.user), community_user_path(comment.comment.commentable.postable, comment.user.slug)) + " replied to " +
-      link_to(username_or_anonymous(comment.comment.user) , community_user_path(comment.comment.commentable.postable, comment.comment.user.slug) ) + "'s comment on " +
-      link_to(username_or_anonymous(comment.comment.commentable.user), community_user_path(comment.comment.commentable.postable, comment.comment.commentable.user.slug) ) + "'s "  +
-      link_to('note', community_post_path( comment.comment.commentable.postable, comment.comment.commentable))
+      link_to(username_or_anonymous(comment.user), building_user_path(comment.comment.commentable.postable, comment.user.slug)) + " replied to " +
+      link_to(username_or_anonymous(comment.comment.user) , building_user_path(comment.comment.commentable.postable, comment.comment.user.slug) ) + "'s comment on " +
+      link_to(username_or_anonymous(comment.comment.commentable.user), building_user_path(comment.comment.commentable.postable, comment.comment.commentable.user.slug) ) + "'s "  +
+      link_to('note', building_post_path( comment.comment.commentable.postable, comment.comment.commentable))
     elsif comment.commentable.class.to_s == 'Ticket'
       comment.created_at.strftime(upstairs_time_format) + " commented on " +
-      link_to(username_or_anonymous(comment.user), community_user_path(comment.commentable.community, comment.commentable.user.slug)) + "'s " +
-      link_to('ticket', community_ticket_path(comment.commentable.community, comment.commentable))
+      link_to(username_or_anonymous(comment.user), building_user_path(comment.commentable.building, comment.commentable.user.slug)) + "'s " +
+      link_to('ticket', building_ticket_path(comment.commentable.building, comment.commentable))
     else
       comment.created_at.strftime(upstairs_time_format) + " " +
-      link_to(username_or_anonymous(comment.user), community_user_path(comment.community, comment.user.slug)) + " commented on "  +
-      link_to(username_or_anonymous(comment.commentable.user), community_user_path(comment.commentable.postable, comment.commentable.user.slug)  ) + "'s "  +
-      link_to('post', community_post_path(comment.commentable.postable, comment.commentable))
+      link_to(username_or_anonymous(comment.user), building_user_path(comment.building, comment.user.slug)) + " commented on "  +
+      link_to(username_or_anonymous(comment.commentable.user), building_user_path(comment.commentable.postable, comment.commentable.user.slug)  ) + "'s "  +
+      link_to('post', building_post_path(comment.commentable.postable, comment.commentable))
     end
   end
 
   def post_summary(post)
    post.created_at.strftime(upstairs_time_format) + " " +
-   link_to(username_or_anonymous(post.user), community_user_path(post.postable, post.user.slug)) +
+   link_to(username_or_anonymous(post.user), building_user_path(post.postable, post.user.slug)) +
    " posted a " +
-   link_to( "note", community_post_path(post.postable, post))
+   link_to( "note", building_post_path(post.postable, post))
   end
 
   def ticket_summary(ticket)
    ticket.created_at.strftime(upstairs_time_format) + " " +
-   link_to(username_or_anonymous(ticket.user), community_user_path(ticket.community, ticket.user.slug)) +
+   link_to(username_or_anonymous(ticket.user), building_user_path(ticket.building, ticket.user.slug)) +
    " opened " +
-   link_to('repair request', community_ticket_path(ticket.community, ticket))
+   link_to('repair request', building_ticket_path(ticket.building, ticket))
   end
 
   def ticket_status_badge(ticket)
@@ -187,7 +187,7 @@ module ApplicationHelper
     "400x400"
   end
 
-  def user_profile_image(community, user, size = 'smallest', crop = 'fit' )
+  def user_profile_image(building, user, size = 'smallest', crop = 'fit' )
     dimensions_method = size + "_image_dimensions"
     dimensions = send(dimensions_method.to_sym)
     image = (usable_username?(user) and user.avatar.present?) ?

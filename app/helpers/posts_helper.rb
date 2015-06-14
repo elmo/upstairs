@@ -12,7 +12,7 @@ module PostsHelper
   end
 
   def edit_post_link(post,user)
-    link_to 'edit', edit_community_post_path(post.community,post) if post.owned_by?(user)
+    link_to 'edit', edit_building_post_path(post.building,post) if post.owned_by?(user)
   end
 
 end

@@ -2,11 +2,11 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_postable
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  layout 'community'
+  layout 'building'
 
   # GET /posts
   def index
-    scope = @community.posts
+    scope = @building.posts
     if params[:category_id]
       @category = Category.find(params[:category_id])
       scope = scope.where(category_id: @category.id)
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      redirect_to community_post_path(@postable, @post), notice: 'Post was successfully created.'
+      redirect_to building_post_path(@postable, @post), notice: 'Post was successfully created.'
     else
       render :new
     end
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to community_post_path(@postable, @post), notice: 'Post was successfully created.'
+      redirect_to building_post_path(@postable, @post), notice: 'Post was successfully created.'
     else
       render :edit
     end
@@ -60,8 +60,8 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
 
     def set_postable
-      @postable = Community.friendly.find(params[:community_id])
-      @community = @postable
+      @postable = Building.friendly.find(params[:building_id])
+      @building = @postable
     end
 
     def set_post

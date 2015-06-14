@@ -1,9 +1,9 @@
 <h5>Activity </h5>
-<% if @community.activities.empty?  %>
+<% if @building.activities.empty?  %>
 <p>This has been no activity.</p>
 
 <% else %>
-<% @community.activities.limit(6).order('created_at desc').each do |activity| %>
+<% @building.activities.limit(6).order('created_at desc').each do |activity| %>
   <%= activity_summary(activity) -%> <br> 
 <% end %>
 <% end %>

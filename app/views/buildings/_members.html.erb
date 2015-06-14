@@ -1,0 +1,12 @@
+<h5>Members</h5>
+<ul>
+<% @building.users.each do |user| %>
+  <li>
+    <%= user_mini_summary(@building, user) -%>
+    <% if current_user.member_of?(@building)%>
+    <%= link_to 'leave', building_membership_path(@building, @building.membership(current_user)), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
+    <% end %>
+  </li>
+
+<% end %>
+</ul>

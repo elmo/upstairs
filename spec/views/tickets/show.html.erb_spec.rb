@@ -4,7 +4,7 @@ RSpec.describe "tickets/show", :type => :view do
   before(:each) do
     @ticket = assign(:ticket, Ticket.create!(
       :user_id => 1,
-      :community_id => 2,
+      :building_id => 2,
       :title => "Title",
       :body => "MyText",
       :severity => 3,

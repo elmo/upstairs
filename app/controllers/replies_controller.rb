@@ -2,7 +2,7 @@ class RepliesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_comment
   before_action :set_reply, only: [:show, :edit, :update, :destroy]
-  layout 'community'
+  layout 'building'
 
   # GET /replies
   def index
@@ -29,11 +29,11 @@ class RepliesController < ApplicationController
     @reply.user = current_user
     if @reply.save
       if @comment.commentable.class.to_s == 'Ticket'
-        redirect_to community_ticket_path(@comment.commentable.community, @comment.commentable), notice: "Your reply has been saved."
+        redirect_to building_ticket_path(@comment.commentable.building, @comment.commentable), notice: "Your reply has been saved."
       elsif @comment.commentable.class.to_s == 'Event'
-        redirect_to community_event_path(@comment.commentable.community, @comment.commentable), notice: "Your reply has been saved."
+        redirect_to building_event_path(@comment.commentable.building, @comment.commentable), notice: "Your reply has been saved."
       else
-        redirect_to community_post_path(@comment.commentable.postable, @comment.commentable) , notice: "Your reply has been saved."
+        redirect_to building_post_path(@comment.commentable.postable, @comment.commentable) , notice: "Your reply has been saved."
       end
     else
       render :new
@@ -52,7 +52,7 @@ class RepliesController < ApplicationController
   # DELETE /replies/1
   def destroy
     @reply.destroy
-    redirect_to community_path(@comment.commentable.postable)
+    redirect_to building_path(@comment.commentable.postable)
   end
 
   private
@@ -60,7 +60,7 @@ class RepliesController < ApplicationController
 
     def set_comment
       @comment = Comment.find(params[:comment_id])
-      @community = @comment.commentable.postable
+      @building = @comment.commentable.postable
     end
 
     def set_reply

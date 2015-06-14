@@ -1,0 +1,13 @@
+<ul>
+<% if !current_user.member_of?(@building) %>
+	<p> You are not currently a member of this building.</p>
+<li>
+<%= form_tag  building_memberships_path(@building), method: :post do %>
+  <%= submit_tag 'join' -%> 
+  <% end %>
+</li>
+<% end %>
+<li><%= link_to 'Request a repair', building_tickets_path(@building) -%> </li>
+<li><%= link_to 'Send alert', new_building_alert_path(@building) -%> </li>
+<li><%= link_to 'Invite someone', new_building_invitation_path(@building)-%></li>
+</ul>

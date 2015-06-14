@@ -7,24 +7,24 @@ RSpec.describe Post, :type => :model do
 
   describe "creation" do
     before(:each) do
-      @community = create(:community)
+      @building = create(:building)
       @user = create(:user, email: "test1@email.com")
     end
 
     it "creates a post" do
-      expect { Post.create(user: @user, postable: @community ) }.to change(Post,:count).by(1)
+      expect { Post.create(user: @user, postable: @building ) }.to change(Post,:count).by(1)
     end
 
     it "does not create a post without a user" do
-      expect { Post.create(postable: @community ) }.to change(Post,:count).by(0)
+      expect { Post.create(postable: @building ) }.to change(Post,:count).by(0)
     end
 
-    it "associates post is whith community" do
-      @post = Post.create(user: @user, postable: @community )
-      expect(@post.postable).to eq @community
+    it "associates post is whith building" do
+      @post = Post.create(user: @user, postable: @building )
+      expect(@post.postable).to eq @building
       expect(@post.user).to eq @user
-      expect(@community.posts.count).to eq 1
-      expect(@community.posts.first).to eq @post
+      expect(@building.posts.count).to eq 1
+      expect(@building.posts.first).to eq @post
     end
   end
 end

@@ -9,7 +9,7 @@ class Ability
     end
 
     can :manage, Ticket do |ticket|
-      user.created?(ticket) or user.manager_of?(ticket.community)
+      user.created?(ticket) or user.manager_of?(ticket.building)
     end
 
     # Define abilities for the passed in user here. For example:

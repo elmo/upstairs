@@ -18,12 +18,12 @@ Upstairs::Application.routes.draw do
   get '/contact' => "home#contact", as: :contact
   get '/terms' => "home#terms_of_service", as: :terms_of_service
   get '/privacy' => "home#privacy", as: :privacy
-  get '/find' => "communities#choose", as: :find_community
-  get '/communities/:community_id/inbox' => "messages#inbox", as: :inbox
-  get '/communities/:community_id/outbox' => "messages#outbox", as: :outbox
-  get '/communities/:community_id/calendar' => "events#index", as: :calendar
+  get '/find' => "buildings#choose", as: :find_building
+  get '/buildings/:building_id/inbox' => "messages#inbox", as: :inbox
+  get '/buildings/:building_id/outbox' => "messages#outbox", as: :outbox
+  get '/buildings/:building_id/calendar' => "events#index", as: :calendar
 
-  resources :communities do
+  resources :buildings do
     resources :memberships, only: [:create, :destroy, :index]
     resources :posts
     resources :alerts

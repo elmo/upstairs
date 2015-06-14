@@ -1,9 +1,9 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-  before_action :set_community
+  before_action :set_building
   before_action :set_recipient, except: [:inbox, :outbox]
-  layout 'community'
+  layout 'building'
 
   # GET /messages
   def index
@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new(sender: current_user, recipient: @recipient)
-    @message.community = @community
+    @message.building = @building
   end
 
   # GET /messages/1/edit
@@ -29,9 +29,9 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.sender = current_user
     @message.recipient = @recipient
-    @message.community = @community
+    @message.building = @building
     if @message.save
-      redirect_to outbox_path(@community, current_user) , notice: "Message to #{@recipient.public_name} was successfully has been sent."
+      redirect_to outbox_path(@building, current_user) , notice: "Message to #{@recipient.public_name} was successfully has been sent."
     else
       render :new
     end
@@ -66,8 +66,8 @@ class MessagesController < ApplicationController
       @message = Message.find_by_slug(params[:id])
     end
 
-    def set_community
-      @community = Community.friendly.find(params[:community_id])
+    def set_building
+      @building = Building.friendly.find(params[:building_id])
     end
 
     def set_recipient
@@ -76,6 +76,6 @@ class MessagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def message_params
-      params.require(:message).permit(:sender_id, :recipient_id, :body, :messageble_type, :messageble_id, :user_id, :sender_id, :community_id)
+      params.require(:message).permit(:sender_id, :recipient_id, :body, :messageble_type, :messageble_id, :user_id, :sender_id, :building_id)
     end
 end

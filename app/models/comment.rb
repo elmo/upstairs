@@ -15,16 +15,16 @@ class Comment < ActiveRecord::Base
     (parent_comment_id.present?) ? comment.commentable : commentable
   end
 
-  def community
-    return commentable.community if !['Ticket', 'Event'].include?(commentable.class.to_s)
-    return (reply?) ?  comment.commentable.community : commentable.community
+  def building
+    return commentable.building if !['Ticket', 'Event'].include?(commentable.class.to_s)
+    return (reply?) ?  comment.commentable.building : commentable.building
   end
 
   def create_notifications
    if commentable.present? and !['Ticket', 'Event'].include?(commentable.class.to_s)
       commentable.commenters.each { |user| Notification.create(notifiable: self, user: user) }
    else
-      commentable.community.users.each { |user| Notification.create(notifiable: self, user: user) }
+      commentable.building.users.each { |user| Notification.create(notifiable: self, user: user) }
    end
   end
 
@@ -44,9 +44,9 @@ class Comment < ActiveRecord::Base
 
   def create_actionable
    if commentable.present? and  !['Ticket', 'Event'].include?(commentable.class.to_s)
-    Activity.create(actionable: self, user: self.user, community: self.grandparent.postable)
+    Activity.create(actionable: self, user: self.user, building: self.grandparent.postable)
    else
-    Activity.create(actionable: self, user: self.user, community: self.commentable.community) if !reply?
+    Activity.create(actionable: self, user: self.user, building: self.commentable.building) if !reply?
    end
   end
 

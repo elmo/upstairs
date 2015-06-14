@@ -1,0 +1,9 @@
+<h1>Is this your building?</h1>
+
+<h2><%= @address -%></h2>
+
+<%= render partial: 'bigger_map' -%>
+
+<p><%= link_to "Yes, this is it", new_building_path(address: @address), class: 'actions' %>
+
+<%= link_to "No, this is wrong", buildings_path, class: 'actions' %></p>

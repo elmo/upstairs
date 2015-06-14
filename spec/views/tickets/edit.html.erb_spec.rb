@@ -4,7 +4,7 @@ RSpec.describe "tickets/edit", :type => :view do
   before(:each) do
     @ticket = assign(:ticket, Ticket.create!(
       :user_id => 1,
-      :community_id => 1,
+      :building_id => 1,
       :title => "MyString",
       :body => "MyText",
       :severity => 1,
@@ -19,7 +19,7 @@ RSpec.describe "tickets/edit", :type => :view do
 
       assert_select "input#ticket_user_id[name=?]", "ticket[user_id]"
 
-      assert_select "input#ticket_community_id[name=?]", "ticket[community_id]"
+      assert_select "input#ticket_building_id[name=?]", "ticket[building_id]"
 
       assert_select "input#ticket_title[name=?]", "ticket[title]"
 

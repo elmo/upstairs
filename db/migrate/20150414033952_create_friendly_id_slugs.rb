@@ -7,8 +7,8 @@ class CreateFriendlyIdSlugs < ActiveRecord::Migration
       t.string   :scope
       t.datetime :created_at
     end
-    add_column :communities, :slug, :string
-    add_index :communities, :slug
+    add_column :buildings, :slug, :string
+    add_index :buildings, :slug
     add_index :friendly_id_slugs, :sluggable_id
     add_index :friendly_id_slugs, [:slug, :sluggable_type]
     add_index :friendly_id_slugs, [:slug, :sluggable_type, :scope], :unique => true

@@ -1,9 +1,0 @@
-<h1 class="inline">Bulletin Board</h1> <%= pluralize(@community.posts.count, 'note') %>
-<%= link_to 'post a note' , new_community_post_path(@community) -%>
-
-<br />
-
-<posts>
-<br>
-<%= render partial: 'posts', locals: {posts: @posts} -%>
-</posts>

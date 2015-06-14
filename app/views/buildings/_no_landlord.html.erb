@@ -1,0 +1,5 @@
+<% if @building.landlord.blank?  %>
+<p> There is no landlord associated with this building. To have your repairs acted up, please invite your landlord to join this building.
+<%= link_to "invite your landlord to join",  new_building_landlord_invitation_path(@building) -%>
+</p>
+<% end %>

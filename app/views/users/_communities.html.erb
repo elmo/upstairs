@@ -1,19 +1,19 @@
-<p>You are a member of <%= pluralize(current_user.memberships.count, 'community')-%> </p>
+<p>You are a member of <%= pluralize(current_user.memberships.count, 'building')-%> </p>
 
 <% if current_user.memberships.any? %>
  <% current_user.memberships.each do |membership| %>
-   <%= link_to membership.community.address, community_path(membership.community)-%>
-   (<%=pluralize(membership.community.users.count, 'member') -%>)
-   (<%=pluralize(membership.community.posts.count, 'post') -%>)
-   (<%=pluralize(membership.community.posts.count, 'comments') -%>)
+   <%= link_to membership.building.address, building_path(membership.building)-%>
+   (<%=pluralize(membership.building.users.count, 'member') -%>)
+   (<%=pluralize(membership.building.posts.count, 'post') -%>)
+   (<%=pluralize(membership.building.posts.count, 'comments') -%>)
    <br />
-   <%= link_to 'leave', community_membership_path(membership.community, membership), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
-    <%= link_to 'edit', edit_community_path(membership.community) -%>
+   <%= link_to 'leave', building_membership_path(membership.building, membership), method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%>
+    <%= link_to 'edit', edit_building_path(membership.building) -%>
    <br>
   <% end %>
    <br>
-  <%= link_to 'join another community', communities_path -%>
+  <%= link_to 'join another building', buildings_path -%>
 <% else %>
    <br>
-  <%= link_to 'find a community to join', communities_path -%>
+  <%= link_to 'find a building to join', buildings_path -%>
 <% end %>
