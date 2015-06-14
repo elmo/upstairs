@@ -1,2 +1,1 @@
-<%= link_to  "Inbox: #{current_user.received_messages.count}", inbox_path(@community) %> 
-<%= link_to  "Outbox: #{current_user.sent_messages.count}", outbox_path(@community) %> 
+Messages: <%= link_to  "Inbox: #{current_user.received_messages.count}", inbox_path(@community) %> 

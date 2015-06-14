@@ -1,20 +1,14 @@
 <% @messages.each do |message| %>
-
-<div id="message_#{message.id}">
-<%= link_to message.created_at.strftime(upstairs_time_format), community_message_path(@community, message)  %> 
-<%= link_to message.sender.public_name , community_user_path(@community, message.sender )%>
-to 
+<div id="message_<%=message.id-%>">
+<% if action_name == "inbox"%>
+<%= user_profile_image(@community, message.sender, 'small', 'fit') -%>
+<%= link_to message.sender.public_name , community_user_path(@community, message.sender ) %> 
+<% elsif action_name =="outbox"%>
+<%= user_profile_image(@community, message.recipient, 'small', 'fit') -%>
 <%= link_to message.recipient.public_name , community_user_path(@community, message.recipient) %>
-
-<p><%= message.body -%></p>
-
-<% if message.sender != current_user %>
-<%= link_to 'reply', new_community_user_message_path(@community, message.sender, parent_id: message.id ) -%>
-<%end%>
-
-
+<% end %>
+<%= link_to message.created_at.strftime(upstairs_time_format), community_message_path(@community, message)  %> 
+<p><%= message.body -%> <small><%= link_to 'reply', new_community_user_message_path(@community, message.sender, parent_id: message.id ) -%> </small> </p>
 </div>
-
-<%end%>
-
+<% end %>
 <%= paginate(@messages) -%>
