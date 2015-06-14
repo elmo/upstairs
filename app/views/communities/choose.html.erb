@@ -1,9 +1,9 @@
-<h1>Choose your community </h1>
+<h1>Is this your building?</h1>
 
 <h2><%= @address -%></h2>
 
 <%= render partial: 'bigger_map' -%>
 
-<%= link_to "Yes, this is it", new_community_path(address: @address), class: 'actions' %>
+<p><%= link_to "Yes, this is it", new_community_path(address: @address), class: 'actions' %>
 
-<%= link_to "No, this isn't it", communities_path, class: 'actions' %>
+<%= link_to "No, this is wrong", communities_path, class: 'actions' %></p>
