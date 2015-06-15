@@ -18,6 +18,7 @@ Upstairs::Application.routes.draw do
   get '/contact' => "home#contact", as: :contact
   get '/terms' => "home#terms_of_service", as: :terms_of_service
   get '/privacy' => "home#privacy", as: :privacy
+  get '/help' => "home#help", as: :help
   get '/find' => "buildings#choose", as: :find_building
   get '/buildings/:building_id/inbox' => "messages#inbox", as: :inbox
   get '/buildings/:building_id/outbox' => "messages#outbox", as: :outbox

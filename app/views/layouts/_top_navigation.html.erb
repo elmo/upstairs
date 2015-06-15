@@ -2,26 +2,28 @@
   <div class="centered-navigation-wrapper">
     <nav role="navigation">
       <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
-        <li class="nav-link logo">
-	<h1 class="top-nav inline"><%= link_to 'Upstairs', home_path-%></h1>
-        </li>
-	<% if @building.present? and @building.id.present? %>
-          <li class='nav-link'><%= link_to "bulletin board",  building_path(@building) -%></li>
-          <li class='nav-link'><%= link_to 'tickets', building_tickets_path(@building) -%></li>
-          <li class='nav-link'><%= link_to 'alerts', building_alerts_path(@building) -%></li>
-          <li class='nav-link'><%= link_to 'calendar', calendar_path(@building) -%></li>
-	  <li class='nav-link'><%= link_to "members (#{@building.memberships.count})", building_memberships_path(@building) -%></li>
-	<% end %>
+        <li class="nav-link"> <h1 class="top-nav inline"><%= link_to 'Upstairs', home_path-%></h1> </li>
         <% if current_user.blank? %>
-          <li class='nav-link'><%= link_to 'Join',  '/join' -%></li>
-          <li class='nav-link'><%= link_to 'Sign in',  '/login' -%></li>
-        <% else  %>
-          <% if @building.present? and !@building.new_record? %>
-	    <li class='nav-link'><%= link_to 'profile', building_user_path(@building, current_user.slug ) -%></li>
-          <% end%>
-          <li class='nav-link'><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%></li>
-        <% end %>
+          <li><%= link_to 'Join', '/join' -%></li>
+          <li><%= link_to 'Sign in', '/login' -%></li>
+        <% else %>
+
+        <li class="nav-link more"><a href="javascript:void(0)"><%= current_user.username -%></a>
+          <ul class="submenu">
+            <% if @building.present? and !@building.new_record?%>
+             <li><%= link_to "Inbox: #{current_user.received_messages.count}", inbox_path(@building) -%></li>
+             <li><%= link_to 'profile', building_user_path(@building, current_user.slug ) -%> </li>
+            <% end %>
+            <% current_user.buildings.each do |building| %>
+              <li><%= link_to building.address[0..12], building_path(building) -%></li> 
+            <% end %>
+            <li><%= link_to 'Help', help_path -%></li>
+            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%></li>
+          </ul>
+        </li>
       </ul>
+     <% end %>
     </nav>
   </div>
 </header>
+
