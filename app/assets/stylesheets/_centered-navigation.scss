@@ -12,11 +12,11 @@
   $centered-navigation-color: transparentize($base-font-color, 0.3);
   //$centered-navigation-color: white; 
   $centered-navigation-color-hover: $base-font-color;
-  $centered-navigation-height: 100px;
+  $centered-navigation-height: 40px;
   $centered-navigation-item-padding: 1em;
   $centered-navigation-submenu-padding: 1em;
   $centered-navigation-submenu-width: 12em;
-  $centered-navigation-item-nudge: 2.2em;
+  $centered-navigation-item-nudge: 1.2em;
   $horizontal-bar-mode: $large-screen;
 
   background-color:  desaturate(darken($centered-navigation-background, 10%), 10%); 
