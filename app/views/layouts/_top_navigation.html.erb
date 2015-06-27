@@ -2,7 +2,7 @@
   <div class="centered-navigation-wrapper">
     <nav role="navigation">
       <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
-        <li class="nav-link"> <h1 class="top-nav inline"><%= link_to 'Upstairs', home_path-%></h1> </li>
+          <li class="nav-logo"> <%= link_to image_tag("logo_white.png"), home_path-%> </li>
         <% if current_user.blank? %>
           <li><%= link_to 'Join', '/join' -%></li>
           <li><%= link_to 'Sign in', '/login' -%></li>

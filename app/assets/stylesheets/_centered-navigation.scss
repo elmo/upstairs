@@ -8,7 +8,7 @@
 
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
-  $centered-navigation-background: #7A5229;
+  $centered-navigation-background: #FAA547;
   $centered-navigation-color: transparentize($base-font-color, 0.3);
   //$centered-navigation-color: white; 
   $centered-navigation-color-hover: $base-font-color;
@@ -18,9 +18,9 @@
   $centered-navigation-submenu-width: 12em;
   $centered-navigation-item-nudge: 2.2em;
   $horizontal-bar-mode: $large-screen;
-
-  background-color:  desaturate(darken($centered-navigation-background, 10%), 10%); 
-  border-bottom: 1px solid darken($centered-navigation-background, 6%);
+@include background(linear-gradient($centered-navigation-background, #F79444) left repeat);
+  //background-color: desaturate(darken($centered-navigation-background, 10%), 10%); 
+  border-bottom: 2px solid darken($centered-navigation-background, 20%);
   min-height: $centered-navigation-height;
   width: 100%;
   z-index: 9999;
@@ -29,7 +29,10 @@
   h1 {
    color: white;
   }
-
+    .nav-logo{
+        margin: 1em;
+        float: left;
+    }
   // Mobile view
 
   .mobile-logo {
@@ -82,7 +85,7 @@
   ul.centered-navigation-menu {
     -webkit-transform-style: preserve-3d; // stop webkit flicker
     clear: both;
-    display: none;
+    //display: none;
     margin: 0 auto;
     overflow: visible;
     padding: 0;
@@ -108,10 +111,10 @@
   }
 
   ul li.nav-link {
-    background: $centered-navigation-background;
+    //background: $centered-navigation-background;
     display: block;
     line-height: $centered-navigation-height;
-    overflow: hidden;
+    //overflow: hidden;
     padding-right: $centered-navigation-submenu-padding;
     text-align: right;
     width: 100%;
@@ -144,9 +147,8 @@
     display: none;
     line-height: 0;
 
-    @include media($large-screen) {
       display: inline;
-    }
+    
   }
 
   .logo img {
@@ -159,10 +161,10 @@
 
   li.more.nav-link {
     padding-right: 0;
-
-    @include media($large-screen) {
+    float: right;
+    width: 50%;
       padding-right: $centered-navigation-submenu-padding;
-    }
+    
 
     > ul > li:first-child a  {
       padding-top: 1em;
@@ -223,14 +225,14 @@
     padding-left: 0;
 
     @include media($horizontal-bar-mode) {
-      left: -$centered-navigation-submenu-padding;
+      right: -$centered-navigation-submenu-padding;
       position: absolute;
       top: 1.5em;
     }
 
     .submenu {
       @include media($horizontal-bar-mode) {
-        left: $centered-navigation-submenu-width - 0.2em;
+        right: $centered-navigation-submenu-width - 0.2em;
         top: 0;
       }
     }
