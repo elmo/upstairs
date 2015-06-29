@@ -163,7 +163,7 @@
   li.more.nav-link {
     padding-right: 0;
     float: right;
-      padding-right: $centered-navigation-submenu-padding;
+    padding-right: $centered-navigation-submenu-padding;
     
 
     > ul > li:first-child a  {
@@ -258,12 +258,13 @@
       }
 
       a {
+          
         background-color: darken($centered-navigation-background, 3%);
         display: inline-block;
         text-align: right;
         text-decoration: none;
         width: 100%;
-
+        
         @include media($horizontal-bar-mode) {
           background-color: $centered-navigation-background;
           padding-left: $centered-navigation-submenu-padding;
@@ -309,9 +310,11 @@ nav ul {
 			}
 		
 		nav ul li a {
-			display: block; 
-			color: #757575; 
+            display: block;
+            color: rgba(255, 255, 255, 0.79);
             text-decoration: none;
+            line-height: 100px;
+            padding-right: 1em;
 		}
 			
 		
