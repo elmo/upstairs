@@ -8,7 +8,7 @@
 
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
-  $centered-navigation-background: #7A5229;
+  $centered-navigation-background: #FAA547;
   $centered-navigation-color: transparentize($base-font-color, 0.3);
   //$centered-navigation-color: white; 
   $centered-navigation-color-hover: $base-font-color;
@@ -18,9 +18,9 @@
   $centered-navigation-submenu-width: 12em;
   $centered-navigation-item-nudge: 1.2em;
   $horizontal-bar-mode: $large-screen;
-
-  background-color:  desaturate(darken($centered-navigation-background, 10%), 10%); 
-  border-bottom: 1px solid darken($centered-navigation-background, 6%);
+@include background(linear-gradient($centered-navigation-background, #F79444) left repeat);
+  //background-color: desaturate(darken($centered-navigation-background, 10%), 10%); 
+  border-bottom: 2px solid darken($centered-navigation-background, 20%);
   min-height: $centered-navigation-height;
   width: 100%;
   z-index: 9999;
@@ -29,7 +29,10 @@
   h1 {
    color: white;
   }
-
+    .nav-logo{
+        margin: 1em;
+        float: left;
+    }
   // Mobile view
 
   .mobile-logo {
@@ -81,12 +84,13 @@
 
   ul.centered-navigation-menu {
     -webkit-transform-style: preserve-3d; // stop webkit flicker
-    clear: both;
-    display: none;
-    margin: 0 auto;
+    display: inline-block;
+    float: right;
+      
+    //margin-right: 2em;
     overflow: visible;
     padding: 0;
-    width: 100%;
+    //width: 100%;
     z-index: 99999;
 
     &.show {
@@ -108,10 +112,10 @@
   }
 
   ul li.nav-link {
-    background: $centered-navigation-background;
+    //background: $centered-navigation-background;
     display: block;
     line-height: $centered-navigation-height;
-    overflow: hidden;
+    //overflow: hidden;
     padding-right: $centered-navigation-submenu-padding;
     text-align: right;
     width: 100%;
@@ -144,9 +148,8 @@
     display: none;
     line-height: 0;
 
-    @include media($large-screen) {
       display: inline;
-    }
+    
   }
 
   .logo img {
@@ -159,16 +162,16 @@
 
   li.more.nav-link {
     padding-right: 0;
-
-    @include media($large-screen) {
-      padding-right: $centered-navigation-submenu-padding;
-    }
+    float: right;
+    padding-right: $centered-navigation-submenu-padding;
+    
 
     > ul > li:first-child a  {
       padding-top: 1em;
     }
 
     a {
+      width: 150px;
       margin-right: $centered-navigation-submenu-padding;
     }
 
@@ -223,14 +226,14 @@
     padding-left: 0;
 
     @include media($horizontal-bar-mode) {
-      left: -$centered-navigation-submenu-padding;
+      right: -$centered-navigation-submenu-padding;
       position: absolute;
       top: 1.5em;
     }
 
     .submenu {
       @include media($horizontal-bar-mode) {
-        left: $centered-navigation-submenu-width - 0.2em;
+        right: $centered-navigation-submenu-width - 0.2em;
         top: 0;
       }
     }
@@ -255,12 +258,13 @@
       }
 
       a {
+          
         background-color: darken($centered-navigation-background, 3%);
         display: inline-block;
         text-align: right;
         text-decoration: none;
         width: 100%;
-
+        
         @include media($horizontal-bar-mode) {
           background-color: $centered-navigation-background;
           padding-left: $centered-navigation-submenu-padding;
@@ -270,4 +274,71 @@
       }
     }
   }
+    
+nav {
+	//margin: 100px auto; 
+	text-align: center;
+}
+
+nav ul ul {
+	display: none;
+}
+
+	nav ul li:hover > ul {
+		display: block;
+	}
+
+
+nav ul {
+	
+	list-style: none;
+	position: relative;
+	display: inline-table;
+}
+	nav ul:after {
+		content: ""; clear: both; display: block;
+	}
+
+	nav ul li {
+		float: left;
+	}
+		nav ul li:hover {
+			//background: #4b545f;
+		}
+			nav ul li:hover a {
+				color: #fff;
+			}
+		
+		nav ul li a {
+            display: block;
+            color: rgba(255, 255, 255, 0.79);
+            text-decoration: none;
+            line-height: 100px;
+            padding-right: 1em;
+		}
+			
+		
+	nav ul ul {
+		background: darken($centered-navigation-background, 3%); 
+        padding: 0;
+		position: absolute; 
+        top: 100%;
+	}
+		nav ul ul li {
+			float: none;  
+            position: relative;
+		}
+			nav ul ul li a {
+				padding: 15px 20px;
+				color: #fff;
+			}	
+				nav ul ul li a:hover {
+					background: #4b545f;
+				}
+		
+	nav ul ul ul {
+		position: absolute; left: 100%; top:0;
+	}
+		
+
 }
