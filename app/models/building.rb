@@ -1,14 +1,14 @@
 class Building < ActiveRecord::Base
-  has_many :memberships
+  has_many :activities, dependent: :destroy
+  has_many :alerts, dependent: :destroy
+  has_many :comments, through: :posts, dependent: :destroy
+  has_many :events, dependent: :destroy
+  has_many :invitations, dependent: :destroy
+  has_many :memberships, dependent: :destroy
+  has_many :notifications, through: :users, dependent: :destroy
+  has_many :posts, as: :postable, dependent: :destroy
+  has_many :tickets, dependent: :destroy
   has_many :users, through: :memberships
-  has_many :posts, as: :postable
-  has_many :comments, through: :posts
-  has_many :activities
-  has_many :alerts
-  has_many :tickets
-  has_many :events
-  has_many :notifications, through: :users
-  has_many :invitations
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   belongs_to :actionable, polymorphic: true
   validates_presence_of :address
@@ -16,22 +16,16 @@ class Building < ActiveRecord::Base
   validates_presence_of :latitude
   validates_presence_of :longitude
   before_save :set_invitation_link
-
   resourcify
-
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
   before_validation :geocode
   before_validation :reverse_geocode
-
   HOMEPAGE_WORD_MAX = 80
-
   extend FriendlyId
   friendly_id :address, use: :slugged
   has_paper_trail
-
   has_attachments :photos
-
 
   def membership(user)
     user.memberships.where(user_id: user.id).first

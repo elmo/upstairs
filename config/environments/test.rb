@@ -38,5 +38,8 @@ Upstairs::Application.configure do
   # Print deprecation notices to the stderr
   config.eager_load = false
 
+  # No SQL when running tests
+  config.log_level = :error
+
   Rails.application.routes.default_url_options[:host] = 'http://test.host'
 end
