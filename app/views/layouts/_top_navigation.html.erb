@@ -1,29 +1,35 @@
 <header class="centered-navigation" role="banner">
   <div class="centered-navigation-wrapper">
-    <nav role="navigation">
-        <div class="nav-logo"> <%= link_to image_tag("logo_white.png"), home_path-%> </div>
-      <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
-        <% if current_user.blank? %>
-          <li><%= link_to 'Join', '/join' -%></li>
-          <li><%= link_to 'Sign in', '/login' -%></li>
-        <% else %>
+    <div class="nav-logo"> 
+        <%= link_to image_tag("logo_white.png"), home_path -%> </div>
+    <nav role="navigation" id='centeredmenu'>
+        <ul>
+             <% if current_user.blank? -%>
+              <li><%= link_to 'Join', '/join' -%></li>
+              <li><%= link_to 'Sign in', '/login' -%></li>
+            <% else -%>
+           <li class='has-sub'>
+                   <div>
+                    <a href="javascript:void(0)"><%= current_user.username -%></a>
+                   </div>
+              <ul class='last'>
+                <% if @building.present? and !@building.new_record? -%>    
+                    <li ><%= link_to "Inbox: #{current_user.received_messages.count}", inbox_path(@building) -%></li>
+                   <li ><%= link_to 'profile', building_user_path(@building, current_user.slug ) -%> </li>
+                <% end -%>
+                <% current_user.buildings.each do |building| -%>
+                  <li ><%= link_to building.address[0..12], building_path(building) -%></li> 
+                <% end -%>
+                <li ><%= link_to 'Help', help_path -%></li>
+                <li ><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%></li>
 
-        <li class="nav-link more"><a href="javascript:void(0)"><%= current_user.username -%></a>
-          <ul class="submenu">
-            <% if @building.present? and !@building.new_record?%>
-             <li><%= link_to "Inbox: #{current_user.received_messages.count}", inbox_path(@building) -%></li>
-             <li><%= link_to 'profile', building_user_path(@building, current_user.slug ) -%> </li>
-            <% end %>
-            <% current_user.buildings.each do |building| %>
-              <li><%= link_to building.address[0..12], building_path(building) -%></li> 
-            <% end %>
-            <li><%= link_to 'Help', help_path -%></li>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%></li>
-          </ul>
-        </li>
-      </ul>
-     <% end %>
+              </ul>
+                
+           </li>
+           <!--li><a href='#'><span>About</span></a></li>
+           <li class='last'><a href='#'><span>Contact</span></a></li-->
+        </ul>
+     <% end -%>
     </nav>
-  </div>
 </header>
 

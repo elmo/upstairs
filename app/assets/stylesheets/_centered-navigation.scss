@@ -1,10 +1,4 @@
 .centered-navigation {
-  ///////////////////////////////////////////////////////////////////////////////////
-  $base-border-radius: 3px !default;
-  $dark-gray: #ccc;
-  $large-screen: em(860) !default;
-  $base-font-color: white;
-  //////////////////////////////////////////////////////////////////////////////////
 
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
@@ -90,255 +84,197 @@
     //margin-right: 2em;
     overflow: visible;
     padding: 0;
+    ///////////////////////////////////////////////////////////////////////////////////
+    $base-border-radius: 3px !default;
+    $dark-gray: #ccc;
+    $large-screen: em(860) !default;
+    $base-font-color: white;
+    //////////////////////////////////////////////////////////////////////////////////
+    $centered-navigation-padding: 1em;
+    $centered-navigation-logo-height: 2em;
+    $centered-navigation-background: #FAA547;
+    $centered-navigation-color: transparentize($base-font-color, 0.3);
+    //$centered-.navigation-color: white; 
+    $centered-navigation-color-hover: $base-font-color;
+    $centered-navigation-height: 100px;
+    $centered-navigation-item-padding: 1em;
+    $centered-navigation-submenu-padding: 1em;
+    $centered-navigation-submenu-width: 12em;
+    $centered-navigation-item-nudge: 2.2em;
+    $horizontal-bar-mode: $large-screen;
+    @include background(linear-gradient($centered-navigation-background, #F79444) left repeat);
+    //background-color: desaturate(darken($centered-navigation-background, 10%), 10%); 
+    border-bottom: 2px solid darken($centered-navigation-background, 20%);
+    min-height: $centered-navigation-height;
     //width: 100%;
-    z-index: 99999;
-
-    &.show {
-      display: block;
-    }
-
-    @include media ($horizontal-bar-mode) {
-      display: block;
-      text-align: center;
-    }
-  }
-
-  // The nav items
-
-  .nav-link:first-child {
-    @include media($horizontal-bar-mode) {
-      margin-left: $centered-navigation-item-nudge;
-    }
-  }
-
-  ul li.nav-link {
-    //background: $centered-navigation-background;
-    display: block;
-    line-height: $centered-navigation-height;
-    //overflow: hidden;
-    padding-right: $centered-navigation-submenu-padding;
-    text-align: right;
-    width: 100%;
     z-index: 9999;
-
-    a {
-      color: $centered-navigation-color;
-      display: inline-block;
-      outline: none;
-      text-decoration: none;
-
-      &:focus,
-      &:hover {
-        color: $centered-navigation-color-hover;
-      }
+    font-weight: 800;
+    h1 {
+        color: white;
     }
-
-    @include media($horizontal-bar-mode) {
-      background: transparent;
-      display: inline;
-      line-height: $centered-navigation-height;
-
-      a {
-        padding-right: $centered-navigation-item-padding;
-      }
+    .nav-logo {
+        margin: 1em;
+        float: left;
     }
-  }
-
-  li.logo.nav-link {
-    display: none;
-    line-height: 0;
-
-      display: inline;
-    
-  }
-
-  .logo img {
-    margin-bottom: -$centered-navigation-logo-height / 3;
-    max-height: $centered-navigation-logo-height;
-    opacity: 0.6;
-  }
-
-  // Sub menus
-
-  li.more.nav-link {
-    padding-right: 0;
-    float: right;
-    padding-right: $centered-navigation-submenu-padding;
-    
-
-    > ul > li:first-child a  {
-      padding-top: 1em;
-    }
-
-    a {
-      width: 150px;
-      margin-right: $centered-navigation-submenu-padding;
-    }
-
-    > a {
-      padding-right: 0.6em;
-    }
-
-    > a:after {
-      @include position(absolute, auto -0.4em auto auto);
-      color: $centered-navigation-color;
-      content: "\25BE";
-    }
-  }
-
-  li.more {
-    overflow: visible;
-    padding-right: 0;
-
-    a {
-      padding-right: $centered-navigation-submenu-padding;
-    }
-
-    > a {
-      padding-right: 1.6em;
-      position: relative;
-
-      @include media($large-screen) {
-        margin-right: $centered-navigation-submenu-padding;
-      }
-
-      &:after {
-        content: "›";
-        font-size: 1.2em;
-        position: absolute;
-        right: $centered-navigation-submenu-padding / 2;
-      }
-    }
-
-    &:focus > .submenu,
-    &:hover > .submenu {
-      display: block;
-    }
-
-    @include media($horizontal-bar-mode) {
-      padding-right: $centered-navigation-submenu-padding;
-      position: relative;
-    }
-  }
-
-  ul.submenu {
-    display: none;
-    padding-left: 0;
-
-    @include media($horizontal-bar-mode) {
-      right: -$centered-navigation-submenu-padding;
-      position: absolute;
-      top: 1.5em;
-    }
-
-    .submenu {
-      @include media($horizontal-bar-mode) {
-        right: $centered-navigation-submenu-width - 0.2em;
-        top: 0;
-      }
-    }
-
-    li {
-      display: block;
-      padding-right: 0;
-
-      @include media($horizontal-bar-mode) {
-        line-height: $centered-navigation-height / 1.3;
-
-        &:first-child > a {
-          border-top-left-radius: $base-border-radius;
-          border-top-right-radius: $base-border-radius;
+    // Mobile view
+    .mobile-logo {
+        display: inline;
+        float: left;
+        max-height: $centered-navigation-height;
+        padding-left: $centered-navigation-padding;
+        img {
+            max-height: $centered-navigation-height;
+            opacity: .6;
+            padding: .8em 0;
         }
-
-        &:last-child > a {
-          border-bottom-left-radius: $base-border-radius;
-          border-bottom-right-radius: $base-border-radius;
-          padding-bottom: .7em;
-        }
-      }
-
-      a {
-          
-        background-color: darken($centered-navigation-background, 3%);
-        display: inline-block;
-        text-align: right;
-        text-decoration: none;
-        width: 100%;
-        
         @include media($horizontal-bar-mode) {
-          background-color: $centered-navigation-background;
-          padding-left: $centered-navigation-submenu-padding;
-          text-align: left;
-          width: $centered-navigation-submenu-width;
+            display: none;
         }
-      }
     }
-  }
+   
+    /* Main menu settings */
+#centeredmenu {
+  /* clear: both; */
+  /* float: right; */
+  margin: 0;
+  padding: 0;
+  /* border-bottom: 1px solid #000; */
+  /* width: 100%; */
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 90%;
+  z-index: 1000;
+  position: relative;
+}
+
+/* Top menu items */
+#centeredmenu ul {
     
-nav {
-	//margin: 100px auto; 
-	text-align: center;
+  margin-top: 33px;
+  padding: 0;
+  list-style: none;
+  float: right;
+  position: relative;
+  right: 50px;
+}
+#centeredmenu ul li {
+	margin:0 0 0 1px;
+	padding:0;
+	float:left;
+	position:relative;
+	left:50%;
+	top:1px;
+}
+#centeredmenu  > ul > li.has-sub:after {
+    display: block;
+    content: "";
+    border: 6px solid transparent;
+    border-top-color: #ffffff;
+    z-index: 2;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 0px;
+    top: 12px;
+    opacity: .7;
+}
+#centeredmenu ul li a {
+	display:block;
+	margin:0;
+	font-size:1em;
+	line-height:1em;
+	text-decoration:none;
+	color:#ffffff;
+	font-weight:bold;
+    
+    padding-top: 7px;
+    margin-right: 10px;
+}
+#centeredmenu ul li div {
+	display:block;
+	margin:0;
+	//padding:.6em .5em .4em;
+	font-size:1em;
+	line-height:1em;
+	text-decoration:none;
+	color:#ffffff;
+	font-weight:bold;
+    
+  margin-right: 10px;
+}
+#centeredmenu ul li.active a {
+	color:#fff;
+	background:#000;
+    padding-top: 7px;
+}
+#centeredmenu ul li a:hover {
+    padding-top: 7px;
+	color:#fff;
+    opacity: .7;
+}
+#centeredmenu ul li:hover a,
+#centeredmenu ul li.hover a { /* This line is required for IE 6 and below */
+	color:#fff;
 }
 
-nav ul ul {
-	display: none;
+/* Submenu items */
+#centeredmenu ul ul {
+    margin: 0;
+	display:none; /* Sub menus are hidden by default */
+	position:absolute;
+	//top:2em;
+	left:0;
+	float:left;
+	right:auto; /*resets the right:50% on the parent ul */
+	width:10em; /* width of the drop-down menus */
+}
+#centeredmenu ul ul li {
+	left:auto;  /*resets the left:50% on the parent li */
+	margin:0; /* Reset the 1px margin from the top menu */
+	clear:left;
+	float:left;
+	width:100%;
+}
+#centeredmenu ul ul li a,
+#centeredmenu ul li.active li a,
+#centeredmenu ul li:hover ul li a,
+#centeredmenu ul li.hover ul li a { /* This line is required for IE 6 and below */
+	font-size:.8em;
+	font-weight:normal; /* resets the bold set for the top level menu items */
+	//background:#eee;
+	color:#444;
+	line-height:1.4em; /* overwrite line-height value from top menu */
+	//border-bottom:1px solid #ddd; /* sub menu item horizontal lines */
+	float:left;
+	width:100%;
+    padding: 20px;
+    background-color: white;
+    opacity: 1;
+	//right:.8em;
+    border-bottom:1px solid #ddd; 
+}
+#centeredmenu ul ul li a:hover,
+#centeredmenu ul li.active ul li a:hover,
+#centeredmenu ul li:hover ul li a:hover,
+#centeredmenu ul li.hover ul li a:hover { /* This line is required for IE 6 and below */
+	background:$centered-navigation-background; /* Sub menu items background colour */
+	color:#fff;
+	float:left;
+    font-weight: bold;
 }
 
-	nav ul li:hover > ul {
-		display: block;
-	}
-
-
-nav ul {
-	
-	list-style: none;
-	position: relative;
-	display: inline-table;
+/* Flip the last submenu so it stays within the page */
+#centeredmenu ul ul.last {
+	left:auto; /* reset left:0; value */
+	right:0; /* Set right value instead */
 }
-	nav ul:after {
-		content: ""; clear: both; display: block;
-	}
+#centeredmenu ul ul.last li {
+	float:right;
+	position:relative;
+}
 
-	nav ul li {
-		float: left;
-	}
-		nav ul li:hover {
-			//background: #4b545f;
-		}
-			nav ul li:hover a {
-				color: #fff;
-			}
-		
-		nav ul li a {
-            display: block;
-            color: rgba(255, 255, 255, 0.79);
-            text-decoration: none;
-            line-height: 100px;
-            padding-right: 1em;
-		}
-			
-		
-	nav ul ul {
-		background: darken($centered-navigation-background, 3%); 
-        padding: 0;
-		position: absolute; 
-        top: 100%;
-	}
-		nav ul ul li {
-			float: none;  
-            position: relative;
-		}
-			nav ul ul li a {
-				padding: 15px 20px;
-				color: #fff;
-			}	
-				nav ul ul li a:hover {
-					background: #4b545f;
-				}
-		
-	nav ul ul ul {
-		position: absolute; left: 100%; top:0;
-	}
-		
-
+/* Make the sub menus appear on hover */
+#centeredmenu ul li:hover ul,
+#centeredmenu ul li.hover ul { /* This line is required for IE 6 and below */
+	display:block; /* Show the sub menus */
+}
 }
