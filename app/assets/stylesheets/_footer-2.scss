@@ -27,7 +27,7 @@
 .footer-2 {
   ///////////////////////////////////////////////////////////////////////////////////
   $base-spacing: 1.5em !default;
-  $base-accent-color: #7A5229;
+  $base-accent-color: #FAA547;
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
   
@@ -52,7 +52,7 @@
   $footer-link-color: transparentize($footer-color, 0.6);
   $footer-disclaimer-color: transparentize($footer-color, 0.6);
 
-  background: $footer-background;
+ @include background(linear-gradient($base-accent-color, #F79444) left repeat);
   padding: $base-spacing;
   width: 100%;
   display: inline-block;
