@@ -6,8 +6,11 @@ class CreateMessages < ActiveRecord::Migration
       t.integer :building_id
       t.text :body
       t.boolean :read, default: false
-      t.references :messageble, polymorphic: true, index: true, dependent: :destroy
       t.timestamps null: false
+      t.string :slug
     end
+    add_index(:messages, [:building_id,:sender_id] )
+    add_index(:messages, [:building_id,:recipient_id] )
+    add_index(:messages, :slug)
   end
 end

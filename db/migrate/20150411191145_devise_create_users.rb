@@ -35,11 +35,13 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.boolean :use_my_username, default: true
       t.boolean :ok_to_send_text_messages, default: true
       t.string  :slug
+      t.integer :invitation_id
       t.timestamps
     end
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
+    add_index :users, :invitation_id
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end

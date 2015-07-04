@@ -4,19 +4,25 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :memberships, dependent: :destroy
-  has_many :buildings, through: :memberships
   has_many :activities, dependent: :destroy
-  has_many :notifications, dependent: :destroy
-  has_many :invitations, dependent: :destroy
+  has_many :buildings, through: :memberships
   has_many :comments, dependent: :destroy
-  has_many :replies, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :invitations, dependent: :destroy
+  has_many :memberships, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+  has_many :replies, dependent: :destroy
   belongs_to :invitation
   after_create :apply_invitation
   before_save :set_slug
 
   rolify
+
+  ROLE_LANDLORD = 'Landlord'
+  ROLE_MANAGER = 'Manager'
+  INVITATION_LANDLORD = 'LandlordInvitation'
+  INVITATION_MANAGER = 'ManagerInvitation'
+
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
 
@@ -56,10 +62,6 @@ class User < ActiveRecord::Base
     has_role?(:landlord, building) or has_role?(:manager, building)
   end
 
-  def created?(object)
-    id == object.user_id
-  end
-
   def sent_messages
     Message.where(sender_id: self.id)
   end
@@ -84,11 +86,8 @@ class User < ActiveRecord::Base
     if invitation.present?
       building = invitation.building
       join(invitation.building)
-      if invitation.type == 'LandlordInvitation'
-        self.add_role(:landlord, building) if invitation.type == 'LandlordInvitation'
-        building.landlord = self
-      end
-      self.add_role(:manager, building)  if invitation.type == 'ManagerInvitation'
+      self.add_role(:landlord, building) if invitation.type == INVITATION_LANDLORD
+      self.add_role(:manager, building) if invitation.type == INVITATION_MANAGER
       building = invitation.building
       building.save
       self.save
@@ -100,19 +99,23 @@ class User < ActiveRecord::Base
   end
 
   def landlord?
-    properties.any?
+    roles.where(resource_type: 'Building', name: ROLE_LANDLORD).exists?
+  end
+
+  def landlord_of?(building)
+    roles.where(resource_type: 'Building', name: ROLE_LANDLORD, resource_id: building.id).exists?
   end
 
   def manager?
-     roles.where(name: 'Manager').exists?
+    roles.where(name: ROLE_MANAGER).exists?
   end
 
   def owned_properties
-    roles.where(resource_type: 'Building', name: 'Landlord').collect(&:resource).uniq
+    roles.where(resource_type: 'Building', name: ROLE_LANDLORD).collect(&:resource).uniq
   end
 
   def managed_properties
-    roles.where(resource_type: 'Building', name: 'Manager').collect(&:resource).uniq
+    roles.where(resource_type: 'Building', name: ROLE_MANAGER).collect(&:resource).uniq
   end
 
   def to_param
@@ -130,7 +133,11 @@ class User < ActiveRecord::Base
   private
 
   def set_slug
-    self.slug = SecureRandom.hex(16) if self.slug.blank?
+    while self.slug.blank? do
+     s = SecureRandom.hex(5)
+     next if User.where(slug: s).exists?
+     self.slug = s
+    end
   end
 
 end

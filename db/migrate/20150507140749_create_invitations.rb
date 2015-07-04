@@ -9,6 +9,10 @@ class CreateInvitations < ActiveRecord::Migration
       t.string :type
       t.timestamps null: false
     end
-    add_column :users, :invitation_id, :integer
+    add_index("invitations", "user_id")
+    add_index("invitations", "building_id")
+    add_index("invitations", "token")
+    add_foreign_key("invitations", "users")
+    add_foreign_key("invitations", "buildings")
   end
 end

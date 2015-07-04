@@ -1,7 +1,7 @@
 Upstairs::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  mount Attachinary::Engine => "/attachinary"
+  mount Attachinary::Engine => "/attachinary" unless Rails.env.test?
 
   devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
 
