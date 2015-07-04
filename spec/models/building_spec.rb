@@ -11,7 +11,6 @@ RSpec.describe Building, :type => :model do
     it { should have_many(:posts) }
     it { should have_many(:users) }
     it { should have_many(:tickets) }
-    it { should belong_to(:landlord) }
     it { should validate_presence_of(:address) }
     it { should validate_presence_of(:latitude) }
     it { should validate_presence_of(:longitude) }
@@ -77,7 +76,7 @@ RSpec.describe Building, :type => :model do
       end
 
       it "set_invitation_link" do
-         expect(@building.invitation_link).to eq "d70031c6"
+         expect(@building.invitation_link.length).to eq 8
       end
 
       it "has a slugifed address parameter" do
@@ -110,5 +109,22 @@ RSpec.describe Building, :type => :model do
            expect(@building.users.count).to eq 1
          end
       end
+    end
+
+    describe "landlord" do
+      before(:each) do
+        load_valid_building
+        load_user
+      end
+
+      it "should be nil if no body has landlord role" do
+        expect(@building.landlord).to be_nil
+      end
+
+      it "should be user with role of landlord" do
+        @user.add_role(User::ROLE_LANDLORD, @building)
+        expect(@building.landlord).to eq @user
+      end
+
     end
 end

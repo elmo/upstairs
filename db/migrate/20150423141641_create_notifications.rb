@@ -5,7 +5,7 @@ class CreateNotifications < ActiveRecord::Migration
       t.references :notifiable, polymorphic: true, index: true
       t.timestamps null: false
     end
-
     add_index :notifications, :notifiable_id
+    add_foreign_key("notifications", "users")
   end
 end

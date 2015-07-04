@@ -86,10 +86,7 @@ class User < ActiveRecord::Base
     if invitation.present?
       building = invitation.building
       join(invitation.building)
-      if invitation.type == 'LandlordInvitation'
-        self.add_role(:landlord, building) if invitation.type == INVITATION_LANDLORD
-        building.landlord = self
-      end
+      self.add_role(:landlord, building) if invitation.type == INVITATION_LANDLORD
       self.add_role(:manager, building) if invitation.type == INVITATION_MANAGER
       building = invitation.building
       building.save
