@@ -5,5 +5,6 @@ class CreateCategories < ActiveRecord::Migration
       t.integer :parent_category_id
       t.timestamps null: false
     end
+     add_foreign_key("posts", "categories")
   end
 end

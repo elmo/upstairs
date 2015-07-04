@@ -8,6 +8,6 @@ class CreateComments < ActiveRecord::Migration
       t.boolean :flagged, default: false
       t.timestamps null: false
     end
-    add_index :comments, :commentable_id
+    add_foreign_key("comments", "users")
   end
 end
