@@ -126,5 +126,11 @@ RSpec.describe Building, :type => :model do
         expect(@building.landlord).to eq @user
       end
 
+      it "should be user with role of landlord" do
+        @user.add_role(User::ROLE_LANDLORD, @building)
+        expect(@building.landlord).to eq @user
+        @user.remove_role(User::ROLE_LANDLORD, @building)
+        expect(@building.landlord).to eq nil
+      end
     end
 end

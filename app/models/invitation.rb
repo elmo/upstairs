@@ -3,7 +3,6 @@ class Invitation < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
-
   after_create :set_token
   after_create :send_invitation
 

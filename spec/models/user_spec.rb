@@ -103,18 +103,19 @@ RSpec.describe User , :type => :model do
 
   describe "owns?" do
      before(:each) do
+       load_valid_building
        load_user
        Alert.any_instance.stub(:create_notifications).and_return(true)
      end
 
       it "is true when user created object" do
-        @alert = create(:alert, user: @user)
+        @alert = create(:alert, user: @user, building: @building)
         expect(@user.owns?(@alert)).to eq true
       end
 
       it "is true when user created object" do
         @user2 = create(:user, email: "user2@gmail.com")
-        @alert = create(:alert, user: @user2)
+        @alert = create(:alert, user: @user2, building: @building)
         expect(@user.owns?(@alert)).to eq false
       end
   end
@@ -199,6 +200,47 @@ RSpec.describe User , :type => :model do
 
    end
 
+   describe "make/revoke landlord role" do
+     before(:each) do
+       load_user
+       load_valid_building
+     end
+
+     it "add landlord role" do
+       expect{ @user.make_landlord(@building)}.to change(Role, :count).by(1)
+       expect(@user.owned_properties.first).to eq @building
+       expect(@building.landlord).to eq @user
+     end
+
+     it "revoke landlord role" do
+       @user.make_landlord(@building)
+       expect(@user.owned_properties.first).to eq @building
+       expect(@building.landlord).to eq @user
+       @user.revoke_landlord(@building)
+       expect(@building.landlord).to eq nil
+       expect(@user.owned_properties).to be_empty
+     end
+   end
+
+   describe "make/revoke manager role" do
+     before(:each) do
+       load_user
+       load_valid_building
+     end
+
+     it "add manager role" do
+       expect{ @user.make_manager(@building)}.to change(Role, :count).by(1)
+       expect(@user.managed_properties.first).to eq @building
+     end
+
+     it "revoke manager role" do
+       @user.make_manager(@building)
+       expect(@user.managed_properties.first).to eq @building
+       @user.revoke_manager(@building)
+       expect(@user.managed_properties).to be_empty
+     end
+   end
+
    describe "apply invitation" do
      before(:each) do
        load_user
@@ -213,7 +255,7 @@ RSpec.describe User , :type => :model do
        it "add user to building" do
          @invitee = create(:user, email: @email, invitation: @invitation)
          expect(@invitee.buildings.first).to eq @building
-         expect(@invitee.roles.first.name).to eq 'landlord'
+         expect(@invitee.roles.first.name).to eq User::ROLE_LANDLORD
        end
      end
 
@@ -225,7 +267,7 @@ RSpec.describe User , :type => :model do
        it "add user to building" do
          @invitee = create(:user, email: @email, invitation: @invitation)
          expect(@invitee.buildings.first).to eq @building
-         expect(@invitee.roles.first.name).to eq 'manager'
+         expect(@invitee.roles.first.name).to eq User::ROLE_MANAGER
        end
 
      end
