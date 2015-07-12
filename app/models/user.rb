@@ -82,12 +82,28 @@ class User < ActiveRecord::Base
     (buildings.any?) ? buildings.first : nil
   end
 
+  def make_landlord(building)
+    add_role(ROLE_LANDLORD, building)
+  end
+
+  def revoke_landlord(building)
+    remove_role(ROLE_LANDLORD, building)
+  end
+
+  def make_manager(building)
+    add_role(ROLE_MANAGER, building)
+  end
+
+  def revoke_manager(building)
+    remove_role(ROLE_MANAGER, building)
+  end
+
   def apply_invitation
     if invitation.present?
       building = invitation.building
       join(invitation.building)
-      self.add_role(:landlord, building) if invitation.type == INVITATION_LANDLORD
-      self.add_role(:manager, building) if invitation.type == INVITATION_MANAGER
+      make_landlord(building) if invitation.type == INVITATION_LANDLORD
+      make_manager(building) if invitation.type == INVITATION_MANAGER
       building = invitation.building
       building.save
       self.save
@@ -124,10 +140,6 @@ class User < ActiveRecord::Base
 
   def owner_or_manager_of?(building)
     building.landlord_id == self.id
-  end
-
-  def properties
-    Building.where(landlord_id: self.id)
   end
 
   private

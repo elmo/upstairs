@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe Membership, :type => :model do
  it { should belong_to(:user) }
  it { should belong_to(:building) }
- it { should validate_presence_of(:user_id) }
- it { should validate_presence_of(:building_id) }
+ it { should validate_presence_of(:user) }
+ it { should validate_presence_of(:building) }
 
  describe "creation" do
 
    before(:each) do
-     @user = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
-     @building = create(:building)
+     load_valid_building
+     load_user
    end
 
    it "creates membership" do
@@ -18,8 +18,8 @@ RSpec.describe Membership, :type => :model do
    end
 
    it "does not allow duplicates" do
-     expect { Membership.create(user: @user, building: @building) }.to change(Membership, :count).by(1)
-     expect { Membership.create(user: @user, building: @building) }.to raise_error ActiveRecord::RecordNotUnique
+     Membership.create(user: @user, building: @building)
+     expect { Membership.create(user: @user, building: @building) }.to change(Membership, :count).by(0)
    end
 
    it "does not creates membership without a user" do
@@ -32,8 +32,8 @@ RSpec.describe Membership, :type => :model do
 
     it "associates user with building" do
       Membership.create(user: @user, building: @building)
-      expect(@user.communities.count).to eq 1
-      expect(@user.communities.first).to eq @building
+      expect(@user.buildings.count).to eq 1
+      expect(@user.buildings.first).to eq @building
     end
 
     it "associates building with user" do

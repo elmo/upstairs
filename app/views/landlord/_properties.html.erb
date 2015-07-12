@@ -1,5 +1,5 @@
 <h3>My Buildings</h3>
-<% @user.properties.each do |building| %>
+<% @user.owned_properties.each do |building| %>
   <%= link_to building.address, building_path(building) %>
   <%= link_to "#{pluralize(building.tickets.open.count, 'open ticket')}", building_tickets_path(building) -%>
 <% end %>

@@ -23,10 +23,6 @@ class Post < ActiveRecord::Base
     comments.collect(&:user).uniq
   end
 
-  def create_notifications
-    postable(includes: :user).users.each { |member| Notification.create(notifiable: self, user: member)  }
-  end
-
   def slug_candidates
     [:title]
   end
@@ -40,7 +36,7 @@ class Post < ActiveRecord::Base
   end
 
   def words(max = nil)
-    (max.present?) ?  body.split[0..max].join(' ') : body
+    (max.present?) ? body.split[0..max].join(' ') : body.split
   end
 
   def word_count
@@ -48,6 +44,11 @@ class Post < ActiveRecord::Base
   end
 
   private
+
+  def create_notifications
+    postable(includes: :user).users.each { |member| Notification.create(notifiable: self, user: member)  }
+  end
+
 
   def create_actionable
     Activity.create(actionable: self, user: self.user, building: self.postable)

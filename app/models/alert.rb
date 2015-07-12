@@ -3,6 +3,8 @@ class Alert < ActiveRecord::Base
   belongs_to :building
   belongs_to :actionable, polymorphic: true
   has_many :notifications, as: :notifiable, dependent: :destroy
+  validates_presence_of :user
+  validates_presence_of :building
 
   after_create :create_notifications
   after_create :create_actionable

@@ -14,9 +14,9 @@ class Ticket < ActiveRecord::Base
 
   scope :open, -> { where(status: STATUS_OPEN )}
   scope :closed, -> { where(status: STATUS_CLOSED)}
-  scope :minor, -> { where(status: SEVERITY_MINOR)}
-  scope :serious, -> { where(status: SEVERITY_SERIOUS)}
-  scope :severe, -> { where(status: SEVERITY_SEVERE)}
+  scope :minor, -> { where(severity: SEVERITY_MINOR)}
+  scope :serious, -> { where(severity: SEVERITY_SERIOUS)}
+  scope :severe, -> { where(severity: SEVERITY_SEVERE)}
 
   STATUS_OPEN = 'open'
   STATUS_CLOSED = 'closed'
@@ -44,6 +44,4 @@ class Ticket < ActiveRecord::Base
   def create_actionable
     Activity.create(actionable: self, user: self.user, building: self.building)
   end
-
-
 end

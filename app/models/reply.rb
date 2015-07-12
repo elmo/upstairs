@@ -1,5 +1,9 @@
 class Reply < Comment
 
+  def building
+    comment.commentable.building
+  end
+
   def commenters
     comment.commenters
   end
