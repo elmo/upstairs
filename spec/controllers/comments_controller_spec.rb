@@ -23,46 +23,46 @@ RSpec.describe CommentsController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # Comment. As you add validations to Comment, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) { {body: "body"} }
+  let(:invalid_attributes) { {body: nil} }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # CommentsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  before(:each) do
+    Post.any_instance.stub(:create_notifications).and_return(true)
+    request.env["HTTP_REFERER"] = "http://"
+    load_valid_building
+    load_user
+    @commentable = create(:post, user: @user, postable: @building)
+    @post = create(:post, user: @user, postable: @building)
+    sign_in(@user)
+  end
 
   describe "GET index" do
     it "assigns all comments as @comments" do
-      comment = Comment.create! valid_attributes
-      get :index, {}, valid_session
+      comment = create(:comment, commentable: @commentable, user: @user)
+      get :index, post_id: @post.id
       expect(assigns(:comments)).to eq([comment])
     end
   end
 
   describe "GET show" do
     it "assigns the requested comment as @comment" do
-      comment = Comment.create! valid_attributes
-      get :show, {:id => comment.to_param}, valid_session
+      comment = create(:comment, commentable: @commentable, user: @user)
+      get :show, :id => comment.to_param, post_id: @post.id
       expect(assigns(:comment)).to eq(comment)
     end
   end
 
   describe "GET new" do
     it "assigns a new comment as @comment" do
-      get :new, {}, valid_session
+      get :new, post_id: @post.id
       expect(assigns(:comment)).to be_a_new(Comment)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested comment as @comment" do
-      comment = Comment.create! valid_attributes
-      get :edit, {:id => comment.to_param}, valid_session
+      comment = create(:comment, commentable: @commentable, user: @user)
+      get :edit, post_id: @post.id, :id => comment.to_param, post_id: @post.id
       expect(assigns(:comment)).to eq(comment)
     end
   end
@@ -71,30 +71,30 @@ RSpec.describe CommentsController, :type => :controller do
     describe "with valid params" do
       it "creates a new Comment" do
         expect {
-          post :create, {:comment => valid_attributes}, valid_session
+          post :create, post_id: @post.id, :comment => valid_attributes
         }.to change(Comment, :count).by(1)
       end
 
       it "assigns a newly created comment as @comment" do
-        post :create, {:comment => valid_attributes}, valid_session
+        post :create, post_id: @post.id, :comment => valid_attributes
         expect(assigns(:comment)).to be_a(Comment)
         expect(assigns(:comment)).to be_persisted
       end
 
       it "redirects to the created comment" do
-        post :create, {:comment => valid_attributes}, valid_session
-        expect(response).to redirect_to(Comment.last)
+        post :create, post_id: @post.id, :comment => valid_attributes
+        expect(response).to redirect_to(building_post_path(@building, @post))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved comment as @comment" do
-        post :create, {:comment => invalid_attributes}, valid_session
+        post :create, post_id: @post.id, :comment => invalid_attributes
         expect(assigns(:comment)).to be_a_new(Comment)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:comment => invalid_attributes}, valid_session
+        post :create, post_id: @post.id, :comment => invalid_attributes
         expect(response).to render_template("new")
       end
     end
@@ -103,39 +103,38 @@ RSpec.describe CommentsController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {body: "a new body"}
       }
 
       it "updates the requested comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => new_attributes}, valid_session
-        comment.reload
-        skip("Add assertions for updated state")
+        comment = create(:comment, commentable: @commentable, user: @user)
+        put :update, post_id: @post.id, :id => comment.to_param, :comment => new_attributes
+        expect(response).to redirect_to(building_post_path(@building, @post))
       end
 
       it "assigns the requested comment as @comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => valid_attributes}, valid_session
+        comment = create(:comment, commentable: @commentable, user: @user)
+        put :update, post_id: @post.id, :id => comment.to_param, :comment => valid_attributes
         expect(assigns(:comment)).to eq(comment)
       end
 
       it "redirects to the comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => valid_attributes}, valid_session
-        expect(response).to redirect_to(comment)
+        comment = create(:comment, commentable: @commentable, user: @user)
+        put :update, post_id: @post.id, :id => comment.to_param, :comment => valid_attributes
+        expect(response).to redirect_to(building_post_path(@building, @post))
       end
     end
 
     describe "with invalid params" do
       it "assigns the comment as @comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => invalid_attributes}, valid_session
+        comment = create(:comment, commentable: @commentable, user: @user)
+        put :update, post_id: @post.id, :id => comment.to_param, :comment => invalid_attributes
         expect(assigns(:comment)).to eq(comment)
       end
 
       it "re-renders the 'edit' template" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => invalid_attributes}, valid_session
+        comment = create(:comment, commentable: @commentable, user: @user)
+        put :update, post_id: @post.id, :id => comment.to_param, :comment => invalid_attributes
         expect(response).to render_template("edit")
       end
     end
@@ -143,15 +142,15 @@ RSpec.describe CommentsController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested comment" do
-      comment = Comment.create! valid_attributes
+      comment = create(:comment, commentable: @commentable, user: @user)
       expect {
-        delete :destroy, {:id => comment.to_param}, valid_session
+        delete :destroy, post_id: @post.id, :id => comment.to_param
       }.to change(Comment, :count).by(-1)
     end
 
     it "redirects to the comments list" do
-      comment = Comment.create! valid_attributes
-      delete :destroy, {:id => comment.to_param}, valid_session
+      comment = create(:comment, commentable: @commentable, user: @user)
+      delete :destroy, post_id: @post.id, :id => comment.to_param
       expect(response).to redirect_to(comments_url)
     end
   end

@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   has_many :replies, class_name: 'Comment', foreign_key: "parent_comment_id", dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
   validates_presence_of :user
+  validates_presence_of :body
   belongs_to :comment, foreign_key: "parent_comment_id"
   after_create :create_notifications
   after_create :create_actionable
