@@ -53,11 +53,9 @@ class BuildingsController < ApplicationController
     end
     @building = Building.new(building_params)
     if @building.save
-    byebug
       current_user.join(@building)
       redirect_to @building, notice: "Welcome, to #{@building.address}. You are now a member." and return false
     else
-    byebug
       render :new
     end
   end

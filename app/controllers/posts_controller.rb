@@ -32,7 +32,6 @@ class PostsController < ApplicationController
   def create
     @post = @postable.posts.new(post_params)
     @post.user = current_user
-
     if @post.save
       redirect_to building_post_path(@postable, @post), notice: 'Post was successfully created.'
     else
