@@ -17,11 +17,11 @@ RSpec.describe Comment, :type => :model do
     end
 
     it "creates comment" do
-      expect{@post.comments.create(commentable: @post, user: @user)}.to change(Comment,:count).by(1)
+      expect{@post.comments.create(commentable: @post, user: @user, body: 'body')}.to change(Comment,:count).by(1)
     end
 
     it "commenters" do
-      @post.comments.create(commentable: @post, user: @user)
+      @post.comments.create(commentable: @post, user: @user, body: 'body')
       expect(@post.commenters.first).to eq @user
       expect(@post.comments.count).to eq 1
       expect(@user.comments.count).to eq 1

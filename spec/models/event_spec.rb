@@ -48,11 +48,11 @@ RSpec.describe Event, :type => :model do
        end
 
       it "creates comment" do
-        expect{@event.comments.create(commentable: @event, user: @user)}.to change(Comment,:count).by(1)
+        expect{@event.comments.create(commentable: @event, user: @user, body: "body")}.to change(Comment,:count).by(1)
       end
 
       it "commenters" do
-        @event.comments.create(commentable: @event, user: @user)
+        @event.comments.create(commentable: @event, user: @user, body: "body")
         expect(@event.commenters.first).to eq @user
         expect(@event.comments.count).to eq 1
         expect(@user.comments.count).to eq 1
