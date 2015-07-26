@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614230717) do
+ActiveRecord::Schema.define(version: 20150612031252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 20150614230717) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "alerts", ["building_id"], name: "index_alerts_on_building_id", using: :btree
+  add_index "alerts", ["user_id"], name: "index_alerts_on_user_id", using: :btree
+
   create_table "attachinary_files", force: :cascade do |t|
     t.integer  "attachinariable_id"
     t.string   "attachinariable_type"
@@ -57,17 +60,17 @@ ActiveRecord::Schema.define(version: 20150614230717) do
   create_table "buildings", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
+    t.string   "invitation_link"
     t.float    "latitude"
     t.float    "float"
     t.float    "longitude"
     t.boolean  "active",          default: true
-    t.integer  "landlord_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "slug"
-    t.string   "invitation_link"
   end
 
+  add_index "buildings", ["address"], name: "index_buildings_on_address", unique: true, using: :btree
   add_index "buildings", ["slug"], name: "index_buildings_on_slug", using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -88,7 +91,6 @@ ActiveRecord::Schema.define(version: 20150614230717) do
     t.datetime "updated_at",                        null: false
   end
 
-  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
 
   create_table "events", force: :cascade do |t|
@@ -100,6 +102,9 @@ ActiveRecord::Schema.define(version: 20150614230717) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "events", ["building_id"], name: "index_events_on_building_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -125,6 +130,10 @@ ActiveRecord::Schema.define(version: 20150614230717) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "invitations", ["building_id"], name: "index_invitations_on_building_id", using: :btree
+  add_index "invitations", ["token"], name: "index_invitations_on_token", using: :btree
+  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
+
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "building_id"
@@ -139,15 +148,14 @@ ActiveRecord::Schema.define(version: 20150614230717) do
     t.integer  "recipient_id"
     t.integer  "building_id"
     t.text     "body"
-    t.boolean  "read",            default: false
-    t.integer  "messageble_id"
-    t.string   "messageble_type"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.boolean  "read",         default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "slug"
   end
 
-  add_index "messages", ["messageble_type", "messageble_id"], name: "index_messages_on_messageble_type_and_messageble_id", using: :btree
+  add_index "messages", ["building_id", "recipient_id"], name: "index_messages_on_building_id_and_recipient_id", using: :btree
+  add_index "messages", ["building_id", "sender_id"], name: "index_messages_on_building_id_and_sender_id", using: :btree
   add_index "messages", ["slug"], name: "index_messages_on_slug", using: :btree
 
   create_table "notifications", force: :cascade do |t|
@@ -212,6 +220,7 @@ ActiveRecord::Schema.define(version: 20150614230717) do
   end
 
   add_index "tickets", ["building_id", "severity"], name: "index_tickets_on_building_id_and_severity", using: :btree
+  add_index "tickets", ["building_id", "status"], name: "index_tickets_on_building_id_and_status", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                    default: "",   null: false
@@ -229,12 +238,13 @@ ActiveRecord::Schema.define(version: 20150614230717) do
     t.boolean  "use_my_username",          default: true
     t.boolean  "ok_to_send_text_messages", default: true
     t.string   "slug"
+    t.integer  "invitation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "invitation_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_id"], name: "index_users_on_invitation_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -255,4 +265,20 @@ ActiveRecord::Schema.define(version: 20150614230717) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "activities", "buildings"
+  add_foreign_key "activities", "users"
+  add_foreign_key "alerts", "buildings"
+  add_foreign_key "alerts", "users"
+  add_foreign_key "comments", "users"
+  add_foreign_key "events", "buildings"
+  add_foreign_key "events", "users"
+  add_foreign_key "invitations", "buildings"
+  add_foreign_key "invitations", "users"
+  add_foreign_key "memberships", "buildings"
+  add_foreign_key "memberships", "users"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "posts", "categories"
+  add_foreign_key "posts", "users"
+  add_foreign_key "tickets", "buildings"
+  add_foreign_key "tickets", "users"
 end

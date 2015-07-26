@@ -5,19 +5,14 @@ class Comment < ActiveRecord::Base
   has_many :replies, class_name: 'Comment', foreign_key: "parent_comment_id", dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
   validates_presence_of :user
+  validates_presence_of :body
   belongs_to :comment, foreign_key: "parent_comment_id"
   after_create :create_notifications
   after_create :create_actionable
   has_paper_trail
 
-  # TODO deprecate
-  def grandparent
-    (parent_comment_id.present?) ? comment.commentable : commentable
-  end
-
   def building
-    return commentable.building if !['Ticket', 'Event'].include?(commentable.class.to_s)
-    return (reply?) ?  comment.commentable.building : commentable.building
+    commentable.building
   end
 
   def create_notifications
@@ -43,11 +38,7 @@ class Comment < ActiveRecord::Base
   private
 
   def create_actionable
-   if commentable.present? and  !['Ticket', 'Event'].include?(commentable.class.to_s)
-    Activity.create(actionable: self, user: self.user, building: self.grandparent.postable)
-   else
-    Activity.create(actionable: self, user: self.user, building: self.commentable.building) if !reply?
-   end
+    Activity.create(actionable: self, user: self.user, building: self.commentable.building)
   end
 
 end

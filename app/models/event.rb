@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :starts
   validates_presence_of :title
   validates_presence_of :body
+  after_create :create_notifications
 
   has_attachments :photos, dependent: :destroy
 
@@ -16,6 +17,16 @@ class Event < ActiveRecord::Base
 
   def postable
     building
+  end
+
+  def commenters
+    comments.collect(&:user).uniq
+  end
+
+  private
+
+  def create_notifications
+    building(includes: :user).users.each { |user| Notification.create(notifiable: self, user: user) }
   end
 
 end

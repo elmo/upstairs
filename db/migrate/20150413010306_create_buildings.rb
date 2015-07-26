@@ -3,11 +3,12 @@ class CreateBuildings < ActiveRecord::Migration
     create_table :buildings do |t|
       t.string :name
       t.string :address
+      t.string :invitation_link
       t.float :latitude, :float
       t.float :longitude
       t.boolean :active, default: true
-      t.integer :landlord_id
       t.timestamps null: false
     end
+    add_index(:buildings, :address, unique: true)
   end
 end

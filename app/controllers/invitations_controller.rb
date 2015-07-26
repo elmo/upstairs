@@ -4,6 +4,7 @@ class InvitationsController < ApplicationController
   before_action :set_building, except:  [:welcome]
   layout 'building'
 
+
   # GET /invitations/1
   def show
   end
@@ -49,7 +50,7 @@ class InvitationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invitation
-      @invitation = Invitation.find(params[:id])
+      @invitation = Invitation.find_by(token: params[:id])
     end
 
     def set_building

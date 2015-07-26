@@ -43,7 +43,13 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      redirect_to @comment, notice: 'Comment was successfully updated.'
+      if @commentable.class.to_s == 'Post'
+        redirect_to building_post_path(@commentable.postable, @commentable), notice: 'Comment was successfully updated.'
+      elsif @commentable.class.to_s == 'Ticket'
+        redirect_to building_ticket_path(@commentable.building,@commentable), notice: 'Comment was successfully updated.'
+      elsif @commentable.class.to_s == 'Event'
+        redirect_to building_event_path(@commentable.building,@commentable), notice: 'Comment was successfully updated.'
+      end
     else
       render :edit
     end
