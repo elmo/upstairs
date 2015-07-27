@@ -1,0 +1,285 @@
+/*
+	@name website_v4
+*/
+@font-face {
+    font-family: 'Raleway-Bold';
+    src:url('fonts/Raleway-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} 
+
+/* Only edit this if you know what you are doing! */
+img {  display: block; margin: 0px; border: none; padding: 0px; }
+
+/* Only edit this if you know what you are doing! */
+
+
+#content-container { display: block; 
+    margin-left: auto ;
+    margin-right: auto ; width: 100%;
+    padding-top: 129px;
+    overflow: hidden;
+    height: 850px;
+}
+.centered-navigation {
+    background: none;
+    border-bottom: none;
+    position: absolute;
+    
+    width: 100%;
+}
+.centered-navigation #centeredmenu {
+    padding-right: 30px;
+}
+.color_fill_1 {
+    
+    position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: auto;
+    min-width: 850px;
+    z-index: -2;
+}
+
+
+.layer_4 {
+    
+    position: absolute;
+	opacity:0.50196078431373;
+	top: 27px;
+	left: 213px;
+	width: 849px;
+	height: 521px;
+    z-index: -1;
+}
+
+
+#ellipse_1 {
+	width: 1920px;
+	height: 1098px;
+    position: relative;
+	-ms-border-radius: 960px / 549px;
+	-o-border-radius: 960px / 549px;
+	-moz-border-radius: 960px / 549px;
+	-webkit-border-radius: 960px / 549px;
+	border-radius: 960px / 549px;
+	background:#FFFFFF;
+    z-index: -1;
+    left: 50%;
+    margin-left: -960px;
+    margin-top: -255px;
+}
+
+
+#get_the_app {
+    
+    position: relative;
+    display: block;
+	opacity:0.8;
+	width: 139px;
+	height: 41px;
+	font-family: MyriadPro-Bold, Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	text-align: center;
+	color:#5D5B5B;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.google_png__2x {
+    
+    float: left;
+    position: relative;
+    margin-left: 30px;
+	width: 130px;
+	height: 40px;
+}
+
+
+.apple_png__2x {
+    float: left;
+    position: relative;
+    margin-left: 30px;
+	width: 130px;
+	height: 40px;
+}
+
+
+#the_social_network__for_your_building_ {
+    
+    position: relative;
+    margin-top: 160px;
+    margin-left: auto;
+    margin-right: auto;
+	width: 458px;
+	height: 50px;
+	font-family: Raleway-Bold, Arial, Helvetica, sans-serif;
+	font-size: 46px;
+	text-align: center;
+	color:#5F5B55;
+}
+#getTheApp{
+    position: relative;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+
+}
+#for_your_building_ {
+    
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+	width: 458px;
+	font-family: Raleway-Bold, Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	text-align: center;
+	color:#5F5B55;
+}
+
+.arrow_down {
+    
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+	width: 26px;
+	height: 32px;
+	
+}
+
+
+#rounded_rectangle_1 {
+    
+    //position: absolute;
+    margin-right: auto;
+    margin-left: auto;
+	width: 410px;
+	height: 47px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background:#FFFFFF;
+}
+#search{
+    
+    margin-right: auto;
+    margin-left: auto;
+	width: 410px;
+	height: 47px;
+}
+
+.vector_smart_object {
+    
+    position: relative;
+    top: -46px;
+    margin-top: 9px;
+    margin-left: 9px;
+    width: 30px;
+    height: 30px;
+}
+
+
+#find_your_building {
+    
+	opacity:0.50196078431373;
+    position: relative;
+    top: -75px;
+    margin-left: 60px;
+	width: 195px;
+	height: 32px;
+	font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-align: left;
+	color:#222222;
+}
+
+
+.png_logo {
+    
+    /*position: absolute;
+	top: 129px;
+	left: 565px;*/
+	width: 248px;
+	height: 188px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#rectangle_1 {
+    
+    position: absolute;
+	opacity:0.4;
+	top: 0px;
+	left: 898px;
+	width: 468px;
+	height: 64px;
+	background:#BEB299;
+}
+
+
+#connection {
+    
+    position: absolute;
+	opacity:0.8;
+	top: 18px;
+	left: 1229px;
+	width: 111px;
+	height: 26px;
+	font-family: Raleway-Bold, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-align: left;
+	color:#565656;
+}
+
+
+#sign_in {
+    
+    position: absolute;
+	opacity:0.8;
+	top: 18px;
+	left: 1094px;
+	width: 67px;
+	height: 29px;
+	font-family: Raleway-Bold, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-align: left;
+	color:#565656;
+}
+
+
+#rectangle_2 {
+    
+    position: absolute;
+	opacity:0.30196078431373;
+	top: 13px;
+	left: 1190px;
+	width: 2px;
+	height: 40px;
+	background:#000000;
+}
+
+#main {
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+centered {
+    padding: 0; 
+    float: left;
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    /* margin-left: 17.05961%; */
+}
+
+/* Add your custom CSS here */
+
