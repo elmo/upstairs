@@ -1,9 +1,11 @@
 /*
 	@name website_v4
 */
+$medium-screen: em(640) !default;
+$large-screen: em(860) !default;
 @font-face {
     font-family: 'Raleway-Bold';
-    src:url('fonts/Raleway-Bold.ttf') format('truetype');
+    src:url('Raleway-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 } 
@@ -12,20 +14,22 @@
 img {  display: block; margin: 0px; border: none; padding: 0px; }
 
 /* Only edit this if you know what you are doing! */
+.nav-logo{
+    visibility: hidden;
 
+}
 
 #content-container { display: block; 
     margin-left: auto ;
     margin-right: auto ; width: 100%;
-    padding-top: 129px;
+    padding-top: 80px;
     overflow: hidden;
-    height: 850px;
+    height: 630px;
 }
 .centered-navigation {
     background: none;
     border-bottom: none;
     position: absolute;
-    
     width: 100%;
 }
 .centered-navigation #centeredmenu {
@@ -68,7 +72,7 @@ img {  display: block; margin: 0px; border: none; padding: 0px; }
     z-index: -1;
     left: 50%;
     margin-left: -960px;
-    margin-top: -255px;
+    margin-top: -235px;
 }
 
 
@@ -110,7 +114,7 @@ img {  display: block; margin: 0px; border: none; padding: 0px; }
 #the_social_network__for_your_building_ {
     
     position: relative;
-    margin-top: 160px;
+    margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
 	width: 458px;
@@ -122,7 +126,7 @@ img {  display: block; margin: 0px; border: none; padding: 0px; }
 }
 #getTheApp{
     position: relative;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
     width: 350px;
@@ -146,7 +150,7 @@ img {  display: block; margin: 0px; border: none; padding: 0px; }
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 20px;
 	width: 26px;
 	height: 32px;
 	
@@ -281,5 +285,20 @@ centered {
     /* margin-left: 17.05961%; */
 }
 
-/* Add your custom CSS here */
 
+/* Add your custom CSS here */
+@media screen and (min-height: 769px) {
+    
+    #content-container {
+        margin-top: 100px;
+        height: 700px;
+        
+    }
+    #ellipse_1 {
+        margin-top: -255px;
+    }
+    
+    #the_social_network__for_your_building_ {
+        margin-top: 100px;
+    }
+}
