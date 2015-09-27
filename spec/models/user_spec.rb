@@ -7,6 +7,7 @@ RSpec.describe User , :type => :model do
   it { should have_many(:memberships) }
   it { should have_many(:notifications) }
   it { should have_many(:replies) }
+  it { should have_many(:verifications) }
   it { should belong_to(:invitation) }
 
   describe "join" do
@@ -350,6 +351,42 @@ RSpec.describe User , :type => :model do
        @user.add_role(User::ROLE_MANAGER, @building)
        @user.reload
        expect(@user.managed_properties.first).to eq @building
+     end
+   end
+
+   describe "verified_owner_of?" do
+     before(:each) do
+       load_valid_building
+       load_user
+     end
+     it "should be false when no verification record exists" do
+       expect(@user.verified_owner_of?(@building)).to be_falsey
+     end
+     it "should be true when a verification record exists" do
+       @verifier = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
+       @user.verify_ownership(@building, @verifier)
+       expect(@user.verified_owner_of?(@building)).to be_truthy
+     end
+   end
+
+   describe "verify_ownership" do
+     before(:each) do
+       load_valid_building
+       load_user
+       @verifier = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
+     end
+
+     it "requires building" do
+       expect {@user.verify_ownership(nil, @verifier) }.to change(Verification, :count).by(0)
+     end
+
+     it "requires verfifier" do
+       expect {@user.verify_ownership(@building, nil) }.to change(Verification, :count).by(0)
+     end
+
+     it "verifiy ownership" do
+       expect {@user.verify_ownership(@building, @verifier) }.to change(Verification, :count).by(1)
+       expect(@user.verified_owner_of?(@building)).to be_truthy
      end
    end
 

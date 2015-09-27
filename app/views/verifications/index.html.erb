@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Verifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Building</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @verifications.each do |verification| %>
+      <tr>
+        <td><%= verification.building_id %></td>
+        <td><%= verification.user_id %></td>
+        <td><%= link_to 'Show', verification %></td>
+        <td><%= link_to 'Edit', edit_verification_path(verification) %></td>
+        <td><%= link_to 'Destroy', verification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Verification', new_verification_path %>

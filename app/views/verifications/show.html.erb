@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Building:</strong>
+  <%= @verification.building_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @verification.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_verification_path(@verification) %> |
+<%= link_to 'Back', verifications_path %>

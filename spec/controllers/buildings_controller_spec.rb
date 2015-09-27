@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe BuildingsController, :type => :controller do
   let(:valid_attributes) {
     {
-      address:  "123 Main Street, San Francisco, CA 94121",
+      address:  "123 Main Street, San Francisco, CA 94121"
     }
   }
   let(:invalid_attributes) { }
