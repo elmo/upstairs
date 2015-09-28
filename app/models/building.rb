@@ -9,6 +9,7 @@ class Building < ActiveRecord::Base
   has_many :posts, as: :postable, dependent: :destroy
   has_many :tickets, dependent: :destroy
   has_many :users, through: :memberships
+  has_many :verification_requests, dependent: :destroy
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   belongs_to :actionable, polymorphic: true
   validates_presence_of :address

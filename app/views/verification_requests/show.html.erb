@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @verification_request.user_id %>
+</p>
+
+<p>
+  <strong>Building:</strong>
+  <%= @verification_request.building_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @verification_request.status %>
+</p>
+
+<%= link_to 'Edit', edit_verification_request_path(@verification_request) %> |
+<%= link_to 'Back', verification_requests_path %>

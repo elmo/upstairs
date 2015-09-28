@@ -1,7 +1,5 @@
 Upstairs::Application.routes.draw do
 
-  resources :verifications
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary" unless Rails.env.test?
 
@@ -26,6 +24,8 @@ Upstairs::Application.routes.draw do
   get '/buildings/:building_id/outbox' => "messages#outbox", as: :outbox
   get '/buildings/:building_id/calendar' => "events#index", as: :calendar
 
+  resources :verifications
+
   resources :buildings do
     resources :memberships, only: [:create, :destroy, :index]
     resources :posts
@@ -35,7 +35,7 @@ Upstairs::Application.routes.draw do
     resources :invitations do
       get 'redeem'
     end
-
+    resources :verification_requests
     resources :photos
     resources :events
     resources :user_invitations, controller: 'invitations', type: 'UserInvitation'
