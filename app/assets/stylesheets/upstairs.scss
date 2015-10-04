@@ -40,14 +40,14 @@ building {
   @include span-columns(12);
   buildingleft {
     @include pad();
-    @include span-columns(4 of 12);
+    @include span-columns(2 of 12);
     buildingimage { 
      @include pad();
      @include span-columns(4 of 4); 
     }
     buildingmembership { 
       @include pad();
-      @include span-columns(4 of 7);  
+      @include span-columns(5 of 7);  
       @include pad();
       categories { 
         @include pad(); 

@@ -13,7 +13,6 @@
 <%= render partial: '/buildings/landlord' %>
 </div>
 
-<div id="map" style='width: 200px; height: 200px; margin:10px;'></div>
 <buildingimage>
 <% if @building.photos.any? %>
   <%= cl_image_tag(@building.photos.first.path, { width: '220', crop: :scale}) %>

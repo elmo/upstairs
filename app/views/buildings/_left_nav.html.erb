@@ -1,0 +1,5 @@
+<% if @building.owner_verified? %>
+  <%= render partial: 'owner_verified_left_nav' %>
+<% else %>
+  <%= render partial: 'owner_not_verified_left_nav' %>
+<% end %>

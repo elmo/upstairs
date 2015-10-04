@@ -191,9 +191,21 @@ img {  display: block; margin: 0px; border: none; padding: 0px; }
 
 
 #find_your_building {
-    
 	opacity:0.50196078431373;
     position: relative;
+    top: -75px;
+    margin-left: 60px;
+	width: 195px;
+	height: 32px;
+	font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-align: left;
+	color:#222222;
+}
+
+#find-your-building-form {
+    opacity:0.50196078431373;
+    position: center;
     top: -75px;
     margin-left: 60px;
 	width: 195px;

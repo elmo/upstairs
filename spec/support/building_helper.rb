@@ -8,3 +8,12 @@ def load_valid_building
   @building.save
 end
 
+def load_unverified_builiding
+  load_valid_building
+end
+
+def load_verified_building
+  @landlord = create(:landlord)
+  @landlord.make_landlord(@building)
+  @verifier = create(:verification, user: @landlord, building: @building, verifier: create(:verifier) )
+end

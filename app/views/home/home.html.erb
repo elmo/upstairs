@@ -10,6 +10,9 @@
         
         
          <%=  image_tag("home/png_logo.png", class:"png_logo") -%>   
+
+<% if false %>
+	Ludo, this your original code. The real form is after the else below.
         <div id="search">
     
             <div id="rounded_rectangle_1"  ></div>
@@ -18,6 +21,16 @@
                 Find your building
             </div>
         </div>
+<%  else %>
+<div id="find-your-builiding-form">
+<%= form_tag find_building_path , method: :get do |f| %>
+<%= text_field_tag :address, params[:address], id: 'gmaps-input-address', placeholder: 'Find your building' -%>
+<%=  submit_tag 'Search'  %>
+<% end %>
+</div>
+<%  end %>
+</div>
+
         <div id="the_social_network__for_your_building_" >
             The social network <br/>
         </div>         
