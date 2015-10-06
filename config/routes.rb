@@ -1,5 +1,7 @@
 Upstairs::Application.routes.draw do
 
+  resources :verifications
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => "/attachinary" unless Rails.env.test?
 

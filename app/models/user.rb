@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_many :verifications, dependent: :destroy
   belongs_to :invitation
   after_create :apply_invitation
   before_save :set_slug
@@ -140,6 +141,14 @@ class User < ActiveRecord::Base
 
   def owner_or_manager_of?(building)
     building.landlord_id == self.id
+  end
+
+  def verify_ownership(building, verifier)
+    verifications.create(building: building, verifier: verifier)
+  end
+
+  def verified_owner_of?(building)
+    verifications.exists?(building_id: building.id)
   end
 
   private
