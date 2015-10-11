@@ -11,7 +11,7 @@ class CreateTickets < ActiveRecord::Migration
     end
     add_index :tickets, [:building_id, :severity], unique: false
     add_index :tickets, [:building_id, :status], unique: false
-    add_foreign_key("tickets", "users")
-    add_foreign_key("tickets", "buildings")
+    add_foreign_key('tickets', 'users')
+    add_foreign_key('tickets', 'buildings')
   end
 end

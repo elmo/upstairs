@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Comment, :type => :model do
+RSpec.describe Comment, type: :model do
   it { should belong_to(:user) }
   it { should belong_to(:comment) }
   it { should have_many(:replies) }
   it { should have_many(:notifications) }
-  it { should validate_presence_of(:user)}
+  it { should validate_presence_of(:user) }
 
-  describe "commenting on posts" do
+  describe 'commenting on posts' do
     before(:each) do
       Notification.any_instance.stub(:deliver_later).and_return(true)
       Post.any_instance.stub(:create_notifications).and_return(true)
@@ -16,16 +16,15 @@ RSpec.describe Comment, :type => :model do
       @post = create(:post, user: @user)
     end
 
-    it "creates comment" do
-      expect{@post.comments.create(commentable: @post, user: @user, body: 'body')}.to change(Comment,:count).by(1)
+    it 'creates comment' do
+      expect { @post.comments.create(commentable: @post, user: @user, body: 'body') }.to change(Comment, :count).by(1)
     end
 
-    it "commenters" do
+    it 'commenters' do
       @post.comments.create(commentable: @post, user: @user, body: 'body')
       expect(@post.commenters.first).to eq @user
       expect(@post.comments.count).to eq 1
       expect(@user.comments.count).to eq 1
     end
   end
-
 end

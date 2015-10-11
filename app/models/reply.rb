@@ -1,5 +1,4 @@
 class Reply < Comment
-
   def building
     comment.commentable.building
   end
@@ -13,7 +12,6 @@ class Reply < Comment
   end
 
   def name
-    "reply"
+    'reply'
   end
-
 end

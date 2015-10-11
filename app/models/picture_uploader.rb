@@ -1,11 +1,11 @@
 class PictureUploader < CarrierWave::Uploader::Base
   include Cloudinary::CarrierWave
 
-  process :convert => 'png'
-  process :tags => ['post_picture']
+  process convert: 'png'
+  process tags: ['post_picture']
 
   version :standard do
-    process :resize_to_fill => [100, 150, :north]
+    process resize_to_fill: [100, 150, :north]
   end
 
   version :thumbnail do
@@ -13,7 +13,6 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   def public_id
-    return model.short_name
+    model.short_name
   end
-
 end

@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   extend SimpleCalendar
-  has_calendar  attribute: :starts
+  has_calendar attribute: :starts
   belongs_to :building
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
@@ -28,5 +28,4 @@ class Event < ActiveRecord::Base
   def create_notifications
     building(includes: :user).users.each { |user| Notification.create(notifiable: self, user: user) }
   end
-
 end

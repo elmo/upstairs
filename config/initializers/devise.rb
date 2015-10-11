@@ -41,12 +41,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :email ]
+  config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :email ]
+  config.strip_whitespace_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -97,7 +97,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-   config.pepper = '89c6ce3f5462e5fc11fdd702f72cef5cb5aa693bfcce6077d37089a2912bf03eede2ea370f7b55bc209e8653408b1cc0e17adbb3e22f62526ad564f3bf971c52'
+  config.pepper = '89c6ce3f5462e5fc11fdd702f72cef5cb5aa693bfcce6077d37089a2912bf03eede2ea370f7b55bc209e8653408b1cc0e17adbb3e22f62526ad564f3bf971c52'
 
   config.secret_key = '57041d269cff1576013df149773bee5a2f2a0a5da6e81cf592dbc841d0fec8028c78d9b0421dbe71c62bb3ed5d98cb21c4a6b4db2ff5120245ed8c51cc0eb783'
 

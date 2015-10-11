@@ -8,7 +8,7 @@ class CreateVerificationRequests < ActiveRecord::Migration
     end
     add_index(:verification_requests, :building_id)
     add_index(:verification_requests, :user_id)
-    add_foreign_key("verification_requests", "users")
-    add_foreign_key("verification_requests", "buildings")
+    add_foreign_key('verification_requests', 'users')
+    add_foreign_key('verification_requests', 'buildings')
   end
 end

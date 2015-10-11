@@ -31,7 +31,7 @@ class MessagesController < ApplicationController
     @message.recipient = @recipient
     @message.building = @building
     if @message.save
-      redirect_to outbox_path(@building, current_user) , notice: "Message to #{@recipient.public_name} was successfully has been sent."
+      redirect_to outbox_path(@building, current_user), notice: "Message to #{@recipient.public_name} was successfully has been sent."
     else
       render :new
     end
@@ -61,21 +61,22 @@ class MessagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      @message = Message.find_by_slug(params[:id])
-    end
 
-    def set_building
-      @building = Building.friendly.find(params[:building_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_message
+    @message = Message.find_by_slug(params[:id])
+  end
 
-    def set_recipient
-      @recipient = User.find_by_slug(params[:user_id])
-    end
+  def set_building
+    @building = Building.friendly.find(params[:building_id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def message_params
-      params.require(:message).permit(:sender_id, :recipient_id, :body, :messageble_type, :messageble_id, :user_id, :sender_id, :building_id)
-    end
+  def set_recipient
+    @recipient = User.find_by_slug(params[:user_id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def message_params
+    params.require(:message).permit(:sender_id, :recipient_id, :body, :messageble_type, :messageble_id, :user_id, :sender_id, :building_id)
+  end
 end

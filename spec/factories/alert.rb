@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :alert do
-     message "alert message"
+    message 'alert message'
   end
 end

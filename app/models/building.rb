@@ -40,11 +40,11 @@ class Building < ActiveRecord::Base
 
   def alerts_for_user(user)
     alerts.recent.joins(:notifications)
-     .where(["notifications.notifiable_id = alerts.id and notifications.notifiable_type = 'Alert' and notifications.user_id = ? ", user.id] )
+      .where(["notifications.notifiable_id = alerts.id and notifications.notifiable_type = 'Alert' and notifications.user_id = ? ", user.id])
   end
 
   def landlord
-    Role.where(resource_type: 'Building', resource_id: self.id,  name: User::ROLE_LANDLORD).try(:first).try(:users).try(:first)
+    Role.where(resource_type: 'Building', resource_id: id,  name: User::ROLE_LANDLORD).try(:first).try(:users).try(:first)
   end
 
   def owner_verified?
@@ -54,7 +54,6 @@ class Building < ActiveRecord::Base
   private
 
   def set_invitation_link
-    self.invitation_link = SecureRandom.hex(4) if self.invitation_link.blank?
+    self.invitation_link = SecureRandom.hex(4) if invitation_link.blank?
   end
-
 end

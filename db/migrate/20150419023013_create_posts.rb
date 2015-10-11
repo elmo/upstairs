@@ -12,6 +12,6 @@ class CreatePosts < ActiveRecord::Migration
     end
     add_index :posts, :postable_id
     add_index :posts, :slug, unique: false
-    add_foreign_key("posts", "users")
+    add_foreign_key('posts', 'users')
   end
 end

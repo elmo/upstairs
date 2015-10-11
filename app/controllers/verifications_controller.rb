@@ -11,9 +11,9 @@ class VerificationsController < ApplicationController
 
   def new
     @verification = Verification.new(
-     verification_request_id: @verification_request.id,
-     user_id: @verification_request.user_id,
-     building_id: @verification_request.building_id
+      verification_request_id: @verification_request.id,
+      user_id: @verification_request.user_id,
+      building_id: @verification_request.building_id
     )
   end
 
@@ -35,7 +35,7 @@ class VerificationsController < ApplicationController
     if  @verification.update(verification_params.merge(verifier_id: current_user.id))
       redirect_to verifications_url, notice: 'Verification was successfully updated.'
     else
-     render :edit
+      render :edit
     end
   end
 
@@ -51,18 +51,18 @@ class VerificationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_verification
-      @verification = Verification.find(params[:id])
-    end
 
-    def set_verification_request
-      @verification_request = VerificationRequest.find(params[:verification_request_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_verification
+    @verification = Verification.find(params[:id])
+  end
 
+  def set_verification_request
+    @verification_request = VerificationRequest.find(params[:verification_request_id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def verification_params
-      params.require(:verification).permit(:verification_request_id)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def verification_params
+    params.require(:verification).permit(:verification_request_id)
+  end
 end

@@ -9,8 +9,8 @@ class CreateMessages < ActiveRecord::Migration
       t.timestamps null: false
       t.string :slug
     end
-    add_index(:messages, [:building_id,:sender_id] )
-    add_index(:messages, [:building_id,:recipient_id] )
+    add_index(:messages, [:building_id, :sender_id])
+    add_index(:messages, [:building_id, :recipient_id])
     add_index(:messages, :slug)
   end
 end
