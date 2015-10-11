@@ -24,7 +24,17 @@ Upstairs::Application.routes.draw do
   get '/buildings/:building_id/outbox' => "messages#outbox", as: :outbox
   get '/buildings/:building_id/calendar' => "events#index", as: :calendar
 
-  resources :verifications
+  resources :verifications, only: [:index, :destroy] do
+     member do
+       put 'revoke'
+     end
+  end
+  resources :verification_requests, only: [:index, :edit, :update, :destroy, :show] do
+     member do
+       put  'reject'
+     end
+     resources :verifications, only: [:new, :create]
+  end
 
   resources :buildings do
     resources :memberships, only: [:create, :destroy, :index]
@@ -35,7 +45,7 @@ Upstairs::Application.routes.draw do
     resources :invitations do
       get 'redeem'
     end
-    resources :verification_requests
+    resources :verification_requests, only: [:new, :create]
     resources :photos
     resources :events
     resources :user_invitations, controller: 'invitations', type: 'UserInvitation'

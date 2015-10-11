@@ -269,9 +269,13 @@ ActiveRecord::Schema.define(version: 20150927194220) do
     t.integer  "building_id"
     t.integer  "user_id"
     t.integer  "verifier_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "verification_request_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
+
+  add_index "verifications", ["building_id"], name: "index_verifications_on_building_id", using: :btree
+  add_index "verifications", ["user_id"], name: "index_verifications_on_user_id", using: :btree
 
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",  null: false
@@ -304,4 +308,7 @@ ActiveRecord::Schema.define(version: 20150927194220) do
   add_foreign_key "tickets", "users"
   add_foreign_key "verification_requests", "buildings"
   add_foreign_key "verification_requests", "users"
+  add_foreign_key "verifications", "buildings"
+  add_foreign_key "verifications", "users"
+  add_foreign_key "verifications", "verification_requests"
 end

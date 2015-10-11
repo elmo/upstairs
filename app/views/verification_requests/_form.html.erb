@@ -1,13 +1,5 @@
-<%= simple_form_for(@verification_request) do |f| %>
+<%= simple_form_for([@verification_request.building, @verification_request]) do |f| %>
   <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :building_id %>
-    <%= f.input :status %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <%= f.hidden_field :building_id %>
+  <%= f.button :submit%>
 <% end %>

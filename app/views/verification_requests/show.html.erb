@@ -1,13 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h1>Verfication Request</h1>
 
 <p>
   <strong>User:</strong>
-  <%= @verification_request.user_id %>
+  <%= @verification_request.user.email %>
 </p>
 
 <p>
   <strong>Building:</strong>
-  <%= @verification_request.building_id %>
+  <%= @verification_request.building.name  %>
 </p>
 
 <p>
@@ -15,5 +15,14 @@
   <%= @verification_request.status %>
 </p>
 
-<%= link_to 'Edit', edit_verification_request_path(@verification_request) %> |
-<%= link_to 'Back', verification_requests_path %>
+<p>
+<% if @verification_request.new?%>
+<%= link_to 'Approve', new_verification_request_verification_path(@verification_request) %>
+<% end %>
+
+<% if @verification_request.approved?%>
+<%= link_to 'Revoke', revoke_verification_path(@verification_request), method: :put %>
+<% end %>
+</p>
+
+<p><%= link_to 'All verification requests', verification_requests_path %></p>
