@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  http_basic_authenticate_with name: 'upstairs', password: 'fixitnow'
+
   protect_from_forgery
 
   before_filter do
