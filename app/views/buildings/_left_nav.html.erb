@@ -1,5 +1,11 @@
-<% if @building.owner_verified? %>
-  <%= render partial: 'owner_verified_left_nav' %>
-<% else %>
-  <%= render partial: 'owner_not_verified_left_nav' %>
-<% end %>
+<% yield :navigation_icon -%>
+<%= upstairs_home_page_icon %>
+<%= building_home_icon(building: @building) %>
+<%= building_bulletin_board_icon(building: @building) %>
+<%= building_alerts_icon(building: @building) %>
+<%= building_calendar_icon(building: @building) %>
+<%= building_messages_icon(building: @building) %>
+<%= building_members_icon(building: @building) %>
+<%= building_repairs_icon(building: @building) %>
+<%= building_invite_icon(building: @building) %>
+<%= building_public_profile_icon(building: @building, user: current_user) %>

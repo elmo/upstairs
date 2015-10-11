@@ -11,7 +11,7 @@ RSpec.describe VerificationRequest, type: :model do
      before(:each) do
        load_user
        load_valid_building
-       load_valid_verfication_request
+       load_valid_verification_request
      end
 
      it "defaults to pending" do

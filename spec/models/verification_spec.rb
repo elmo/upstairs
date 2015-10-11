@@ -15,7 +15,7 @@ RSpec.describe Verification, type: :model do
        load_user
        load_valid_building
        load_verifier
-       load_valid_verfication_request
+       load_valid_verification_request
        build_verification
        UserMailer.stub(:verification_request_approved).and_return(true)
      end
@@ -54,7 +54,7 @@ RSpec.describe Verification, type: :model do
        load_user
        load_valid_building
        load_verifier
-       load_valid_verfication_request
+       load_valid_verification_request
        build_verification
        UserMailer.stub(:verification_request_approved).and_return(true)
        UserMailer.stub(:verification_expired).and_return(true)
@@ -65,7 +65,7 @@ RSpec.describe Verification, type: :model do
        expect{@verification.destroy}.to change{Verification.count}.by(-1)
      end
 
-     it"updates associated user from verified to not verfied" do
+     it"updates associated user from verified to not verified" do
        expect{@verification.destroy}.to change{@user.verified_owner_of?(@building)}
         .from(true)
         .to(false)

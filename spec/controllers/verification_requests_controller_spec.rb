@@ -98,7 +98,7 @@ RSpec.describe VerificationRequestsController, type: :controller do
 
   describe "PUT #update" do
     before(:each) do
-      load_valid_verfication_request
+      load_valid_verification_request
       @valid_attributes = {user_id: @user.id, building_id: @building.id, status: 'New' }
       @invalid_attributes = {user_id: @user.id, buliding_id: nil, status: nil }
     end
@@ -139,7 +139,7 @@ RSpec.describe VerificationRequestsController, type: :controller do
 
   describe "DELETE #destroy" do
     before(:each) do
-      load_valid_verfication_request
+      load_valid_verification_request
     end
      it "destroys the requested verification_request" do
        expect {

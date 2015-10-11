@@ -140,14 +140,14 @@ RSpec.describe Building, :type => :model do
         load_valid_building
         load_user
 	load_verifier
-        load_valid_verfication_request
+        load_valid_verification_request
       end
 
-      it "should be false if there is no verfication record for the building" do
+      it "should be false if there is no verification record for the building" do
         expect(@building.owner_verified?).to be_falsey
       end
 
-      it "should be true if there is a verfication record for the building" do
+      it "should be true if there is a verification record for the building" do
         create(:verification, user: @user, building: @building, verifier: @verifier, verification_request: @verification_request)
         expect(@building.owner_verified?).to be_truthy
       end
@@ -158,14 +158,14 @@ RSpec.describe Building, :type => :model do
         load_valid_building
         load_user
         load_verifier
-        load_valid_verfication_request
+        load_valid_verification_request
       end
 
-      it "should be false if there is no verfication record for the building" do
+      it "should be false if there is no verification record for the building" do
         expect(Building.verified.count).to eq 0
       end
 
-      it "should be true if there is a verfication record for the building" do
+      it "should be true if there is a verification record for the building" do
         create(:verification, user: @user, building: @building, verifier: @verifier, verification_request: @verification_request)
         expect(Building.verified.count).to eq 1
       end

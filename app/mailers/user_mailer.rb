@@ -41,7 +41,7 @@ class UserMailer < ApplicationMailer
     @user = verification_request.user
     @email = @user.email
     @building_url = Rails.application.routes.url_helpers.building_url(@building)
-    mail(to: @email, from: "admin@upstairs.io", subject: "Your Upstairs verfication request for #{@building.address} has been approved!" )
+    mail(to: @email, from: "admin@upstairs.io", subject: "Your Upstairs verification request for #{@building.address} has been approved!" )
   end
 
   def verification_request_rejected(verification_request)

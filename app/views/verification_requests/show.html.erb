@@ -16,11 +16,9 @@
 </p>
 
 <p>
-<% if @verification_request.new?%>
+<% if !@verification_request.approved? %>
 <%= link_to 'Approve', new_verification_request_verification_path(@verification_request) %>
-<% end %>
-
-<% if @verification_request.approved?%>
+<% else %>
 <%= link_to 'Revoke', revoke_verification_path(@verification_request), method: :put %>
 <% end %>
 </p>

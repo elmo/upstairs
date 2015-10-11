@@ -374,7 +374,7 @@ RSpec.describe User , :type => :model do
        load_valid_building
        load_user
        load_verifier
-       load_valid_verfication_request
+       load_valid_verification_request
      end
      it "should be false when no verification record exists" do
        expect(@user.verified_owner_of?(@building)).to be_falsey
@@ -390,14 +390,14 @@ RSpec.describe User , :type => :model do
        load_valid_building
        load_user
        load_verifier
-       load_valid_verfication_request
+       load_valid_verification_request
      end
 
      it "requires building" do
        expect {@user.verify_ownership(building: nil, verifier: @verifier, verification_request: @verification_request) }.to change(Verification, :count).by(0)
      end
 
-     it "requires verfifier" do
+     it "requires verififier" do
        expect {@user.verify_ownership(building: @building, verifier: nil, verification_request: @verification_request) }.to change(Verification, :count).by(0)
      end
 

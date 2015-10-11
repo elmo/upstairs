@@ -9,7 +9,7 @@ RSpec.describe VerificationsController, type: :controller do
     load_valid_building
     load_verifier
     load_user
-    load_valid_verfication_request
+    load_valid_verification_request
     sign_in(@verifier)
     @verifier.add_role(:admin)
   end
