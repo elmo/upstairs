@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.boolean :ok_to_send_text_messages, default: true
       t.string :slug
       t.integer :invitation_id
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :users, :email,                unique: true
