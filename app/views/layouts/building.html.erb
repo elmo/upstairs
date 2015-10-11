@@ -13,50 +13,16 @@
 
 </head>
 <body class="type-system-geometric">
-<%= render partial: '/layouts/top_navigation' %>
-<%= render partial: '/layouts/flash' %>
-<%= render partial: '/buildings/alerts' %>
-
 <div id= "main" class="type-system-geometric">
 <building>
 <buildingleft>
-<%= render partial: '/buildings/messages' -%>
-<br clear="all">
-<%= render partial: '/buildings/name' %>
-<br clear="all">
-<%= render partial: '/buildings/membership' -%>
-<br clear="all">
-</buildingmembership>
-<br clear="all">
-<categories><%= render partial: '/buildings/categories' %></categories>
-<br clear="all">
- <activity> <%= render partial: '/buildings/activity' -%> </activity>
+<%= current_user_left_nav(building: @building, user: current_user) -%>
 </buildingleft>
 <buildingright>
-<buildingfeed>
 <%= yield %>
-</buildingfeed>
 </buildingright>
-</building>
 </div>
-
 <%= footer %>
-
-<script>
-$(document).ready(function(){
- initialize($("div#map").get(0));
-});
-
-function initialize(element) {
-  var latlng = new google.maps.LatLng(<%= @building.latitude-%>, <%= @building.longitude -%>);
-  var myOptions = {
-    zoom: 19,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.HYBRID
-  };
-  var map = new google.maps.Map(element, myOptions);
-}
-</script>
-
+<%= render partial: '/layouts/google_map_javascript'%>
 </body>
 </html>

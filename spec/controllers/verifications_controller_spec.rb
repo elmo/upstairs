@@ -9,16 +9,25 @@ RSpec.describe VerificationsController, type: :controller do
     load_valid_building
     load_verifier
     load_user
+    load_valid_verfication_request
     sign_in(@verifier)
     @verifier.add_role(:admin)
   end
 
   let(:valid_attributes) {
-    {building_id: @building.id, user_id: @user.id, verifier_id: @verifier.id}
+    {
+      verification_request_id: @verification_request.id,
+      verifier_id: @verifier.id,
+      building_id: @verification_request.building.id,
+      user_id: @verification_request.user.id
+    }
   }
 
   let(:invalid_attributes) {
-    {building_id: -1}
+    {
+      verification_request_id: nil,
+      verifier_id: @verifier.id,
+    }
   }
 
   let(:valid_session) { {user_id: @verifier.id} }
@@ -31,26 +40,10 @@ RSpec.describe VerificationsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested verification as @verification" do
-      verification = Verification.create! valid_attributes
-      get :show, {:id => verification.to_param}, valid_session
-      expect(assigns(:verification)).to eq(verification)
-    end
-  end
-
   describe "GET #new" do
     it "assigns a new verification as @verification" do
-      get :new, {}, valid_session
+      get :new, {verification_request_id: @verification_request.id}, valid_session
       expect(assigns(:verification)).to be_a_new(Verification)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested verification as @verification" do
-      verification = Verification.create! valid_attributes
-      get :edit, {:id => verification.to_param}, valid_session
-      expect(assigns(:verification)).to eq(verification)
     end
   end
 
@@ -58,72 +51,19 @@ RSpec.describe VerificationsController, type: :controller do
     context "with valid params" do
       it "creates a new Verification" do
         expect {
-          post :create, {:verification => valid_attributes}, valid_session
+          post :create, {verification_request_id: @verification_request.id}, valid_session
         }.to change(Verification, :count).by(1)
       end
 
       it "assigns a newly created verification as @verification" do
-        post :create, {:verification => valid_attributes}, valid_session
+        post :create, {verification_request_id: @verification_request.id, :verification => valid_attributes}, valid_session
         expect(assigns(:verification)).to be_a(Verification)
         expect(assigns(:verification)).to be_persisted
       end
 
       it "redirects to the created verification" do
-        post :create, {:verification => valid_attributes}, valid_session
-        expect(response).to redirect_to(Verification.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved verification as @verification" do
-        post :create, {:verification => invalid_attributes}, valid_session
-        expect(assigns(:verification)).to be_a_new(Verification)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:verification => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        {building_id: @building.id, user_id: @user.id, verifier_id: @verifier.id }
-      }
-
-      it "updates the requested verification" do
-        verification = Verification.create! valid_attributes
-        put :update, {:id => verification.to_param, :verification => new_attributes}, valid_session
-        verification.reload
-	expect(assigns(:verification).verifier_id).to eq @verifier.id
-      end
-
-      it "assigns the requested verification as @verification" do
-        verification = Verification.create! valid_attributes
-        put :update, {:id => verification.to_param, :verification => valid_attributes}, valid_session
-        expect(assigns(:verification)).to eq(verification)
-      end
-
-      it "redirects to the verification" do
-        verification = Verification.create! valid_attributes
-        put :update, {:id => verification.to_param, :verification => valid_attributes}, valid_session
-        expect(response).to redirect_to(verification)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the verification as @verification" do
-        verification = Verification.create! valid_attributes.merge(verifier_id: @verifier.id)
-        put :update, {:id => verification.to_param, :verification => invalid_attributes.merge(building_id: -1)}, valid_session
-        expect(assigns(:verification)).to eq(verification)
-      end
-
-      it "re-renders the 'edit' template" do
-        verification = Verification.create! valid_attributes.merge(verifier_id: @verifier.id)
-        put :update, {:id => verification.to_param, :verification => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        post :create, {verification_request_id: @verification_request.id, :verification => valid_attributes}, valid_session
+        expect(response).to redirect_to verification_requests_url
       end
     end
   end

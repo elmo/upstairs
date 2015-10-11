@@ -9,6 +9,8 @@ class Building < ActiveRecord::Base
   has_many :posts, as: :postable, dependent: :destroy
   has_many :tickets, dependent: :destroy
   has_many :users, through: :memberships
+  has_many :verifications, dependent: :destroy
+  has_many :verification_requests, dependent: :destroy
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   belongs_to :actionable, polymorphic: true
   validates_presence_of :address
@@ -26,6 +28,7 @@ class Building < ActiveRecord::Base
   friendly_id :address, use: :slugged
   has_paper_trail
   has_attachments :photos
+  scope :verified, -> { joins(:verifications) }
 
   def membership(user)
     user.memberships.where(user_id: user.id).first
@@ -42,6 +45,10 @@ class Building < ActiveRecord::Base
 
   def landlord
     Role.where(resource_type: 'Building', resource_id: self.id,  name: User::ROLE_LANDLORD).try(:first).try(:users).try(:first)
+  end
+
+  def owner_verified?
+    verifications.exists?
   end
 
   private

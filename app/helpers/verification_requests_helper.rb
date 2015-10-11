@@ -1,0 +1,2 @@
+module VerificationRequestsHelper
+end

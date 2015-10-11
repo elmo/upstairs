@@ -1,9 +1,7 @@
-<h1 class="inline">Bulletin Board</h1> <%= pluralize(@building.posts.count, 'note') %>
-<%= link_to 'post a note' , new_building_post_path(@building) -%>
+<% content_for :navigation_icon do %>
+<%#TODO: replace below with a real path to a icon image. -%>
+<% image_tag("building_home_icon.png") %> 
+<% end %>
 
-<br />
-
-<posts>
-<br>
-<%= render partial: 'posts', locals: {posts: @posts} -%>
-</posts>
+<%= alert_bar(building: @building, user: current_user) -%>
+<%= current_user_view(building: @building, user: current_user) -%>

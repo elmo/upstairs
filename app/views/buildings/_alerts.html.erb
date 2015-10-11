@@ -1,8 +1,6 @@
-<% if current_user.present? %>
-  <% @building.alerts_for_user(current_user).each do |alert| %>
-    <div class="flash-error"> 
-      <span><%=link_to alert.message, building_alert_path(@building, alert ) -%> </span> 
-        <%= link_to 'dismiss', notification_path(alert.id, notifiable_type: 'Alert'), method: :delete -%>
-    </div>
-  <% end %>
+<% @building.alerts_for_user(current_user).each do |alert| %>
+  <div class="flash-error"> 
+    <span><%=link_to alert.message, building_alert_path(@building, alert ) -%> </span> 
+    <%= link_to 'dismiss', notification_path(alert.id, notifiable_type: 'Alert'), method: :delete -%>
+  </div>
 <% end %>

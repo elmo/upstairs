@@ -102,6 +102,21 @@ RSpec.describe User , :type => :model do
      end
   end
 
+  describe "verifier?" do
+     before(:each) do
+       load_user
+     end
+
+     it "is false when user does not have role :verifier" do
+        expect(@user.verifier?).to eq false
+     end
+
+     it "is true when user has role :admin" do
+        @user.add_role(:verifier)
+        expect(@user.verifier?).to eq true
+     end
+  end
+
   describe "owns?" do
      before(:each) do
        load_valid_building
@@ -358,13 +373,14 @@ RSpec.describe User , :type => :model do
      before(:each) do
        load_valid_building
        load_user
+       load_verifier
+       load_valid_verfication_request
      end
      it "should be false when no verification record exists" do
        expect(@user.verified_owner_of?(@building)).to be_falsey
      end
      it "should be true when a verification record exists" do
-       @verifier = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
-       @user.verify_ownership(@building, @verifier)
+       @user.verify_ownership(building: @building, verifier: @verifier, verification_request: @verification_request)
        expect(@user.verified_owner_of?(@building)).to be_truthy
      end
    end
@@ -373,19 +389,20 @@ RSpec.describe User , :type => :model do
      before(:each) do
        load_valid_building
        load_user
-       @verifier = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
+       load_verifier
+       load_valid_verfication_request
      end
 
      it "requires building" do
-       expect {@user.verify_ownership(nil, @verifier) }.to change(Verification, :count).by(0)
+       expect {@user.verify_ownership(building: nil, verifier: @verifier, verification_request: @verification_request) }.to change(Verification, :count).by(0)
      end
 
      it "requires verfifier" do
-       expect {@user.verify_ownership(@building, nil) }.to change(Verification, :count).by(0)
+       expect {@user.verify_ownership(building: @building, verifier: nil, verification_request: @verification_request) }.to change(Verification, :count).by(0)
      end
 
      it "verifiy ownership" do
-       expect {@user.verify_ownership(@building, @verifier) }.to change(Verification, :count).by(1)
+       expect {@user.verify_ownership(building: @building, verifier: @verifier, verification_request: @verification_request)}.to change(Verification, :count).by(1)
        expect(@user.verified_owner_of?(@building)).to be_truthy
      end
    end

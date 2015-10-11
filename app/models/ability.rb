@@ -12,6 +12,11 @@ class Ability
       user.owns?(ticket) or user.manager_of?(ticket.building)
     end
 
+    if user.verifier?
+      can :manage , VerificationRequest
+      can :manage , Verification
+    end
+
     # Define abilities for the passed in user here. For example:
 	  #
     #user ||= User.new # guest user (not logged in)

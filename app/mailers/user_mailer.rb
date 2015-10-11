@@ -36,4 +36,28 @@ class UserMailer < ApplicationMailer
     mail(to: notification.user.email, subject: "#{notification.notifiable.user.public_name} replied to a comment on #{notification.notifiable.comment.commentable.title}")
   end
 
+  def verification_request_approved(verification_request)
+    @building = verification_request.building
+    @user = verification_request.user
+    @email = @user.email
+    @building_url = Rails.application.routes.url_helpers.building_url(@building)
+    mail(to: @email, from: "admin@upstairs.io", subject: "Your Upstairs verfication request for #{@building.address} has been approved!" )
+  end
+
+  def verification_request_rejected(verification_request)
+    @building = verification_request.building
+    @user = verification_request.user
+    @email = @user.email
+    @building_url = Rails.application.routes.url_helpers.building_url(@building)
+    mail(to: @email, from: "admin@upstairs.io", subject: "You're to be offical Upstairs landlord of #{@building.address} been rejected." )
+  end
+
+  def verification_expired(verification)
+    @building = verification.building
+    @user = verification.user
+    @email = @user.email
+    @building_url = Rails.application.routes.url_helpers.building_url(@building)
+    mail(to: @email, from: "admin@upstairs.io", subject: "You are no longer the offical Upstairs landlord of #{@building.address}." )
+  end
+
 end

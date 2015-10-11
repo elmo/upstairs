@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Verifications</h1>
 
+<% if @verifications.any? %>
 <table>
   <thead>
     <tr>
@@ -14,16 +13,16 @@
   <tbody>
     <% @verifications.each do |verification| %>
       <tr>
-        <td><%= verification.building_id %></td>
-        <td><%= verification.user_id %></td>
-        <td><%= link_to 'Show', verification %></td>
-        <td><%= link_to 'Edit', edit_verification_path(verification) %></td>
-        <td><%= link_to 'Destroy', verification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= verification.building.name %></td>
+        <td><%= verification.user.email %></td>
+        <td><%= link_to 'Revoke', verification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+<p>There are no verifications in the system.</p>
+<% end %>
 
 <br>
 
-<%= link_to 'New Verification', new_verification_path %>

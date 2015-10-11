@@ -51,6 +51,14 @@ class User < ActiveRecord::Base
     has_role?(:admin)
   end
 
+  def verifier?
+    has_role?(:verifier)
+  end
+
+  def make_verifier
+    add_role(:verifier)
+  end
+
   def owns?(obj)
     id == obj.user_id
   end
@@ -143,8 +151,8 @@ class User < ActiveRecord::Base
     building.landlord_id == self.id
   end
 
-  def verify_ownership(building, verifier)
-    verifications.create(building: building, verifier: verifier)
+  def verify_ownership(building:, verifier:, verification_request: )
+    verifications.create(building: building, verifier: verifier, verification_request: verification_request)
   end
 
   def verified_owner_of?(building)

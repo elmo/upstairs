@@ -1,0 +1,9 @@
+<h1 class="inline">Bulletin Board</h1> <%= pluralize(@building.posts.count, 'note') %>
+<%= link_to 'post a note' , new_building_post_path(@building) -%>
+
+<br />
+
+<posts>
+<br>
+<%= render partial: 'posts', locals: {posts: @posts} -%>
+</posts>
