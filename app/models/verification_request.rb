@@ -10,13 +10,13 @@ class VerificationRequest < ActiveRecord::Base
   STATUS_REJECTED = 'rejected'
   STATUS_EXPIRED = 'expired'
 
-  scope :approved, -> { where(status: STATUS_APPROVED)}
-  scope :pending, -> { where(status: STATUS_PENDING)}
-  scope :rejected,-> { where(status: STATUS_REJECTED)}
-  scope :expired,-> { where(status: STATUS_EXPIRED)}
+  scope :approved, -> { where(status: STATUS_APPROVED) }
+  scope :pending, -> { where(status: STATUS_PENDING) }
+  scope :rejected, -> { where(status: STATUS_REJECTED) }
+  scope :expired, -> { where(status: STATUS_EXPIRED) }
 
   def approve!
-    update_column(:status,STATUS_APPROVED)
+    update_column(:status, STATUS_APPROVED)
     notify_user_of_approval
   end
 
@@ -57,5 +57,4 @@ class VerificationRequest < ActiveRecord::Base
   def notify_user_of_expiration
     UserMailer.verification_expired(self)
   end
-
 end

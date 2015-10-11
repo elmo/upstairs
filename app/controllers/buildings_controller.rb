@@ -10,13 +10,13 @@ class BuildingsController < ApplicationController
   def show
     @users = @building.users
     @posts = @building.posts.page(params[:page]).per(10).order('created_at desc')
-    @notifications = @building.notifications.order("created_at desc").limit(5)
+    @notifications = @building.notifications.order('created_at desc').limit(5)
   end
 
   def choose
     @address = params[:address]
-    @building = Building.where(address: params[:address] ).first
-    redirect_to building_path(@building) and return false if @building.present? and current_user.member_of?(@building)
+    @building = Building.where(address: params[:address]).first
+    redirect_to building_path(@building) and return false if @building.present? && current_user.member_of?(@building)
     @building = Building.new(address: params[:address])
     @building.geocode
   end
@@ -64,18 +64,18 @@ class BuildingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_building
-      @building = Building.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def building_params
-      params.require(:building).permit(:name, :address, photos: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_building
+    @building = Building.friendly.find(params[:id])
+  end
 
-   def get_layout
-     ['show', 'gallery', 'edit'].include?(action_name) ? 'building' : 'application'
-   end
+  # Only allow a trusted parameter "white list" through.
+  def building_params
+    params.require(:building).permit(:name, :address, photos: [])
+  end
 
+  def get_layout
+    %w(show gallery edit).include?(action_name) ? 'building' : 'application'
+  end
 end

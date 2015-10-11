@@ -5,5 +5,4 @@ class NotifyWorker
     @notification = Notification.find(notification_id)
     @notification.deliver
   end
-
 end

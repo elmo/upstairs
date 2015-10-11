@@ -53,18 +53,18 @@ class AlertsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
 
-    def set_building
-      @building = Building.friendly.find(params[:building_id])
-    end
+  def set_building
+    @building = Building.friendly.find(params[:building_id])
+  end
 
-    def set_alert
-      @alert = Alert.find(params[:id])
-    end
+  def set_alert
+    @alert = Alert.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def alert_params
-      params[:alert].permit(:message)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def alert_params
+    params[:alert].permit(:message)
+  end
 end

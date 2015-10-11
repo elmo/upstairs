@@ -8,7 +8,7 @@ class CreateAlerts < ActiveRecord::Migration
     end
     add_index(:alerts, :user_id)
     add_index(:alerts, :building_id)
-    add_foreign_key("alerts", "users")
-    add_foreign_key("alerts", "buildings")
+    add_foreign_key('alerts', 'users')
+    add_foreign_key('alerts', 'buildings')
   end
 end

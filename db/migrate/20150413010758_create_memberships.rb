@@ -5,8 +5,8 @@ class CreateMemberships < ActiveRecord::Migration
       t.integer :building_id
       t.timestamps null: false
     end
-    add_index(:memberships,[:user_id, :building_id], unique: true)
-    add_foreign_key("memberships","users")
-    add_foreign_key("memberships","buildings")
+    add_index(:memberships, [:user_id, :building_id], unique: true)
+    add_foreign_key('memberships', 'users')
+    add_foreign_key('memberships', 'buildings')
   end
 end

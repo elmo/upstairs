@@ -1,5 +1,4 @@
 class SessionsController < Devise::SessionsController
-
   def new
     super
   end
@@ -26,7 +25,5 @@ class SessionsController < Devise::SessionsController
     else
       respond_with resource, location: root_path
     end
-
   end
-
 end

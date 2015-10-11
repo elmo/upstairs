@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :message do
-    body "message body"
+    body 'message body'
   end
 end

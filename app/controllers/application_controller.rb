@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    redirect_to root_url, alert: exception.message
   end
 
   def after_sign_in_path_for(resource)
@@ -23,11 +23,10 @@ class ApplicationController < ActionController::Base
       redirect_to building_path(building) and return false  if building.present?
     end
     sign_in_url = new_user_session_url
-    return stored_location_for(resource) || root_path
+    stored_location_for(resource) || root_path
   end
 
   def not_found
-    raise ActionController::RoutingError.new('Not Found')
+    fail ActionController::RoutingError.new('Not Found')
   end
-
 end

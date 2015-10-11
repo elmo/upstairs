@@ -24,5 +24,4 @@ class UsersController < ApplicationController
   def get_layout
     'building'
   end
-
 end

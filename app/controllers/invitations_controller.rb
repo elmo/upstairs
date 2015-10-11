@@ -4,21 +4,19 @@ class InvitationsController < ApplicationController
   before_action :set_building, except:  [:welcome]
   layout 'building'
 
-
   # GET /invitations/1
   def show
   end
 
   def welcome
     # user has shared static link for this building
-    @building = Building.where(invitation_link: params[:id] ).first
+    @building = Building.where(invitation_link: params[:id]).first
     if @building.present?
       session[:invitation_link] = params[:id]
       redirect_to building_path(@building)
     else
       not_found
     end
-
   end
 
   def redeem
@@ -48,17 +46,18 @@ class InvitationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_invitation
-      @invitation = Invitation.find_by(token: params[:id])
-    end
 
-    def set_building
-      @building = Building.friendly.find(params[:building_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_invitation
+    @invitation = Invitation.find_by(token: params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def invitation_params
-      params.require(:invitation).permit(:user_id, :building_id, :token, :email, :redeemed_at, :type)
-    end
+  def set_building
+    @building = Building.friendly.find(params[:building_id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def invitation_params
+    params.require(:invitation).permit(:user_id, :building_id, :token, :email, :redeemed_at, :type)
+  end
 end

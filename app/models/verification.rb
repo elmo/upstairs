@@ -11,11 +11,10 @@ class Verification < ActiveRecord::Base
   before_destroy :expire_request
 
   def approve_request
-    self.verification_request.approve!
+    verification_request.approve!
   end
 
   def expire_request
-    self.verification_request.expired!
+    verification_request.expired!
   end
-
 end

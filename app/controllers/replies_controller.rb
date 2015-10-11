@@ -29,11 +29,11 @@ class RepliesController < ApplicationController
     @reply.user = current_user
     if @reply.save
       if @comment.commentable.class.to_s == 'Ticket'
-        redirect_to building_ticket_path(@comment.commentable.building, @comment.commentable), notice: "Your reply has been saved."
+        redirect_to building_ticket_path(@comment.commentable.building, @comment.commentable), notice: 'Your reply has been saved.'
       elsif @comment.commentable.class.to_s == 'Event'
-        redirect_to building_event_path(@comment.commentable.building, @comment.commentable), notice: "Your reply has been saved."
+        redirect_to building_event_path(@comment.commentable.building, @comment.commentable), notice: 'Your reply has been saved.'
       else
-        redirect_to building_post_path(@comment.commentable.postable, @comment.commentable) , notice: "Your reply has been saved."
+        redirect_to building_post_path(@comment.commentable.postable, @comment.commentable), notice: 'Your reply has been saved.'
       end
     else
       render :new
@@ -56,19 +56,20 @@ class RepliesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
 
-    def set_comment
-      @comment = Comment.find(params[:comment_id])
-      @building = @comment.commentable.postable
-    end
+  # Use callbacks to share common setup or constraints between actions.
 
-    def set_reply
-      @reply = Comment.find(params[:id])
-    end
+  def set_comment
+    @comment = Comment.find(params[:comment_id])
+    @building = @comment.commentable.postable
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def reply_params
-      params[:reply].permit(:body)
-    end
+  def set_reply
+    @reply = Comment.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def reply_params
+    params[:reply].permit(:body)
+  end
 end

@@ -5,18 +5,18 @@ class Ticket < ActiveRecord::Base
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   validates_presence_of :user
-  validates_presence_of :title, message: "Please enter a title for your maintenance issue."
+  validates_presence_of :title, message: 'Please enter a title for your maintenance issue.'
   validates_presence_of :severity
   validates_presence_of :status
-  validates_presence_of :body, message: "Please enter the details of your maintenance issue."
+  validates_presence_of :body, message: 'Please enter the details of your maintenance issue.'
   after_create :create_notifications
   after_create :create_actionable
 
-  scope :open, -> { where(status: STATUS_OPEN )}
-  scope :closed, -> { where(status: STATUS_CLOSED)}
-  scope :minor, -> { where(severity: SEVERITY_MINOR)}
-  scope :serious, -> { where(severity: SEVERITY_SERIOUS)}
-  scope :severe, -> { where(severity: SEVERITY_SEVERE)}
+  scope :open, -> { where(status: STATUS_OPEN) }
+  scope :closed, -> { where(status: STATUS_CLOSED) }
+  scope :minor, -> { where(severity: SEVERITY_MINOR) }
+  scope :serious, -> { where(severity: SEVERITY_SERIOUS) }
+  scope :severe, -> { where(severity: SEVERITY_SEVERE) }
 
   STATUS_OPEN = 'open'
   STATUS_CLOSED = 'closed'
@@ -42,6 +42,6 @@ class Ticket < ActiveRecord::Base
   end
 
   def create_actionable
-    Activity.create(actionable: self, user: self.user, building: self.building)
+    Activity.create(actionable: self, user: user, building: building)
   end
 end

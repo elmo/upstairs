@@ -9,18 +9,19 @@ class Alert < ActiveRecord::Base
   after_create :create_notifications
   after_create :create_actionable
 
-  scope :recent, -> { where( ["alerts.created_at > ? ", Time.zone.now - 12.hours ] ) }
-  scope :for_user , -> (user) { joins(:notifications).
-	  where(["notifications.user_id = ? and notifications.notifiable_type = 'Alert'" , user.id ] ) }
+  scope :recent, -> { where(['alerts.created_at > ? ', Time.zone.now - 12.hours]) }
+  scope :for_user, lambda  { |user|
+    joins(:notifications)
+      .where(["notifications.user_id = ? and notifications.notifiable_type = 'Alert'", user.id])
+  }
 
   private
 
   def create_actionable
-   Activity.create(actionable: self, user: self.user, building: self.building)
+    Activity.create(actionable: self, user: user, building: building)
   end
 
   def create_notifications
     building.users.each { |user| Notification.create(notifiable: self, user: user) }
   end
-
 end
