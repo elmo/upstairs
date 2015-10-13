@@ -10,7 +10,7 @@ class CreateEvents < ActiveRecord::Migration
     end
     add_index(:events, :building_id)
     add_index(:events, :user_id)
-    add_foreign_key("events", "users")
-    add_foreign_key("events", "buildings")
+    add_foreign_key('events', 'users')
+    add_foreign_key('events', 'buildings')
   end
 end

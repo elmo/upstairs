@@ -56,19 +56,19 @@ class PostsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
 
-    def set_postable
-      @postable = Building.friendly.find(params[:building_id])
-      @building = @postable
-    end
+  def set_postable
+    @postable = Building.friendly.find(params[:building_id])
+    @building = @postable
+  end
 
-    def set_post
-      @post = @postable.posts.friendly.find(params[:id])
-    end
+  def set_post
+    @post = @postable.posts.friendly.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def post_params
-      params[:post].permit(:title, :body, :category_id,  photos: [])
-    end
+  # Only allow a trusted parameter "white list" through.
+  def post_params
+    params[:post].permit(:title, :body, :category_id,  photos: [])
+  end
 end

@@ -2,9 +2,9 @@ class ShortUrl < ActiveRecord::Base
   after_create :save_token
 
   def self.for(url)
-   Rails.application.routes.url_helpers.dispatch_url(
-     (ShortUrl.where(url: url).first || ShortUrl.create(url: url)).token
-   )
+    Rails.application.routes.url_helpers.dispatch_url(
+      (ShortUrl.where(url: url).first || ShortUrl.create(url: url)).token
+    )
   end
 
   private
@@ -16,5 +16,4 @@ class ShortUrl < ActiveRecord::Base
       return
     end
   end
-
 end

@@ -10,5 +10,4 @@ FactoryGirl.define do
   factory :user_invitation do
     type 'UserInvitation'
   end
-
 end

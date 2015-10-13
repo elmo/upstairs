@@ -50,17 +50,18 @@ class TicketsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ticket
-      @ticket = @building.tickets.find(params[:id])
-    end
 
-    def set_building
-      @building = Building.friendly.find(params[:building_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ticket
+    @ticket = @building.tickets.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def ticket_params
-      params.require(:ticket).permit(:user_id, :building_id, :title, :body, :severity, :status, photos: [])
-    end
+  def set_building
+    @building = Building.friendly.find(params[:building_id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def ticket_params
+    params.require(:ticket).permit(:user_id, :building_id, :title, :body, :severity, :status, photos: [])
+  end
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout :get_layout
   before_action :authenticate_user!
   before_action :get_building, only: [:show]
 
@@ -20,4 +21,7 @@ class UsersController < ApplicationController
     @building = Building.friendly.find(params[:building_id])
   end
 
+  def get_layout
+    'building'
+  end
 end

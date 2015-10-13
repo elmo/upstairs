@@ -1,5 +1,7 @@
 <h1>New Verification</h1>
 
+<p>Create verficiation for user <b><%= @verification_request.user.email -%></b> for building <b><%= @verification_request.building.name -%></b></p>
+
 <%= render 'form' %>
 
-<%= link_to 'Back', verifications_path %>
+<%= link_to 'List all verifications', verifications_path %>

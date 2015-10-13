@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   has_attachment :avatar, accept: [:jpg, :png, :gif]
 
   def join(building)
-    self.memberships.create(building_id: building.id) unless member_of?(building)
+    memberships.create(building_id: building.id) unless member_of?(building)
   end
 
   def leave(building)
@@ -40,15 +40,23 @@ class User < ActiveRecord::Base
   end
 
   def receives_text_messages?
-   ok_to_send_text_messages? && phone_valid?
+    ok_to_send_text_messages? && phone_valid?
   end
 
   def phone_valid?
-    phone.present? && phone.length >=10 and phone.length <= 12
+    phone.present? && phone.length >= 10 && phone.length <= 12
   end
 
   def admin?
     has_role?(:admin)
+  end
+
+  def verifier?
+    has_role?(:verifier)
+  end
+
+  def make_verifier
+    add_role(:verifier)
   end
 
   def owns?(obj)
@@ -60,23 +68,23 @@ class User < ActiveRecord::Base
   end
 
   def manager_of?(building)
-    has_role?(:landlord, building) or has_role?(:manager, building)
+    has_role?(:landlord, building) || has_role?(:manager, building)
   end
 
   def sent_messages
-    Message.where(sender_id: self.id)
+    Message.where(sender_id: id)
   end
 
   def received_messages
-    Message.where(recipient_id: self.id)
+    Message.where(recipient_id: id)
   end
 
   def received_messages_count
-    Message.where(recipient_id: self.id).count
+    Message.where(recipient_id: id).count
   end
 
   def sent_messages_count
-    Message.where(sender_id: self.id).count
+    Message.where(sender_id: id).count
   end
 
   def default_building
@@ -107,12 +115,12 @@ class User < ActiveRecord::Base
       make_manager(building) if invitation.type == INVITATION_MANAGER
       building = invitation.building
       building.save
-      self.save
+      save
     end
   end
 
   def landlord_or_manager?
-    landlord? or manager?
+    landlord? || manager?
   end
 
   def landlord?
@@ -140,11 +148,11 @@ class User < ActiveRecord::Base
   end
 
   def owner_or_manager_of?(building)
-    building.landlord_id == self.id
+    building.landlord_id == id
   end
 
-  def verify_ownership(building, verifier)
-    verifications.create(building: building, verifier: verifier)
+  def verify_ownership(building:, verifier:, verification_request:)
+    verifications.create(building: building, verifier: verifier, verification_request: verification_request)
   end
 
   def verified_owner_of?(building)
@@ -154,11 +162,10 @@ class User < ActiveRecord::Base
   private
 
   def set_slug
-    while self.slug.blank? do
-     s = SecureRandom.hex(5)
-     next if User.where(slug: s).exists?
-     self.slug = s
+    while slug.blank?
+      s = SecureRandom.hex(5)
+      next if User.where(slug: s).exists?
+      self.slug = s
     end
   end
-
 end

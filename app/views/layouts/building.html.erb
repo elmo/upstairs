@@ -13,6 +13,7 @@
 
 </head>
 <body class="type-system-geometric">
+<<<<<<< HEAD
     
     
     
@@ -20,10 +21,13 @@
 <%= render partial: '/layouts/flash' %>
 <%= render partial: '/buildings/alerts' %>
 
+=======
+>>>>>>> master
 <div id= "main" class="type-system-geometric">
 
 <building>
 <buildingleft>
+<<<<<<< HEAD
     <div class="menu_contener">
     <ul class="menu">
      <li title="home"><a href="#" class="home">home</a></li>
@@ -49,30 +53,19 @@
 <categories><%= render partial: '/buildings/categories' %></categories>
 <br clear="all">
  <activity> <%= render partial: '/buildings/activity' -%> </activity>
+=======
+<%= current_user_left_nav(building: @building, user: current_user) -%>
+>>>>>>> master
 </buildingleft>
 <buildingright>
-<buildingfeed>
 <%= yield %>
+<<<<<<< HEAD
 </building>
+=======
+</buildingright>
+>>>>>>> master
 </div>
-
 <%= footer %>
-
-<script>
-$(document).ready(function(){
- initialize($("div#map").get(0));
-});
-
-function initialize(element) {
-  var latlng = new google.maps.LatLng(<%= @building.latitude-%>, <%= @building.longitude -%>);
-  var myOptions = {
-    zoom: 19,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.HYBRID
-  };
-  var map = new google.maps.Map(element, myOptions);
-}
-</script>
-
+<%= render partial: '/layouts/google_map_javascript'%>
 </body>
 </html>

@@ -1,0 +1,39 @@
+<h1>Verification Requests</h1>
+
+<% if @verification_requests.any? %>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Building</th>
+      <th>Status</th>
+      <th>Approve/Reject</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @verification_requests.each do |verification_request| %>
+      <tr>
+        <td><%= verification_request.user.email %></td>
+        <td><%= link_to verification_request.building.name, building_path(verification_request.building) %></td>
+        <td><%= verification_request.status %></td>
+	<td>
+        <% if !verification_request.approved? %>
+	   <%= link_to 'Approve', verification_request %>
+         <% end %>
+        <% if verification_request.pending? %>
+	 <%= link_to 'Reject', reject_verification_request_path(verification_request), 
+		method: :delete, 
+		data: { confirm: 'Are you sure you want to reject this request?' } %>
+	<% end %>
+        <% if verification_request.approved? %>
+           <%= link_to 'revoke', verification_request_path(verification_request) -%>
+	<% end %>
+	</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>There are no outstanding verification requests.</p>
+<% end %>

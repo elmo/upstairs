@@ -3,5 +3,5 @@ def load_user
 end
 
 def load_verifier
-  @verifier= create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
+  @verifier = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
 end

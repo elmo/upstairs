@@ -6,6 +6,6 @@ class CreateNotifications < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :notifications, :notifiable_id
-    add_foreign_key("notifications", "users")
+    add_foreign_key('notifications', 'users')
   end
 end

@@ -2,24 +2,27 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    #can :access, :rails_admin   # grant access to rails_admin
-    #can :dashboard              # grant access to the dashboard
-    if user && user.admin?
-      can :manage, :all
-    end
+    # can :access, :rails_admin   # grant access to rails_admin
+    # can :dashboard              # grant access to the dashboard
+    can :manage, :all if user && user.admin?
 
     can :manage, Ticket do |ticket|
-      user.owns?(ticket) or user.manager_of?(ticket.building)
+      user.owns?(ticket) || user.manager_of?(ticket.building)
+    end
+
+    if user.verifier?
+      can :manage, VerificationRequest
+      can :manage, Verification
     end
 
     # Define abilities for the passed in user here. For example:
-	  #
-    #user ||= User.new # guest user (not logged in)
-    #if user.admin?
+    #
+    # user ||= User.new # guest user (not logged in)
+    # if user.admin?
     #  can :manage, :all
-    #else
+    # else
     #  can :read, :all
-    #end
+    # end
 
     # The first argument to `can` is the action you are giving the user
     # permission to do.

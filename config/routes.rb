@@ -1,30 +1,39 @@
 Upstairs::Application.routes.draw do
-
-  resources :verifications
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  mount Attachinary::Engine => "/attachinary" unless Rails.env.test?
+  mount Attachinary::Engine => '/attachinary' unless Rails.env.test?
 
-  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
   devise_scope :user do
-    get "/join" => "devise/registrations#new"
-    get "/login" => "devise/sessions#new"
-    get "/invite/:id" => "invitations#welcome", as: :invite
+    get '/join' => 'devise/registrations#new'
+    get '/login' => 'devise/sessions#new'
+    get '/invite/:id' => 'invitations#welcome', as: :invite
   end
 
-  root to: "home#home"
-  get '/' => "home#home", as: :home
-  get '/go/:id' => "dispatch#redirect", as: :dispatch
-  get '/about' => "home#about", as: :about
-  get '/contact' => "home#contact", as: :contact
-  get '/terms' => "home#terms_of_service", as: :terms_of_service
-  get '/privacy' => "home#privacy", as: :privacy
-  get '/help' => "home#help", as: :help
-  get '/find' => "buildings#choose", as: :find_building
-  get '/buildings/:building_id/inbox' => "messages#inbox", as: :inbox
-  get '/buildings/:building_id/outbox' => "messages#outbox", as: :outbox
-  get '/buildings/:building_id/calendar' => "events#index", as: :calendar
+  root to: 'home#home'
+  get '/' => 'home#home', as: :home
+  get '/go/:id' => 'dispatch#redirect', as: :dispatch
+  get '/about' => 'home#about', as: :about
+  get '/contact' => 'home#contact', as: :contact
+  get '/terms' => 'home#terms_of_service', as: :terms_of_service
+  get '/privacy' => 'home#privacy', as: :privacy
+  get '/help' => 'home#help', as: :help
+  get '/find' => 'buildings#choose', as: :find_building
+  get '/buildings/:building_id/inbox' => 'messages#inbox', as: :inbox
+  get '/buildings/:building_id/outbox' => 'messages#outbox', as: :outbox
+  get '/buildings/:building_id/calendar' => 'events#index', as: :calendar
+
+  resources :verifications, only: [:index, :destroy] do
+    member do
+      put 'revoke'
+    end
+  end
+  resources :verification_requests, only: [:index, :edit, :update, :destroy, :show] do
+    member do
+      put 'reject'
+    end
+    resources :verifications, only: [:new, :create]
+  end
 
   resources :buildings do
     resources :memberships, only: [:create, :destroy, :index]
@@ -35,7 +44,7 @@ Upstairs::Application.routes.draw do
     resources :invitations do
       get 'redeem'
     end
-
+    resources :verification_requests, only: [:new, :create]
     resources :photos
     resources :events
     resources :user_invitations, controller: 'invitations', type: 'UserInvitation'
@@ -48,7 +57,7 @@ Upstairs::Application.routes.draw do
 
     resources :photos
     member do
-     get 'gallery'
+      get 'gallery'
     end
   end
 
@@ -69,5 +78,4 @@ Upstairs::Application.routes.draw do
   resources :comments do
     resources :replies
   end
-
 end

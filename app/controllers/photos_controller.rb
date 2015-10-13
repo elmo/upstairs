@@ -49,17 +49,18 @@ class PhotosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo
-      @photo = Photo.find(params[:id])
-    end
 
-    def set_building
-      @building = Building.friendly.find(params[:building_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_photo
+    @photo = Photo.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def photo_params
-      params[:photo]
-    end
+  def set_building
+    @building = Building.friendly.find(params[:building_id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def photo_params
+    params[:photo]
+  end
 end

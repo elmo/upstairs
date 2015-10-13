@@ -48,7 +48,7 @@ building {
     }
     buildingmembership { 
       @include pad();
-      @include span-columns(4 of 7);  
+      @include span-columns(5 of 7);  
       @include pad();
       categories { 
         @include pad(); 

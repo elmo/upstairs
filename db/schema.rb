@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926210228) do
+ActiveRecord::Schema.define(version: 20150927194220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,8 +192,8 @@ ActiveRecord::Schema.define(version: 20150926210228) do
     t.string   "name"
     t.integer  "resource_id"
     t.string   "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
@@ -239,8 +239,8 @@ ActiveRecord::Schema.define(version: 20150926210228) do
     t.boolean  "ok_to_send_text_messages", default: true
     t.string   "slug"
     t.integer  "invitation_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -254,13 +254,28 @@ ActiveRecord::Schema.define(version: 20150926210228) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  create_table "verification_requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "building_id"
+    t.string   "status",      default: "New"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "verification_requests", ["building_id"], name: "index_verification_requests_on_building_id", using: :btree
+  add_index "verification_requests", ["user_id"], name: "index_verification_requests_on_user_id", using: :btree
+
   create_table "verifications", force: :cascade do |t|
     t.integer  "building_id"
     t.integer  "user_id"
     t.integer  "verifier_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "verification_request_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
+
+  add_index "verifications", ["building_id"], name: "index_verifications_on_building_id", using: :btree
+  add_index "verifications", ["user_id"], name: "index_verifications_on_user_id", using: :btree
 
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",  null: false
@@ -281,8 +296,6 @@ ActiveRecord::Schema.define(version: 20150926210228) do
   add_foreign_key "events", "buildings"
   add_foreign_key "events", "users"
   add_foreign_key "invitations", "buildings"
-  add_foreign_key "invitations", "buildings"
-  add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "users"
   add_foreign_key "memberships", "buildings"
   add_foreign_key "memberships", "users"
@@ -291,4 +304,8 @@ ActiveRecord::Schema.define(version: 20150926210228) do
   add_foreign_key "posts", "users"
   add_foreign_key "tickets", "buildings"
   add_foreign_key "tickets", "users"
+  add_foreign_key "verification_requests", "buildings"
+  add_foreign_key "verification_requests", "users"
+  add_foreign_key "verifications", "buildings"
+  add_foreign_key "verifications", "users"
 end

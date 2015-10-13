@@ -1,0 +1,5 @@
+<%= simple_form_for([@verification_request.building, @verification_request]) do |f| %>
+  <%= f.error_notification %>
+  <%= f.hidden_field :building_id %>
+  <%= f.button :submit%>
+<% end %>

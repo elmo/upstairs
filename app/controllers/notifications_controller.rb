@@ -16,5 +16,4 @@ class NotificationsController < ApplicationController
   def get_notification
     @notification = Notification.where(user_id: current_user.id, notifiable_id: params[:id], notifiable_type: params[:notifiable_type]).first
   end
-
 end

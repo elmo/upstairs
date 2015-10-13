@@ -6,12 +6,12 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    start_date = ( params[:start_date].present?) ? Chronic.parse( params[:start_date]) : Date.today.at_beginning_of_month
-    @events = @building.events.where(["starts >= ? and starts <= ?", start_date, start_date.next_month ])
-    if params[:view] and  params[:view]  == 'list'
-      render template: "/events/list"
+    start_date = (params[:start_date].present?) ? Chronic.parse(params[:start_date]) : Date.today.at_beginning_of_month
+    @events = @building.events.where(['starts >= ? and starts <= ?', start_date, start_date.next_month])
+    if params[:view] && params[:view] == 'list'
+      render template: '/events/list'
     else
-      render template: "/events/index"
+      render template: '/events/index'
     end
   end
 
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new(user: current_user, building: @building )
+    @event = Event.new(user: current_user, building: @building)
   end
 
   # GET /events/1/edit
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
     @event.user = current_user
     @event.building = @building
     if @event.save
-      redirect_to building_events_path(@building), notice: "Event has been successfully created."
+      redirect_to building_events_path(@building), notice: 'Event has been successfully created.'
     else
       render :new
     end
@@ -56,17 +56,18 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    def set_building
-      @building = Building.friendly.find(params[:building_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def event_params
-      params.require(:event).permit(:title, :body, :starts, photos: [])
-    end
+  def set_building
+    @building = Building.friendly.find(params[:building_id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def event_params
+    params.require(:event).permit(:title, :body, :starts, photos: [])
+  end
 end

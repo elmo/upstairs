@@ -9,7 +9,7 @@ class CreateActivities < ActiveRecord::Migration
     add_index :activities, :actionable_id
     add_index :activities, :user_id
     add_index :activities, :building_id
-    add_foreign_key("activities", "users")
-    add_foreign_key("activities", "buildings")
+    add_foreign_key('activities', 'users')
+    add_foreign_key('activities', 'buildings')
   end
 end

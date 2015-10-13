@@ -28,7 +28,7 @@ class Post < ActiveRecord::Base
   end
 
   def grandparent
-   self
+    self
   end
 
   def owned_by?(user)
@@ -49,9 +49,7 @@ class Post < ActiveRecord::Base
     postable(includes: :user).users.each { |member| Notification.create(notifiable: self, user: member)  }
   end
 
-
   def create_actionable
-    Activity.create(actionable: self, user: self.user, building: self.postable)
+    Activity.create(actionable: self, user: user, building: postable)
   end
-
 end
