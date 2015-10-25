@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  layout :layout_by_resource
   http_basic_authenticate_with name: 'upstairs', password: 'fixitnow'
 
   protect_from_forgery
@@ -31,4 +32,18 @@ class ApplicationController < ActionController::Base
   def not_found
     fail ActionController::RoutingError.new('Not Found')
   end
+
+  protected
+
+  def layout_by_resource
+    if devise_controller? or controller_name == 'user'
+     'users'
+    elsif controller_name == 'home'
+      'home'
+    else
+     'building'
+    end
+
+  end
+
 end

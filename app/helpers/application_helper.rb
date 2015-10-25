@@ -198,7 +198,7 @@ module ApplicationHelper
 
   def current_section
     case controller_name
-      when  'posts'
+      when 'posts'
         'bulletin board'
       when  'alerts'
         'alerts'
@@ -212,6 +212,8 @@ module ApplicationHelper
         'tickets'
       when 'invitations'
         'invitations'
+      when 'buildings'
+        'buildings'
       else
         ''
     end
@@ -219,11 +221,11 @@ module ApplicationHelper
 
   def current_title
     case controller_name
-      when  'posts'
+      when 'posts'
         'bulletin board'
       when  'alerts'
         'alerts'
-      when  'events'
+      when 'events'
         'calendar'
       when 'messages'
         'messages'
@@ -233,8 +235,31 @@ module ApplicationHelper
         'tickets'
       when 'invitations'
         'invitations'
+      when 'buildings'
+        'buildings'
       else
         ''
+    end
+  end
+
+  def search_and_filter_nav
+   case current_section
+   when 'bulletin board'
+     render partial: '/posts/search_and_filter_nav'
+   when 'alerts'
+     render partial: '/alerts/search_and_filter_nav'
+   when  'calendar'
+     render partial: '/events/search_and_filter_nav'
+   when 'messages'
+     render partial: '/messages/search_and_filter_nav'
+    when 'members'
+     render partial: '/memberships/search_and_filter_nav'
+    when 'tickets'
+     render partial: '/tickets/search_and_filter_nav'
+    when 'invitations'
+     render partial: '/invitations/search_and_filter_nav'
+    when 'buildings'
+     render partial: '/buildings/search_and_filter_nav'
     end
   end
 

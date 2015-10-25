@@ -148,7 +148,7 @@ class User < ActiveRecord::Base
   end
 
   def owner_or_manager_of?(building)
-    building.landlord_id == id
+     false
   end
 
   def verify_ownership(building:, verifier:, verification_request:)

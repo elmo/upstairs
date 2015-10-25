@@ -1,21 +1,6 @@
-<% if section == 'bulletin board'%>
-  <%= render partial: '/posts/search_and_filter_nav' %>
-<% elsif section == 'alerts' %>
-  <%= render partial: '/alerts/search_and_filter_nav' %>
-<% elsif section == 'calendar' %>
-  <%= render partial: '/events/search_and_filter_nav' %>
-<% elsif section == 'messages' %>
-  <%= render partial: '/messages/search_and_filter_nav' %>
-<% elsif section == 'members' %>
-  <%= render partial: '/memberships/search_and_filter_nav' %>
-<% elsif section == 'tickets' %>
-  <%= render partial: '/tickets/search_and_filter_nav' %>
-<% elsif section == 'invitations' %>
-  <%= render partial: '/invitations/search_and_filter_nav' %>
-<% end %>
+<%= search_and_filter_nav %>
 
 <div id="menu">
-
 <div id="background">
 <%= image_tag "gradient_fill_2.png", id: "gradient_fill_2" %>
 <%= image_tag "pattern_fill_1_copy.png", id: "pattern_fill_1_copy" %>
@@ -27,10 +12,7 @@
 <div id="rectangle_7_copy_2"  ></div>
 </div> <!-- split -->
 
-<% if section == 'bulletin board'%>
-  <%= bulletin_board_icon(user: current_user, building: @building) -%>
-<% end %>
-
+<%= bulletin_board_icon(user: current_user, building: @building) -%>
 <%= alerts_icon(user: current_user, building: @building) -%>
 <%= calendar_icon(user: current_user, building: @building) -%>
 <%= messages_icon(user: current_user, building: @building) -%>
