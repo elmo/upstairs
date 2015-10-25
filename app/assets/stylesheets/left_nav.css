@@ -1,7 +1,14 @@
 /*
 	@name bulletin_board
+@font-face { 
+  font-family: 'Icon_set_upstairs-Regular'; 
+}
 */
-@font-face { font-family: Icon_set_upstairs-Regular; src: url('Icon_set_upstairs-Regular.otf'); } 
+
+@font-face { 
+  font-family: Icon_set_upstairs-Regular; src: url('Icon_set_upstairs-Regular.otf'); 
+}
+
 .icon_menu {
 	top: -20px;
 	left: -1px;
