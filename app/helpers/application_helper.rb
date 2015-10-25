@@ -195,4 +195,47 @@ module ApplicationHelper
     height, width = dimensions.split('x')
     cl_image_tag('anonymous.png', width: width, height: height, crop: :fit)
   end
+
+  def current_section
+    case controller_name
+      when  'posts'
+        'bulletin board'
+      when  'alerts'
+        'alerts'
+      when 'events'
+        'calendar'
+      when 'messages'
+        'messages'
+      when 'memberships'
+        'members'
+      when 'tickets'
+        'tickets'
+      when 'invitations'
+        'invitations'
+      else
+        ''
+    end
+  end
+
+  def current_title
+    case controller_name
+      when  'posts'
+        'bulletin board'
+      when  'alerts'
+        'alerts'
+      when  'events'
+        'calendar'
+      when 'messages'
+        'messages'
+      when 'memberships'
+        'members'
+      when 'tickets'
+        'tickets'
+      when 'invitations'
+        'invitations'
+      else
+        ''
+    end
+  end
+
 end

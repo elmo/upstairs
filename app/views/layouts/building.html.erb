@@ -1,28 +1,23 @@
-<!DOCTYPE>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" >
 <head>
-  <title>Upstairs - <%= @building.address -%></title>
-  <%= stylesheet_link_tag "application", :media => "all" %>
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-  <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <%= javascript_include_tag "application" %>
+    <link href='//fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Sanchez:400italic,400' rel='stylesheet' type='text/css'>
+    <%= csrf_meta_tags %>
+    <%= cloudinary_js_config %>
+    <title><%= current_title -%></title>
+  </head>
 
-  <link href='//fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
-  <link href='//fonts.googleapis.com/css?family=Sanchez:400italic,400' rel='stylesheet' type='text/css'>
-  <%= csrf_meta_tags %>
-  <%= cloudinary_js_config %>
-
-</head>
-<body class="type-system-geometric">
-<div id= "main" class="type-system-geometric">
-<building>
-<buildingleft>
-<%= current_user_left_nav(building: @building, user: current_user) -%>
-</buildingleft>
-<buildingright>
-<%= yield %>
-</buildingright>
-</div>
-<%= footer %>
-<%= render partial: '/layouts/google_map_javascript'%>
-</body>
+  <body>
+    <div id= "content-container">
+      <div id="content">
+       <%= yield %>
+       <%= render partial: '/layouts/left_nav', locals: { section: current_section } -%>
+      </div>
+    </div>
+   </div>
+   <%# render partial: '/layouts/google_map_javascript'%>
+  </body>
 </html>
