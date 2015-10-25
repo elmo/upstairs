@@ -31,7 +31,6 @@ gem 'rollbar'
 gem 'refills'
 gem 'sidekiq'
 gem 'simple_form'
-gem 'simple_calendar'
 gem 'twilio-ruby'
 gem 'gmaps-autocomplete-rails'
 
@@ -41,8 +40,6 @@ gem 'underscore-rails'
 gem 'uglifier', '>= 1.0.3'
 
 group :development do
-  gem 'rspec'
-  gem 'rspec-rails'
   gem 'spring'
 end
 
