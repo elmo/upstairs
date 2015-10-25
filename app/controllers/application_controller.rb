@@ -36,14 +36,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_resource
-    if devise_controller? or controller_name == 'user'
+    if devise_controller? or (controller_name == 'users' and action_name != 'show')
      'users'
     elsif controller_name == 'home'
       'home'
     else
      'building'
     end
-
   end
 
 end

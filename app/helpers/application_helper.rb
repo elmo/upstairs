@@ -214,6 +214,8 @@ module ApplicationHelper
         'invitations'
       when 'buildings'
         'buildings'
+      when 'users'
+        'users'
       else
         ''
     end
@@ -237,6 +239,8 @@ module ApplicationHelper
         'invitations'
       when 'buildings'
         'buildings'
+      when 'users'
+        'users'
       else
         ''
     end
@@ -260,6 +264,8 @@ module ApplicationHelper
      render partial: '/invitations/search_and_filter_nav'
     when 'buildings'
      render partial: '/buildings/search_and_filter_nav'
+    when 'users'
+     render partial: '/users/search_and_filter_nav'
     end
   end
 

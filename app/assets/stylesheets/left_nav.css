@@ -45,12 +45,22 @@ div { position: absolute; }
 	width: 1013px;
 	height: 316px;
 }
+
 #notes_list {
 	top: 66px;
 	left: 0px;
 	width: 1012px;
 	height: 250px;
 }
+
+#inner-building-content{
+	top: 66px;
+	left: 0px;
+	width: 1012px;
+	height: 250px;
+	padding: 10px;
+}
+
 #note_pair {
 	top: 125px;
 	left: 0px;

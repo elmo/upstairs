@@ -138,7 +138,7 @@ module BuildingsHelper
 
   def building_public_profile_icon(building: building, user: user)
     content_tag(:div, 'profile', id: 'profil' ) do
-      link_to(edit_user_registration_path) do
+      link_to(building_user_path(building,user)) do
         content_tag(:div, 'q', id: 'icon_8', class: 'icon_menu') +
         content_tag(:div, 'profile' ,id: 'profil_1')
       end
