@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
-
-ruby '2.1.6'
+ruby "2.1.6"
 gem 'rails', '4.2'
 
 gem 'attachinary'
@@ -23,7 +22,7 @@ gem 'paper_trail'
 gem 'pg'
 gem 'puma'
 gem 'quiet_assets'
-gem 'rails_12factor'
+gem 'rails_12factor', group: 'production'
 gem 'rails_admin'
 gem 'rails_stdout_logging'
 gem 'rolify'
@@ -50,5 +49,6 @@ group :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
 end
+
 
 gem 'jquery-rails'
