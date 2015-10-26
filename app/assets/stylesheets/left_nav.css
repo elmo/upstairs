@@ -6,7 +6,7 @@
 */
 
 @font-face { 
-  font-family: Icon_set_upstairs-Regular; src: url('Icon_set_upstairs-Regular.otf'); 
+  font-family: Icon_set_upstairs-Regular; src: asset-url('Icon_set_upstairs-Regular.otf'); 
 }
 
 .icon_menu {
