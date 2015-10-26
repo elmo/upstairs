@@ -64,8 +64,8 @@ module Upstairs
     config.assets.digest = true
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.assets.precompile += [
-      'homebundle',
-      'userbundle'
+      'homebundle.css',
+      'userbundle.css'
      ]
      config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
     # Version of your assets, change this if you want to expire all your assets
