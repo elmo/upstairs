@@ -119,16 +119,16 @@ module BuildingsHelper
   end
 
   def building_repairs_icon(user:, building:)
-    content_tag(:div,'request') do
+      content_tag(:div,'request',id: 'request') do
       link_to new_building_ticket_path(building) do
         content_tag(:div, 'k', id: 'icon_5', class: 'icon_menu') +
         content_tag(:div, 'request a repair' ,id: 'request_a_repair')
       end
-    end + content_tag(:br)
+    end 
   end
 
   def invite_someone_icon(user:, building:)
-    content_tag(:div,'invite') do
+      content_tag(:div,'invite',id: 'invite') do
       link_to(new_building_user_invitation_path(building)) do
         content_tag(:div, 'm', id: 'icon_7', class: 'icon_menu') +
         content_tag(:div, 'invite someone' ,id: 'invite_someone')
