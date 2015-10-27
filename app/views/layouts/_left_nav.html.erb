@@ -7,38 +7,34 @@
 </div> <!-- background -->
 
 <div id="group_my_space">
-<div id="split">
-<div id="rectangle_7_copy_3"  ></div>
-<div id="rectangle_7_copy_2"  ></div>
-</div> <!-- split -->
+    <div id="split">
+        <div id="rectangle_7_copy_3"  ></div>
+        <div id="rectangle_7_copy_2"  ></div>
+    </div> <!-- split -->
 
-<%= bulletin_board_icon(user: current_user, building: @building) -%>
-<%= alerts_icon(user: current_user, building: @building) -%>
-<%= calendar_icon(user: current_user, building: @building) -%>
-<%= messages_icon(user: current_user, building: @building) -%>
-<%= other_tenants_icon(user: current_user, building: @building) -%>
+    <%= bulletin_board_icon(user: current_user, building: @building) %>
+    <%= alerts_icon(user: current_user, building: @building) %>
+    <%= calendar_icon(user: current_user, building: @building) %>
+    <%= messages_icon(user: current_user, building: @building) %>
+    <%= other_tenants_icon(user: current_user, building: @building) %>
 </div> <!-- group_my_space -->
 
 <div id="group_actions"  >
-<%= building_repairs_icon(user: current_user, building: @building) -%>
-<%= invite_someone_icon(user: current_user, building: @building) -%>
-
-<div id="split_1">
-  <div id="rectangle_7"></div>
-  <div id="rectangle_7_copy"></div>
-</div>
-
+     <div id="split_1">
+          <div id="rectangle_7"></div>
+          <div id="rectangle_7_copy"></div>
+    </div>   
+    <%= building_repairs_icon(user: current_user, building: @building) %>
+    <%= invite_someone_icon(user: current_user, building: @building) %>
 </div> <!-- group actions-->
 
 <div id="group_setting">
-<div id="split_2">
-<div id="rectangle_7_copy_5"></div>
-<div id="rectangle_7_copy_4"></div>
-</div> <!-- group setting -->
-
-<%= user_settings_icon(user: current_user, building: @builidng) -%>
-
-<%= building_public_profile_icon(user: current_user, building: @building ) %>
+    <div id="split_2">
+        <div id="rectangle_7_copy_5"></div>
+        <div id="rectangle_7_copy_4"></div>
+    </div> <!-- group setting -->
+    <%= user_settings_icon(user: current_user, building: @builidng) %>
+    <%= building_public_profile_icon(user: current_user, building: @building ) %>
 </div> <!-- menu -->
 
 <%= upstairs_home_page_icon(id: 'home') %>
