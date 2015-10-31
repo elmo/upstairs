@@ -11,24 +11,18 @@
         
          <%=  image_tag("home/png_logo.png", class:"png_logo") -%>   
 
-<% if false %>
-	Ludo, this your original code. The real form is after the else below.
-        <div id="search">
-    
-            <div id="rounded_rectangle_1"  ></div>
-            <%=  image_tag("home/vector_smart_object.png", class:"vector_smart_object") -%> 
-            <div id="find_your_building" >
-                Find your building
-            </div>
-        </div>
-<%  else %>
+<center>
 <div id="find-your-builiding-form">
 <%= form_tag find_building_path , method: :get do |f| %>
-<%= text_field_tag :address, params[:address], id: 'gmaps-input-address', placeholder: 'Find your building' -%>
-<%=  submit_tag 'Search'  %>
+        <%= text_field_tag :address, 
+                params[:address], 
+                id: 'gmaps-input-address', 
+                placeholder: 'Find your building' -%>
+<%=  submit_tag 'Search', id: 'find-my-building-submit'  %>
 <% end %>
+</center>
 </div>
-<%  end %>
+
 </div>
 
         <div id="the_social_network__for_your_building_" >
