@@ -2,7 +2,10 @@
 <div id="find-your-building">
 <h1>Now let's find your building.</h1>
 <%= form_tag find_building_path , method: :get do |f| %>
-  <%= text_field_tag :address, params[:address], id: 'gmaps-input-address', placeholder: 'Start typing a place...' -%>
+	<%= text_field_tag :address, 
+		params[:address], 
+		id: 'gmaps-input-address', 
+		placeholder: 'Start typing a place...' -%>
   <%=  submit_tag 'Search'  %>
 <% end %>
 </div>

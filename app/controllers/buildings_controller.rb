@@ -76,6 +76,6 @@ class BuildingsController < ApplicationController
   end
 
   def get_layout
-    %w(show gallery edit).include?(action_name) ? 'building' : 'application'
+    return %w(index choose).include?(action_name) ? 'users' : 'building'
   end
 end
