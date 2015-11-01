@@ -45,7 +45,9 @@ body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
 
 /* Only edit this if you know what you are doing! */
 #menu div { position: absolute; }
-#content-container { display: block; position: relative;  height: 842px; overflow: hidden;
+#content-container { 
+    padding-left: 10px;
+    display: block; position: relative;  height: 842px; overflow: hidden;
     top: -45px;}
 
 
@@ -60,7 +62,6 @@ body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
 	left: 167px;
 	width: 1013px;
 	height: 316px;
-    margin-left: 10px;
 }
 
 #notes_list {
