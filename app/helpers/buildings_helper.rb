@@ -19,11 +19,7 @@ module BuildingsHelper
     render partial: '/buildings/alerts'
   end
 
-  def upstairs_home_page_icon(id: nil, klass: nil)
-    content_tag :div, id: id, class: klass do
-      link_to(image_tag('upstairs_home_page_icon.png'), root_url)
-    end
-  end
+  
 
   def building_home_icon(building: building, id: nil, klass: nil)
     content_tag :div, id: id, class: klass do
@@ -141,6 +137,15 @@ module BuildingsHelper
       link_to(building_user_path(building,user)) do
         content_tag(:div, 'q', id: 'icon_8', class: 'icon_menu') +
         content_tag(:div, 'profile' ,id: 'profil_1')
+      end
+    end
+
+ end
+
+def upstairs_home_page_icon(id: nil, klass: nil)
+    content_tag(:div, 'home', id: 'home' ) do
+      link_to(root_url) do
+        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu') 
       end
     end
 
