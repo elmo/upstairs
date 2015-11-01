@@ -34,9 +34,8 @@ body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
 img { position: absolute; display: block; margin: 0px; border: none; padding: 0px; }
 
 /* Only edit this if you know what you are doing! */
-div { position: absolute; }
-
-#content-container { display: block; position: relative; width: 1391px; height: 842px; overflow: hidden;}
+#menu div { position: absolute; }
+#content-container { display: block; position: relative;  height: 842px; overflow: hidden;}
 
 
 #bulletinboard {
@@ -50,6 +49,7 @@ div { position: absolute; }
 	left: 167px;
 	width: 1013px;
 	height: 316px;
+    
 }
 
 #notes_list {
@@ -485,9 +485,10 @@ div { position: absolute; }
 
 #menu {
 	top: 0px;
-	left: -1px;
+	left: 0px;
 	width: 170px;
 	height: 691px;
+    float: left;
 }
 #background {
 	top: 0px;

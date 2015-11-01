@@ -11,12 +11,14 @@
   </head>
 
   <body>
+      
+    <%= render partial: '/layouts/left_nav', locals: { section: current_section } -%>
     <div id= "content-container">
       <div id="content">
        <div id="inner-building-content">
        <%= yield %>
        </div>
-       <%= render partial: '/layouts/left_nav', locals: { section: current_section } -%>
+      
       </div>
     </div>
    </div>
