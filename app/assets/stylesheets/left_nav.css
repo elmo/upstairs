@@ -8,7 +8,16 @@
 @font-face { 
   font-family: Icon_set_upstairs-Regular; src: asset-url('Icon_set_upstairs-Regular.otf'); 
 }
-
+.home_icon_menu {
+	left: -1px;
+	width: 90px;
+	height: 90px;
+	font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+	font-size: 120px;
+	text-transform: uppercase;
+	text-align: left;
+	color:#FFFFFF;
+}
 .icon_menu {
 	left: -1px;
 	width: 53px;
@@ -51,7 +60,7 @@ body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
 	left: 167px;
 	width: 1013px;
 	height: 316px;
-    
+    margin-left: 10px;
 }
 
 #notes_list {
@@ -64,6 +73,7 @@ body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
 #inner-building-content{
 	width: 100%;
 	height: 250px;
+    margin-left: -10px;
 }
 
 #note_pair {
