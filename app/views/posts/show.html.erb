@@ -1,3 +1,13 @@
 <h1>Building Note</h1>
 
-<%= render partial: '/posts/post', locals: { post: @post } %>
+<h2 class="inline"><%= @post.title -%></h2>
+<%= by_line(@post) -%>
+
+<div class="@post-body">
+<% if @post.photos.any? %>
+<span class="@post-image"> <%= cl_image_tag(@post.photos.first.path, { size: '300x500', crop: :fit }) %> </span>
+<% end %>
+<%= @post.body  -%>
+<br clear="both">
+<%= render partial: '/comments/comments', locals: { commentable: @post}  %>
+</div>
