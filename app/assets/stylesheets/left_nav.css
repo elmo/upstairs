@@ -76,10 +76,6 @@ body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
 	height: 250px;
 }
 
-#note_pair {
-    display:block;
-}
-
 #rectangle_8_copy {
 	top: 0px;
 	left: 0px;
@@ -107,103 +103,7 @@ body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
 }
 
 
-#shadow {
-    float: left;
-    margin-left: -22px;
-	width: 22px;
-	height: 8px;
-}
 
-
-#name_ {
-	float: left;
-	width: 47px;
-	height: 18px;
-	font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	text-align: left;
-	color:#4E4E4E;
-    min-width: 200px;
-    
-}
-
-
-#_days_ago_ {
-    float: left;
-	font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	text-align: left;
-	color:#4E4E4E;
-}
-#post_text{
-    float: left;
-    margin-left: -20px;
-}
-#header_post{      
-    display: block;
-    width: auto;
-    height: 40px;
-    margin-left: 20px;
-    
-}
-#info_post{    width: 100%;
-    padding-top: 10px;
-}
-
-#text {
-    margin-left: 20px;
-    /* margin-top: 5px; */
-    display: block;
-    width: 100%;
-    height: 50px; 
-    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    text-align: left;
-    color: #2C2C2C;
-
-}
-
-#category {
-    float: left;
-    margin: 10px 15px;
-	height: 29px;
-	font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-	font-size: 22px;
-	text-transform: uppercase;
-	text-align: left;
-	color:#2C2C2C;
-}
-
-
-
-#title {
-    float: left;
-    margin: 10px 15px;
-	width: 60px;
-	height: 30px;
-	font-family: Raleway-Light, Arial, Helvetica, sans-serif;
-	font-size: 22px;
-	text-align: left;
-	color:#2C2C2C;
-}
-
-
-#onglet {
-	width: 41px;
-	height: 12px;
-    position: absolute;
-    left: 50%;
-    right: 50%;
-}
-
-#note {
-	top: 0px;
-	left: 0px;
-	width: 1012px;
-	height: 125px;
-    clear: both;
-    background-color: white;
-}
 
 #rectangle_8_copy_1 {
 	top: 0px;
@@ -262,8 +162,6 @@ body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
 	text-align: left;
 	color:#4E4E4E;
 }
-
-
 
 
 #text_1 {

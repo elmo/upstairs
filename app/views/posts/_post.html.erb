@@ -1,11 +1,28 @@
-<h2 class="inline"><%= post.title -%></h2>
-<%= by_line(post) -%>
-
-<div class="post-body">
-<% if post.photos.any? %>
-<span class="post-image"> <%= cl_image_tag(post.photos.first.path, { size: '300x500', crop: :fit }) %> </span>
-<% end %>
-<%= post.body  -%>
-<br clear="both">
-<%= render partial: '/comments/comments', locals: { commentable: post}  %>
+<div class="note<%= i % 1 == 0 ? '_pair' : ''  -%>">
+      <%= image_tag"onglet_1.png", id: "onglet" %>
+      <div id="category_color"></div>
+      <%= image_tag"shadow.png", class: "shadow" %>
+      <%= image_tag"photo.png" , id: "photo" %>
+    <div class="post_text">   
+      <div class="header_post">
+          <div class="category" >
+	     <%= post.category.name -%> 
+          </div>
+          <div class="title" >
+	    <%= link_to post.title, building_post_path(@building, post ) -%> 
+          </div>
+      </div>
+      <div class="post-text" >
+	<%= post.body -%> 
+      </div>
+      <div class="info_post">
+          <div class="user-name" >
+	     <%= post.user.username -%> 
+          </div>
+          <div class="_days_ago_" >    
+	    <%= time_ago_in_words(post.created_at) -%> ago.<br/>
+          </div>
+      </div>
+    </div> 
 </div>
+<br  clear="all">
