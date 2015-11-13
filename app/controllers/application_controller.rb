@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   layout :layout_by_resource
-  http_basic_authenticate_with name: 'upstairs', password: 'fixitnow'
+  #http_basic_authenticate_with name: 'upstairs', password: 'fixitnow'
 
   protect_from_forgery
 
