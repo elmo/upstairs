@@ -72,10 +72,12 @@ module ApplicationHelper
     '%m/%d %I:%S %p'
   end
 
-  def by_line(obj)
+  def by_line(obj, with_icon: false)
     content_tag(:span, class: 'byline') do
+      ((with_icon && obj.user.avatar.present?) ? cl_image_tag(obj.user.avatar.path, size: '40x40', crop: :fit) : '') +
       link_to(username_or_anonymous(obj.user), building_user_path(obj.building, obj.user.slug)) +
         ' at ' + obj.created_at.strftime(upstairs_time_format)
+
     end
   end
 

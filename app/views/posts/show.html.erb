@@ -1,12 +1,14 @@
 <h1>Building Note</h1>
 
 <h2 class="inline"><%= @post.title -%></h2>
-<%= by_line(@post) -%>
+
+<%= by_line(@post, with_icon: true) -%>
 
 <div class="@post-body">
-<% if @post.photos.any? %>
-<span class="@post-image"> <%= cl_image_tag(@post.photos.first.path, { size: '300x500', crop: :fit }) %> </span>
+<% @post.photos.each do |photo| %>
+<span class="post-image"> <%= cl_image_tag(photo.path, { size: '300x500', crop: :fit }) %> </span>
 <% end %>
+
 <%= @post.body  -%>
 <br clear="both">
 <%= render partial: '/comments/comments', locals: { commentable: @post}  %>
