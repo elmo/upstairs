@@ -11,6 +11,8 @@ class PostsController < ApplicationController
       @category = Category.find(params[:category_id])
       scope = scope.where(category_id: @category.id)
     end
+    scope = scope.where(["title like ? or body like ? ", "%#{params[:q]}%", "%#{params[:q]}%"]) if params[:q]
+    scope.page(params[:page]).per(10)
     @posts = scope.page(params[:page]).per(10)
   end
 

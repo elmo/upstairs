@@ -1,3 +1,21 @@
+<%= form_tag building_posts_url(@building), method: :get do %>
+<%= text_field_tag :q %>
+<%= submit_tag 'search' %>
+<% end %>
+
+
+<ul>
+ <% Category.all.each do |category| %>
+   <li id="category_#{category.id}">
+	<%= link_to category.name, params.merge(category_id: category.id) -%> 
+   </li>
+ <% end %>
+   <li><%= link_to 'clear search', building_posts_url(@building)-%> </li>
+</ul>
+
+<p><%= link_to 'new post', new_building_post_path(@building) %></p>
+
+
 <div id="header"  >
     <div id="rectangle_8"  ></div>
     <div id="add"  >
@@ -17,5 +35,9 @@
             s
         </div>
     </div>
+
     <div id="rectangle_2"  ></div>
+ <br />
+
 </div>
+

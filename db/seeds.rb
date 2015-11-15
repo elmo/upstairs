@@ -37,3 +37,57 @@ building_two = Building.create(
   longitude: -122.4644187,
   latitude: 37.7500272
 )
+
+Building.all.each do |building|
+  User.all.each do |user|
+    user.join(building)
+  end
+end
+
+Building.all.each do |building|
+  Category.all.each do |category|
+    10.times do |x|
+      building.posts.create!(category: category,
+			    postable: building,
+			    user: building.users[(rand * 7).to_i],
+			    title: Faker::Lorem.sentence(5),
+			    body: Faker::Lorem.paragraphs(5).join("\n"))
+    end
+  end
+end
+
+
+Post.all.each do |post|
+   urls =  []
+   3.times do
+     faked_photo = Faker::Avatar.image
+     uploader = Cloudinary::Uploader.upload(faked_photo)
+     urls << uploader['url']
+   end
+  post.send(:photo_urls=, urls, folder: Rails.env.to_s, use_filename: true, image_metadata: true)
+end
+
+User.all.each do |user|
+  faked_photo = Faker::Avatar.image
+  uploader = Cloudinary::Uploader.upload(faked_photo)
+  user.avatar_url = uploader['url']
+end
+
+
+Post.all.each do |post|
+  users = post.postable.users
+  5.times do
+    user = users[rand(users.count).to_i]
+    post.comments.create(user: user, body: Faker::Lorem.paragraphs(5).join("\n") )
+  end
+end
+
+Post.all.each do |post|
+  users = post.postable.users
+  post.comments.each do |comment|
+    user = users[rand(users.count).to_i]
+    5.times do
+      Reply.create(user: user, parent_comment_id: comment.id, body: Faker::Lorem.paragraphs(1).join("\n") )
+    end
+  end
+end
