@@ -2,7 +2,7 @@
     <div id="rectangle_8"  ></div>
     <div id="add"  >
         <div id="bkg_1"  ></div>
-	<%= link_to new_building_post_path(@building) do %>
+	   <%= link_to new_building_post_path(@building) do %>
         <%= image_tag"icon_plus.png", id: "icon_plus" %>
         <%= image_tag"icon_note_add.png", id: "icon_note_add" %>
         <%  end %>
@@ -19,10 +19,12 @@
                 <ul>
                  <% Category.all.each do |category| %>
                    <li id="category_#{category.id}">
-                    <%= link_to category.name, params.merge(category_id: category.id) -%> 
+                       <%= link_to category.name, params.merge(category_id: category.id) -%> 
                    </li>
-                 <% end %>
-                   <li><%= link_to 'clear search', building_posts_url(@building)-%> </li>
+                    <% end %>
+                    <li>
+                        <%= link_to 'clear search', building_posts_url(@building)-%> 
+                    </li>
                 </ul> 
             </li>
         </ul>
@@ -30,15 +32,10 @@
     <div id="rectangle_2"  ></div>
     
     <div id="searchC"  >
-        <div id="search"  >
-            s
-        </div>
-        <%= text_field_tag :searchTextField %>
         <%= submit_tag 's', id:'search' %>
+        <%= text_field_tag :searchTextField %>
     </div>
     <div id="rectangle_2"  ></div>
- <br />
-
 </div>
 <%= form_tag building_posts_url(@building), method: :get do %>
 
@@ -47,9 +44,6 @@
 
         
         
-
-
-<p><%= link_to 'new post', new_building_post_path(@building) %></p>
 
 
 

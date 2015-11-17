@@ -20,9 +20,8 @@
 	     <%= truncate(post.user.username, length: 6, omission: '...') -%> 
           </div>
           <div class="_days_ago_" >    
-	    <%= time_ago_in_words(post.created_at) -%> ago.<br/>
+	    <%= time_ago_in_words(post.created_at) -%> ago.
           </div>
       </div>
     </div> 
 </div>
-<br clear="all">
