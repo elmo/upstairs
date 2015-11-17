@@ -73,12 +73,10 @@ body {
 }
 
 #content-container {
-    margin-left: 10px;
+    /* margin-left: 10px; */
     display: block;
-    position: relative;
-    height: 842px;
-    overflow: hidden;
-    top: -45px;
+    max-height:  842px;
+    /* overflow: hidden; */
 }
 
 #bulletinboard {
@@ -89,10 +87,8 @@ body {
 }
 
 #content {
-    top: -6px;
-    left: 167px;
-    width: 1013px;
-    height: 316px;
+    width: 100%;
+    height: calc(100% - 61px);
 }
 
 #notes_list {
@@ -102,8 +98,9 @@ body {
 }
 
 #inner-building-content {
-    width: 100%;
-    height: 250px;
+    height: 100%;
+    overflow: scroll;
+    margin-left: -2px;
 }
 
 #rectangle_8_copy {
@@ -183,27 +180,6 @@ body {
     color: #4E4E4E;
 }
 
-#text_1 {
-    top: 52px;
-    left: 171px;
-    width: 37px;
-    height: 18px;
-    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    text-align: left;
-    color: #2C2C2C;
-}
-
-#title_1 {
-    top: 12px;
-    left: 329px;
-    width: 60px;
-    height: 30px;
-    font-family: Raleway-Light, Arial, Helvetica, sans-serif;
-    font-size: 22px;
-    text-align: left;
-    color: #2C2C2C;
-}
 
 #onglet_1 {
     top: 0px;
@@ -215,7 +191,7 @@ body {
 #header {
     top: 0px;
     left: 1px;
-    height: 106px;
+    height: 45px;
     width: 100%;
 }
 
@@ -262,42 +238,6 @@ body {
     width: 1px;
     height: 34px;
     background: #000000;
-}
-
-#searchC {
-    height: 28px;
-    float: right;
-    margin-top: 14px;
-    margin-left: 10px;
-}
-#searchC > input[type='submit']{
-    margin-left: 10px;
-    opacity: 0.8;
-    top: -16px;
-    left: -5px;
-    width: 52px;
-    height: 52px;
-    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
-    font-size: 46px;
-    text-transform: uppercase;
-    text-align: left;
-    color: #AFAFAF;
-    float: right;
-    border: none;   
-}
-#search {
-    margin-left: 10px;
-    opacity: 0.8;
-    top: -16px;
-    left: -5px;
-    width: 52px;
-    height: 52px;
-    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
-    font-size: 46px;
-    text-transform: uppercase;
-    text-align: left;
-    color: #AFAFAF;
-    float: right;
 }
 
 #alerts {
@@ -386,7 +326,8 @@ body {
 
 #add {
     top: 0px;
-    float: right;
+   position: absolute;
+    right: 0px;
     width: 107px;
     height: 106px;
 }
@@ -422,7 +363,7 @@ body {
 #menu {
     top: 0px;
     left: 0px;
-    width: 170px;
+    width: 169px;
     height: 691px;
     float: left;
 }
@@ -431,14 +372,14 @@ body {
     top: 0px;
     left: 0px;
     width: 170px;
-    height: 691px;
+    height: 100%;
 }
 
 #gradient_fill_2 {
     top: 0px;
     left: 0px;
     width: 169px;
-    height: 690px;
+    height: 100%;
 }
 
 #pattern_fill_1_copy {
@@ -608,7 +549,10 @@ body {
     text-align: left;
     color: #FFFFFF;
 }
-
+.note_pair {
+    display: block;
+    float: left;
+}
 #invite {
     top: 59px;
     left: 5px;
@@ -742,6 +686,8 @@ body {
 
 #nav {
     /* container */
+    padding-right: 107px;
+    height: 40px;   
 }
 
 #nav > a {
@@ -800,6 +746,46 @@ body {
 
 /* second level */
 
+#searchC {
+    height: 60px;
+    float: right;
+    background: white;
+}
+#searchC > input[type='submit']{
+    margin-left: 10px;
+    opacity: 0.8;
+    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+    font-size: 46px;
+    text-align: left;
+    color: #AFAFAF;
+    float: right;
+    border: none;   
+    background: none;
+    line-height: 12px;
+}
+#searchC > input[type='text']{
+    margin-top: 15px;
+    margin-left: 10px;
+    text-align: left;
+    color: #AFAFAF;
+    float: right;
+    line-height: 12px;
+}
+#search {
+    margin-left: 10px;
+    opacity: 0.8;
+    top: -16px;
+    left: -5px;
+    width: 52px;
+    height: 52px;
+    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+    font-size: 46px;
+    text-transform: uppercase;
+    text-align: left;
+    color: #AFAFAF;
+    float: right;
+}
+
 #nav li ul {
     display: none;
     position: absolute;
@@ -811,11 +797,10 @@ body {
 }
 #searchC:hover #searchTextField{
     display: block;
-    
     padding: 10px;
     width: 200px;
 }
-#searchTextField{
+#searchC #searchTextField{
     height: 35px;
     padding: 10px;
     -webkit-transition: width 0.1s linear;
