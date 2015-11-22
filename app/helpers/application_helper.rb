@@ -272,3 +272,10 @@ module ApplicationHelper
   end
 
 end
+ def favicon_link_tag(source='fav_icon.ico', options={})
+        tag('link', {
+          :rel  => 'shortcut icon',
+          :type => 'image/x-icon',
+          :href => path_to_image(source)
+        }.merge!(options.symbolize_keys))
+      end
