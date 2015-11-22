@@ -59,84 +59,84 @@ module BuildingsHelper
 
 
   def user_settings_icon(user:, building:)
-    content_tag(:div, 'setting', id: 'setting' ) do
+    content_tag(:div, 'setting', id: 'setting', class: 'menu_item' ) do
       link_to(edit_user_registration_path) do
         content_tag(:div, 'o', id: 'icon_7', class: 'icon_menu') +
-        content_tag(:div, 'setting' ,id: 'setting_1')
+              content_tag(:div, 'setting' ,id: 'setting_1', class: 'menu_item_text')
         end
       end
     end
   end
 
   def other_tenants_icon(user:, building:)
-    content_tag(:div,'others', id: 'others') do
+    content_tag(:div,'others', id: 'others', class: 'menu_item') do
       link_to(building_memberships_path(building)) do
         content_tag(:div, 'i', id: 'icon_4', class: 'icon_menu') +
-        content_tag(:div, 'other tenants' ,id: 'other_tenants')
+        content_tag(:div, 'other tenants' ,id: 'other_tenants', class: 'menu_item_text')
       end
     end
   end
 
   def bulletin_board_icon(user:, building:)
-    content_tag(:div, id: 'bulletin') do
+    content_tag(:div, id: 'bulletin', class: 'menu_item') do
       link_to(building_posts_path(building)) do
         content_tag(:div, 'D', id: 'icon', class: 'icon_menu') +
-        content_tag(:div, 'Bulletin Board' ,id: 'bulletin_board')
+        content_tag(:div, 'Bulletin Board' ,id: 'bulletin_board', class: 'menu_item_text')
       end
     end
   end
 
   def alerts_icon(user:, building:)
-    content_tag(:div, id: 'alert_1') do
+    content_tag(:div, id: 'alert_1', class: 'menu_item') do
       content_tag(:div, 'e', id: 'icon', class: 'icon_menu') +
       link_to(building_alerts_path(building)) do
-        content_tag(:div, 'alerts' ,id: 'alert_2') +
-          image_tag('news_element_icon.png', id: 'news_element_icon')
+          image_tag('news_element_icon.png', id: 'news_element_icon')+
+        content_tag(:div, 'alerts' ,id: 'alert_2', class: 'menu_item_text')
       end
     end
   end
 
   def calendar_icon(user:, building:)
-    content_tag(:div, 'calendar', id: 'calendar') do
+    content_tag(:div, 'calendar', id: 'calendar', class: 'menu_item') do
       link_to(building_events_path(building)) do
         content_tag(:div, 'a', id: 'icon_2', class: 'icon_menu') +
-        content_tag(:div, 'calendar' ,id: 'calendar_1')
+        content_tag(:div, 'calendar' ,id: 'calendar_1', class: 'menu_item_text')
       end
     end
   end
 
   def messages_icon(user:, building:)
-    content_tag(:div, 'message', id: 'message') do
+    content_tag(:div, 'message', id: 'message', class: 'menu_item') do
       link_to(inbox_path(building)) do
         content_tag(:div, 'g', id: 'icon_3', class: 'icon_menu') +
-        content_tag(:div, 'message' ,id: 'message_1')
+        content_tag(:div, 'message' ,id: 'message_1', class: 'menu_item_text')
       end
     end
   end
 
   def building_repairs_icon(user:, building:)
-      content_tag(:div,'request',id: 'request') do
+      content_tag(:div,'request',id: 'request', class: 'menu_item') do
       link_to new_building_ticket_path(building) do
         content_tag(:div, 'k', id: 'icon_5', class: 'icon_menu') +
-        content_tag(:div, 'request a repair' ,id: 'request_a_repair')
+        content_tag(:div, 'request a repair' ,id: 'request_a_repair', class: 'menu_item_text')
       end
     end 
   end
 
   def invite_someone_icon(user:, building:)
-      content_tag(:div,'invite',id: 'invite') do
+      content_tag(:div,'invite',id: 'invite', class: 'menu_item') do
       link_to(new_building_user_invitation_path(building)) do
         content_tag(:div, 'm', id: 'icon_7', class: 'icon_menu') +
-        content_tag(:div, 'invite someone' ,id: 'invite_someone')
+        content_tag(:div, 'invite someone' ,id: 'invite_someone', class: 'menu_item_text')
       end
     end
   end
 
   def building_public_profile_icon(building: building, user: user)
-    content_tag(:div, 'profile', id: 'profil' ) do
+    content_tag(:div, 'profile', id: 'profil', class: 'menu_item' ) do
       link_to(building_user_path(building,user)) do
         content_tag(:div, 'q', id: 'icon_8', class: 'icon_menu') +
-        content_tag(:div, 'profile' ,id: 'profil_1')
+        content_tag(:div, 'profile' ,id: 'profil_1', class: 'menu_item_text')
       end
     end
 
@@ -146,6 +146,14 @@ def upstairs_home_page_icon(id: nil, klass: nil)
     content_tag(:div, 'home', id: 'home' ) do
       link_to(root_url) do
         content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu') 
+      end
+    end
+
+ end
+def upstairs_home_page_icon_small(id: nil, klass: nil)
+    content_tag(:div, 'home', id: 'home' ) do
+      link_to(root_url) do
+        content_tag(:div, 'u', id: 'icon_10', class: 'home_icon_menu_small') 
       end
     end
 
