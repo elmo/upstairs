@@ -16,12 +16,12 @@
 	<%= truncate(post.body, length: 35, omission: '... (continued)' ) -%> 
       </div>
       <div class="info_post">
-          <div class="user-name" >
+          <span class="user-name" >
 	     <%= truncate(post.user.username, length: 6, omission: '...') -%> 
-          </div>
-          <div class="_days_ago_" >    
+          </span>
+          <span class="_days_ago_" >    
 	    <%= time_ago_in_words(post.created_at) -%> ago.
-          </div>
+          </span>
       </div>
     </div> 
 </div>

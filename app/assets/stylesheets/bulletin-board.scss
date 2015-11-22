@@ -1,6 +1,7 @@
 .note_pair {
   display:block;
- width: 80%;
+ width: 100%;
+    min-width: 125px;
 }
 
 .note {
@@ -10,8 +11,8 @@
   height: 125px;
   clear: both;
   background-color: white;
+    min-width: 125px;
 }
-
 .onglet {
   width: 41px;
   height: 12px;
@@ -28,29 +29,34 @@
 }
 
 .user-name {
-  float: left;
-  width: 47px;
-  height: 18px;
-  font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  text-align: left;
-  color:#4E4E4E;
-  min-width: 200px;
+    padding-right: 20px;
+    /* width: 47px; */
+    height: 18px;
+    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: left;
+    color: #4E4E4E;
+    display: inline-block;
+    /* min-width: 200px; */
 }
 
 ._days_ago_ {
-  float: left;
   font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
   font-size: 12px;
   text-align: left;
   color:#4E4E4E;
+    display: inline-block;
 }
 
 .info_post{
-  width: 100%;
+    width: 100%;
+    display: block;
+    height: 30px;
 }
 
 .post-text {
+
+    white-space: nowrap;
   margin-left: 20px;
   display: block;
   font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
@@ -82,6 +88,7 @@
 
 .post_text {
   margin-left: -20px;
+    width: calc(100% - 61px);
 }
 
 .header_post {
