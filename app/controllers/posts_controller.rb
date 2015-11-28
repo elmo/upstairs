@@ -11,13 +11,16 @@ class PostsController < ApplicationController
       @category = Category.friendly.find(params[:c])
       scope = scope.where(category_id: @category.id)
     end
-    scope = scope.where(["title like ? or body like ? ", "%#{params[:q]}%", "%#{params[:q]}%"]) if params[:q]
+    scope = scope.where(["title like ? or body like ? ", "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
     scope.page(params[:page]).per(10)
     @posts = scope.page(params[:page]).per(10)
   end
 
   # GET /posts/1
   def show
+    photo_index = (params[:photo_index]) ? params[:photo_index].to_i : 0
+    @photos = @post.photos
+    @selected_photo = @photos[photo_index]
   end
 
   # GET /posts/new
@@ -71,6 +74,6 @@ class PostsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def post_params
-    params[:post].permit(:title, :body, :category_id,  photos: [])
+    params[:post].permit(:title, :body, :searchTextField, :c,  photos: [])
   end
 end

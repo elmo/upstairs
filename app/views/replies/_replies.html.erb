@@ -1,10 +1,10 @@
-<p class="reply-summary"><%= pluralize(comment.replies.count, 'reply' ) %> <%= link_to 'post your reply', new_comment_reply_path(comment) -%></p>
+<p><%= pluralize(comment.replies.count, 'reply' ) %> <%= link_to 'post your reply', new_comment_reply_path(comment) -%></p>
 <% comment.replies.each do |reply| %>
-<div class="reply">
-  <div class="reply-image">
+<div>
+  <div>
     <%= user_profile_image(@building, reply.user, 'smallest', 'fit') -%>
   </div> 
-  <div class="reply-content">
+  <div>
     <h1 class="reply-heading"><%= username_or_anonymous(reply.user)-%> </h1>
      <p><%= reply.body -%></p>
   </div>
