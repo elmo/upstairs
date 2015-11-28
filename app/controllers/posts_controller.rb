@@ -7,8 +7,8 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     scope = @building.posts
-    if params[:category_id]
-      @category = Category.find(params[:category_id])
+    if params[:c]
+      @category = Category.friendly.find(params[:c])
       scope = scope.where(category_id: @category.id)
     end
     scope = scope.where(["title like ? or body like ? ", "%#{params[:q]}%", "%#{params[:q]}%"]) if params[:q]
