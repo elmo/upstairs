@@ -2,11 +2,11 @@
 <p> <%= pluralize(commentable.comments.count, 'comment' ) %> <%= link_to "add your comment" , new_polymorphic_path([commentable, Comment.new]) -%></p>
 <% commentable.comments.each do |comment| %>
 <% next if comment.new_record? %>
-<div class="comment">
-<div class="comment-image">
+<div>
+<div>
    <%= user_profile_image(@building, comment.user, 'smallest', 'fit') -%>
  </div>
- <div class="comment-content">
+ <div>
  <h1 class="comment-heading"><%= username_or_anonymous(comment.user) -%> </h1>
  <p> <%= comment.body -%> </p>
  </div>
