@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   after_create :create_actionable
 
   extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  friendly_id :slug_candidate, use: :slugged
   has_paper_trail
   has_attachments :photos
 
