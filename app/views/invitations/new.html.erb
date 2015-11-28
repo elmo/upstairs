@@ -1,7 +1,9 @@
-<% if @invitation.type == 'UserInvitation' %>
+<div class="content-default">
+    <% if @invitation.type == 'UserInvitation' %>
 <%= render partial: 'neighbor'  -%>
 <% elsif @invitation.type == 'LandlordInvitation' %>
 <%= render partial: 'landlord'  -%>
 <% elsif @invitation.type == 'ManagerInvitation' %>
 <%= render partial: 'manager'  -%>
 <% end %>
+</div>
