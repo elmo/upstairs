@@ -19,7 +19,7 @@
                 <ul class="submenu">
                  <% Category.all.each do |category| %>
                    <li id="category_#{category.id}">
-                       <%= link_to category.name, params.merge(category_id: category.id) -%> 
+                       <%= link_to category.name, params.merge(c: category.slug) -%> 
                    </li>
                     <% end %>
                     <li>
