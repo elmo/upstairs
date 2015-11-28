@@ -2,18 +2,58 @@
     <div id="rectangle_8"  ></div>
     <div id="add"  >
         <div id="bkg_1"  ></div>
+	   <%= link_to new_building_event_path(@building) do %>
         <%= image_tag"icon_plus.png", id: "icon_plus" %>
-        <%= image_tag"icon_note_add.png", id: "icon_note_add" %>
+        <%= content_tag(:div, 'B', id: 'icon', class: 'icon_note_add') %>
+        <%  end %>
     </div>
-     <div id="filters_1" >
-        <div id="filters_title" >Filters</div>
-        <div id="arrow" >T</div>
-    </div>
+    <nav id="nav" role="navigation" class="filters">
+        <a href="#nav" title="Show navigation">Show navigation</a>
+        <a href="#" title="Hide navigation">Hide navigation</a>
+        <ul class="accordion">
+            <li>
+                <a href="javascript:void(0)" class="js-accordion-trigger">
+                    <div id="filters_title" >Filters</div>
+                     <div id="arrow" >T</div>
+                </a>
+                <ul class="submenu">
+                 <% Category.all.each do |category| %>
+                   <li id="category_#{category.id}">
+                       <%= link_to category.name, params.merge(c: category.slug) -%> 
+                   </li>
+                    <% end %>
+                    <li>
+                        <%= link_to 'clear categories', building_posts_url(@building)-%> 
+                    </li>
+                </ul> 
+            </li>
+        </ul>
+    </nav>
     <div id="rectangle_2"  ></div>
-    <div id="shearch"  >
-        <div id="search" >
-            s
-        </div>
+    
+    <div id="searchC"  >
+        <%= form_tag building_posts_path(@building), method: :get  do %>
+        <%= submit_tag 's', id: 'search' %>
+        <%= text_field_tag :searchTextField %>
+        <% end %>
     </div>
     <div id="rectangle_2"  ></div>
 </div>
+<%= form_tag building_posts_url(@building), method: :get do %>
+
+<% end %>
+
+
+        
+        
+
+
+
+
+
+        
+        
+
+
+
+

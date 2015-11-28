@@ -117,6 +117,13 @@ body {
 #inner-building-content {
     height: 100%;
     overflow: scroll;
+
+
+}
+.content-default{
+    padding-left: 10px;
+    padding-top: 10px;
+    
 }
 
 #rectangle_8_copy {
@@ -345,12 +352,20 @@ body {
     height: 86px;
 }
 
-#icon_note_add {
-    opacity: 0.30196078431373;
-    top: 25px;
-    right: 25px;
-    width: 54px;
-    height: 54px;
+.icon_note_add {
+    position: absolute;
+    margin-left: 10px;
+    top: 40px;
+    right: 30px;
+    opacity: 0.3;
+    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    text-align: left;
+    color: #FFFFFF;
+    float: right;
+    border: none;
+    background: none;
+    line-height: 12px;
 }
 @mixin texture($gradient-angle, $bg-color-1, $bg-color-2, $texture-number, $inverted) { $texture-list: 
   "paper.png"             // Fabric and paper
@@ -647,7 +662,7 @@ body {
     float: right;
     background: white;
 }
-#searchC > input[type='submit']{
+#searchC > form > input[type='submit']{
     margin-left: 10px;
     opacity: 0.8;
     font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
@@ -659,7 +674,7 @@ body {
     background: none;
     line-height: 12px;
 }
-#searchC > input[type='text']{
+#searchC > form > input[type='text']{
     margin-top: 15px;
     margin-left: 10px;
     text-align: left;

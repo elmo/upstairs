@@ -4,7 +4,7 @@
         <div id="bkg_1"  ></div>
 	   <%= link_to new_building_post_path(@building) do %>
         <%= image_tag"icon_plus.png", id: "icon_plus" %>
-        <%= image_tag"icon_note_add.png", id: "icon_note_add" %>
+        <%= content_tag(:div, 'D', id: 'icon', class: 'icon_add_header') %>
         <%  end %>
     </div>
     <nav id="nav" role="navigation" class="filters">
@@ -19,11 +19,11 @@
                 <ul class="submenu">
                  <% Category.all.each do |category| %>
                    <li id="category_#{category.id}">
-                       <%= link_to category.name, params.merge(category_id: category.id) -%> 
+                       <%= link_to category.name, params.merge(c: category.slug) -%> 
                    </li>
                     <% end %>
                     <li>
-                        <%= link_to 'clear search', building_posts_url(@building)-%> 
+                        <%= link_to 'clear categories', building_posts_url(@building)-%> 
                     </li>
                 </ul> 
             </li>
@@ -32,8 +32,10 @@
     <div id="rectangle_2"  ></div>
     
     <div id="searchC"  >
-        <%= submit_tag 's', id:'search' %>
+        <%= form_tag building_posts_path(@building), method: :get  do %>
+        <%= submit_tag 's', id: 'search' %>
         <%= text_field_tag :searchTextField %>
+        <% end %>
     </div>
     <div id="rectangle_2"  ></div>
 </div>

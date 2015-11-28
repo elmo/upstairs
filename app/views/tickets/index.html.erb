@@ -1,4 +1,5 @@
-<h1 class="inline">Tickets</h1>
+<div class="content-default">
+    <h1 class="inline">Tickets</h1>
 <small><%= pluralize(@building.tickets.open.count, 'open ticket')-%></small>
 <small><%= pluralize(@building.tickets.closed.count, 'closed ticket')-%></small>
 <p><%= link_to 'File a New Ticket', new_building_ticket_path(@building) %></p>
@@ -16,4 +17,6 @@
   <% end %>
 <% end %>
 </tickets>
+</div>
+
 

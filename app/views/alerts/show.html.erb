@@ -1,7 +1,9 @@
-<h1><%= @building.address -%> building Alert!</h1>
+<div class="content-default">
+    <h1><%= @building.address -%> building Alert!</h1>
 
 <p class="alert">
  <%= @alert.message -%>
 </p>
 
 <%= link_to 'building page', building_path(@building) -%>
+</div>
