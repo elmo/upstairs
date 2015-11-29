@@ -8,7 +8,18 @@
 <%= link_to message.recipient.public_name , building_user_path(@building, message.recipient) %>
 <% end %>
 <%= link_to message.created_at.strftime(upstairs_time_format), building_message_path(@building, message)  %> 
-<p><%= message.body -%> <small><%= link_to 'reply', new_building_user_message_path(@building, message.sender, parent_id: message.id ) -%> </small> </p>
+<p>
+   <%= message.body -%>
+   <small>
+      <%= link_to 'reply', new_building_user_message_path(@building, message.sender, parent_id: message.id ) -%>
+      <%= message.id -%>
+      <% if !message.read? %>
+      <%= link_to 'mark as read', read_building_message_path(@building, message), method: :put %> 
+      <% else %>
+      <%= link_to 'mark as unread', unread_building_message_path(@building, message) , method: :put %> 
+      <% end %>
+   </small> 
+</p>
 </div>
 <% end %>
 <%= paginate(@messages) -%>

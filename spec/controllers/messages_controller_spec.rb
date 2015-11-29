@@ -65,4 +65,24 @@ RSpec.describe MessagesController, type: :controller do
       end
     end
   end
+
+  describe "read/unread" do
+    before(:each) do
+      request.env["HTTP_REFERER"] = '/home'
+      create_valid_message
+    end
+
+    it "marks as read" do
+      @message.update_attributes(read: false)
+      put :read, building_id: @building.to_param, id: @message.to_param
+      expect( assigns(:message).read).to be true
+    end
+
+    it "marks as unread" do
+      @message.update_attributes(read: true)
+      put :unread, building_id: @building.to_param, id: @message.to_param
+      expect( assigns(:message).read).to be false
+    end
+  end
+
 end
