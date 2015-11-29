@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: [:show, :edit, :update, :destroy, :read, :unread]
   before_action :set_building
   before_action :set_recipient, except: [:inbox, :outbox]
   layout 'building'
@@ -52,6 +52,16 @@ class MessagesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def read
+    @message.mark_as_read!
+    redirect_to :back
+  end
+
+  def unread
+    @message.mark_as_unread!
+    redirect_to :back
   end
 
   # DELETE /messages/1

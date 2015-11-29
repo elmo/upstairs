@@ -40,7 +40,12 @@ Upstairs::Application.routes.draw do
     resources :posts
     resources :alerts
     resources :tickets
-    resources :messages
+    resources :messages do
+      member do
+        put 'read'
+        put 'unread'
+      end
+    end
     resources :invitations do
       get 'redeem'
     end

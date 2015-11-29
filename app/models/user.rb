@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   has_many :verifications, dependent: :destroy
   belongs_to :invitation
+  belongs_to :sender, foreign_key: 'sender_id', class_name: 'User'
   after_create :apply_invitation
   before_save :set_slug
 
@@ -85,6 +86,10 @@ class User < ActiveRecord::Base
 
   def sent_messages_count
     Message.where(sender_id: id).count
+  end
+
+  def has_unread_messages?
+    Message.where(recipient_id: id, read: false).any?
   end
 
   def default_building
