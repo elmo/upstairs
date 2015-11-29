@@ -39,4 +39,25 @@ RSpec.describe Message, type: :model do
       end
     end
   end
+
+  describe "user messages" do
+     before(:each) do
+       load_valid_building
+       @sender = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
+       @recipient = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
+       @valid_attributes = { sender: @sender, recipient: @recipient, building: @building, body: 'message body' }
+     end
+
+     it "changes sender sent counts" do
+       expect { Message.create!(@valid_attributes) }.to change(@sender, :sent_messages_count).by(1)
+     end
+
+     it "changes recipient recieved count" do
+       expect { Message.create!(@valid_attributes) }.to change(@recipient, :received_messages_count).by(1)
+     end
+
+     it "changes recipient recieved count" do
+       expect { Message.create!(@valid_attributes) }.to change(@recipient, :has_unread_messages?).from(false).to(true)
+     end
+  end
 end
