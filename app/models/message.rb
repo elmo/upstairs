@@ -14,6 +14,14 @@ class Message < ActiveRecord::Base
     slug
   end
 
+  def mark_as_read!
+    update_attributes(read: true)
+  end
+
+  def mark_as_unread!
+    update_attributes(read: false)
+  end
+
   private
 
   def set_slug
