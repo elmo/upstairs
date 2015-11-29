@@ -107,8 +107,9 @@ module BuildingsHelper
   def messages_icon(user:, building:)
     content_tag(:div, 'message', id: 'message', class: 'menu_item') do
       link_to(inbox_path(building)) do
-          content_tag(:div,controller_name == 'messages' ? 'H' : 'G', id: 'icon_3', class: 'icon_menu') +
-        content_tag(:div, 'message' ,id: 'message_1', class: 'menu_item_text')
+        content_tag(:div,controller_name == 'messages' ? 'H' : 'G', id: 'icon_3', class: 'icon_menu') +
+        content_tag(:div, 'message' ,id: 'message_1', class: 'menu_item_text') +
+        ((current_user.has_unread_messages?) ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
       end
     end
   end
