@@ -19,7 +19,7 @@ module BuildingsHelper
     render partial: '/buildings/alerts'
   end
 
-  
+
 
   def building_home_icon(building: building, id: nil, klass: nil)
     content_tag :div, id: id, class: klass do
@@ -87,10 +87,10 @@ module BuildingsHelper
     end
   def alerts_icon(user:, building:)
     content_tag(:div, id: 'alert_1', class: 'menu_item') do
-        content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
-      link_to(building_alerts_path(building)) do
-          image_tag('news_element_icon.png', id: 'news_element_icon')+
-        content_tag(:div, 'alerts' ,id: 'alert_2', class: 'menu_item_text')
+      content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
+        link_to(building_alerts_path(building)) do
+          content_tag(:div, 'alerts' ,id: 'alert_2', class: 'menu_item_text') +
+          (building.alerts_for_user(current_user).any? ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
       end
     end
   end
@@ -119,7 +119,7 @@ module BuildingsHelper
         content_tag(:div, controller_name == 'tickets' ? 'L' : 'K', id: 'icon_5', class: 'icon_menu') +
         content_tag(:div, 'request a repair' ,id: 'request_a_repair', class: 'menu_item_text')
       end
-    end 
+    end
   end
 
   def invite_someone_icon(user:, building:)
@@ -144,7 +144,7 @@ module BuildingsHelper
 def upstairs_home_page_icon(id: nil, klass: nil)
     content_tag(:div, 'home', id: 'home' ) do
       link_to(root_url) do
-        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu') 
+        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
       end
     end
 
@@ -152,7 +152,7 @@ def upstairs_home_page_icon(id: nil, klass: nil)
 def upstairs_home_page_icon_small(id: nil, klass: nil)
     content_tag(:div, 'home', id: 'home' ) do
       link_to(root_url) do
-        content_tag(:div, 'u', id: 'icon_10', class: 'home_icon_menu_small') 
+        content_tag(:div, 'u', id: 'icon_10', class: 'home_icon_menu_small')
       end
     end
 
