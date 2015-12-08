@@ -2,7 +2,7 @@ Upstairs::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => '/attachinary' unless Rails.env.test?
 
-  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', omniauth_callbacks: 'callbacks' }
 
   devise_scope :user do
     get '/join' => 'devise/registrations#new'
