@@ -1,7 +1,20 @@
-<% content_for :navigation_icon do %>
-<%#TODO: replace below with a real path to a icon image. -%>
-<% image_tag("building_home_icon.png") %> 
-<% end %>
-<%= alert_bar(building: @building, user: current_user) -%>
+<h1><%= @building.address -%></h1>
 
-<%= current_user_view(building: @building, user: current_user) -%>
+<h2>Latest Posts</h2>
+<% if @posts.any?  %>
+  <% @posts.each_with_index do |post,i| -%>
+    <%= render partial: '/posts/post', locals: { post: post, i: i } %> 
+  <% end %>
+<% end %>
+
+<p><%= link_to 'see all posts', building_posts_path(@building) -%></p>
+
+<h2>Upcoming Events</h2>
+
+<% if @events.any? %>
+  <% @events.each do |event| %>
+  <% end %>
+<% else %>
+  <p>There are no upcoming events for this building.</p>
+  <%= link_to 'create a new event' , new_building_event_path(@building ) %>
+<% end %>

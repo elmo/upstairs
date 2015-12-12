@@ -25,11 +25,17 @@ class User < ActiveRecord::Base
   INVITATION_LANDLORD = 'LandlordInvitation'
   INVITATION_MANAGER = 'ManagerInvitation'
 
+  PROFILE_STATUS_NEW = 0
+  PROFILE_STATUS_WELCOMED = 5
+  PROFILE_STATUS_BUILDING_CHOSEN = 10
+  PROFILE_STATUS_BUILDING_OWNERSHIP_DECLARED = 15
+
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
 
   def join(building)
     memberships.create(building_id: building.id) unless member_of?(building)
+    profile_building_chosen!
   end
 
   def leave(building)
@@ -70,6 +76,10 @@ class User < ActiveRecord::Base
 
   def manager_of?(building)
     has_role?(:landlord, building) || has_role?(:manager, building)
+  end
+
+  def primary_residence
+    (memberships.any?) ? memberships.first.building : nil
   end
 
   def sent_messages
@@ -162,6 +172,34 @@ class User < ActiveRecord::Base
 
   def verified_owner_of?(building)
     verifications.exists?(building_id: building.id)
+  end
+
+  def brand_new?
+    profile_status == PROFILE_STATUS_NEW
+  end
+
+  def welcomed?
+    profile_status >= PROFILE_STATUS_WELCOMED
+  end
+
+  def building_chosen?
+    profile_status >= PROFILE_STATUS_BUILDING_CHOSEN
+  end
+
+  def profile_building_ownership_declared?
+    profile_status >= PROFILE_STATUS_BUILDING_OWNERSHIP_DECLARED
+  end
+
+  def profile_building_chosen!
+    update_attributes(profile_status: PROFILE_STATUS_BUILDING_CHOSEN)
+  end
+
+  def profile_welcomed!
+    update_attributes(profile_status: PROFILE_STATUS_WELCOMED)
+  end
+
+  def profile_building_ownership_declared!
+    update_attributes(profile_status: PROFILE_STATUS_BUILDING_OWNERSHIP_DECLARED)
   end
 
   def self.from_omniauth(auth)

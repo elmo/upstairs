@@ -1,3 +1,5 @@
+<h2>Bulletin Board</h2>
 <div class="content-posts">
-    <%= render partial: 'posts' %>
+  <%= render partial: 'posts' %>
+  <%= paginate(@posts) -%>
 </div>
