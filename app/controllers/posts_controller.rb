@@ -12,8 +12,8 @@ class PostsController < ApplicationController
       scope = scope.where(category_id: @category.id)
     end
     scope = scope.where(["title like ? or body like ? ", "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
-    scope.page(params[:page]).per(10)
-    @posts = scope.page(params[:page]).per(10)
+    scope.page(params[:page]).per(5)
+    @posts = scope.page(params[:page]).per(5)
   end
 
   # GET /posts/1

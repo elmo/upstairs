@@ -1,6 +1,7 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_building, only: [:show, :edit, :update, :gallery]
+  before_action :set_building, only: [:show, :edit, :update, :gallery,:declare_ownership,:landlord_onboarding,:invite_your_landlord]
+  before_action :ask_about_ownership, only: [:show]
   layout :get_layout
 
   def index
@@ -9,7 +10,8 @@ class BuildingsController < ApplicationController
   # GET /buildings/1
   def show
     @users = @building.users
-    @posts = @building.posts.page(params[:page]).per(10).order('created_at desc')
+    @posts = @building.posts.page(params[:page]).per(3).order('created_at desc')
+    @events = @building.events.page(params[:page]).per(3).order('starts asc')
     @notifications = @building.notifications.order('created_at desc').limit(5)
   end
 
@@ -21,15 +23,29 @@ class BuildingsController < ApplicationController
     @building.geocode
   end
 
+  def declare_ownership
+  end
+
+  def landlord_onboarding
+   current_user.profile_building_ownership_declared!
+   current_user.make_landlord(@building)
+  end
+
+  def invite_your_landlord
+   current_user.profile_building_ownership_declared!
+  end
+
   # GET /buildings/new
   def new
     @building = Building.where(address: params[:address]).first
     if @building.present?
       current_user.join(@building)
+      current_user.profile_building_chosen!
       redirect_to building_path(@building)
     end
     @building = Building.new(address: params[:address])
     @building.geocode
+    @building.save
   end
 
   # GET /buildings/1/edit
@@ -77,5 +93,10 @@ class BuildingsController < ApplicationController
 
   def get_layout
     return %w(index choose).include?(action_name) ? 'users' : 'building'
+  end
+
+  def ask_about_ownership
+    return if current_user.profile_building_ownership_declared?
+    redirect_to declare_ownership_building_path and return false
   end
 end

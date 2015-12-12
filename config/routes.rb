@@ -23,6 +23,9 @@ Upstairs::Application.routes.draw do
   get '/buildings/:building_id/outbox' => 'messages#outbox', as: :outbox
   get '/buildings/:building_id/calendar' => 'events#index', as: :calendar
 
+  get '/welcome' => 'users#welcome', :via  => :get
+  put '/acknowledge' => 'users#acknowledge'
+
   resources :verifications, only: [:index, :destroy] do
     member do
       put 'revoke'
@@ -36,6 +39,11 @@ Upstairs::Application.routes.draw do
   end
 
   resources :buildings do
+    member do
+      get 'declare_ownership'
+      get 'landlord_onboarding'
+      get 'invite_your_landlord'
+    end
     resources :memberships, only: [:create, :destroy, :index]
     resources :posts
     resources :alerts
@@ -56,7 +64,7 @@ Upstairs::Application.routes.draw do
     resources :landlord_invitations, controller: 'invitations', type: 'LandlordInvitation'
     resources :manager_invitations, controller: 'invitations', type: 'ManagerInvitation'
 
-    resources :users, only: [:show] do
+    resources :users, only: [:show, :welcome] do
       resources :messages
     end
 
