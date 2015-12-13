@@ -8,6 +8,7 @@ RSpec.describe MessagesController, type: :controller do
     @sender = create(:user, email: 'sender@email.com')
     @recipient = create(:user, email: 'recipient@email.com')
     sign_in(@sender)
+    Message.any_instance.stub(:create_notifications).and_return(true)
   end
 
   describe 'GET index' do
