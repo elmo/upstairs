@@ -15,18 +15,14 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if session[:invitation_id].present?
-      invitation = Invitation.find(session[:invitation_id])
-      session[:invitation_id] = nil
-      redirect_to building_path(invitation.building)
-    end
-    if resource.invitation_link.present?
-      session[:invitation_link] = nil
-      building = resource.buildings.first
-      redirect_to building_path(building) and return false  if building.present?
-    end
     sign_in_url = new_user_session_url
-    stored_location_for(resource) || root_path
+    return stored_location_for(resource) if stored_location_for(resource).present?
+    return welcome_path if resource.brand_new?
+    return buildings_path if resource.welcomed? and !resource.building_chosen?
+    if resource.primary_residence.present?
+      return building_path(resource.primary_residence)
+    end
+    root_path
   end
 
   def not_found

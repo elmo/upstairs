@@ -1,0 +1,6 @@
+<h1>Declare Ownership</h1>
+
+<p>Are you the owner of <b><%= @building.address -%> </b>?
+
+<p><%= link_to "I declare that I am the owner of #{@building.address}", landlord_onboarding_building_path(@building) -%> </p>
+<p><%= link_to "I  am not the owner of  #{@building.address}", invite_your_landlord_building_path(@building) -%> </p>

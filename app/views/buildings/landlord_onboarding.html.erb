@@ -1,0 +1,12 @@
+<h1>Landlord Onboarding</h1>
+
+<h2>Congratulations, you are now the landlord of <%= @building.address -%> </h2>
+
+<% if current_user.verified_owner_of?(@building) %>
+  <p>You are the verified owner of the building.</p>
+<% else %>
+  <p>However, you have not been verified as the owner. Would you like to become verfiied? I'ts free! 
+    <%= link_to 'Request Verficiation', new_building_verification_request_path(@building) -%>
+  </p>
+<% end %>
+

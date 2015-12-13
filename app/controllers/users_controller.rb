@@ -2,8 +2,14 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :get_building, only: [:show]
 
-  def home
+  def welcome
   end
+
+  def acknowledge
+    current_user.profile_welcomed!
+    redirect_to buildings_path
+  end
+
 
   def show
     @user = User.where(slug: params[:id]).last
