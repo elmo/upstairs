@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Icon_set_upstairs-Regular;
+    src: asset-url('Icon_set_upstairs-Regular.otf');
+}
+
 #gmaps-input-address{
   width: 100%; 
 }
@@ -12,10 +17,35 @@
 }
 
 div #find-your-builiding-form {
-  width: 40%;
+  width: 100%;
+    padding-bottom: 90px;
 }
 
-div #find-my-building-submit {
- background-color: #0059FF;
- color: #fff; 
+#find-my-building-submit {
+    background-color: #996633;
+    height: 34px;
+    width: 36px;
+    border: none;
+    padding: 8px;
+    float: left;
+    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+    font-size: 1.9em;
+    padding-top: 0px;
+    color: #fff;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+#find-your-builiding-content{
+    width: 40%
+        
+    
+}
+#second_section{    background: #ffffff;
+    width: 160%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    PADDING-TOP: 30PX;
+    margin-left: -30%;
+    padding-bottom: 70px;
+    
 }

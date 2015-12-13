@@ -1,6 +1,7 @@
 /*
 	@name website_v4
 */
+
 $medium-screen: em(640) !default;
 $large-screen: em(860) !default;
 @font-face {
@@ -24,7 +25,6 @@ img {  display: block; margin: 0px; border: none; padding: 0px; }
     margin-right: auto ; width: 100%;
     padding-top: 80px;
     overflow: hidden;
-    height: 630px;
 }
 .centered-navigation {
     background: none;
@@ -313,4 +313,17 @@ centered {
     #the_social_network__for_your_building_ {
         margin-top: 100px;
     }
+}
+
+#gmaps-input-address {
+    width: calc(100% - 36px);
+    float: left;
+    border: none;
+    margin: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+body {
+    display: block;
+    margin: 0px;
 }

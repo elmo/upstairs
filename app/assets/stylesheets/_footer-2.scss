@@ -25,11 +25,24 @@
 // }
 
 .footer-2 {
-  ///////////////////////////////////////////////////////////////////////////////////
-  $base-spacing: 1.5em !default;
+  
+
+  //$footer-background: desaturate(darken($base-accent-color, 10%), 10%);
+  $footer-background: desaturate(darken($base-accent-color, 10%), 10%);
+  $footer-color: white;
+  $footer-link-color: transparentize($footer-color, 0.6);
+  $footer-disclaimer-color: transparentize($footer-color, 0.6);
+
+ @include background(linear-gradient($base-accent-color, #F79444) left repeat);
+  padding: $base-spacing;
+  width: 100%;
+  display: inline-block;
+///////////////////////////////////////////////////////////////////////////////////
+  $base-spacing: 2em !default;
   $base-accent-color: #FAA547;
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
+    
   
   ul {
     margin: 0;
@@ -45,18 +58,6 @@
     text-decoration: none;
   }
   //////////////////////////////////////////////////////////////////////////////////
-
-  //$footer-background: desaturate(darken($base-accent-color, 10%), 10%);
-  $footer-background: desaturate(darken($base-accent-color, 10%), 10%);
-  $footer-color: white;
-  $footer-link-color: transparentize($footer-color, 0.6);
-  $footer-disclaimer-color: transparentize($footer-color, 0.6);
-
- @include background(linear-gradient($base-accent-color, #F79444) left repeat);
-  padding: $base-spacing;
-  width: 100%;
-  display: inline-block;
-
   .footer-logo {
     margin-right: 1em;
     margin-bottom: 1em;
