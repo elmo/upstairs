@@ -21,6 +21,7 @@ RSpec.describe PostsController, type: :controller do
   describe 'GET show' do
     it 'assigns the requested post as @post' do
       create_valid_post
+      Post.any_instance.stub(:photos).and_return([])
       get :show, building_id: @building.to_param, id: @post.to_param
       expect(assigns(:post)).to eq(@post)
     end
