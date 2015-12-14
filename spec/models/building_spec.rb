@@ -169,4 +169,17 @@ RSpec.describe Building, type: :model do
       expect(Building.verified.count).to eq 1
     end
   end
+
+  describe "alert_notification_for_user" do
+    before(:each) do
+      load_valid_building
+      load_user
+      @user.join(@building)
+      @alert = Alert.create(building: @building, user: @user)
+    end
+    it "returns notification associated with alert" do
+      expect( @building.alert_notification_for_user(user: @user, alert: @alert)).to eq Notification.last
+    end
+  end
+
 end

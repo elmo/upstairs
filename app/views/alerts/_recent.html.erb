@@ -1,0 +1,10 @@
+<% @building.alerts_for_user(current_user).each do |alert| %>
+<div id="alert_<%=alert.id-%>" class="alert">
+  <%= simple_format(alert.message) -%>
+  <%= link_to 'x', 
+    notification_path(@building.alert_notification_for_user(user: current_user, alert: alert) ), 
+    method: :delete 
+  -%>
+</div>
+<% end %>
+<p><%= link_to "all alerts", building_alerts_path(@building) -%></p>

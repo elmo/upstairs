@@ -34,6 +34,7 @@ gem 'rollbar'
 gem 'refills'
 gem 'sidekiq'
 gem 'simple_form'
+gem 'timecop'
 gem 'twilio-ruby'
 gem 'gmaps-autocomplete-rails'
 
