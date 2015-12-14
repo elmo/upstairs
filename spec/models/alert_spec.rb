@@ -27,10 +27,19 @@ RSpec.describe Alert, type: :model do
       expect { Alert.create(user: @user, building: @building, message: 'message') }.to change(Notification, :count).by(1)
     end
 
-    it 'recent' do
-      expect(Alert.recent.count).to eq 0
-      Alert.create(user: @user, building: @building, message: 'message')
-      expect(Alert.recent.count).to eq 1
+    describe "recent" do
+      before(:each) do
+        Timecop.freeze(2015,1,1)
+      end
+      it 'older than 12 hours are not recent ' do
+        Alert.create(user: @user, building: @building, message: 'message', created_at: Time.zone.now - 13.hours)
+        expect(Alert.recent.count).to eq 0
+      end
+
+      it 'more recent than 12 hours are recent ' do
+        @alert = Alert.create(user: @user, building: @building, message: 'message', created_at: Time.zone.now - 11.hours)
+        expect(Alert.recent.count).to eq 1
+      end
     end
 
     it 'for_user' do
