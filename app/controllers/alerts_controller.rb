@@ -6,6 +6,7 @@ class AlertsController < ApplicationController
 
   # GET /alerts
   def index
+    @alert = @building.alerts.new(user: current_user)
     scope = @building.alerts
     scope = scope.where(["message like ? ", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
     @alerts = scope.order('created_at desc').page(params[:page]).per(10)
@@ -22,7 +23,7 @@ class AlertsController < ApplicationController
 
   # GET /alerts/1/edit
   def edit
-    @alert = @building.alerts.friendly.find(params[:id])
+    @alert = @building.alerts.find(params[:id])
   end
 
   # POST /alerts
@@ -31,7 +32,7 @@ class AlertsController < ApplicationController
     @alert.user = current_user
 
     if @alert.save
-      redirect_to building_alert_path(@building, @alert), notice: 'Alert was successfully created.'
+      redirect_to building_alerts_path(@building), notice: 'Alert was successfully created.'
     else
       render :new
     end
@@ -40,7 +41,7 @@ class AlertsController < ApplicationController
   # PATCH/PUT /alerts/1
   def update
     if @alert.update(alert_params)
-      redirect_to building_alert_path(@building, @alert), notice: 'Alert was successfully updated.'
+      redirect_to building_alerts_path(@building), notice: 'Alert was successfully updated.'
     else
       render :edit
     end
