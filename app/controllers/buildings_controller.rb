@@ -96,6 +96,7 @@ class BuildingsController < ApplicationController
   end
 
   def ask_about_ownership
+    return unless current_user.present?
     return if current_user.profile_building_ownership_declared?
     redirect_to declare_ownership_building_path and return false
   end

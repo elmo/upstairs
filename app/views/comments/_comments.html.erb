@@ -1,16 +1,19 @@
 <div id="comments">
+
 <p> <%= pluralize(commentable.comments.count, 'comment' ) %> <%= link_to "add your comment" , new_polymorphic_path([commentable, Comment.new]) -%></p>
-<% commentable.comments.each do |comment| %>
+
+<% @post.comments.each do |comment| %>
 <% next if comment.new_record? %>
 <div>
 <div>
    <%= user_profile_image(@building, comment.user, 'smallest', 'fit') -%>
  </div>
  <div>
- <h1 class="comment-heading"><%= username_or_anonymous(comment.user) -%> </h1>
+ <h3><%= username_or_anonymous(comment.user) -%> </h3>
  <p> <%= comment.body -%> </p>
  </div>
  </div>
  <%= render partial: '/replies/replies', locals: { comment: comment} %>
 <% end %>
+
  </div>
