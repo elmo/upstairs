@@ -1,19 +1,30 @@
 <div class="content-default">
-    <h1 class="inline">Alerts</h1>
 
+<h3>Alerts</h3>
+<%= render partial: 'form' -%>
 
-<h3>Past Alerts</h3>
-
-<ul>
-<% @alerts.each do |alert| %>
-  <li>
-    <%= alert.created_at.strftime(upstairs_time_format) %>
-    by <%= link_to alert.user.public_name, building_user_path(@building, alert.user) %> 
-    <%= link_to alert.message, building_alert_path(@building, alert) %>
-  </li>
-<% end %>
-</ul>
-
-<br />
+<% if @alerts.any? %>
+  <ul>
+    <% @alerts.each do |alert| %>
+      <li>
+	<p><%= link_to alert.message, building_alert_path(@building, alert) %></p>
+        <%= alert.created_at.strftime(upstairs_time_format) %>
+        by <%= link_to alert.user.public_name, building_user_path(@building, alert.user) %> 
+        <% if alert.owned_by?(current_user) %>
+          <%= link_to 'edit', edit_building_alert_path(@building, alert) -%>
+	<% end %>
+       </li>
+    <% end %>
+  </ul>
 <%= paginate(@alerts) -%>
+
+<% else %>
+
+  <% if params[:searchTextField].present? %>
+    <p>There are no alerts matching your query.</p>
+  <% else %>
+    <p>There are no alerts for this building.</p>
+  <% end %>
+<% end %>
+
 </div>

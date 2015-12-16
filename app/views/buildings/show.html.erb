@@ -1,5 +1,7 @@
 <h1><%= @building.address -%></h1>
 
+<%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
+
 <h2>Latest Posts</h2>
 <% if @posts.any?  %>
   <% @posts.each_with_index do |post,i| -%>

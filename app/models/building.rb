@@ -43,6 +43,10 @@ class Building < ActiveRecord::Base
       .where(["notifications.notifiable_id = alerts.id and notifications.notifiable_type = 'Alert' and notifications.user_id = ? ", user.id])
   end
 
+  def alert_notification_for_user(user: user, alert: alert)
+    notifications.find_by(user: user.id, notifiable_id: alert.id)
+  end
+
   def landlord
     Role.where(resource_type: 'Building', resource_id: id,  name: User::ROLE_LANDLORD).try(:first).try(:users).try(:first)
   end
