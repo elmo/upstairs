@@ -1,12 +1,18 @@
 <div class="content-default">
+
 <h3>Alerts</h3>
+<%= render partial: 'form' -%>
+
 <% if @alerts.any? %>
   <ul>
     <% @alerts.each do |alert| %>
       <li>
+	<p><%= link_to alert.message, building_alert_path(@building, alert) %></p>
         <%= alert.created_at.strftime(upstairs_time_format) %>
         by <%= link_to alert.user.public_name, building_user_path(@building, alert.user) %> 
-	<p><%= link_to alert.message, building_alert_path(@building, alert) %></p>
+        <% if alert.owned_by?(current_user) %>
+          <%= link_to 'edit', edit_building_alert_path(@building, alert) -%>
+	<% end %>
        </li>
     <% end %>
   </ul>

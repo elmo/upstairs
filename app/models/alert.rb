@@ -5,6 +5,7 @@ class Alert < ActiveRecord::Base
   has_many :notifications, as: :notifiable, dependent: :destroy
   validates_presence_of :user
   validates_presence_of :building
+  validates_presence_of :message
 
   after_create :create_notifications
   after_create :create_actionable
@@ -14,6 +15,10 @@ class Alert < ActiveRecord::Base
     joins(:notifications)
       .where(["notifications.user_id = ? and notifications.notifiable_type = 'Alert'", user.id])
   }
+
+  def owned_by?(u)
+    user.id == u.id
+  end
 
   private
 
