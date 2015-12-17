@@ -4,18 +4,20 @@
     <%= user_profile_image(@building, post.user, 'medium', 'fit') %>
     <div class="post_text">   
        <div class="header_post">
-	       <div class="category" style="color:<%=post.category.color-%>;" ><%= post.category.name -%> </div>
-         <div class="title" ><%= link_to post.title, building_post_path(@building, post ) -%></div>
-      </div>
-      <div class="post-text" >
-	<%= truncate(post.body, length: 35, omission: '... (continued)' ) -%> 
-      </div>
-      <div class="info_post">
-          <span class="user-name" >
-	     <%= truncate(post.user.username, length: 6, omission: '...') -%> 
-          </span>
-          <span class="_days_ago_" >    
-	    <%= time_ago_in_words(post.created_at) -%> ago.
+       <div class="category" style="color:<%= post.category.color-%>;" ><%= post.category.name -%> </div>
+       <div class="title" ><%= link_to post.title, building_post_path(@building, post ) -%></div>
+    </div>
+    <div class="post-text" >
+     <%= truncate(post.body, length: 35, omission: '... (continued)' ) -%> 
+    </div>
+    <div class="info_post">
+      <span class="user-name" > <%= truncate(post.user.username, length: 6, omission: '...') -%> </span>
+          <span class="_days_ago_">
+	    <% if post.created_at > Time.now - 24.hours %>
+	      <%= time_ago_in_words(post.created_at) -%> ago
+            <% else %>
+	      <%= post.created_at.strftime("%B %d at %I:%M %p") -%>
+           <% end %>
           </span>
       </div>
     </div> 

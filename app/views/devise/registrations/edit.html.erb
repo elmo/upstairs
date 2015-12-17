@@ -67,12 +67,14 @@
     <%= f.check_box :ok_to_send_text_messages %>
   </div>
 
-
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
+
 <% end %>
 
+<br/>
+<p><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%> </p>
 <br />
 
 <h3>Cancel my account</h3>

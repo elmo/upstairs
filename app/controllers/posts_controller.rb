@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     end
     scope = scope.where(["title like ? or body like ? ", "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
     scope.page(params[:page]).per(5)
-    @posts = scope.page(params[:page]).per(5)
+    @posts = scope.page(params[:page]).order('created_at desc').per(5)
   end
 
   # GET /posts/1
@@ -75,6 +75,6 @@ class PostsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def post_params
-    params[:post].permit(:title, :body, :searchTextField, :c,  photos: [])
+    params[:post].permit(:title, :body, :category_id, :searchTextField, :c,  photos: [])
   end
 end
