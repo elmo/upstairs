@@ -1,8 +1,8 @@
-<h1><%= @building.address -%></h1>
+<h5><% @building.address -%></h5>
 
 <%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
 
-<h2>Latest Posts</h2>
+<h5>Latest Posts</h5>
 <% if @posts.any?  %>
   <% @posts.each_with_index do |post,i| -%>
     <%= render partial: '/posts/post', locals: { post: post, i: i } %> 
@@ -11,7 +11,7 @@
 
 <p><%= link_to 'see all posts', building_posts_path(@building) -%></p>
 
-<h2>Upcoming Events</h2>
+<h5>Upcoming Events</h5>
 
 <% if @events.any? %>
   <% @events.each do |event| %>

@@ -59,10 +59,10 @@ module BuildingsHelper
 
 
   def user_settings_icon(user:, building:)
-    content_tag(:div, 'setting', id: 'setting', class: 'menu_item' ) do
+    content_tag(:div, 'settings', id: 'setting', class: 'menu_item' ) do
       link_to(edit_user_registration_path) do
         content_tag(:div, 'o', id: 'icon_7', class: 'icon_menu') +
-              content_tag(:div, 'setting' ,id: 'setting_1', class: 'menu_item_text')
+              content_tag(:div, 'settings' ,id: 'setting_1', class: 'menu_item_text')
         end
       end
     end
