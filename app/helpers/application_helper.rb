@@ -188,14 +188,14 @@ module ApplicationHelper
     dimensions_method = size + '_image_dimensions'
     dimensions = send(dimensions_method.to_sym)
     image = (usable_username?(user) && user.avatar.present?) ?
-      cl_image_tag(user.avatar.path, size: dimensions, crop: crop) :
+      cl_image_tag(user.avatar.path, size: dimensions, crop: crop, id: 'photo') :
       anonymous_user_icon(dimensions)
     image
   end
 
   def anonymous_user_icon(dimensions)
     height, width = dimensions.split('x')
-    cl_image_tag('anonymous.png', width: width, height: height, crop: :fit)
+    cl_image_tag('anonymous.png', width: width, height: height, crop: :fit, id: 'photo')
   end
 
   def current_section
