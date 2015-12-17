@@ -99,8 +99,8 @@
 #centeredmenu ul li a {
 	display:block;
 	margin:0;
-	font-size:1em;
-	line-height:1em;
+	font-size:.8em;
+	line-height:.8em;
 	text-decoration:none;
 	color:#ffffff;
 	font-weight:bold;
@@ -110,8 +110,8 @@
 	display:block;
 	margin:0;
 	//padding:.6em .5em .4em;
-	font-size:1em;
-	line-height:1em;
+	font-size:.8em;
+	line-height:.8em;
 	text-decoration:none;
 	color:#ffffff;
 	font-weight:bold;
@@ -158,15 +158,15 @@
 #centeredmenu ul li.active li a,
 #centeredmenu ul li:hover ul li a,
 #centeredmenu ul li.hover ul li a { /* This line is required for IE 6 and below */
-	font-size:.8em;
+	font-size:.6em;
 	font-weight:bold; /* resets the bold set for the top level menu items */
 	//background:#eee;
 	color:#444;
-	line-height:1.4em; /* overwrite line-height value from top menu */
+	line-height:1.2em; /* overwrite line-height value from top menu */
 	//border-bottom:1px solid #ddd; /* sub menu item horizontal lines */
 	float:left;
 	width:100%;
-    padding: 20px;
+    padding: 10px;
     background-color: white;
     opacity: 1;
 	//right:.8em;
