@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   has_many :notifications, as: :notifiable, dependent: :destroy
   validates_presence_of :user
   validates_presence_of :title
+  validates_presence_of :category
   after_create :create_notifications
   after_create :create_actionable
 

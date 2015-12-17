@@ -1,18 +1,12 @@
 <div class="note<%= i % 1 == 0 ? '_pair' : ''  -%>">
-      <%= image_tag"onglet_1.png", id: "onglet" %>
-      <div id="category_color"></div>
-      <%= image_tag"shadow.png", class: "shadow" %>
-      <%= image_tag"photo.png" , id: "photo" %>
-      <%# we need to integrat this -%>
-      <%= user_profile_image(@building, post.user, 'medium', 'fit') %>
+  <%= image_tag"onglet_1.png", id: "onglet" %>
+  <div id="category_color" style="color:<%=post.category.color-%>;"> </div>
+    <%= image_tag"shadow.png", class: "shadow" %>
+    <%= user_profile_image(@building, post.user, 'medium', 'fit') %>
     <div class="post_text">   
-      <div class="header_post">
-          <div class="category" >
-	     <%= post.category.name -%> 
-          </div>
-          <div class="title" >
-	    <%= link_to post.title, building_post_path(@building, post ) -%> 
-          </div>
+       <div class="header_post">
+	       <div class="category" style="color:<%=post.category.color-%>;" ><%= post.category.name -%> </div>
+         <div class="title" ><%= link_to post.title, building_post_path(@building, post ) -%></div>
       </div>
       <div class="post-text" >
 	<%= truncate(post.body, length: 35, omission: '... (continued)' ) -%> 
