@@ -8,6 +8,7 @@ RSpec.describe Post, type: :model do
   it { should belong_to(:postable) }
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:title) }
+  it { should validate_presence_of(:category) }
 
   describe 'creation' do
     before(:each) do
