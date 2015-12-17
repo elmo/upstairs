@@ -1,19 +1,32 @@
-<div id="comments">
+<%= paginate(@paginated_comments, param_name: 'comment_page' ) -%>
+<p>
+<%= pluralize(commentable.comments.count, 'comment' ) %> 
+<%= link_to "add your comment" , 
+  new_polymorphic_path([commentable, Comment.new]) 
+-%>
+</p>
 
-<p> <%= pluralize(commentable.comments.count, 'comment' ) %> <%= link_to "add your comment" , new_polymorphic_path([commentable, Comment.new]) -%></p>
+<ul id="comment-list">
+<% @paginated_comments.each do |comment| %>
+  <% next if comment.new_record? %>
+  <li id="comment_#{comment.id}">
+    <%= user_profile_image(@building, comment.user, 'smallest', 'fit') -%>
+    <b><%= username_or_anonymous(comment.user) -%></b> commented:
+    <p class="comment-body">
+      <%= simple_format(comment.body) -%> 
+    </p>
+<p><%= pluralize(comment.replies.count, 'reply' ) %> <%= link_to 'post your reply', new_comment_reply_path(comment) -%></p>
+<ul id="reply-list">
+  <% comment.replies.each do |reply| %>
+    <li>
+      <%= user_profile_image(@building, reply.user, 'smallest', 'fit') -%>
+      <b><%= username_or_anonymous(reply.user)-%></b> replied:
+      <p><%= reply.body -%></p>
+      <br clear="both">
+    </li>
+  <% end %>
+</ul>
 
-<% @post.comments.each do |comment| %>
-<% next if comment.new_record? %>
-<div>
-<div>
-   <%= user_profile_image(@building, comment.user, 'smallest', 'fit') -%>
- </div>
- <div>
- <h3><%= username_or_anonymous(comment.user) -%> </h3>
- <p> <%= comment.body -%> </p>
- </div>
- </div>
- <%= render partial: '/replies/replies', locals: { comment: comment} %>
+</li>
 <% end %>
-
- </div>
+</ul>

@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    @paginated_comments = @post.comments.where(parent_comment_id: nil).page(params[:comment_page]).per(1)
     photo_index = (params[:photo_index]) ? params[:photo_index].to_i : 0
     @photos = @post.photos
     @selected_photo = @photos[photo_index]
