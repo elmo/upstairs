@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
-categories = Category.create([{ name: 'For Sale' }, { name: 'Free' }, { name: 'Help Wanted' }, { name: 'Jobs Offered' }, { name: 'Random' }])
+categories = Category.create([{ name: 'For Sale', color: '' }, { name: 'Free', color: 'blue' }, { name: 'Help Wanted', color: 'green' }, { name: 'Jobs Offered', color: 'purple' }, { name: 'Random', color: 'orange' }])
 jerry = User.create(email: "jerry@upstairs.io", password: "Upstairs1!", password_confirmation: "Upstairs1!", phone: "5555551212", username: "jerry")
 jane = User.create(email: "jane@upstairs.io", password: "Upstairs1!", password_confirmation: "Upstairs1!", phone: "5555551213", username: "jane")
 mark = User.create(email: "mark@upstairs.io", password: "Upstairs1!", password_confirmation: "Upstairs1!", phone: "5555551214", username: "mark")
