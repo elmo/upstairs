@@ -143,13 +143,7 @@ body {
     height: 125px;
 }
 
-#category_color {
-    top: 0px;
-    left: 0px;
-    width: 22px;
-    height: 125px;
-    background: #819AC2;
-}
+
 
 #rectangle_8_copy_1 {
     top: 0px;
@@ -206,9 +200,7 @@ body {
 }
 
 
-#onglet_1 {
-    top: 0px;
-    left: 486px;
+#onglet {
     width: 41px;
     height: 12px;
 }
