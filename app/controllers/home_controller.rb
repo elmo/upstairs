@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout false, only: [:splash]
+  layout :get_layout
 
   def home
     # if current_user.present?
@@ -11,6 +11,9 @@ class HomeController < ApplicationController
     # end
   end
 
-  def splash
+
+  def get_layout
+    action_name == 'home' ? 'home' : 'users'
   end
+
 end
