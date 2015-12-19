@@ -1,12 +1,9 @@
 <%= simple_form_for([@building, @event]) do |f| %>
-
   <%= f.error_notification %>
-
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :body %>
     <%= f.input :photos, as: :attachinary %>
-
     <div class='input-group date container-datetime' >
       <%= f.text_field :starts, placeholder: 'Date', class: 'form-control', id: "datetimepicker" %>
       <span class="input-group-addon">
