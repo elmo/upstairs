@@ -17,14 +17,12 @@
                      <div id="arrow" >T</div>
                 </a>
                 <ul class="submenu">
-                 <% Category.all.each do |category| %>
-                   <li id="category_#{category.id}">
-                       <%= link_to category.name, params.merge(c: category.slug) -%> 
+                   <li>
+                      <%= link_to 'upcoming events', params.merge(archive: false) -%> 
                    </li>
-                    <% end %>
-                    <li>
-                        <%= link_to 'clear categories', building_posts_url(@building)-%> 
-                    </li>
+                   <li>
+                      <%= link_to 'past events', params.merge(archive: true) -%> 
+                   </li>
                 </ul> 
             </li>
         </ul>
@@ -32,14 +30,14 @@
     <div id="rectangle_2"  ></div>
     
     <div id="searchC"  >
-        <%= form_tag building_posts_path(@building), method: :get  do %>
+        <%= form_tag building_events_path(@building), method: :get  do %>
         <%= submit_tag 's', id: 'search' %>
         <%= text_field_tag :searchTextField %>
         <% end %>
     </div>
     <div id="rectangle_2"  ></div>
 </div>
-<%= form_tag building_posts_url(@building), method: :get do %>
+<%= form_tag building_events_url(@building), method: :get do %>
 
 <% end %>
 

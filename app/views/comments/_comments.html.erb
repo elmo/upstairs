@@ -16,7 +16,7 @@
       <%= simple_format(comment.body) -%> 
     </p>
 <p><%= pluralize(comment.replies.count, 'reply' ) %> <%= link_to 'post your reply', new_comment_reply_path(comment) -%></p>
-<ul id="reply-list">
+  <ul id="reply-list">
   <% comment.replies.each do |reply| %>
     <li>
       <%= user_profile_image(@building, reply.user, 'smallest', 'fit') -%>
@@ -25,8 +25,7 @@
       <br clear="both">
     </li>
   <% end %>
-</ul>
-
+  </ul>
 </li>
 <% end %>
 </ul>

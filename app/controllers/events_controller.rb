@@ -6,8 +6,19 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
+    @event = @building.events.new
     start_date = (params[:start_date].present?) ? Chronic.parse(params[:start_date]) : Date.today.at_beginning_of_month
-    @events = @building.events.where(['starts >= ? and starts <= ?', start_date, start_date.next_month])
+    if params[:archive] and params[:archive] == 'true'
+      @past_or_upcoming_events = 'Past'
+      scope = @building.events.where(['starts <= ? ', start_date])
+    else
+      @past_or_upcoming_events = 'Upcoming Events'
+      scope = @building.events.where(['starts >= ?', start_date])
+    end
+
+    scope = scope.where(["title like ? or body like ? ", "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
+    @search_results_message = "There are no #{@past_or_upcoming_events.downcase} events for this building #{(params[:searchTextField].present?) ? "matching '#{params[:searchTextField]}'." : "" }"
+    @events = scope.page(params[:page]).per(5)
     if params[:view] && params[:view] == 'list'
       render template: '/events/list'
     else
@@ -17,6 +28,7 @@ class EventsController < ApplicationController
 
   # GET /events/1
   def show
+    @paginated_comments = @event.comments.where(parent_comment_id: nil).page(params[:comment_page]).per(1)
   end
 
   # GET /events/new
