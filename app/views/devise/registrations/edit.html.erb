@@ -9,10 +9,9 @@
 		  building_membership_path(building, building.membership(current_user)), 
 		  method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%></small>
   <% end %>
-
-  <p><%= link_to 'join another buidling', buildings_path -%></p>
-
+  <br />
 <% end %>
+<p><%= link_to 'join another buidling', buildings_path -%></p>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -54,18 +53,17 @@
 
 
   <div class="field">
-    <%= f.label :use_my_username, "Check this box if you would like to use your user name when posting and commenting. Uncheck this box if you would like to be anonymous." %>
+    <%= f.label :use_my_username, "Post and comment under my username" %>
     <%= f.check_box :use_my_username %>
   </div>
 
-
   <div class="field">
-    <%= f.label :phone ,"(Optional): Check this box if you give Upstairs permission to send you text messages" %>
+    <%= f.label :phone ,"Phone number" %>
     <%= f.text_field :phone , autocomplete: "on", placeholder: "Enter your phone # here" %>
   </div>
 
   <div class="field">
-    <%= f.label :ok_to_send_text_messages, "Check this box if you give Upstairs permission to send you text messages"%>
+    <%= f.label :ok_to_send_text_messages, "Upstairs can send me text messages." %>
     <%= f.check_box :ok_to_send_text_messages %>
   </div>
 
