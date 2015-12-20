@@ -1,31 +1,26 @@
 .note_pair {
-  display:block;
- width: 100%;
-    min-width: 125px;
+    display: flex;
+    clear: both;
+    background: white;
 }
 
 .note {
-  top: 0px;
-  left: 0px;
-  width: 1012px;
-  height: 125px;
-  clear: both;
-  background-color: white;
-    min-width: 125px;
+    display: flex;
+    clear: both;
 }
+
 .onglet {
-  width: 41px;
-  height: 12px;
-  position: absolute;
-  left: 50%;
-  right: 50%;
+    width: 41px;
+    height: 12px;
+    position: absolute;
+    left: 50%;
+    right: 50%;
 }
 
 .shadow {
-  float: left;
-  margin-left: -22px;
-  width: 22px;
-  height: 8px;
+    float: left;
+    width: 22px;
+    height: 8px;
 }
 
 .user-name {
@@ -41,58 +36,68 @@
 }
 
 ._days_ago_ {
-  font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  text-align: left;
-  color:#4E4E4E;
+    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: left;
+    color: #4E4E4E;
     display: inline-block;
 }
 
-.info_post{
+.info_post {
     width: 100%;
-    display: block;
+    display: flex;
     height: 30px;
+    align-self: flex-end;
 }
 
 .post-text {
-
-    white-space: nowrap;
-  margin-left: 20px;
-  display: block;
-  font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  text-align: left;
-  color: #2C2C2C;
+    margin-top: 10px;
+    display: flex;
+    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: left;
+    color: #2C2C2C;
 }
 
 .category {
-  margin: 0px 15px;
-  height: 29px;
-  font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-  font-size: 22px;
-  text-transform: uppercase;
-  text-align: left;
-  color:#2C2C2C;
+    float: left;
+    margin-right: 15px;
+    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    text-align: left;
+    color: #2C2C2C;
 }
 
-
 .title {
-    height: 30px;
     font-family: Raleway-Light, Arial, Helvetica, sans-serif;
     font-size: 22px;
     text-align: left;
     color: #2C2C2C;
-    overflow: hidden;
-    white-space: nowrap;
+    display: flex;
 }
-
-.post_text {
-  margin-left: -20px;
+.category_color {
+    width: 22px;
+    float: left;
+}
+.post_text {   
+    margin-left: 20px;
+    padding-top: 10px;
     width: calc(100% - 61px);
+    display: flex;
+    FLEX-DIRECTION: column;
+    justify-content: space-between;
 }
 
 .header_post {
-    display: block;
-    margin-left: 20px;
+    display: flex   ;
+}
+.content-posts{
+    height:calc(100% - 61px);
+    overflow: scroll;
     
+}
+#inner-building-content {
+    height: 100%;
+    overflow:inherit;
 }
