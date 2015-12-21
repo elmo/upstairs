@@ -111,26 +111,124 @@ RSpec.describe Building, type: :model do
     end
   end
 
-  describe 'landlord' do
+  describe "guests" do
     before(:each) do
       load_valid_building
       load_user
     end
 
-    it 'should be nil if no body has landlord role' do
+    it "guests" do
+      expect(@building.guests).to be_empty
+      @building.grant_guestship(@user)
+      expect(@building.guests).to_not be_empty
+      expect(@building.is_guest?(@user)).to eq true
+    end
+
+    it "revoke_guestship" do
+      @building.grant_guestship(@user)
+      expect(@building.is_guest?(@user)).to eq true
+      @building.revoke_guestship(@user)
+      expect(@building.is_guest?(@user)).to eq false
+    end
+  end
+
+  describe "changing memebership type" do
+    before(:each) do
+      load_valid_building
+      load_user
+    end
+
+    it "promotes guest to tenant" do
+      @building.grant_guestship(@user)
+      expect(@building.is_guest?(@user)).to eq true
+      @building.promote_to_tenant(@user)
+      expect(@building.has_tenant?(@user)).to eq true
+      expect(@building.is_guest?(@user)).to eq false
+      expect(@building.is_member?(@user)).to eq true
+    end
+  end
+
+  describe "tenantship" do
+    before(:each) do
+      load_valid_building
+      load_user
+    end
+
+    it "tenants" do
+     expect(@building.tenants).to be_empty
+     @building.grant_tenantship(@user)
+     expect(@building.tenants).to_not be_empty
+     expect(@building.has_tenant?(@user)).to eq true
+    end
+
+    it "grants tenantship" do
+     expect { @building.grant_tenantship(@user)}.to change(Membership, :count).by(1)
+     expect(@building.has_tenant?(@user)).to eq true
+    end
+
+    it "revokes tenantship" do
+     @building.grant_tenantship(@user)
+     expect( @building.has_tenant?(@user)).to eq true
+     @building.revoke_tenantship(@user)
+     expect( @building.has_tenant?(@user)).to eq false
+    end
+  end
+
+  describe "landlordship" do
+    before(:each) do
+      load_valid_building
+      load_user
+    end
+
+    it "landlord" do
+     expect(@building.landlord).to be_nil
+    end
+
+    it "is_landlord?" do
+     expect(@building.is_landlord?(@user)).to eq false
+     @building.grant_landlordship(@user)
+     expect(@building.is_landlord?(@user)).to eq true
+    end
+
+    it "grant_landlordship" do
+      @building.grant_landlordship(@user)
+      expect(@building.landlord).to eq @user
+    end
+
+    it "revoke_landlordship" do
+      @building.grant_landlordship(@user)
+      expect(@building.landlord).to eq @user
+      @building.revoke_landlordship(@user)
       expect(@building.landlord).to be_nil
     end
+  end
 
-    it 'should be user with role of landlord' do
-      @user.add_role(User::ROLE_LANDLORD, @building)
-      expect(@building.landlord).to eq @user
+  describe "managership" do
+    before(:each) do
+      load_valid_building
+      load_user
     end
 
-    it 'should be user with role of landlord' do
-      @user.add_role(User::ROLE_LANDLORD, @building)
-      expect(@building.landlord).to eq @user
-      @user.remove_role(User::ROLE_LANDLORD, @building)
-      expect(@building.landlord).to eq nil
+    it "managers" do
+     expect(@building.managers).to be_empty
+    end
+
+    it "is_manager?" do
+     expect(@building.is_manager?(@user)).to eq false
+     @building.grant_managership(@user)
+     expect(@building.is_manager?(@user)).to eq true
+    end
+
+    it "grant_managership" do
+      @building.grant_managership(@user)
+      expect(@building.managers.first).to eq @user
+    end
+
+    it "revoke_managership" do
+      @building.grant_managership(@user)
+      expect(@building.managers.first).to eq @user
+      @building.revoke_managership(@user)
+      expect(@building.managers).to be_empty
     end
   end
 

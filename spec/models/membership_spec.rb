@@ -5,6 +5,17 @@ RSpec.describe Membership, type: :model do
   it { should belong_to(:building) }
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:building) }
+  it { should validate_presence_of(:membership_type) }
+
+
+  describe "constants" do
+   it "membership_types" do
+     expect(Membership::MEMBERSHIP_TYPE_GUEST).to eq 'Guest'
+     expect(Membership::MEMBERSHIP_TYPE_TENANT).to eq 'Tenant'
+     expect(Membership::MEMBERSHIP_TYPE_LANDLORD).to eq 'Landlord'
+     expect(Membership::MEMBERSHIP_TYPE_MANAGER).to eq 'Manager'
+    end
+  end
 
   describe 'creation' do
     before(:each) do

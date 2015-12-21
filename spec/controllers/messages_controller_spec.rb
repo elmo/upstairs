@@ -9,6 +9,7 @@ RSpec.describe MessagesController, type: :controller do
     @recipient = create(:user, email: 'recipient@email.com')
     sign_in(@sender)
     Message.any_instance.stub(:create_notifications).and_return(true)
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
   end
 
   describe 'GET index' do

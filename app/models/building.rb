@@ -31,7 +31,92 @@ class Building < ActiveRecord::Base
   scope :verified, -> { joins(:verifications) }
 
   def membership(user)
-    user.memberships.where(user_id: user.id).first
+    memberships.where(user_id: user.id).first
+  end
+
+  def is_member?(user)
+    memberships.where(user_id: user.id).exists?
+  end
+
+  def guests
+    users.joins(:memberships).where( memberships: {membership_type: Membership::MEMBERSHIP_TYPE_GUEST} )
+  end
+
+  def grant_guestship(user)
+    memberships.find_or_create_by(user: user, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
+  end
+
+  def is_guest?(user)
+    users.joins(:memberships)
+         .where( memberships: {
+		   membership_type: Membership::MEMBERSHIP_TYPE_GUEST,
+		   user_id: user.id } ).exists?
+  end
+
+  def revoke_guestship(user)
+    memberships.where(user: user, membership_type: Membership::MEMBERSHIP_TYPE_GUEST).destroy_all
+  end
+
+  def grant_tenantship(user)
+    memberships.find_or_create_by(user: user, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+  end
+
+  def revoke_tenantship(user)
+    memberships.where(user: user, membership_type: Membership::MEMBERSHIP_TYPE_TENANT).destroy_all
+  end
+
+  def tenants
+    users.joins(:memberships).where( memberships: {membership_type: Membership::MEMBERSHIP_TYPE_TENANT } )
+  end
+
+  def has_tenant?(user)
+    users.joins(:memberships)
+         .where( memberships: {
+		  membership_type: Membership::MEMBERSHIP_TYPE_TENANT,
+		  user_id: user.id } ).exists?
+  end
+
+  def grant_landlordship(user)
+    memberships.find_or_create_by(user: user, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD)
+  end
+
+  def revoke_landlordship(user)
+    memberships.where(user: user, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD).destroy_all
+  end
+
+  def landlord
+    users.joins(:memberships).where( memberships: {membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD} ).first
+  end
+
+  def is_landlord?(user)
+    users.joins(:memberships)
+         .where( memberships: {
+		   membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD,
+		   user_id: user.id } ).exists?
+  end
+
+  def managers
+    users.joins(:memberships).where( memberships: {membership_type: Membership::MEMBERSHIP_TYPE_MANAGER} )
+  end
+
+  def grant_managership(user)
+    memberships.find_or_create_by(user: user, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER)
+  end
+
+  def revoke_managership(user)
+    memberships.where(user: user, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER).destroy_all
+  end
+
+  def is_manager?(user)
+    users.joins(:memberships)
+         .where( memberships: {
+		   membership_type: Membership::MEMBERSHIP_TYPE_MANAGER,
+		   user_id: user.id } ).exists?
+  end
+
+  def promote_to_tenant(user)
+    memberships.where(user_id: user.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
+               .update_all(membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
   end
 
   def public_name
@@ -45,10 +130,6 @@ class Building < ActiveRecord::Base
 
   def alert_notification_for_user(user: user, alert: alert)
     notifications.find_by(user: user.id, notifiable_id: alert.id)
-  end
-
-  def landlord
-    Role.where(resource_type: 'Building', resource_id: id,  name: User::ROLE_LANDLORD).try(:first).try(:users).try(:first)
   end
 
   def owner_verified?
