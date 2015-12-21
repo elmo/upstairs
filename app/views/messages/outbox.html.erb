@@ -1,7 +1,7 @@
+<div class="content-posts">
 <h1 class="inline">Outbox</h1>
 <small><%= pluralize(current_user.sent_messages_count, 'message') -%> </small>
 <small><%= link_to  "Received messages: #{current_user.sent_messages.count}", inbox_path(@building) %></small>
-
 <h2>Sent Messages </h2>
-
 <%= render partial: 'messages' %>
+</div>
