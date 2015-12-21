@@ -1,3 +1,4 @@
+<div class="content-posts">
 <h5><% @building.address -%></h5>
 <%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
 
@@ -19,3 +20,4 @@
   <p>There are no upcoming events for this building.</p>
   <%= link_to 'create a new event' , new_building_event_path(@building ) %>
 <% end %>
+</div>

@@ -1,3 +1,4 @@
+<div class="content-posts">
 <h1>Building Note</h1>
 <h2 class="inline"><%= @post.title -%></h2>
 <p><%= by_line(@post, with_icon: true) -%></p>
@@ -16,4 +17,5 @@
   </p>
   <br clear="both">
   <%= render partial: '/comments/comments', locals: { commentable: @post}  %>
+</div>
 </div>

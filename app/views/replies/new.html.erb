@@ -1,12 +1,10 @@
+<div class="content-posts">
 <h1>Your Reply</h1>
-
 <%= render 'form' %>
-
 <%= render partial: '/posts/post', locals: {post: @comment.commentable} %>
-
-
 <% if @comment.commentable.class.to_s != 'Ticket'%>
    <%= link_to 'back to original comment', building_post_path(@building, @comment.commentable) %>
 <% else %>
   <%= link_to 'back to ticket', building_ticket_path(@comment.commentable.building, @comment.commentable )%>
 <% end %>
+</div>

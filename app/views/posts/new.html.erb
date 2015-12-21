@@ -1,11 +1,7 @@
-<div class="content-default">
-    <h1>Bulletin Board</h1>
-
-    <h2>Add a Note</h2>
-
-    <%= render 'form' %>
-
-    <br />
-
-    <p><%= link_to "back to Bulletin Board" , building_path(@postable) %></p>
+<div class="content-posts">
+  <h1>Bulletin Board</h1>
+  <h2>Add a Note</h2>
+  <%= render 'form' %>
+  <br />
+  <p><%= link_to "back to Bulletin Board", building_path(@postable) %></p>
 </div>

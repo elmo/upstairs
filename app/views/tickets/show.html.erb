@@ -1,3 +1,4 @@
+<div class="content-posts">
 <div class="ticket">
 <h4><%= @ticket.title %> <%= ticket_severity_badge(@ticket) -%> <%= ticket_status_badge(@ticket)-%> </h4>
 <%= @ticket.body %> 
@@ -7,7 +8,6 @@
 <% end %>
 <br clear="all">
 <%= render partial: '/comments/comments', locals: {commentable: @ticket}  %>
-
 <p><%= link_to 'list all tickets' , building_tickets_path(@building) -%> </p>
-
+</div>
 </div>
