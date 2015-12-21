@@ -13,6 +13,7 @@ RSpec.describe Membership, type: :model do
      expect(Membership::MEMBERSHIP_TYPE_GUEST).to eq 'Guest'
      expect(Membership::MEMBERSHIP_TYPE_TENANT).to eq 'Tenant'
      expect(Membership::MEMBERSHIP_TYPE_LANDLORD).to eq 'Landlord'
+     expect(Membership::MEMBERSHIP_TYPE_MANAGER).to eq 'Manager'
     end
   end
 

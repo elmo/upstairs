@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   has_attachment :avatar, accept: [:jpg, :png, :gif]
 
   def join(building)
-    memberships.create(building_id: building.id) unless member_of?(building)
+    building.grant_guestship(self)
     profile_building_chosen!
   end
 

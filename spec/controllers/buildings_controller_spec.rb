@@ -13,6 +13,7 @@ RSpec.describe BuildingsController, type: :controller do
     request.env['HTTP_REFERER'] = 'http://www.upstairs.io'
     load_user
     sign_in(@user)
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
   end
 
   describe 'GET show' do

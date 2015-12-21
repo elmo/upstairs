@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe HomeController, type: :controller do
   describe 'GET #index' do
+    before(:each) do
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
+    end
     it 'responds successfully with an HTTP 200 status code' do
       get :about
       expect(response).to be_success

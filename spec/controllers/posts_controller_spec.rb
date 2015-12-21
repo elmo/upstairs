@@ -8,6 +8,7 @@ RSpec.describe PostsController, type: :controller do
     load_user
     sign_in(@user)
     @category = create(:category, name: 'Free')
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
   end
 
   describe 'GET index' do

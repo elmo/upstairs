@@ -213,28 +213,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'make/revoke landlord role' do
-    before(:each) do
-      load_user
-      load_valid_building
-    end
-
-    it 'add landlord role' do
-      expect { @user.make_landlord(@building) }.to change(Role, :count).by(1)
-      expect(@user.owned_properties.first).to eq @building
-      expect(@building.landlord).to eq @user
-    end
-
-    it 'revoke landlord role' do
-      @user.make_landlord(@building)
-      expect(@user.owned_properties.first).to eq @building
-      expect(@building.landlord).to eq @user
-      @user.revoke_landlord(@building)
-      expect(@building.landlord).to eq nil
-      expect(@user.owned_properties).to be_empty
-    end
-  end
-
   describe 'make/revoke manager role' do
     before(:each) do
       load_user
