@@ -1,0 +1,22 @@
+<h5><% @building.address -%></h5>
+
+<%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
+
+<h5>Latest Posts</h5>
+<% if @posts.any?  %>
+  <% @posts.each_with_index do |post,i| -%>
+    <%= render partial: '/posts/post', locals: { post: post, i: i } %> 
+  <% end %>
+<% end %>
+
+<p><%= link_to 'see all posts', building_posts_path(@building) -%></p>
+
+<h5>Upcoming Events</h5>
+
+<% if @events.any? %>
+  <% @events.each do |event| %>
+  <% end %>
+<% else %>
+  <p>There are no upcoming events for this building.</p>
+  <%= link_to 'create a new event' , new_building_event_path(@building ) %>
+<% end %>
