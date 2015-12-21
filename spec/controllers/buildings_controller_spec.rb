@@ -17,10 +17,47 @@ RSpec.describe BuildingsController, type: :controller do
   end
 
   describe 'GET show' do
-    it 'assigns the requested building as @building' do
-      load_valid_building
-      get :show, id: @building.slug
-      expect(assigns(:building)).to eq(@building)
+    describe  'renders template based on membership type:' do
+      before(:each) do
+        load_valid_building
+      end
+
+      it 'guest' do
+         @building.grant_guestship(@user)
+         @building.reload
+	 @user.reload
+         get :show, id: @building.slug
+         expect(assigns(:building)).to eq(@building)
+         expect(assigns(:subdirectory)).to eq('guests')
+      end
+
+      it 'tenant' do
+         @building.grant_tenantship(@user)
+         @building.reload
+	 @user.reload
+         get :show, id: @building.slug
+         expect(assigns(:building)).to eq(@building)
+         expect(assigns(:subdirectory)).to eq('tenants')
+      end
+
+      it 'manager' do
+         @building.grant_managership(@user)
+         @building.reload
+	 @user.reload
+         get :show, id: @building.slug
+         expect(assigns(:building)).to eq(@building)
+         expect(assigns(:subdirectory)).to eq('managers')
+      end
+
+      it 'landlord' do
+         @building.grant_landlordship(@user)
+         @building.reload
+	 @user.reload
+         get :show, id: @building.slug
+         expect(assigns(:building)).to eq(@building)
+         expect(assigns(:subdirectory)).to eq('landlords')
+      end
+
     end
   end
 end

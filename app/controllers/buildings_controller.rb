@@ -1,6 +1,7 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_building, only: [:show, :edit, :update, :gallery,:declare_ownership,:landlord_onboarding,:invite_your_landlord]
+  before_action :set_template_directory
   before_action :ask_about_ownership, only: [:show]
   layout :get_layout
 
@@ -13,6 +14,7 @@ class BuildingsController < ApplicationController
     @posts = @building.posts.page(params[:page]).per(3).order('created_at desc')
     @events = @building.events.page(params[:page]).per(3).order('starts asc')
     @notifications = @building.notifications.order('created_at desc').limit(5)
+    render template: "/buildings/#{@subdirectory}/show"
   end
 
   def choose
@@ -93,6 +95,10 @@ class BuildingsController < ApplicationController
 
   def get_layout
     return %w(index choose).include?(action_name) ? 'users' : 'building'
+  end
+
+  def set_template_directory
+    @subdirectory = @building.membership(current_user).membership_type.downcase.pluralize
   end
 
   def ask_about_ownership
