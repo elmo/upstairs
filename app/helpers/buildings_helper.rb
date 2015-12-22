@@ -1,6 +1,10 @@
 module BuildingsHelper
-  def address(building, _delimitter = '<br>')
+  def address(building)
     building.address
+  end
+
+  def building_short_address(building)
+    building.address.split(',')[0..1].join(',')
   end
 
   def current_user_left_nav(building:, user:)
@@ -18,8 +22,6 @@ module BuildingsHelper
   def alert_bar(building:, user:)
     render partial: '/buildings/alerts'
   end
-
-
 
   def building_home_icon(building: building, id: nil, klass: nil)
     content_tag :div, id: id, class: klass do

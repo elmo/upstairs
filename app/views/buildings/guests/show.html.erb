@@ -1,5 +1,5 @@
 <div class="content-posts">
-<h5><% @building.address -%></h5>
+<h5><%= building_short_address(@building) -%></h5>
 <%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
 
 <h5>Latest Posts</h5>
