@@ -34,12 +34,3 @@ en:
   bummer: "Bummer! Was it something we said?" 
   cancel_account_confirmation: "Are you sure that you would like to delete your account? Doing so will remove all trace you."
   save_my_profile_changes: "Save my profile changes"
-  post_name: 'Building note'
-  alert_name: 'Alerts'
-  calendar_name: 'Calendar'
-  add_a_new_event: 'Add a new event'
-  past: 'Past'
-  upcoming_events: 'Upcoming Events'
-  there_are_no: 'There are no '
-  events_for_this_building: ' events for this building.'
-  matching: ' matching'

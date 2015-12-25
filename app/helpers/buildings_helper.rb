@@ -64,7 +64,7 @@ module BuildingsHelper
     content_tag(:div, 'settings', id: 'setting', class: 'menu_item' ) do
       link_to(edit_user_registration_path) do
         content_tag(:div, 'o', id: 'icon_7', class: 'icon_menu') +
-              content_tag(:div, 'settings' ,id: 'setting_1', class: 'menu_item_text')
+          content_tag(:div, I18n.t(:settings) ,id: 'setting_1', class: 'menu_item_text')
         end
       end
     end
@@ -83,7 +83,7 @@ module BuildingsHelper
       content_tag(:div, id: 'bulletin', class: 'menu_item') do
         link_to(building_posts_path(building)) do
           content_tag(:div, controller_name == 'posts' ? 'D' : 'C', id: 'icon', class: 'icon_menu') +
-         content_tag(:div, 'Bulletin Board' ,id: 'bulletin_board', class: 'menu_item_text')
+         content_tag(:div, I18n.t(:bulletin_board), id: 'bulletin_board', class: 'menu_item_text')
         end
       end
     end
@@ -91,7 +91,7 @@ module BuildingsHelper
     content_tag(:div, id: 'alert_1', class: 'menu_item') do
       content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
         link_to(building_alerts_path(building)) do
-          content_tag(:div, 'alerts' ,id: 'alert_2', class: 'menu_item_text') +
+          content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text') +
           (building.alerts_for_user(current_user).any? ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
       end
     end
@@ -101,7 +101,7 @@ module BuildingsHelper
     content_tag(:div, 'calendar', id: 'calendar', class: 'menu_item') do
       link_to(building_events_path(building)) do
           content_tag(:div, controller_name == 'events' ? 'B' : 'A', id: 'icon_2', class: 'icon_menu') +
-        content_tag(:div, 'calendar' ,id: 'calendar_1', class: 'menu_item_text')
+        content_tag(:div, I18n.t(:calendar), id: 'calendar_1', class: 'menu_item_text')
       end
     end
   end
@@ -110,7 +110,7 @@ module BuildingsHelper
     content_tag(:div, 'message', id: 'message', class: 'menu_item') do
       link_to(inbox_path(building)) do
         content_tag(:div,controller_name == 'messages' ? 'H' : 'G', id: 'icon_3', class: 'icon_menu') +
-        content_tag(:div, 'message' ,id: 'message_1', class: 'menu_item_text') +
+        content_tag(:div, I18n.t(:message), id: 'message_1', class: 'menu_item_text') +
         ((current_user.has_unread_messages?) ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
       end
     end
@@ -120,7 +120,7 @@ module BuildingsHelper
       content_tag(:div,'request',id: 'request', class: 'menu_item') do
       link_to new_building_ticket_path(building) do
         content_tag(:div, controller_name == 'tickets' ? 'L' : 'K', id: 'icon_5', class: 'icon_menu') +
-        content_tag(:div, 'request a repair' ,id: 'request_a_repair', class: 'menu_item_text')
+        content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text')
       end
     end
   end
@@ -129,7 +129,7 @@ module BuildingsHelper
       content_tag(:div,'invite',id: 'invite', class: 'menu_item') do
       link_to(new_building_user_invitation_path(building)) do
         content_tag(:div, controller_name == 'invitations' ? 'N' : 'M', id: 'icon_7', class: 'icon_menu') +
-        content_tag(:div, 'invite someone' ,id: 'invite_someone', class: 'menu_item_text')
+        content_tag(:div, I18n.t(:invite_someone), id: 'invite_someone', class: 'menu_item_text')
       end
     end
   end
@@ -138,7 +138,7 @@ module BuildingsHelper
     content_tag(:div, 'profile', id: 'profil', class: 'menu_item' ) do
       link_to(building_user_path(building,user)) do
           content_tag(:div,  controller_name == 'users' ? 'R' : 'Q', id: 'icon_8', class: 'icon_menu') +
-        content_tag(:div, 'profile' ,id: 'profil_1', class: 'menu_item_text')
+        content_tag(:div, I18n.t(:profile) , id: 'profil_1', class: 'menu_item_text')
       end
     end
 

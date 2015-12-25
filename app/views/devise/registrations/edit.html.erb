@@ -7,28 +7,28 @@
     <% if current_user.member_of?(building)%>
        <small><%= link_to 'leave', 
 		  building_membership_path(building, building.membership(current_user)), 
-		  method: :delete, confirm: "Are your sure that you want to leave this coummnity?" -%></small>
+		  method: :delete, confirm:  I18n.t(:are_you_sure_that_you_want_to_leave_this_building) -%></small>
   <% end %>
   <br />
 <% end %>
-<p><%= link_to 'join another buidling', buildings_path -%></p>
+<p><%= link_to I18n.t(:join_another_building), buildings_path -%></p>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :username, "Username" %><br/>
+    <%= f.label :username, I18n.t(:username) %><br/>
     <%= f.text_field :username, autocomplete: "on" %>
   </div>
 
   <div class="field">
-    <%= f.label :avatar, "Profile Picture" %>
+    <%= f.label :avatar, I18n.t(:profile_picture) %>
     <%= f.attachinary_file_field :avatar %>
   </div>
   <br />
   <div class="field">
     <strong>Email: <%= resource.email -%>  </strong>
-    <%= f.label :email, "Change Email: ", placeholder: "Enter your new email address..." %>
+    <%= f.label :email,  I18n.t(:change_email) , placeholder: I18n.t(:enter_your_new_email_address) %>
     <%= f.email_field :email, autofocus: true %>
   </div>
 
@@ -37,48 +37,46 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password,  "Revise Password" %>
-    <%= f.password_field :password, autocomplete: "off", placeholder: "What’s your new password?" %>
+    <%= f.label :password,  I18n.t(:revise_password) %>
+    <%= f.password_field :password, autocomplete: "off", placeholder:  I18n.t(:what_is_your_new_password) %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Confirm Password"%><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Enter your new password again." %>
+    <%= f.label :password_confirmation,  I18n.t(:confirm_password) %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: I18n.t(:enter_your_new_password_again) %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off", placeholder: "Enter your current password..." %>
+    <%= f.label :current_password %><i>( <%=I18n.t(:we_need_your_current_password) %>)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off", placeholder: I18n.t(:enter_your_current_password) %>
   </div>
 
 
   <div class="field">
-    <%= f.label :use_my_username, "Post and comment under my username" %>
+    <%= f.label :use_my_username, I18n.t(:post_and_comment_under_my_username) %>
     <%= f.check_box :use_my_username %>
   </div>
 
   <div class="field">
-    <%= f.label :phone ,"Phone number" %>
-    <%= f.text_field :phone , autocomplete: "on", placeholder: "Enter your phone # here" %>
+    <%= f.label :phone , I18n.t(:phone_number) %>
+    <%= f.text_field :phone , autocomplete: "on", placeholder: I18n.t(:entery_your_phone_number_hear) %>
   </div>
 
   <div class="field">
-    <%= f.label :ok_to_send_text_messages, "Upstairs can send me text messages." %>
+    <%= f.label :ok_to_send_text_messages, I18n.t(:ok_to_send_me_text_messages) %>
     <%= f.check_box :ok_to_send_text_messages %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit I18n.t(:save_my_profile_changes) %>
   </div>
 
 <% end %>
 
-<br/>
-<p><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%> </p>
-<br />
-
-<h3>Cancel my account</h3>
-Bummer! Was it something we said?
-<p> <%= button_to "Cancel my account", 
+<h3><%= I18n.t(:cancel_my_account) -%></h3>
+<%= I18n.t(:bummer) -%>
+<p><%= button_to I18n.t(:cancel_my_account),  
 	registration_path(resource_name), 
-	data: { confirm: "Are you sure that you would like to delete your account? Doing so will remove all trace you."}, method: :delete %></p>
+	data: { confirm: I18n.t(:cancel_account_confirmation) },
+	method: :delete %>
+</p>

@@ -1,12 +1,14 @@
 <div class="content-posts">
-<h3>Calendar</h3>
+<h3><%= t(:calendar_name)-%></h3>
 <h4 class="inline"><%= @past_or_upcoming_events -%></h4>
 <%= render partial: 'form' -%>
 <% if @events.any? %>
 <% @events.each do |event| %>
    <p id="event_id=<%=event.id-%>" class="event">
      <%= small_event_image(event) -%>
-     <%= link_to event.title, building_event_path(@building, event), class: "calendar-event" %>
+     <%= link_to event.title, 
+	     building_event_path(@building, event), 
+	     class: "calendar-event" %>
      <small>
       <%= event.starts.strftime("%B %d, %Y") %>
       posted by <%= link_to event.user.public_name, building_user_path(@building, event.user ) %> 

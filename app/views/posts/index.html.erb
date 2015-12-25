@@ -1,7 +1,6 @@
 <%= recent_alerts -%>
-
-<h3>Bulletin Board</h3>
+<h3><%= t(:bulletin_board).capitalize -%></h3>
 <div class="content-posts">
   <%= render partial: 'posts' %>
+  <%= paginate(@posts) -%>
 </div>
-<%= paginate(@posts) -%>

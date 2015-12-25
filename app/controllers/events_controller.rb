@@ -9,15 +9,17 @@ class EventsController < ApplicationController
     @event = @building.events.new
     start_date = (params[:start_date].present?) ? Chronic.parse(params[:start_date]) : Date.today.at_beginning_of_month
     if params[:archive] and params[:archive] == 'true'
-      @past_or_upcoming_events = 'Past'
+      @past_or_upcoming_events = I18n.t(:past)
       scope = @building.events.where(['starts <= ? ', start_date])
     else
-      @past_or_upcoming_events = 'Upcoming Events'
+      @past_or_upcoming_events = I18n.t(:upcoming_events)
       scope = @building.events.where(['starts >= ?', start_date])
     end
 
     scope = scope.where(["title like ? or body like ? ", "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
-    @search_results_message = "There are no #{@past_or_upcoming_events.downcase} events for this building #{(params[:searchTextField].present?) ? "matching '#{params[:searchTextField]}'." : "" }"
+    @search_results_message =
+       I18n.t(:there_are_no) + @past_or_upcoming_events.downcase + I18n.t(:events_for_this_building) +
+       ((params[:searchTextField].present?) ? ("#{ I18n.t(:matching) + params[:searchTextField]}.") : "")
     @events = scope.page(params[:page]).per(5)
     if params[:view] && params[:view] == 'list'
       render template: '/events/list'
