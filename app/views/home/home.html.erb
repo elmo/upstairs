@@ -6,35 +6,30 @@
     <%=  image_tag("home/layer_4.png", class:"layer_4") -%>
     
 <div id="content-container" >
-          
-        
-        
-         <%=  image_tag("home/png_logo.png", class:"png_logo") -%>   
-
+    <%=  image_tag("home/png_logo.png", class:"png_logo") -%>   
     <center>
         <div id="find-your-builiding-form">
             <div id="find-your-builiding-content">
                 <%= form_tag find_building_path , method: :get do |f| %>
-                        <%= text_field_tag :address, 
-                                params[:address], 
-                                id: 'gmaps-input-address', 
-                                placeholder: 'Find your building' -%>
-                <%=  submit_tag 'S', id: 'find-my-building-submit'  %>
+			<%= text_field_tag(:address, 
+					   params[:address], 
+					   id: 'gmaps-input-address', 
+					   placeholder:  I18n.t(:find_your_building) ) -%>
+                <%= submit_tag 'S', id: 'find-my-building-submit' %>
                 <% end %>
             </div>
         </div>
         <div id="second_section">
             <div id="the_social_network__for_your_building_" >
-                The social network <br/>
+		    <%= t :the_social_network %> <br/>
             </div>         
             <div id="for_your_building_" >
-                 for your building
+		<%= t :for_your_building %> 
             </div>   
             <%=  image_tag("home/arrow_down.png", class:"arrow_down") -%> 
-
                      <div id="getTheApp">
                 <div id="get_the_app" >
-                    Get the App
+		    <%= t :get_the_app %> 
                 </div>
                 <%=  image_tag("home/google_png__2x.png", class:"google_png__2x") -%>  
                 <%=  image_tag("home/apple_png__2x.png", class:"apple_png__2x")-%>  
