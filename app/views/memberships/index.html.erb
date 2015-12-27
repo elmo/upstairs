@@ -1,6 +1,7 @@
-<div class="content-posts">
-<h1>Members</h1>
-<ul>
+<div class="content-Neighbor">
+    <h1>Members</h1>
+
+<ul >
 <% @memberships.each do |membership| %>
   <li>
     <%= user_profile_image(@building, membership.user, 'small', 'fit') -%>

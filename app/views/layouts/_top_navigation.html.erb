@@ -19,8 +19,8 @@
                 <% current_user.buildings.each do |building| -%>
                   <li ><%= link_to building.address[0..12], building_path(building) -%></li> 
                 <% end -%>
-		<li><%= link_to 'my profile', edit_user_registration_path %></li>
-                <li ><%= link_to 'Log out', destroy_user_session_path, method: :delete  -%></li>
+		<li><%= link_to I18n.t(:settings), edit_user_registration_path %></li>
+                <li ><%= link_to I18n.t(:log_out), destroy_user_session_path, method: :delete  -%></li>
               </ul>
            </li>
            <!--li><a href='#'><span>About</span></a></li>
