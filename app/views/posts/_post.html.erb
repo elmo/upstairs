@@ -1,21 +1,26 @@
-<div class="note<%= i.even? ? '_pair' : ''  -%>">
+<div class="note <%= i.even? ? 'note_pair' : ''  -%>">
     
     <div class="category_color" style="background-color:<%= post.category.color-%>;" >
-        <%= image_tag"shadow.png", class: "shadow" %>
+           <div class="category" ><%= post.category.name -%> </div>
+        
+        <div class="photo" style="<%= show_user_bg(post.user, 'large', 'fit') %>"></div>
+        <div class="user-name" > <%= truncate(post.user.username, length: 6, omission: '...') -%> </div>
     </div>
+     <div class="ribbon-wrapper">
+    <div class="ribbon">NEW</div>
+  </div>    
     
-    
-    <%= user_profile_image(@building, post.user, 'medium', 'fit') %>
     <div class="post_text">   
        <div class="header_post">
-           <div class="category" style="color:<%= post.category.color-%>;" ><%= post.category.name -%> </div>
            <div class="title" ><%= link_to post.title, building_post_path(@building, post ) -%></div>
         </div>
         <div class="post-text" >
          <%= truncate(post.body, length: 35, omission: '... (continued)' ) -%> 
         </div>
-        <div class="info_post">
-          <span class="user-name" > <%= truncate(post.user.username, length: 6, omission: '...') -%> </span>
+        
+    </div>    
+   <div class="info_post">
+          
               <span class="_days_ago_">
             <% if post.created_at > Time.now - 24.hours %>
               <%= time_ago_in_words(post.created_at) -%> ago
@@ -24,5 +29,4 @@
                <% end %>
               </span>
           </div>
-    </div>    
 </div>
