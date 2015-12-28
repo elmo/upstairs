@@ -26,6 +26,22 @@ Upstairs::Application.routes.draw do
   get '/welcome' => 'users#welcome', :via  => :get
   put '/acknowledge' => 'users#acknowledge'
 
+  namespace :api do
+    resources :user, only: [:show] do
+    end
+    resources :buildings, only: [:show] do
+      resources :posts do
+         resources :comments
+      end
+      resources :events do
+         resources :comments
+      end
+      resources :alerts do
+         resources :comments
+      end
+    end
+  end
+
   resources :verifications, only: [:index, :destroy] do
     member do
       put 'revoke'
