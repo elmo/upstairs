@@ -32,6 +32,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_model_serializers (0.8.3)
+      activemodel (>= 3.0)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -131,6 +133,9 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
+    json_spec (1.1.4)
+      multi_json (~> 1.0)
+      rspec (>= 2.0, < 4.0)
     jwt (1.5.2)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
@@ -321,6 +326,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   attachinary
   bitters
   bootstrap3-datetimepicker-rails
@@ -341,6 +347,7 @@ DEPENDENCIES
   gmaps-autocomplete-rails
   gmapsjs
   jquery-rails
+  json_spec
   momentjs-rails
   neat
   omniauth-facebook
