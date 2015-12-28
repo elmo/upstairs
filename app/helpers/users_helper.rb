@@ -11,7 +11,16 @@ module UsersHelper
       anonymous_user_icon(dimensions)
     image
   end
-
+  def show_user_bg(user, size = 'smallest', crop = 'fit')
+    dimensions_method = size + '_image_dimensions'
+    dimensions = send(dimensions_method.to_sym)
+    image = (usable_username?(user) && user.avatar.present?) ?
+      "background-image:url(#{cl_image_path(user.avatar.path, size: dimensions, crop: crop)});" :
+      "background-image:url(#{anonymous_user_icon(dimensions)});"
+      
+    image
+  end
+    
   def anonymous_user_icon(dimensions)
     height, width = dimensions.split('x')
     cl_image_tag('anonymous.png', width: width, height: height, crop: :fit, id: 'photo')
