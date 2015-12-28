@@ -17,7 +17,9 @@
         <div class="post-text" >
          <%= truncate(post.body, length: 35, omission: '... (continued)' ) -%> 
         </div>
-        <div class="info_post">
+        
+    </div>    
+   <div class="info_post">
           
               <span class="_days_ago_">
             <% if post.created_at > Time.now - 24.hours %>
@@ -27,6 +29,4 @@
                <% end %>
               </span>
           </div>
-    </div>    
-   
 </div>
