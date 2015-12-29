@@ -4,7 +4,7 @@
 }
 
 .note {
-  $base-border-color: gainsboro !default;
+  $base-border-color: rrgba(221, 221, 221, 0.35) !default;
   $base-border-radius: 3px !default;
   $base-background-color: white !default;
   $base-spacing: 1.5em !default;
@@ -24,7 +24,7 @@
   @include transition (all 0.2s ease-in-out);
   border-radius: $base-border-radius;
   border: $card-border;
-  box-shadow: 0 2px 4px darken($base-background-color, 10%);
+  box-shadow: 2px 2px 8px darken($base-background-color, 5%);
   cursor: pointer;
   margin: 0 $card-margin $base-spacing $card-margin;
     max-height: 450px;
@@ -109,7 +109,7 @@
         border-top-right-radius:$base-border-radius ;
         margin-bottom: 80px;
         text-align: center;
-    box-shadow: 0px 2px 5px #cccccc;
+        box-shadow: 0px 0px 4px rgba(0,0,0,.2);
     }
 }
     
@@ -135,7 +135,8 @@
     color: #4E4E4E;
     display: inline-block;
     text-align: right;
-    width: 90%;
+    width: calc (100% -10px);
+   
 }
 
 .info_post {
@@ -179,4 +180,25 @@
 #inner-building-content {
     height: 100%;
     overflow:inherit;
+    margin-top: 60px;
+}
+h3 {
+    font-size: 1.75em;
+    margin: 30px;
+    padding-left: 50px;
+}
+#content-container {
+    /* margin-left: 10px; */
+    display: flex;
+    max-height: 842px;
+    flex-direction: column-reverse;
+    /* overflow: hidden; */
+}
+#header {
+    top: 0px;
+    left: 1px;
+    height: 45px;
+    width: 100%;
+    position: absolute;
+    margin-bottom: 30px;
 }
