@@ -1,14 +1,117 @@
+
 .note_pair {
-    display: flex;
-    clear: both;
     background: white;
 }
 
 .note {
-    display: flex;
-    clear: both;
-}
+  $base-border-color: rrgba(221, 221, 221, 0.35) !default;
+  $base-border-radius: 3px !default;
+  $base-background-color: white !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $card-border-color: $base-border-color;
+  $card-border: 1px solid $card-border-color;
+  $card-background: lighten($card-border-color, 10%);
+  $card-header-background: $card-background;
+  $card-margin: .3em;
+  $card-image-hover-opacity: 0.7;
+  $card-image-hover-color: #F8F2B4;
 
+  @include flex-basis(15em);
+  @include flex-grow(1);
+  @include transition (all 0.2s ease-in-out);
+  border-radius: $base-border-radius;
+  border: $card-border;
+  box-shadow: 2px 2px 8px darken($base-background-color, 5%);
+  cursor: pointer;
+  margin: 0 $card-margin $base-spacing $card-margin;
+  
+
+  
+
+  .user-name {
+   // padding-right: 20px;
+    /* width: 47px; */
+    height: 18px;
+    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: #4E4E4E;
+    display: inline-block;
+    /* min-width: 200px; */
+ }
+  .photo {    
+        /* top: 0px; */
+        /* left: 22px; */
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 120px 120px;
+        margin-right: auto;
+        margin-left: auto; 
+    }
+    .ribbon-wrapper {
+      $action-color: #477dca !default;
+      $ribbon-background: $action-color;
+      $ribbon-size: 85px;
+
+      @include size($ribbon-size);
+      overflow: hidden;
+      float: right;
+      margin-top: -170px;
+
+      .ribbon {
+        @include transform(rotate(45deg));
+        background-color: $ribbon-background;
+        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+        color: #fff;
+        font-size: 0.8em;
+        //left: -5px;
+        line-height: 1.5em;
+        padding: 2px 7px;
+        text-align: center;
+        margin-top: 10px;
+        width: 120px;
+      }
+    }
+    .category {
+        float: left;
+        /* margin-right: 15px; */
+        font-family: Raleway, Arial, Helvetica, sans-serif;
+        font-size: 22px;
+        text-transform: uppercase;
+        text-align: center;
+        width: 100%;
+        color: #fff;text-shadow: 1px 1px rgba(0,0,0,.1);
+    }
+
+    .title {
+        font-family: Raleway-Light, Arial, Helvetica, sans-serif;
+        font-size: 22px;
+        text-align: center;
+        color: #2C2C2C;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .category_color {
+        width: 100%;
+        height: 120px;
+        float: left;
+        border-top-left-radius:$base-border-radius ;
+        border-top-right-radius:$base-border-radius ;
+        padding-top: 10px;
+        text-align: center;
+        box-shadow: 0px 0px 4px rgba(0,0,0,.2);
+    }
+}
+    
 .onglet {
     width: 41px;
     height: 12px;
@@ -23,24 +126,17 @@
     height: 8px;
 }
 
-.user-name {
-    padding-right: 20px;
-    /* width: 47px; */
-    height: 18px;
-    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    text-align: left;
-    color: #4E4E4E;
-    display: inline-block;
-    /* min-width: 200px; */
-}
+
 
 ._days_ago_ {
     font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
     font-size: 12px;
-    text-align: left;
     color: #4E4E4E;
     display: inline-block;
+    text-align: right;
+    padding-right: 10px;
+    width: 100%;
+   
 }
 
 .info_post {
@@ -48,45 +144,25 @@
     display: flex;
     height: 30px;
     align-self: flex-end;
+    margin-top: 20px;
 }
 
-.post-text {
-    margin-top: 10px;
-    display: flex;
-    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    text-align: left;
-    color: #2C2C2C;
+.post-text{
+    margin-top: 20px;
+    text-align: center;
+    
 }
 
-.category {
-    float: left;
-    margin-right: 15px;
-    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-    font-size: 22px;
-    text-transform: uppercase;
-    text-align: left;
-    color: #2C2C2C;
-}
 
-.title {
-    font-family: Raleway-Light, Arial, Helvetica, sans-serif;
-    font-size: 22px;
-    text-align: left;
-    color: #2C2C2C;
-    display: flex;
-}
-.category_color {
-    width: 22px;
-    float: left;
-}
 .post_text {   
-    margin-left: 20px;
-    padding-top: 10px;
-    width: calc(100% - 61px);
+    /* margin-left: 20px; */
+     padding-top: 70px; 
+    /* width: calc(100% - 61px); */
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 40px;
     display: flex;
     FLEX-DIRECTION: column;
-    justify-content: space-between;
 }
 
 .header_post {
@@ -95,9 +171,83 @@
 .content-posts{
     height:calc(100% - 61px);
     overflow: scroll;
+    display: flex;
+    margin-right: 10px;
+    flex-wrap:wrap;
     
 }
 #inner-building-content {
     height: 100%;
     overflow:inherit;
+    margin-top: 60px;
 }
+h3 {
+    font-size: 1.75em;
+    margin: 30px;
+    padding-left: 50px;
+}
+#content-container {
+    /* margin-left: 10px; */
+    display: flex;
+    max-height: 842px;
+    flex-direction: column-reverse;
+    /* overflow: hidden; */
+}
+#header {
+    top: 0px;
+    left: 1px;
+    height: 45px;
+    width: 100%;
+    position: absolute;
+    margin-bottom: 30px;
+}
+@mixin texture($gradient-angle, $bg-color-1, $bg-color-2, $texture-number, $inverted) { $texture-list: 
+  "dark-dotted-2.png",
+  "fancy-deboss.png",
+  "escheresque.png",
+  "diamond-upholstery.png",
+  "diagmonds-light.png";
+
+  @if ($inverted == 1) {
+    @include background(asset-url("#{nth($texture-list, $texture-number)}"), linear-gradient($gradient-angle, $bg-color-1, $bg-color-2), center no-repeat $bg-color-1 scroll);
+  }
+
+  @else {
+    @include background(asset-url("#{nth($texture-list, $texture-number)}"), linear-gradient($gradient-angle, $bg-color-1, $bg-color-2), center no-repeat $bg-color-1 scroll);
+    
+}
+}
+
+// The mixin above should preferably be in a file of its own. Below is the code for the object that has the texture.
+
+
+
+.texture-category-blue {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg, #4D30E8, #3075E8, 1, 0); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+.texture-category-orange {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg,#FF913B , #D66E1C   , 2, 1); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+.texture-category-purple {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg,#8A1CD6 , #AE3AFF   , 3, 1); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+.texture-category-green {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg,#178A41 , #39D673   , 4, 1); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+

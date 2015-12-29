@@ -135,13 +135,7 @@ body {
     background: #FFFFFF;
 }
 
-#photo {
-    float: left;
-    top: 0px;
-    left: 22px;
-    width: 140px;
-    height: 125px;
-}
+
 
 
 
@@ -210,6 +204,7 @@ body {
     left: 1px;
     height: 45px;
     width: 100%;
+    position: absolute;
 }
 
 #rectangle_8 {

@@ -1,12 +1,30 @@
 <div id="header"  >
     <div id="rectangle_8"  ></div>
-    <div id="add"  >
-        <div id="bkg_1"  ></div>
-	   <%= link_to new_building_user_invitation_path(@building) do %>
-        <%= image_tag"icon_plus.png", id: "icon_plus" %>
-        <%= content_tag(:div, 'D', id: 'icon', class: 'icon_note_add') %>
-        <%  end %>
-    </div>
+    
+    <nav id="nav" role="navigation" class="filters">
+        <a href="#nav" title="Show navigation">Show navigation</a>
+        <a href="#" title="Hide navigation">Hide navigation</a>
+        <ul class="accordion">
+            <li>
+                <a href="javascript:void(0)" class="js-accordion-trigger">
+                    <div id="add"  >
+                        <div id="bkg_1"  ></div>
+                        <%= image_tag"icon_plus.png", id: "icon_plus" %>
+                    </div>
+                </a>
+                <ul class="submenu">
+                 <% Category.all.each do |category| %>
+                   <li id="category_#{category.id}">
+                       <%= link_to category.name, params.merge(c: category.slug) -%> 
+                   </li>
+                    <% end %>
+                    <li>
+                        <%= link_to 'clear categories', building_posts_url(@building)-%> 
+                    </li>
+                </ul> 
+            </li>
+        </ul>
+    </nav>
     <nav id="nav" role="navigation" class="filters">
         <a href="#nav" title="Show navigation">Show navigation</a>
         <a href="#" title="Hide navigation">Hide navigation</a>
