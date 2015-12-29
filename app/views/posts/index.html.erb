@@ -1,8 +1,6 @@
 <%= recent_alerts -%>
-<div id="posts">
 <h3>Bulletin Board</h3>
-  <div class="content-posts">
-    <%= render partial: 'posts' %>
-  </div>
+<div id="posts" class="content-posts">
+  <%= render partial: 'posts' %>
 </div>
-<%= paginate(@posts) -%>
+<%= paginate(@posts)-%>
