@@ -22,6 +22,7 @@
 //= require gmaps-auto-complete
 //= require moment
 //= require bootstrap-datetimepicker
+//= require infinite-scrolling 
 //= require pickers
 //= require_tree .
 
