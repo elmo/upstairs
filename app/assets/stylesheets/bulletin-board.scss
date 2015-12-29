@@ -18,16 +18,17 @@
   $card-margin: .3em;
   $card-image-hover-opacity: 0.7;
   $card-image-hover-color: #F8F2B4;
-
-  @include flex-basis(15em);
-  @include flex-grow(1);
-  @include transition (all 0.2s ease-in-out);
-  border-radius: $base-border-radius;
-  border: $card-border;
-  box-shadow: 2px 2px 8px darken($base-background-color, 5%);
-  cursor: pointer;
-  margin: 0 $card-margin $base-spacing $card-margin;
-  
+    $card-height:350px;
+    $card-category_color-height:120px;
+    @include flex-basis(15em);
+    @include flex-grow(1);
+    @include transition (all 0.2s ease-in-out);
+    //border-radius: $base-border-radius;
+    //border: $card-border;
+    box-shadow: 2px 2px 8px darken($base-background-color, 5%);
+    cursor: pointer;
+    margin: 0 $card-margin $base-spacing $card-margin;
+    height:$card-height ;
 
   
 
@@ -45,40 +46,30 @@
   .photo {    
         /* top: 0px; */
         /* left: 22px; */
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
-        margin-top: 30px;
+        margin-top: 40px;
         margin-bottom: 10px;
         background-position: 50% 50%;
         background-repeat: no-repeat;
-        background-size: 120px 120px;
+        background-size: 100px auto;
         margin-right: auto;
         margin-left: auto; 
     }
     .ribbon-wrapper {
       $action-color: #477dca !default;
       $ribbon-background: $action-color;
-      $ribbon-size: 85px;
+      $ribbon-size: 60px;
 
       @include size($ribbon-size);
       overflow: hidden;
-      float: right;
-      margin-top: -170px;
+      float: left;
+    margin-top: -163px;
+    margin-left: -3px;
+      @include background(asset-url("ribbon.png"));
+      background-size: $ribbon-size auto;
 
-      .ribbon {
-        @include transform(rotate(45deg));
-        background-color: $ribbon-background;
-        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-        color: #fff;
-        font-size: 0.8em;
-        //left: -5px;
-        line-height: 1.5em;
-        padding: 2px 7px;
-        text-align: center;
-        margin-top: 10px;
-        width: 120px;
-      }
     }
     .category {
         float: left;
@@ -96,19 +87,49 @@
         font-size: 22px;
         text-align: center;
         color: #2C2C2C;
-        display: flex;
+        @include display(flex);
         margin-left: auto;
         margin-right: auto;
     }
     .category_color {
         width: 100%;
-        height: 120px;
+        height: $card-category_color-height;
         float: left;
         border-top-left-radius:$base-border-radius ;
         border-top-right-radius:$base-border-radius ;
         padding-top: 10px;
         text-align: center;
         box-shadow: 0px 0px 4px rgba(0,0,0,.2);
+    }
+    .post-text{
+        @include display(flex);
+        margin-top: 20px;
+        text-align: center;
+    }
+    .post_text {   
+        /* margin-left: 20px; */
+         padding-top: 80px; 
+        /* width: calc(100% - 61px); */
+        padding-left: 5px;
+        padding-right: 5px;
+        @include display-box;
+        @include flex-direction(column);
+        @include justify-content(space-between);
+        @include align-items(center);
+        border-radius: $base-border-radius;
+        border: $card-border;
+        height:calc(100% - 120px);
+    }
+    ._days_ago_ {
+        font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        color: #4E4E4E;
+        display: inline-block;
+        text-align: right;
+        padding-right: 10px;
+        width: 100%;
+        align-self: flex-end
+
     }
 }
     
@@ -128,52 +149,31 @@
 
 
 
-._days_ago_ {
-    font-family: Raleway-SemiBold, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: #4E4E4E;
-    display: inline-block;
-    text-align: right;
-    padding-right: 10px;
-    width: 100%;
-   
-}
+
 
 .info_post {
     width: 100%;
-    display: flex;
+    @include display(flex);
     height: 30px;
     align-self: flex-end;
     margin-top: 20px;
 }
 
-.post-text{
-    margin-top: 20px;
-    text-align: center;
-    
-}
 
 
-.post_text {   
-    /* margin-left: 20px; */
-     padding-top: 70px; 
-    /* width: calc(100% - 61px); */
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-top: 40px;
-    display: flex;
-    FLEX-DIRECTION: column;
-}
+
+
 
 .header_post {
-    display: flex   ;
+    @include display(flex);
 }
 .content-posts{
     height:calc(100% - 61px);
     overflow: scroll;
-    display: flex;
+    @include display(flex);
     margin-right: 10px;
     flex-wrap:wrap;
+    padding-top: 10px;
     
 }
 #inner-building-content {
@@ -188,7 +188,7 @@ h3 {
 }
 #content-container {
     /* margin-left: 10px; */
-    display: flex;
+    @include display(flex);
     max-height: 842px;
     flex-direction: column-reverse;
     /* overflow: hidden; */

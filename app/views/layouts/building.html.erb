@@ -14,12 +14,12 @@
     <%= render partial: '/layouts/left_nav', locals: { section: current_section } -%> 
     
     <div id= "content-container">
+      <%= search_and_filter_nav %>
       <div id="content">
        <div id="inner-building-content">
        <%= yield %>
        </div>
       </div>
-      <%= search_and_filter_nav %>
     </div>
     </div>
   </body>
