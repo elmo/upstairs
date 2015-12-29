@@ -27,7 +27,7 @@
   box-shadow: 2px 2px 8px darken($base-background-color, 5%);
   cursor: pointer;
   margin: 0 $card-margin $base-spacing $card-margin;
-    max-height: 450px;
+  
 
   
 
@@ -48,7 +48,7 @@
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        margin-top: 50px;
+        margin-top: 30px;
         margin-bottom: 10px;
         background-position: 50% 50%;
         background-repeat: no-repeat;
@@ -64,7 +64,7 @@
       @include size($ribbon-size);
       overflow: hidden;
       float: right;
-      margin-top: -220px;
+      margin-top: -170px;
 
       .ribbon {
         @include transform(rotate(45deg));
@@ -83,7 +83,6 @@
     .category {
         float: left;
         /* margin-right: 15px; */
-        margin-top: 10px;
         font-family: Raleway, Arial, Helvetica, sans-serif;
         font-size: 22px;
         text-transform: uppercase;
@@ -98,16 +97,16 @@
         text-align: center;
         color: #2C2C2C;
         display: flex;
-    margin-left: auto;
-    margin-right: auto;
+        margin-left: auto;
+        margin-right: auto;
     }
     .category_color {
         width: 100%;
-        height: 140px;
+        height: 120px;
         float: left;
         border-top-left-radius:$base-border-radius ;
         border-top-right-radius:$base-border-radius ;
-        margin-bottom: 80px;
+        padding-top: 10px;
         text-align: center;
         box-shadow: 0px 0px 4px rgba(0,0,0,.2);
     }
@@ -135,7 +134,8 @@
     color: #4E4E4E;
     display: inline-block;
     text-align: right;
-    width: calc (100% -10px);
+    padding-right: 10px;
+    width: 100%;
    
 }
 
@@ -156,9 +156,8 @@
 
 .post_text {   
     /* margin-left: 20px; */
-    /* padding-top: 10px; */
+     padding-top: 70px; 
     /* width: calc(100% - 61px); */
-    height: 160px;
     padding-left: 5px;
     padding-right: 5px;
     margin-top: 40px;
@@ -202,3 +201,53 @@ h3 {
     position: absolute;
     margin-bottom: 30px;
 }
+@mixin texture($gradient-angle, $bg-color-1, $bg-color-2, $texture-number, $inverted) { $texture-list: 
+  "dark-dotted-2.png",
+  "fancy-deboss.png",
+  "escheresque.png",
+  "diamond-upholstery.png",
+  "diagmonds-light.png";
+
+  @if ($inverted == 1) {
+    @include background(asset-url("#{nth($texture-list, $texture-number)}"), linear-gradient($gradient-angle, $bg-color-1, $bg-color-2), center no-repeat $bg-color-1 scroll);
+  }
+
+  @else {
+    @include background(asset-url("#{nth($texture-list, $texture-number)}"), linear-gradient($gradient-angle, $bg-color-1, $bg-color-2), center no-repeat $bg-color-1 scroll);
+    
+}
+}
+
+// The mixin above should preferably be in a file of its own. Below is the code for the object that has the texture.
+
+
+
+.texture-category-blue {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg, #4D30E8, #3075E8, 1, 0); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+.texture-category-orange {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg,#FF913B , #D66E1C   , 2, 1); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+.texture-category-purple {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg,#8A1CD6 , #AE3AFF   , 3, 1); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+.texture-category-green {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg,#178A41 , #39D673   , 4, 1); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+

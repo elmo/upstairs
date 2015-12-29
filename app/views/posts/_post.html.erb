@@ -1,14 +1,17 @@
+
 <div class="note <%= i.even? ? 'note_pair' : ''  -%>">
     
-    <div class="category_color" style="background-color:<%= post.category.color-%>;" >
+    <div class="category_color texture-category-<%= post.category.color-%> " >
+        
            <div class="category" ><%= post.category.name -%> </div>
         
         <div class="photo" style="<%= show_user_bg(post.user, 'large', 'fit') %>"></div>
         <div class="user-name" > <%= truncate(post.user.username, length: 6, omission: '...') -%> </div>
-    </div>
-    <div class="ribbon-wrapper" style=" visibility: <%= (post.created_at > Time.now - 24.hours) ? 'visible' : 'hidden' -%>; " >
+        <div class="ribbon-wrapper" style=" visibility: <%= (post.created_at > Time.now - 24.hours) ? 'visible' : 'hidden' -%>; " >
         <div class="ribbon">NEW</div>
-    </div>    
+    </div>  
+    </div>
+      
     
     <div class="post_text">   
        <div class="header_post">
