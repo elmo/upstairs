@@ -4,20 +4,20 @@
 }
 
 .note {
-  $base-border-color: rrgba(221, 221, 221, 0.35) !default;
-  $base-border-radius: 3px !default;
-  $base-background-color: white !default;
-  $base-spacing: 1.5em !default;
-  $action-color: #477DCA !default;
-  $dark-gray: #333 !default;
-  $base-font-color: $dark-gray !default;
-  $card-border-color: $base-border-color;
-  $card-border: 1px solid $card-border-color;
-  $card-background: lighten($card-border-color, 10%);
-  $card-header-background: $card-background;
-  $card-margin: .3em;
-  $card-image-hover-opacity: 0.7;
-  $card-image-hover-color: #F8F2B4;
+    $base-border-color: rrgba(221, 221, 221, 0.35) !default;
+    $base-border-radius: 3px !default;
+    $base-background-color: white !default;
+    $base-spacing: 1.5em !default;
+    $action-color: #477DCA !default;
+    $dark-gray: #333 !default;
+    $base-font-color: $dark-gray !default;
+    $card-border-color: $base-border-color;
+    $card-border: 1px solid $card-border-color;
+    $card-background: lighten($card-border-color, 10%);
+    $card-header-background: $card-background;
+    $card-margin: .3em;
+    $card-image-hover-opacity: 0.7;
+    $card-image-hover-color: #F8F2B4;
     $card-height:350px;
     $card-category_color-height:120px;
     @include flex-basis(15em);
@@ -28,7 +28,8 @@
     box-shadow: 2px 2px 8px darken($base-background-color, 5%);
     cursor: pointer;
     margin: 0 $card-margin $base-spacing $card-margin;
-    height:$card-height ;
+    height:calc(100%/2) ;
+    max-height: 400px;
 
   
 
@@ -56,6 +57,8 @@
         background-size: 100px auto;
         margin-right: auto;
         margin-left: auto; 
+        border-color: white;
+        border-style: solid;
     }
     .ribbon-wrapper {
       $action-color: #477dca !default;
@@ -90,6 +93,14 @@
         @include display(flex);
         margin-left: auto;
         margin-right: auto;
+    }
+    .title a{
+        
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+        
     }
     .category_color {
         width: 100%;
@@ -168,22 +179,20 @@
     @include display(flex);
 }
 .content-posts{
-    height:calc(100% - 61px);
+    height:100% ;
     overflow: scroll;
     @include display(flex);
-    margin-right: 10px;
     flex-wrap:wrap;
-    padding-top: 10px;
     
 }
 #inner-building-content {
     height: 100%;
     overflow:inherit;
-    margin-top: 60px;
+    padding-top: 100px;
 }
 h3 {
     font-size: 1.75em;
-    margin: 30px;
+    margin: 10px;
     padding-left: 50px;
 }
 #content-container {
