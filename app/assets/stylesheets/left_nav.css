@@ -84,10 +84,13 @@ body {
 
 
 #header img {
-    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    border: white solid 8px;
+    /* position: absolute; */
     display: block;
     margin: 0px;
-    border: none;
+    /* border: none; */
     padding: 0px;
 }
 
@@ -96,7 +99,12 @@ body {
 
 
 
-
+.add_menu {
+    margin-top: -25px;
+    padding-top: 25px;
+    margin-left: -100%;
+    background-color: #f9b81a;
+}
 #bulletinboard {
     top: 0px;
     left: 1px;
@@ -106,7 +114,6 @@ body {
 
 #content {
     width: 100%;
-    height: calc(100% - 61px);
 }
 
 #notes_list {
@@ -200,11 +207,13 @@ body {
 }
 
 #header {
-    top: 0px;
-    left: 1px;
+    /* top: 0px; */
+    /* left: 1px; */
     height: 45px;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
+    /* margin-bottom: 30px; */
+    display: block;
 }
 
 #rectangle_8 {
@@ -227,6 +236,7 @@ body {
     float: left;
     margin-right: 5px;
     color: #565656;
+    height: 40px;
 }
 
 #filters_1 {
@@ -313,12 +323,10 @@ body {
 }
 
 #add {
-    top: 0px;
-   position: absolute;
-    right: 0px;
-    width: 107px;
-    height: 106px;
+    margin-top: -20px;
+    margin-left: 20px;
 }
+
 
 #bkg_1 {
     top: -1px;
@@ -584,11 +592,21 @@ body {
     visibility:hidden;
     
 }
+.menu_item_text_add{
+    margin-top: 5px;
+    margin-left: 10px;
+    float: left;
+    font-family: Raleway-Medium, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: left;
+    color: #FFFFFF;
+    white-space: nowrap;
+    
+}
 /* Add your custom CSS here */
 
 #nav {
-    /* container */
-    padding-right: 107px;
     height: 40px;   
 }
 
@@ -620,10 +638,12 @@ body {
     float: left;
     padding: 10px;  
     width: 100%;
+    
 }
 #nav > ul > li > ul  {
     background: #565656; 
      border-radius: 2px;
+    margin-left: -100%;
 } 
 #nav > ul > li > ul > li> a  {
      text-decoration: none;

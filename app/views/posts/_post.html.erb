@@ -11,7 +11,7 @@
   <div class="title" ><%= link_to post.title, building_post_path(@building, post ) -%></div>
 </div>
 <div class="post-text" >
-  <%= truncate(post.body, length: 300, omission: '... (continued)' ) -%> 
+  <%= truncate(post.body, length: 25, omission: '... (continued)' ) -%> 
  </div>
   <div class="info_post">
     <span class="_days_ago_">
