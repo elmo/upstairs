@@ -29,7 +29,7 @@
     cursor: pointer;
     margin: 0 $card-margin $base-spacing $card-margin;
     height:calc(100%/2) ;
-    max-height: 400px;
+    height: 370px; 
 
   
 
@@ -179,16 +179,16 @@
     @include display(flex);
 }
 .content-posts{
-    height:100% ;
+    padding-top: 10px;
+    height:calc(100% - 135px) ;
     overflow: scroll;
     @include display(flex);
     flex-wrap:wrap;
     
 }
 #inner-building-content {
-    height: 100%;
-    overflow:inherit;
-    padding-top: 100px;
+    height: auto;
+    overflow: hidden;
 }
 h3 {
     font-size: 1.75em;
@@ -198,17 +198,8 @@ h3 {
 #content-container {
     /* margin-left: 10px; */
     @include display(flex);
-    max-height: 842px;
-    flex-direction: column-reverse;
+    flex-direction: column;
     /* overflow: hidden; */
-}
-#header {
-    top: 0px;
-    left: 1px;
-    height: 45px;
-    width: 100%;
-    position: absolute;
-    margin-bottom: 30px;
 }
 @mixin texture($gradient-angle, $bg-color-1, $bg-color-2, $texture-number, $inverted) { $texture-list: 
   "dark-dotted-2.png",
