@@ -1,12 +1,5 @@
 <div id="header"  >
     <div id="rectangle_8"  ></div>
-    <div id="add"  >
-        <div id="bkg_1"  ></div>
-	   <%= link_to new_building_event_path(@building) do %>
-        <%= image_tag"icon_plus.png", id: "icon_plus" %>
-        <%= content_tag(:div, 'B', id: 'icon', class: 'icon_note_add') %>
-        <%  end %>
-    </div>
     <nav id="nav" role="navigation" class="filters">
         <a href="#nav" title="Show navigation">Show navigation</a>
         <a href="#" title="Hide navigation">Hide navigation</a>
@@ -16,14 +9,9 @@
                     <div id="filters_title" >Filters</div>
                      <div id="arrow" >T</div>
                 </a>
-                <ul class="submenu">
-                   <li>
-                      <%= link_to 'upcoming events', params.merge(archive: false) -%> 
-                   </li>
-                   <li>
-                      <%= link_to 'past events', params.merge(archive: true) -%> 
-                   </li>
-                </ul> 
+            </li>
+           <li>
+              <%= render partial: '/layouts/add_sub_menu'-%>
             </li>
         </ul>
     </nav>
@@ -38,20 +26,4 @@
     <div id="rectangle_2"  ></div>
 </div>
 <%= form_tag building_events_url(@building), method: :get do %>
-
 <% end %>
-
-
-        
-        
-
-
-
-
-
-        
-        
-
-
-
-

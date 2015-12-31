@@ -45,7 +45,11 @@ Upstairs::Application.routes.draw do
       get 'invite_your_landlord'
     end
     resources :memberships, only: [:create, :destroy, :index]
-    resources :posts
+    resources :posts do
+      collection do
+        get 'tips'
+      end
+    end
     resources :alerts
     resources :tickets
     resources :messages do

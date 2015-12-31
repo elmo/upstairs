@@ -11,9 +11,9 @@ class BuildingsController < ApplicationController
   # GET /buildings/1
   def show
     @users = @building.users
-    @posts = @building.posts.page(params[:page]).per(3).order('created_at desc')
-    @events = @building.events.page(params[:page]).per(3).order('starts asc')
-    @notifications = @building.notifications.order('created_at desc').limit(5)
+    @posts = @building.posts.page(params[:page]).per(1).order('created_at desc')
+    @events = @building.events.page(params[:page]).per(1).order('starts asc')
+    #@notifications = @building.notifications.order('created_at desc').limit(5)
     render template: "/buildings/#{@subdirectory}/show"
   end
 

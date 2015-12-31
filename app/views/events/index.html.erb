@@ -1,6 +1,7 @@
-<div class="content-posts">
+<%= recent_alerts -%>
 <h3>Calendar</h3>
-<h4 class="inline"><%= @past_or_upcoming_events -%></h4>
+<div id="events" class="content-posts">
+<h5><%= @past_or_upcoming_events -%></h5>
 <%= render partial: 'form' -%>
 <% if @events.any? %>
 <% @events.each do |event| %>

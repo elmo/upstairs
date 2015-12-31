@@ -21,6 +21,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def tips
+    category = Category.find_by_name('Tips')
+    redirect_to url_for params.merge(action: :index, c: category.to_param)
+  end
+
   # GET /posts/1
   def show
     @paginated_comments = @post.comments.where(parent_comment_id: nil).page(params[:comment_page]).per(1)
