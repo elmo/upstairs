@@ -1,18 +1,18 @@
-<div class="content-posts">
-<h5><%= building_short_address(@building) -%></h5>
-<%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
+<%= recent_alerts -%>
+<b><%= building_short_address(@building) -%></b>
 
+<%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
 <h5>Latest Posts</h5>
+<div id="posts">
 <% if @posts.any?  %>
   <% @posts.each_with_index do |post,i| -%>
-    <%= render partial: '/posts/post', locals: { post: post, i: i } %> 
+    <%= render partial: '/posts/post', locals: { post: post } %> 
   <% end %>
 <% end %>
-
+</div>
 <p><%= link_to 'see all posts', building_posts_path(@building) -%></p>
 
 <h5>Upcoming Events</h5>
-
 <% if @events.any? %>
   <% @events.each do |event| %>
   <% end %>
@@ -20,4 +20,3 @@
   <p>There are no upcoming events for this building.</p>
   <%= link_to 'create a new event' , new_building_event_path(@building ) %>
 <% end %>
-</div>
