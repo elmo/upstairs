@@ -23,42 +23,9 @@
                 </ul> 
             </li>
            <li>
-                
-                <ul class="add_menu submenu ">
-                   <li >
-                       <%= link_to new_building_user_invitation_path(@building) do
-                            content_tag(:div,  'N' , id: 'icon_7', class: 'icon_menu') +
-                            content_tag(:div, I18n.t(:invite_someone), id: 'invite_someone', class: 'menu_item_text_add')
-                          end-%> 
-                   </li>
-                    <li >
-                       <%= link_to new_building_ticket_path(@building) do
-                            content_tag(:div, 'L' , id: 'icon_5', class: 'icon_menu') +
-                            content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text_add')
-                            end
-                        -%> 
-                   </li>
-                    <li >
-                       <%= link_to new_building_alert_path(@building) do
-                            content_tag(:div, 'F' , id: 'icon_5', class: 'icon_menu') +
-                            content_tag(:div, 'Post an alert', id: 'icon', class: 'menu_item_text_add')
-                            end-%> 
-                   </li>
-                    <li >
-                       <%= link_to new_building_message_path(@building) do 
-                        content_tag(:div, 'H' , id: 'icon_5', class: 'icon_menu') +
-        content_tag(:div, 'Send a message', id: 'icon', class: 'menu_item_text_add') 
-                         end -%> 
-                   </li>
-                </ul> 
-               <a href="javascript:void(0)" class="js-accordion-trigger">
-                    <div id="add"  >
-                        <%= image_tag"icon_plus.png", id: "icon_plus" %>
-                    </div>
-                </a>
+              <%= render partial: '/layouts/add_sub_menu'-%>
             </li>
         </ul>
-        
     </nav>
     <div id="rectangle_2"  ></div>
     
