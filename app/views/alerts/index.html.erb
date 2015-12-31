@@ -1,5 +1,6 @@
-<div class="content-posts">
 <h3>Alerts</h3>
+<div class="content-posts">
+<br clear="all">
 <%= render partial: 'form' -%>
 <% if @alerts.any? %>
   <ul>
@@ -16,14 +17,11 @@
     <% end %>
   </ul>
 <%= paginate(@alerts) -%>
-
 <% else %>
-
   <% if params[:searchTextField].present? %>
     <p>There are no alerts matching your query.</p>
   <% else %>
     <p>There are no alerts for this building.</p>
   <% end %>
 <% end %>
-
 </div>
