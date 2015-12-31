@@ -19,6 +19,14 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
+  describe 'GET tips' do
+    it 'assigns all posts as @posts' do
+      create_valid_tip
+      get :tips, building_id: @building.to_param
+      expect(response).to redirect_to 'http://test.host/buildings/123-main-street-san-francisco-ca-94121/posts?c=tips'
+    end
+  end
+
   describe 'GET show' do
     it 'assigns the requested post as @post' do
       create_valid_post
