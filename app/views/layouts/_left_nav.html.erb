@@ -3,6 +3,7 @@
         <%= upstairs_home_page_icon_small(id: 'home') %>
         <%= upstairs_home_page_icon(id: 'home') %>
     </div>
+    <% if current_user.memberships.count > 1 %>
     <div class="group " >
         <nav role="navigation" id='nav' class=" nav left_nav_menu">
             <ul>
@@ -14,17 +15,15 @@
                     </div>
                             
                   <ul class='last'>
-                   
-                    <% current_user.buildings.each do |building| -%>
+                    <% current_user.buildings.where.not(id: @building.id).each do |building| -%>
                       <li ><%= link_to building.address[0..12], building_path(building) -%></li> 
                     <% end -%>
                   </ul>
                </li>
-               <!--li><a href='#'><span>About</span></a></li>
-               <li class='last'><a href='#'><span>Contact</span></a></li-->
             </ul>
         </nav>
     </div>
+    <% end %>
     <div class="group" id="dashboard">
         <div id="split">
             <div id="rectangle_7_copy_3"  ></div>
