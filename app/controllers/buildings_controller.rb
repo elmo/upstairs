@@ -1,7 +1,7 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_building, only: [:show, :edit, :update, :gallery,:declare_ownership,:landlord_onboarding,:invite_your_landlord]
-  before_action :set_template_directory, except: [:find, :choose, :index]
+  before_action :set_template_directory, except: [:find, :choose, :index, :new]
   before_action :ask_about_ownership, only: [:show]
   layout :get_layout
 
@@ -23,6 +23,8 @@ class BuildingsController < ApplicationController
     redirect_to building_path(@building) and return false if @building.present? && current_user.member_of?(@building)
     @building = Building.new(address: params[:address])
     @building.geocode
+    @building.save
+    current_user.join(@building)
   end
 
   def declare_ownership
@@ -31,10 +33,12 @@ class BuildingsController < ApplicationController
   def landlord_onboarding
    current_user.profile_building_ownership_declared!
    current_user.make_landlord(@building)
+   render template: "/buildings/#{@subdirectory}/invite_your_landlord"
   end
 
   def invite_your_landlord
    current_user.profile_building_ownership_declared!
+   render template: "/buildings/#{@subdirectory}/invite_your_landlord"
   end
 
   # GET /buildings/new

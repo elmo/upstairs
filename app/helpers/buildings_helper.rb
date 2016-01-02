@@ -168,3 +168,12 @@ def upstairs_home_page_icon_small(id: nil, klass: nil)
     end
 
  end
+
+def user_logout_icon(user:, building:)
+  content_tag(:div, 'exit', id: 'exit', class: 'menu_item' ) do
+    link_to(destroy_user_session_path, method: :delete ) do
+      content_tag(:div, 'w', id: 'icon_7', class: 'icon_menu') +
+      content_tag(:div, I18n.t(:log_out) ,id: 'exit_1', class: 'menu_item_text')
+    end
+  end
+ end
