@@ -206,7 +206,8 @@ h3 {
   "fancy-deboss.png",
   "escheresque.png",
   "diamond-upholstery.png",
-  "diagmonds-light.png";
+  "diagmonds-light.png",
+  "arches.png";
 
   @if ($inverted == 1) {
     @include background(asset-url("#{nth($texture-list, $texture-number)}"), linear-gradient($gradient-angle, $bg-color-1, $bg-color-2), center no-repeat $bg-color-1 scroll);
@@ -224,7 +225,7 @@ h3 {
 
 .texture-category-blue {
     // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
-    @include texture(180deg, #4D30E8, #3075E8, 1, 0); 
+    @include texture(180deg, #4D30E8, #3075E8,6, 0); 
     float: left;
     height: 5em;
     width: 50%;
@@ -250,4 +251,13 @@ h3 {
     height: 5em;
     width: 50%;
 }
+
+.texture-category-cyan {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal  
+    @include texture(180deg,#39D6C9 , #5DFFF2   , 4, 1); 
+    float: left;
+    height: 5em;
+    width: 50%;
+}
+
 

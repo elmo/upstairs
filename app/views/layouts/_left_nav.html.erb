@@ -1,7 +1,29 @@
 <div id="menu">
-    <div class="group" >
+    <div class="group homeLogo" >
         <%= upstairs_home_page_icon_small(id: 'home') %>
         <%= upstairs_home_page_icon(id: 'home') %>
+    </div>
+    <div class="group " >
+        <nav role="navigation" id='nav' class=" nav left_nav_menu">
+            <ul>
+                 
+               <li class='has-sub'>
+                    <a href="javascript:void(0)">
+                        <div class="building-selector"><div class="building-selector-text">Change building</div><div class="building-selector-icon icon">T</div>
+                    </a>
+                    </div>
+                            
+                  <ul class='last'>
+                   
+                    <% current_user.buildings.each do |building| -%>
+                      <li ><%= link_to building.address[0..12], building_path(building) -%></li> 
+                    <% end -%>
+                  </ul>
+               </li>
+               <!--li><a href='#'><span>About</span></a></li>
+               <li class='last'><a href='#'><span>Contact</span></a></li-->
+            </ul>
+        </nav>
     </div>
     <div class="group" id="dashboard">
         <div id="split">
@@ -31,7 +53,14 @@
             <div id="rectangle_7_copy_2"  ></div>
         </div> 
         <%= user_settings_icon(user: current_user, building: @builidng) %>
-        <%= building_public_profile_icon(user: current_user, building: @building ) %>
+       <%= building_public_profile_icon(user: current_user, building: @building ) %>
+    </div>  <div class="group" id="logOut">
+        <div id="split">
+            <div id="rectangle_7_copy_3"  ></div>
+            <div id="rectangle_7_copy_2"  ></div>
+        </div>
+        
+        <%= user_logout_icon(user: current_user, building: @builidng) %>
     </div> 
 
 </div> 
