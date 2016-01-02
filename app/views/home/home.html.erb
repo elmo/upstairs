@@ -11,7 +11,7 @@
         <div id="find-your-builiding-form">
             <div id="find-your-builiding-content">
                 <%= form_tag find_building_path , method: :get do |f| %>
-			<%= text_field_tag(:address, 
+                <%= text_field_tag(:address, 
 					   params[:address], 
 					   id: 'gmaps-input-address', 
 					   placeholder:  I18n.t(:find_your_building) ) -%>

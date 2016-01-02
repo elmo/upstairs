@@ -70,6 +70,15 @@ module BuildingsHelper
     end
   end
 
+ def user_logout_icon(user:, building:)
+  content_tag(:div, 'exit', id: 'exit', class: 'menu_item' ) do
+    link_to(destroy_user_session_path, method: :delete ) do
+      content_tag(:div, 'w', id: 'icon_7', class: 'icon_menu') +
+      content_tag(:div, I18n.t(:log_out) ,id: 'exit_1', class: 'menu_item_text')
+    end
+  end
+ end
+
   def other_tenants_icon(user:, building:)
     content_tag(:div,'others', id: 'others', class: 'menu_item') do
       link_to(building_memberships_path(building)) do
@@ -133,7 +142,6 @@ module BuildingsHelper
       end
     end
   end
-
   def building_public_profile_icon(building: building, user: user)
     content_tag(:div, 'profile', id: 'profil', class: 'menu_item' ) do
       link_to(building_user_path(building,user)) do

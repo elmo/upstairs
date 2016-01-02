@@ -9,35 +9,33 @@
     font-family: Icon_set_upstairs-Regular;
     src: asset-url('Icon_set_upstairs-Regular.otf');
 }
-
+.homeLogo{
+    height: 80px;
+    
+}
+.home_icon_menu_small,
 .home_icon_menu {
-    top: 5px;
-    width: 90px;
-    height: 90px;
-    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+    font-family: Icon_set_upstairs-Regular;
     font-size: 120px;
+    margin-top: -40px;
     text-transform: uppercase;
-    text-align: left;
+    text-align: center;
     color: #FFFFFF;
     visibility: hidden;
-    position: absolute;
-    opacity: 0;
-    left:37px ;
-    right: 50%;
-    @include transition( opacity 0.1s linear);
-}
+    display: none;
+    margin-right: auto;
+    margin-left: auto;
+    -webkit-transition: opacity 0.1s linear;
+    -moz-transition: opacity 0.1s linear;
+    transition: opacity 0.1s linear;
+} 
 .home_icon_menu_small {
     margin-top: 20px;
     width: 24px;
     height: 35px;
-    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
     font-size: 38px;
-    text-transform: uppercase;
-    text-align: left;
-    color: #FFFFFF;
-    
-    margin-left: auto;
-    margin-right: auto;
+    display: block;
+    visibility: visible;
 }
 #menu:hover  .home_icon_menu{
     display: block;
@@ -476,6 +474,7 @@ body {
     float: left;
     width: 100%;
     margin-bottom: 10px;
+    @include transition(all 3s);  
     
 }
 #settings {
@@ -536,21 +535,19 @@ body {
 }
 
 #rectangle_7_copy_3 {
-    opacity: 0.4;
     top: 1px;
     left: 0px;
     width: 100%;
     height: 1px;
-    background: #FFFFFF;
+    background: rgba(256,256,256,0.4) ;
 }
 
-#rectangle_7_copy_2 {   
-    opacity: 0.06;
+#rectangle_7_copy_2 {
     top: 0px;
     left: 0px;
     width: 100%;
     height: 1px;
-    background: #000000;
+    background: rgba(0,0,0,0.06) ;
 }
 
 #bulletin {
@@ -592,6 +589,7 @@ body {
     visibility:hidden;
     
 }
+
 .menu_item_text_add{
     margin-top: 5px;
     margin-left: 10px;
@@ -606,19 +604,19 @@ body {
 }
 /* Add your custom CSS here */
 
-#nav {
+.nav {
     height: 40px;   
 }
 
-#nav > a {
+.nav > a {
     display: none;
 }
 
-#nav li {
+.nav li {
     position: relative;
     color: white;
 }
-#nav li a {
+.nav li a {
     position: relative;
     color: white;
 }
@@ -627,36 +625,36 @@ body {
 
 /* first level */
 
-#nav > ul {
+.nav > ul {
     height: 3.75em;
 }
 
-#nav > ul > li {
+.nav > ul > li {
     float: left;
 }
-#nav > ul > li > ul > li {
+.nav > ul > li > ul > li {
     float: left;
     padding: 10px;  
     width: 100%;
     
 }
-#nav > ul > li > ul  {
+.nav > ul > li > ul  {
     background: #565656; 
      border-radius: 2px;
     margin-left: -100%;
 } 
-#nav > ul > li > ul > li> a  {
+.nav > ul > li > ul > li> a  {
      text-decoration: none;
     -webkit-transition: color 0.1s linear;
     -moz-transition: color 0.1s linear;
     transition: color 0.1s linear;
     white-space: nowrap;
 } 
-#nav > ul > li > ul > li:Hover > a  {
+.nav > ul > li > ul > li:Hover > a  {
     color: #565656; 
     
 }   
- #nav > ul > li > ul > li:Hover  {
+ .nav > ul > li > ul > li:Hover  {
      text-decoration: none;
     @include transition( background 0.1s linear);
    
@@ -671,19 +669,7 @@ body {
     float: right;
     background: white;
 }
-#searchC > form > input[type='submit']{
-    margin-left: 10px;
-    opacity: 0.8;
-    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
-    font-size: 46px;
-    text-align: left;
-    color: #AFAFAF;
-    float: right;
-    border: none;   
-    padding-top: 13px;
-    background: none;
-    line-height: 12px;
-}
+
 #searchC > form > input[type='text']{
     margin-top: 15px;
     margin-left: 10px;
@@ -692,29 +678,104 @@ body {
     float: right;
     line-height: 12px;
 }
-#search {
-    margin-left: 10px;
-    opacity: 0.8;
-    top: -16px;
-    left: -5px;
-    width: 52px;
-    height: 52px;
-    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+.icon{
+     opacity: 0.8;
+     font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
     font-size: 46px;
     text-transform: uppercase;
     text-align: left;
     color: #AFAFAF;
+}
+#search {
+    margin-left: 10px;
+    top: -16px;
+    left: -5px;
+    width: 52px;
+    height: 52px;
     float: right;
 }
+#searchC > form > input[type='submit']{
+    margin-left: 10px;
+    float: right;
+    border: none;   
+    padding-top: 13px;
+    background: none;
+    line-height: 12px;
+}
 
-#nav li ul {
+.nav li ul {
     display: none;
     position: absolute;
     top: 100%;
 }
 
-#nav li:hover ul {
+.nav li:hover ul {
     display: block;
+}
+.left_nav_menu{
+    float: left;
+    width: 100%;
+    height: 20px;
+    
+}
+.left_nav_profile{
+    width: 100%;
+    
+    
+}
+.left_nav_profile li{
+    width: 100%;
+}
+.left_nav_profile > ul > li > ul{
+    
+    position: relative;
+    margin-left: 0px;   
+    padding-left: 30px;
+}
+.building-selector  a{
+    
+    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+    
+}
+.building-selector-text{
+    visibility: hidden;
+    display: none;
+    font-family: Raleway-Medium, Arial, Helvetica, sans-serif;
+    white-space: nowrap;  
+    overflow: hidden;
+    
+}
+#menu:hover .building-selector-text {
+    visibility: visible;
+    display: block;
+    
+}
+#menu:hover .building-selector-icon{
+   visibility: hidden;
+    display: none;
+    
+}
+.building-selector-icon{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    
+}
+.left_nav_menu  > ul > li > ul  {
+    margin-left: 0;
+    
+} 
+.left_nav_menu > ul > li {
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.building-selector{
+    margin-left: 10px;
+    margin-right: 10px;
+    border: white 1px solid;    
+    border-radius: 3px;
+    
 }
 #searchC:hover #searchTextField{
     display: block;
