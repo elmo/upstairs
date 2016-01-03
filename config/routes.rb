@@ -31,6 +31,9 @@ Upstairs::Application.routes.draw do
     end
     resources :buildings, only: [:show] do
       resources :posts do
+         collection do
+           get 'tips'
+         end
          resources :comments
       end
       resources :events do
