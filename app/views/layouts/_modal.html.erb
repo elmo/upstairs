@@ -1,0 +1,77 @@
+<%
+  @event  = @building.events.new
+  @alert  = @building.alerts.new
+  @ticket = @building.tickets.new
+  @post   = @building.posts.new
+%>
+<div class="modal">
+  <label for="event-modal">
+    <div class="modal-trigger">Add a new Event.</div>
+  </label>
+  <input class="modal-state" id="event-modal" type="checkbox" />
+
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="event-modal"></div>
+      <h1>Enter a new Event</h1>
+      <p class="modal-intro">Create a new Event.</p>
+      <p class="modal-content">
+        <%= render partial: '/events/form'%>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="modal">
+  <label for="alert-modal">
+    <div class="modal-trigger">Add a new Alert.</div>
+  </label>
+  <input class="modal-state" id="alert-modal" type="checkbox" />
+
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="event-modal"></div>
+      <h1>Enter a new Alert</h1>
+      <p class="modal-intro">Create a new Event.</p>
+      <p class="modal-content">
+        <%= render partial: '/alerts/form'%>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="modal">
+  <label for="ticket-modal">
+    <div class="modal-trigger">Add a new Ticket.</div>
+  </label>
+  <input class="modal-state" id="ticket-modal" type="checkbox" />
+
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="event-modal"></div>
+      <h1>Enter a new Alert</h1>
+      <p class="modal-intro">Create a new Ticket.</p>
+      <p class="modal-content">
+        <%= render partial: '/tickets/form'%>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="modal">
+  <label for="post-modal">
+    <div class="modal-trigger">Add a new Post.</div>
+  </label>
+  <input class="modal-state" id="post-modal" type="checkbox" />
+
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="post-modal"></div>
+      <h1>Enter a new Note</h1>
+      <p class="modal-intro">Create a new Post.</p>
+      <p class="modal-content">
+        <%= render partial: '/posts/form'%>
+      </p>
+    </div>
+  </div>
+</div>
