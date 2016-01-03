@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     redirect_to buildings_path
   end
 
-
   def show
     @user = User.where(slug: params[:id]).last
     if @user.landlord?

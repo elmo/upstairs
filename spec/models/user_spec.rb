@@ -45,8 +45,8 @@ RSpec.describe User, type: :model do
     end
 
     it 'receives_text_messages? false when ok_to_send_text_messages is false' do
-      @user.stub(:ok_to_send_text_messages).and_return(false)
-      expect(@user.receives_text_messages?).to eq false
+      @user.stub(:ok_to_send_text_messages).and_return(true)
+      expect(@user.receives_text_messages?).to eq true
     end
 
     it 'receives_text_messages? false when ok_to_send_text_messages is true and phone_valid? is false'  do
@@ -269,7 +269,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'should be 10 chars long' do
-      expect(@user.to_param.length).to eq 10
+      expect(@user.to_param.length).to eq 9
       expect(@user.to_param).to eq @user.slug
     end
   end
