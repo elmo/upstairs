@@ -7,7 +7,7 @@ class Api::TicketsController < ApplicationController
   end
 
   def show
-    @ticket = @building.tickets.friendly.find(params[:id])
+    @ticket = @building.tickets.find(params[:id])
     render json: @ticket
   end
 

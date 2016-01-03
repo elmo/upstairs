@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::UserController, type: :routing do
+RSpec.describe Api::TicketsController, type: :routing do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: 'api/buildings/1/tickets').to route_to('api/tickets#index', building_id: "1" )
