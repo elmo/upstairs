@@ -1,7 +1,4 @@
-class Api::AlertsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  before_action :authenticate_user!
-  before_action :get_building, only: [:index, :show, :create, :update,:destroy]
+class Api::AlertsController < Api::ApiController
 
   def index
     @alerts = @building.alerts.page(params[:page]).order(created_at: :desc).per(4)
@@ -41,14 +38,6 @@ class Api::AlertsController < ApplicationController
   end
 
   private
-
-  def not_found
-    render json: {error: 'not found'}, status: :not_found
-  end
-
-  def get_building
-    @building = Building.friendly.find(params[:building_id])
-  end
 
   def alert_params
     params.require(:alert).permit(:message)
