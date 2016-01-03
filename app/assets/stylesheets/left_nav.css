@@ -650,11 +650,13 @@ body {
     transition: color 0.1s linear;
     white-space: nowrap;
 } 
+.nav > ul > li > ul > li:Hover > a > .menu_item_text_add,
+.nav > ul > li > ul > li:Hover > a > .icon_menu,
 .nav > ul > li > ul > li:Hover > a  {
     color: #565656; 
     
 }   
- .nav > ul > li > ul > li:Hover  {
+.nav > ul > li > ul > li:Hover  {
      text-decoration: none;
     @include transition( background 0.1s linear);
    

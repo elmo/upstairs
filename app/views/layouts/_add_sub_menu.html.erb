@@ -1,4 +1,4 @@
-<ul class="add_menu submenu ">
+<ul class="add_menu submenu">
   <li>
     <%= link_to new_building_user_invitation_path(@building) do
       content_tag(:div, 'N' , id: 'icon_7', class: 'icon_menu') +
@@ -23,7 +23,16 @@
      content_tag(:div, 'Send a message', id: 'icon', class: 'menu_item_text_add') 
     end -%> 
    </li>
+    <li>
+    <%= link_to building_events_url(@building) do 
+     content_tag(:div, 'B' , id: 'icon_5', class: 'icon_menu') +
+        content_tag(:div, 'New Event', id: 'icon', class: 'menu_item_text_add') 
+    end -%> 
+   </li>
 </ul> 
 <a href="javascript:void(0)" class="js-accordion-trigger">
   <div id="add"><%= image_tag"icon_plus.png", id: "icon_plus" %></div>
 </a>
+
+
+
