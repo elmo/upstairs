@@ -39,6 +39,9 @@ Upstairs::Application.routes.draw do
       resources :alerts do
          resources :comments
       end
+      resources :tickets do
+         resources :comments
+      end
     end
   end
 
