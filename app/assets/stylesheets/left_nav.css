@@ -591,7 +591,6 @@ body {
 }
 
 .menu_item_text_add{
-    margin-top: 5px;
     margin-left: 10px;
     float: left;
     font-family: Raleway-Medium, Arial, Helvetica, sans-serif;
@@ -600,6 +599,7 @@ body {
     text-align: left;
     color: #FFFFFF;
     white-space: nowrap;
+    margin-top: 7px;
     
 }
 /* Add your custom CSS here */
@@ -650,8 +650,8 @@ body {
     transition: color 0.1s linear;
     white-space: nowrap;
 } 
-.nav > ul > li > ul > li:Hover > a > .menu_item_text_add,
-.nav > ul > li > ul > li:Hover > a > .icon_menu,
+.nav > ul > li > ul > li:Hover  .menu_item_text_add,
+.nav > ul > li > ul > li:Hover  .icon_menu,
 .nav > ul > li > ul > li:Hover > a  {
     color: #565656; 
     

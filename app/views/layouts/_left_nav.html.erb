@@ -31,7 +31,6 @@
         </div> 
 
         <%= bulletin_board_icon(user: current_user, building: @building) %>
-        <%= alerts_icon(user: current_user, building: @building) %>
         <%= calendar_icon(user: current_user, building: @building) %>
         <%= messages_icon(user: current_user, building: @building) %>
         <%= other_tenants_icon(user: current_user, building: @building) %>
@@ -42,8 +41,10 @@
             <div id="rectangle_7_copy_3"  ></div>
             <div id="rectangle_7_copy_2"  ></div>
         </div>   
+        
+        <%= alerts_icon(user: current_user, building: @building) %>
         <%= building_repairs_icon(user: current_user, building: @building) %>
-        <%= invite_someone_icon(user: current_user, building: @building) %>
+        <!--%= invite_someone_icon(user: current_user, building: @building) %-->
     </div> 
 
     <div class="group" id="settings">

@@ -127,7 +127,7 @@ module BuildingsHelper
 
   def building_repairs_icon(user:, building:)
       content_tag(:div,'request',id: 'request', class: 'menu_item') do
-      link_to new_building_ticket_path(building) do
+      link_to building_tickets_path(building) do
         content_tag(:div, controller_name == 'tickets' ? 'L' : 'K', id: 'icon_5', class: 'icon_menu') +
         content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text')
       end
