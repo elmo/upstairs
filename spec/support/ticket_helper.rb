@@ -27,3 +27,6 @@ def load_building_with_one_ticket
 		   status: 'new')
 end
 
+def valid_ticket_params
+  { title: 'title', body: 'body' , status: Ticket::STATUS_OPEN, severity: Ticket::SEVERITY_MINOR}
+end
