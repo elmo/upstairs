@@ -765,6 +765,8 @@ body {
 }
 .left_nav_menu  > ul > li > ul  {
     margin-left: 0;
+    width: 100%;
+
     
 } 
 .left_nav_menu > ul > li {
