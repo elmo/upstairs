@@ -21,3 +21,8 @@ def load_building_with_one_post
   @user = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
   @post = create(:post, postable: @building, user: @user, title: 'title', body: 'body')
 end
+
+def valid_post_params
+  category = Category.create(name: 'Tips', color: 'red')
+  { title: 'title', body: 'body', category_id: category.id  }
+end
