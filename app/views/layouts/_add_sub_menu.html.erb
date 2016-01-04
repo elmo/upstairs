@@ -1,29 +1,134 @@
-<ul class="add_menu submenu ">
-  <li>
-    <%= link_to new_building_user_invitation_path(@building) do
-      content_tag(:div, 'N' , id: 'icon_7', class: 'icon_menu') +
-      content_tag(:div, I18n.t(:invite_someone), id: 'invite_someone', class: 'menu_item_text_add')
-    end -%> 
+<%
+  @event  = @building.events.new
+  @alert  = @building.alerts.new
+  @ticket = @building.tickets.new
+  @post   = @building.posts.new
+  @invitation   = @building.invitations.new
+%>
+<ul class="add_menu submenu">
+    <li>
+        <div class="modal">
+          <label for="post-modal">
+            <div class="modal-trigger">
+              <%= content_tag(:div, 'C' , id: 'icon_7', class: 'icon_menu') -%> 
+                <%= content_tag(:div, 'Create a new Note', id: 'invite_someone', class: 'menu_item_text_add')-%>
+              </div>
+          </label>
+          <input class="modal-state" id="post-modal" type="checkbox" />
+
+          <div class="modal-fade-screen">
+            <div class="modal-inner">
+              <div class="modal-close" for="post-modal"></div>
+              <h1>Enter a new Note</h1>
+              <p class="modal-intro">Create a new Post.</p>
+              <p class="modal-content">
+                <%= render partial: '/posts/form'%>
+              </p>
+            </div>
+          </div>
+        </div>
+    </li>
+  <li> 
+    <div class="modal">
+      <label for="invitation-modal">
+        <div class="modal-trigger">
+            <%= content_tag(:div, 'M' , id: 'icon_7', class: 'icon_menu') -%> 
+            <%= content_tag(:div, I18n.t(:invite_someone), id: 'invite_someone', class: 'menu_item_text_add')-%>
+          
+        </div>
+      </label>
+      <input class="modal-state" id="invitation-modal" type="checkbox" />
+
+      <div class="modal-fade-screen">
+        <div class="modal-inner">
+          <div class="modal-close" for="invitation-modal"></div>
+          <h1><%= I18n.t(:invite_someone)%></h1>
+          <p class="modal-intro">Create a new Event.</p>
+          <p class="modal-content">
+            <%= render partial: '/invitations/form'%>
+          </p>
+        </div>
+      </div>
+    </div>
   </li>
   <li>
-    <%= link_to new_building_ticket_path(@building) do
-      content_tag(:div, 'L' , id: 'icon_5', class: 'icon_menu') +
-      content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text_add')
-      end -%> 
+      <div class="modal">
+          <label for="ticket-modal">
+            <div class="modal-trigger">
+            <%=    content_tag(:div, 'K' , id: 'icon_5', class: 'icon_menu') -%> 
+            <%=      content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text_add')-%> 
+              </div>
+          </label>
+          <input class="modal-state" id="ticket-modal" type="checkbox" />
+
+          <div class="modal-fade-screen">
+            <div class="modal-inner">
+              <div class="modal-close" for="event-modal"></div>
+              <h1> <%=I18n.t(:tickets)-%></h1>
+              <p class="modal-intro">Create a new Ticket.</p>
+              <p class="modal-content">
+                <%= render partial: '/tickets/form'%>
+              </p>
+            </div>
+          </div>
+        </div>          
    </li>
    <li>
-    <%= link_to new_building_alert_path(@building) do
-      content_tag(:div, 'F' , id: 'icon_5', class: 'icon_menu') +
-      content_tag(:div, 'Post an alert', id: 'icon', class: 'menu_item_text_add')
-      end %> 
+       <div class="modal">
+          <label for="alert-modal">
+            <div class="modal-trigger">
+             <%=  content_tag(:div, 'E' , id: 'icon_5', class: 'icon_menu') -%> 
+             <%=  content_tag(:div, 'Post an alert', id: 'icon', class: 'menu_item_text_add')-%> 
+              </div>
+          </label>
+          <input class="modal-state" id="alert-modal" type="checkbox" />
+
+          <div class="modal-fade-screen">
+            <div class="modal-inner">
+              <div class="modal-close" for="event-modal"></div>
+              <h1>Enter a new Alert</h1>
+              <p class="modal-intro">Create a new Event.</p>
+              <p class="modal-content">
+                <%= render partial: '/alerts/form'%>
+              </p>
+            </div>
+          </div>
+        </div>
     </li>
-   <li>
-    <%= link_to new_building_message_path(@building) do 
-     content_tag(:div, 'H' , id: 'icon_5', class: 'icon_menu') +
-     content_tag(:div, 'Send a message', id: 'icon', class: 'menu_item_text_add') 
-    end -%> 
-   </li>
+    <li> 
+    <div class="modal">
+      <label for="event-modal">
+        <div class="modal-trigger">
+            <%= content_tag(:div, 'A' , id: 'icon_5', class: 'icon_menu') -%> 
+            <%= content_tag(:div, 'New Event', id: 'icon', class: 'menu_item_text_add')-%>
+          </div>
+      </label>
+      <input class="modal-state" id="event-modal" type="checkbox" />
+
+      <div class="modal-fade-screen">
+        <div class="modal-inner">
+          <div class="modal-close" for="event-modal"></div>
+          <h1>Enter a new Event</h1>
+          <p class="modal-intro">Create a new Event.</p>
+          <p class="modal-content">
+            <%= render partial: '/events/form'%>
+          </p>
+        </div>
+      </div>
+    </div>
+  </li>     
 </ul> 
 <a href="javascript:void(0)" class="js-accordion-trigger">
   <div id="add"><%= image_tag"icon_plus.png", id: "icon_plus" %></div>
 </a>
+
+
+
+
+
+
+
+
+
+
+

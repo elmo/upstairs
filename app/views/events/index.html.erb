@@ -2,7 +2,7 @@
 <h3>Calendar</h3>
 <div id="events" class="content-posts">
 <h5><%= @past_or_upcoming_events -%></h5>
-<%= render partial: 'form' -%>
+<!--%= render partial: 'form' -%-->
 <% if @events.any? %>
 <% @events.each do |event| %>
    <p id="event_id=<%=event.id-%>" class="event">
@@ -15,7 +15,7 @@
   </p>
 <% end %>
 <%= paginate(@events) -%>
-<p> <%= link_to 'Add new event', new_building_event_path(@building) -%></p>
+<p> <!--%= link_to 'Add new event', new_building_event_path(@building) -%--></p>
 <% else %>
 <p><%=  @search_results_message -%></p>
 <% end %>
