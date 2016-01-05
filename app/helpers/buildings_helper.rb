@@ -98,10 +98,11 @@ module BuildingsHelper
     end
   def alerts_icon(user:, building:)
     content_tag(:div, id: 'alert_1', class: 'menu_item') do
+        (building.alerts_for_user(current_user).any? ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')+
+        
       content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
         link_to(building_alerts_path(building)) do
-          content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text') +
-          (building.alerts_for_user(current_user).any? ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
+          content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text') 
       end
     end
   end
