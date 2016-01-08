@@ -14,6 +14,11 @@ RSpec.describe Api::EventsController, type: :controller do
     expect(response.status).to eq 200
   end
 
+  it 'GET calendar' do
+    get :calendar, building_id: @building.to_param, format: :json
+    expect(response.status).to eq 200
+  end
+
   describe 'GET show' do
     it 'finds' do
       get :show, building_id: @building.to_param, id: @event.id, format: :json

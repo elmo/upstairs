@@ -1,7 +1,7 @@
 class Api::ApiController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   before_action :authenticate_user!
-  before_action :get_building, only: [:index, :show, :create, :update,:destroy]
+  before_action :get_building, only: [:index, :show, :create, :update,:destroy,:calendar]
 
   private
 

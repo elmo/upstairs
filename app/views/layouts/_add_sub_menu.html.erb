@@ -1,9 +1,9 @@
 <%
-  @event  = @building.events.new
-  @alert  = @building.alerts.new
-  @ticket = @building.tickets.new
-  @post   = @building.posts.new
-  @invitation   = @building.invitations.new
+  @event  ||= @building.events.new
+  @alert  ||= @building.alerts.new
+  @ticket ||= @building.tickets.new
+  @post   ||= @building.posts.new
+  @invitation ||= @building.invitations.new
 %>
 <ul class="add_menu submenu">
     <li>
