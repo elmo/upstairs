@@ -3,11 +3,11 @@ module UsersHelper
     user.landlord_of?(building) ? 'landlord' : ''
   end
 
-  def user_profile_image(_building, user, size = 'smallest', crop = 'fit')
+    def user_profile_image(_building, user, size = 'smallest', crop = 'fit', classP="photoP", id = "photo")
     dimensions_method = size + '_image_dimensions'
     dimensions = send(dimensions_method.to_sym)
     image = (usable_username?(user) && user.avatar.present?) ?
-      cl_image_tag(user.avatar.path, size: dimensions, crop: crop, id: 'photo') :
+      cl_image_tag(user.avatar.path, size: dimensions, crop: crop, id: id,class: classP) :
       anonymous_user_icon(dimensions)
     image
   end

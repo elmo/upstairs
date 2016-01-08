@@ -39,7 +39,6 @@ gem 'simple_form'
 gem 'timecop'
 gem 'twilio-ruby'
 gem 'gmaps-autocomplete-rails'
-
 gem 'sass-rails', '5.0.0.beta1'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'underscore-rails'

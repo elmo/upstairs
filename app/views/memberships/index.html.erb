@@ -4,7 +4,8 @@
 <ul >
 <% @memberships.each do |membership| %>
   <li>
-    <%= user_profile_image(@building, membership.user, 'small', 'fit') -%>
+     
+    <div class="photo" style="<%= show_user_bg(membership.user, 'large', 'fit') %>"></div>
     <%= landlord_link(user: membership.user, building: @building)-%>
     <%= verified_link(user: membership.user, building: @building)-%>
     <%= link_to username_or_anonymous(membership.user), building_user_path(@building, membership.user.slug) -%>
