@@ -6,7 +6,6 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    @event = @building.events.new
     start_date = (params[:start_date].present?) ? Chronic.parse(params[:start_date]) : Date.today.at_beginning_of_month
     if params[:archive] and params[:archive] == 'true'
       @past_or_upcoming_events = 'Past'

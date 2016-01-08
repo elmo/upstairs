@@ -1,0 +1,15 @@
+<% if @events.present? %>
+<%# calendar callbacks %>
+<%# see: http://fullcalendar.io/docs/ for customization instructions %>
+<%# to see what the data looks like, see this example: http://localhost:3000/api/buildings/401-43rd-ave-san-francisco-ca-94121-usa/events/calendar.json %>
+<script>
+  $('#events-calendar').fullCalendar({ 
+    events: "<%= calendar_api_building_events_url(@building, format: :json) -%>",
+    header: { 
+     left: 'today prev,next',
+     center: '',
+     right: 'title'
+    } 
+   });
+</script>
+<% end %>
