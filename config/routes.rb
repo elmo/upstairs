@@ -37,6 +37,9 @@ Upstairs::Application.routes.draw do
          resources :comments
       end
       resources :events do
+         collection do
+           get 'calendar'
+         end
          resources :comments
       end
       resources :alerts do

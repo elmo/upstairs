@@ -26,7 +26,6 @@
 //= require pickers
 //= require_tree .
 
-
 $( document ).ready(function() {
   $('.attachinary-input').attachinary();
 });

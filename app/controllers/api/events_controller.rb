@@ -5,6 +5,14 @@ class Api::EventsController < Api::ApiController
     render json: @events
   end
 
+  def calendar
+    scope = @building.events
+    params[:start] ||= (Date.today - 1.week).strftime("%Y-%m-%d")
+    params[:end] ||= (Date.today + 5.weeks).strftime("%Y-%m-%d")
+    scope = scope.where(["starts >= ? and starts < ? ", params[:start], params[:end] ])
+    @events = scope.order(created_at: :desc)
+  end
+
   def show
     @event = @building.events.find(params[:id])
     render json: @event

@@ -1,22 +1,2 @@
 <%= recent_alerts -%>
-<h3>Calendar</h3>
-<div id="events" class="content-posts">
-<h5><%= @past_or_upcoming_events -%></h5>
-<!--%= render partial: 'form' -%-->
-<% if @events.any? %>
-<% @events.each do |event| %>
-   <p id="event_id=<%=event.id-%>" class="event">
-     <%= small_event_image(event) -%>
-     <%= link_to event.title, building_event_path(@building, event), class: "calendar-event" %>
-     <small>
-      <%= event.starts.strftime("%B %d, %Y") %>
-      posted by <%= link_to event.user.public_name, building_user_path(@building, event.user ) %> 
-   </small>
-  </p>
-<% end %>
-<%= paginate(@events) -%>
-<p> <!--%= link_to 'Add new event', new_building_event_path(@building) -%--></p>
-<% else %>
-<p><%=  @search_results_message -%></p>
-<% end %>
-</div>
+<div id="events-calendar"></div>
