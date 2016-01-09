@@ -17,6 +17,12 @@ RSpec.describe Membership, type: :model do
     end
   end
 
+  describe "membership_types" do
+    it "are only 'Guest', 'Tenant', 'Landlord', 'Manager' " do
+      expect(Membership.membership_types).to eq  ["Guest", "Tenant", "Landlord", "Manager"]
+    end
+  end
+
   describe 'creation' do
     before(:each) do
       load_valid_building

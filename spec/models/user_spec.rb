@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
       load_membership
     end
 
-    it 'dis-associates user with a building' do
+    it 'disassociates user with a building' do
       expect { @user.leave(@building) }.to change(Membership, :count).by(-1)
       expect(@user.buildings).to be_empty
     end
@@ -166,17 +166,12 @@ RSpec.describe User, type: :model do
       load_valid_building
     end
 
-    it 'is false if user does not have landlord or manager role for building' do
+    it 'is false if user does not have landlord or manager membership for building' do
       expect(@user.manager_of?(@building)).to eq false
     end
 
-    it 'is true when user has landlord role for building' do
-      @user.add_role(:landlord, @building)
-      expect(@user.manager_of?(@building)).to eq true
-    end
-
-    it 'is true when user has manager role for building' do
-      @user.add_role(:manager, @building)
+    it 'is true when user has manager membership for building' do
+      @user.make_manager(@building)
       expect(@user.manager_of?(@building)).to eq true
     end
   end
@@ -213,53 +208,23 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'make/revoke manager role' do
+  describe 'make/revoke manager membership' do
     before(:each) do
       load_user
       load_valid_building
     end
 
-    it 'add manager role' do
-      expect { @user.make_manager(@building) }.to change(Role, :count).by(1)
+    it 'add manager membership' do
+      expect { @user.make_manager(@building) }.to change(Membership, :count).by(1)
       expect(@user.managed_properties.first).to eq @building
+      expect(@user.managerships.count).to eq 1
     end
 
-    it 'revoke manager role' do
+    it 'revoke manager membership' do
       @user.make_manager(@building)
       expect(@user.managed_properties.first).to eq @building
       @user.revoke_manager(@building)
       expect(@user.managed_properties).to be_empty
-    end
-  end
-
-  describe 'apply invitation' do
-    before(:each) do
-      load_user
-      load_valid_building
-      @email = 'invitee@email.com'
-    end
-
-    describe 'landlord invitation' do
-      before(:each) do
-        @invitation = create(:landlord_invitation, user: @user, building: @building, email: @email)
-      end
-      it 'add user to building' do
-        @invitee = create(:user, email: @email, invitation: @invitation)
-        expect(@invitee.buildings.first).to eq @building
-        expect(@invitee.roles.first.name).to eq User::ROLE_LANDLORD
-      end
-    end
-
-    describe 'manager invitation' do
-      before(:each) do
-        @invitation = create(:manager_invitation, user: @user, building: @building, email: @email)
-      end
-
-      it 'add user to building' do
-        @invitee = create(:user, email: @email, invitation: @invitation)
-        expect(@invitee.buildings.first).to eq @building
-        expect(@invitee.roles.first.name).to eq User::ROLE_MANAGER
-      end
     end
   end
 
@@ -280,16 +245,74 @@ RSpec.describe User, type: :model do
       load_user
     end
 
-    it 'is false when user has no landlord role for bulding' do
+    it 'is false when user has no landlord membership for bulding' do
       expect(@user.landlord?).to be false
     end
 
-    it 'is true when user has landlord role for bulding' do
-      @user.add_role('Landlord', @building)
-      @user.reload
+    it 'is true when user has landlord membership for bulding' do
+      @user.make_landlord(@building)
       expect(@user.landlord?).to be true
     end
   end
+
+  describe "ships" do
+    before(:each) do
+      load_valid_building
+      load_user
+    end
+
+    it "creates landlord membership role" do
+      @user.make_landlord(@building)
+      expect(@user.landlordships.count).to eq 1
+    end
+
+    it "creates manager membership role" do
+      @user.make_manager(@building)
+      expect(@user.managerships.count).to eq 1
+    end
+
+    it "creates tenant role" do
+      @user.make_tenant(@building)
+      expect(@user.tenantships.count).to eq 1
+    end
+
+    it "creates guest role" do
+      @user.make_guest(@building)
+      expect(@user.guestships.count).to eq 1
+    end
+
+    describe "revocations" do
+
+      it "creates landlord membership role" do
+        @user.make_landlord(@building)
+        expect(@user.landlordships.count).to eq 1
+        @user.revoke_landlord(@building)
+        expect(@user.landlordships.count).to eq 0
+      end
+
+      it "creates manager membership role" do
+        @user.make_manager(@building)
+        expect(@user.managerships.count).to eq 1
+        @user.revoke_manager(@building)
+        expect(@user.managerships.count).to eq 0
+      end
+
+      it "creates tenant role" do
+        @user.make_tenant(@building)
+        expect(@user.tenantships.count).to eq 1
+        @user.revoke_tenant(@building)
+        expect(@user.tenantships.count).to eq 0
+      end
+
+      it "creates guest role" do
+        @user.make_guest(@building)
+        expect(@user.guestships.count).to eq 1
+        @user.revoke_guest(@building)
+        expect(@user.guestships.count).to eq 0
+      end
+
+    end #revocations
+  end #..ships
 
   describe 'landlord_of_building?' do
     before(:each) do
@@ -297,14 +320,176 @@ RSpec.describe User, type: :model do
       load_user
     end
 
-    it 'is false when user has no landlord role for bulding' do
+    it 'is false when user has no landlord membership for bulding' do
       expect(@user.landlord_of?(@building)).to be false
     end
 
-    it 'is true when user has landlord role for bulding' do
-      @user.add_role('Landlord', @building)
-      @user.reload
+    it 'is true when user has landlord membership for bulding' do
+      @user.make_landlord(@building)
       expect(@user.landlord_of?(@building)).to be true
+    end
+  end
+
+  describe "change membership" do
+    before(:each) do
+      load_valid_building
+      load_user
+      @user.make_guest(@building)
+    end
+
+    it "changes membership to 'tenant' " do
+       expect(@user.guestships.count).to eq 1
+       @user.change_membership(building: @building, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+       expect(@user.tenantships.count).to eq 1
+    end
+
+    it "does not change membership to 'foo' " do
+       expect(@user.guestships.count).to eq 1
+       @user.change_membership(building: @building, membership_type: 'foo')
+       expect(@user.guestships.count).to eq 1
+    end
+  end
+
+  describe "grant/revoke" do
+    before(:each) do
+      load_valid_building
+      load_user
+    end
+
+    describe "permissions" do
+      describe "permitted_to_grant_landlordship?" do
+         it "true when admin" do
+           @user.make_admin
+	   expect(@user.permitted_to_grant_landlordship?(@building)).to eq true
+         end
+
+         it "false when not admin" do
+	   expect(@user.permitted_to_grant_landlordship?(@building)).to eq false
+         end
+      end
+
+      describe "permitted_to_revoke_landlordship?" do
+         it "true when admin" do
+           @user.make_admin
+	   expect(@user.permitted_to_revoke_landlordship?(@building)).to eq true
+         end
+
+         it "false when not admin" do
+	   expect(@user.permitted_to_revoke_landlordship?(@building)).to eq false
+         end
+      end
+
+      describe "permitted_to_grant_manager?" do
+         it "true when owner of building" do
+           @user.make_landlord(@building)
+	   expect(@user.permitted_to_grant_managership?(@building)).to eq true
+         end
+
+         it "false when not owner of building" do
+	   expect(@user.permitted_to_grant_managership?(@building)).to eq false
+         end
+      end
+
+      describe "permitted_to_revoke_manager?" do
+
+         it "true when landlord of building" do
+           @user.make_landlord(@building)
+	   expect(@user.permitted_to_revoke_managership?(@building)).to eq true
+         end
+
+         it "false when not landlord of building" do
+	   expect(@user.permitted_to_revoke_managership?(@building)).to eq false
+         end
+      end
+
+      describe "permitted_to_grant_tenantship?" do
+         it "true when owner of building" do
+           @user.make_landlord(@building)
+	   expect(@user.permitted_to_grant_tenantship?(@building)).to eq true
+         end
+
+         it "false when not owner of building" do
+	   expect(@user.permitted_to_grant_tenantship?(@building)).to eq false
+         end
+      end
+
+      describe "permitted_to_revoke_tenant?" do
+         it "true when landlord of building" do
+           @user.make_landlord(@building)
+	   expect(@user.permitted_to_revoke_tenantship?(@building)).to eq true
+         end
+
+         it "false when not landlord of building" do
+	   expect(@user.permitted_to_revoke_tenantship?(@building)).to eq false
+         end
+      end
+    end
+  end
+
+  describe "grant/revoke" do
+    before(:each) do
+      load_valid_building
+      load_user
+      @user.join(@building)
+      @membership = @user.memberships.first
+      load_landlord(@building)
+    end
+
+    describe "grants" do
+
+      it "landlordship" do
+        load_admin
+        @admin.grant(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD)
+	expect(@user.landlordships).to eq @user.memberships
+      end
+
+      it "landlordship raises when user is not admin" do
+        load_landlord(@building)
+        expect{ @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD) }.to raise_error("Unable to grant permission")
+      end
+
+      it "managership" do
+        @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
+	expect(@user.managerships).to eq @user.memberships
+      end
+
+      it "tenantship" do
+        @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
+	expect(@user.tenantships).to eq @user.memberships
+      end
+
+    end
+
+    describe "revokes" do
+
+      it "landlordship" do
+        load_admin
+        @admin.grant(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD)
+	expect(@user.landlordships).to eq @user.memberships
+        @admin.revoke(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD)
+	expect(@user.landlordships).to be_empty
+      end
+
+      it "landlordship raises when user is not admin" do
+        load_landlord(@building)
+        expect{ @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD) }.to raise_error("Unable to revoke permission")
+      end
+
+
+      it "managership" do
+        @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
+	expect(@user.managerships).to eq @user.memberships
+        @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
+	expect(@user.managerships).to be_empty
+      end
+
+      it "tenantship" do
+        @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
+	expect(@user.tenantships).to eq @user.memberships
+        @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
+	expect(@user.tenantships).to be_empty
+      end
+
     end
   end
 
@@ -314,13 +499,12 @@ RSpec.describe User, type: :model do
       load_user
     end
 
-    it 'should be empty when user has no landlord role' do
+    it 'should be empty when user has no landlord membership' do
       expect(@user.owned_properties).to be_empty
     end
 
-    it 'should not be empty when user has no landlord role' do
-      @user.add_role(User::ROLE_LANDLORD, @building)
-      @user.reload
+    it 'should not be empty when user has no landlord membership' do
+      @user.make_landlord(@building)
       expect(@user.owned_properties.first).to eq @building
     end
   end
@@ -331,13 +515,12 @@ RSpec.describe User, type: :model do
       load_user
     end
 
-    it 'should be empty when user has no manager role' do
+    it 'should be empty when user has no manager membership' do
       expect(@user.managed_properties).to be_empty
     end
 
-    it 'should not be empty when user has no manager role' do
-      @user.add_role(User::ROLE_MANAGER, @building)
-      @user.reload
+    it 'should not be empty when user has no manager membership' do
+      @user.make_manager(@building)
       expect(@user.managed_properties.first).to eq @building
     end
   end
