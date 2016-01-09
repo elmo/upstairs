@@ -4,7 +4,7 @@ RSpec.describe "Building", :type => :request do
   before(:each) do
     @env ||= {}
     @env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
-    load_building
+    load_valid_building
   end
 
   it "reads building information" do
