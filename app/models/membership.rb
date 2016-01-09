@@ -15,4 +15,9 @@ class Membership < ActiveRecord::Base
   scope :tenant, -> { where(membership_type: MEMBERSHIP_TYPE_TENANT ) }
   scope :landlord, -> { where(membership_type: MEMBERSHIP_TYPE_LANDLORD ) }
   scope :manager, -> { where(membership_type: MEMBERSHIP_TYPE_MANAGER) }
+
+  def self.membership_types
+   [MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT, MEMBERSHIP_TYPE_LANDLORD, MEMBERSHIP_TYPE_MANAGER]
+  end
+
 end

@@ -1,22 +1,50 @@
-<div class="content-posts">
-<h5><%= building_short_address(@building) -%></h5>
-<%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
-<h5>Latest Posts</h5>
-<% if @posts.any?  %>
-  <% @posts.each_with_index do |post,i| -%>
-    <%= render partial: '/posts/post', locals: { post: post, i: i } %> 
-  <% end %>
+<h1>Dashboard</h1>
+
+
+<h2>Managers</h2>
+<% @building.managers.each do |manager| %>
+<p><%= manager.email-%>
+  <%= link_to 'revoke', 
+	revoke_building_membership_path(@building, 
+					manager.managership_of(building: @building) ,
+					membership_type: Membership::MEMBERSHIP_TYPE_MANAGER), 
+	method: :put -%>
+</p>
 <% end %>
 
-<p><%= link_to 'see all posts', building_posts_path(@building) -%></p>
+<h2>Guests</h2>
+<% @building.guests.each do |guest| %>
+  <p><%= guest.email-%> 
 
-<h5>Upcoming Events</h5>
+  <%= link_to 'make manager', 
+	grant_building_membership_path(@building, 
+					guest.membership_of(building: @building),
+					membership_type: Membership::MEMBERSHIP_TYPE_MANAGER), 
+	method: :put -%>
+  |
+  <%= link_to 'make tenant', 
+	grant_building_membership_path(@building, 
+					guest.membership_of(building: @building),
+					membership_type: Membership::MEMBERSHIP_TYPE_TENANT), 
+	method: :put -%>
+  </p>
 
-<% if @events.any? %>
-  <% @events.each do |event| %>
-  <% end %>
-<% else %>
-  <p>There are no upcoming events for this building.</p>
-  <%= link_to 'create a new event' , new_building_event_path(@building ) %>
 <% end %>
-</div>
+
+<h2>Tenants</h2>
+<% @building.tenants.each do |tenant| %>
+  <p><%= tenant.email-%> 
+    <%= link_to 'make manager of building', 
+	grant_building_membership_path(@building, 
+					tenant.membership_of(building: @building) ,
+					membership_type: Membership::MEMBERSHIP_TYPE_MANAGER), 
+	method: :put -%>
+     |
+    <%= link_to 'evict from building', 
+	revoke_building_membership_path(@building, 
+					tenant.membership_of(building: @building) ,
+					membership_type: Membership::MEMBERSHIP_TYPE_TENANT), 
+	method: :put -%>
+  </p>
+<% end %>
+
