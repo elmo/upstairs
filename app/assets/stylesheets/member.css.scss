@@ -1,22 +1,67 @@
+$radius: 3px;
 div.member {
   border: 1px solid black;
   float: left;
   padding: 1em;
   margin: 1em;
 }
-.photo {    
-        /* top: 0px; */
-        /* left: 22px; */
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin-top: 40px;
-        margin-bottom: 10px;
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        background-size: 100px auto;
+
+.memberList{
+     display: flex;
+    flex-direction: row;          
+    font-family:  Raleway-light;
+    flex-wrap: wrap;
+    
+}
+.user-name{
+    width: 100%;
+    text-align: center;
+}
+
+.member_fiche{
+    flex-grow: 1;
+    padding: 10px;
+    min-width: 200px;
+    display: flex;
+    background: #ffffff;
+    flex-direction:column;
+    align-items: stretch;
+    justify-content: space-between;
+    height:initial;
+    border-radius: 8px;
+    .photo{
+        margin: 0px;
         margin-right: auto;
-        margin-left: auto; 
-        border-color: white;
-        border-style: solid;
+        margin-left: auto;
+        
     }
+}
+.member_details{
+    padding: 10px;  
+}
+.header_fiche{
+    margin-bottom: 20px;
+    
+}
+.move_in{
+    font-size: 14px;    
+    text-align: center; 
+    
+}
+.btn {
+    align-items: flex-end;
+    border-radius: $radius;
+    font-family: Raleway-Light;
+    text-transform:uppercase;
+    color: #919191;
+    font-size: 16px;
+    padding: 10px 20px 10px 20px;
+    border: solid #e0e0e0 1px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+  background: #f2f2f2;
+  text-decoration: none;
+}

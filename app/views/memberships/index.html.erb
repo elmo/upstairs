@@ -1,19 +1,21 @@
-<div class="content-Neighbor">
-    <h1>Members</h1>
 
-<ul >
-<% @memberships.each do |membership| %>
-  <li>
-     
-    <div class="photo" style="<%= show_user_bg(membership.user, 'large', 'fit') %>"></div>
-    <%= landlord_link(user: membership.user, building: @building)-%>
-    <%= verified_link(user: membership.user, building: @building)-%>
-    <%= link_to username_or_anonymous(membership.user), building_user_path(@building, membership.user.slug) -%>
-    joined at <%= membership.user.created_at.strftime(upstairs_time_format) -%>.
-    <% if membership.user != current_user %>
-    <%= link_to 'send message',  new_building_user_message_path(@building, membership.user.slug) %>
+    <h3>Members</h3>
+
+    <div class="memberList content-posts" >
+    <% @memberships.each do |membership| %>
+        <div class="note member_fiche">
+            <div class="header_fiche">              
+                <div class="photo" style="<%= show_user_bg(membership.user, 'large', 'fit') %>"></div>
+                <div class="user-name"><%= link_to username_or_anonymous(membership.user), building_user_path(@building, membership.user.slug) -%></div>
+                <div class="move_in">Moved in <%= time_ago_in_words(membership.user.created_at) -%> ago</div>
+            </div>
+            <div class="member_details">
+                
+                <% if membership.user != current_user %>
+                
+                <%= send_message_user(user: membership.user, building: @building) %>
+                <% end %>
+            </div>
+        </div>
     <% end %>
-  </li>
-<% end %>
-</ul>
-</div>
+    </div>

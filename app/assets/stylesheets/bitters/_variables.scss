@@ -1,9 +1,16 @@
 // Typography
 ///////////////////////////////////////////////////////////////////////////////
-$sans-serif: $helvetica;
+@font-face {
+    font-family: 'Raleway-Bold';
+    src:url('Raleway-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} 
+
+$sans-serif: Raleway-Bold;
 $serif: $georgia;
 
-$base-font-family: $sans-serif;
+$base-font-family: Raleway-light;
 $header-font-family: $base-font-family;
 
 // Sizes
