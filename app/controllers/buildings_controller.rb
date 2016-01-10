@@ -2,7 +2,7 @@ class BuildingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_building, only: [:show, :edit, :update, :gallery,:declare_ownership,:landlord_onboarding,:invite_your_landlord]
   before_action :set_template_directory, except: [:find, :choose, :index, :new]
-  before_action :ask_about_ownership, only: [:show]
+  #before_action :ask_about_ownership, only: [:show]
   layout :get_layout
 
   def index

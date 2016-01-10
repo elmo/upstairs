@@ -152,7 +152,7 @@ module BuildingsHelper
 
  end
 
-def upstairs_home_page_icon(id: nil, klass: nil)
+def upstairs_home_page_icon()
     content_tag(:div, 'home', id: 'home' ) do
       link_to(root_url) do
         content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
@@ -160,7 +160,7 @@ def upstairs_home_page_icon(id: nil, klass: nil)
     end
 
  end
-def upstairs_home_page_icon_small(id: nil, klass: nil)
+def upstairs_home_page_icon_small()
     content_tag(:div, 'home', id: 'home' ) do
       link_to(root_url) do
         content_tag(:div, 'u', id: 'icon_10', class: 'home_icon_menu_small')
