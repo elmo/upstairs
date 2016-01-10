@@ -1,9 +1,62 @@
-<h4>Manage <%= @building.address -%> </h4>
+<h5>Residents</h5>
+<ul>
+  <li>
+    (<%= @building.tickets.open.count -%> open) <%= link_to "Tickets", building_tickets_path(@building) -%>
+  </li>
+  <li>
+  (<%= @building.messages.unread.count -%> new) <%= link_to 'Messages', building_messages_path(@building) -%>
+  </li>
+  <li>
+  (<%= @building.tenants.count -%>)
+  <%= link_to 'Residents', residents_building_path(@building) -%>
+  </li>
+  <li>
+  (<%= @building.guests.count -%>)
+   <%= link_to 'Guests', guests_building_path(@building) -%>
+  </li>
 
-<%= render partial: '/buildings/landlords/managers' %>
+  <li>
+  (3)
+   <%= link_to 'Pending Approvals', '#' -%>
+  </li>
 
-<%= render partial: '/buildings/landlords/tenants' %>
+</ul>
 
-<%= render partial: '/buildings/landlords/guests' %>
+<h5>Building</h5>
+<ul>
+  <li>
+  <%= link_to 'Units', '#' -%>
+  </li>
 
-<%= render partial: '/tickets/summary' %>
+  <li>
+  <%= link_to 'Vacancies', '#' -%>
+  </li>
+
+  <li>
+  <%= link_to 'Waiting List', '#' -%>
+  </li>
+
+
+</ul>
+
+<h5>Management</h5>
+<ul>
+  <li>
+  On call: <%= link_to 'Jorge', '#' -%>
+  </li>
+
+  <li>
+  <%= link_to 'Units', '#' -%>
+  </li>
+
+  <li>
+  (<%= @building.managers.count -%>)
+  <%= link_to 'Managers', managers_building_path(@building) -%>
+  </li>
+
+  <li>
+   (3) <%= link_to 'Approved Vendors', vendors_building_path(@building) -%>
+  </li>
+
+
+</ul>

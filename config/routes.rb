@@ -68,6 +68,11 @@ Upstairs::Application.routes.draw do
       get 'declare_ownership'
       get 'landlord_onboarding'
       get 'invite_your_landlord'
+      get 'residents'
+      get 'building'
+      get 'managers'
+      get 'guests'
+      get 'vendors'
     end
     resources :memberships, only: [:create, :destroy, :index] do
       member do
