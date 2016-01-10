@@ -10,6 +10,9 @@ class Message < ActiveRecord::Base
   before_save :set_slug
   after_create :create_notifications
 
+  scope :read, -> { where(read:  true) }
+  scope :unread, -> { where(read:  true) }
+
   def to_param
     slug
   end
