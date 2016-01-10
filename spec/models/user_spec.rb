@@ -450,12 +450,12 @@ RSpec.describe User, type: :model do
 
       it "managership" do
         @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
-	expect(@user.managerships).to eq @user.memberships
+	expect(@user.managerships.count).to eq 1
       end
 
       it "tenantship" do
         @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
-	expect(@user.tenantships).to eq @user.memberships
+	expect(@user.tenantships.count).to eq 1
       end
 
     end
@@ -478,14 +478,14 @@ RSpec.describe User, type: :model do
 
       it "managership" do
         @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
-	expect(@user.managerships).to eq @user.memberships
+	expect(@user.managerships.count).to eq 1
         @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
 	expect(@user.managerships).to be_empty
       end
 
       it "tenantship" do
         @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
-	expect(@user.tenantships).to eq @user.memberships
+	expect(@user.tenantships.count).to eq 1
         @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
 	expect(@user.tenantships).to be_empty
       end
