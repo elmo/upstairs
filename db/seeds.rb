@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-#
 categories = Category.create([{ name: 'For Sale', color: '' }, { name: 'Free', color: 'blue' }, { name: 'Help Wanted', color: 'green' }, { name: 'Jobs Offered', color: 'purple' }, { name: 'Random', color: 'orange' }])
 jerry = User.create(email: "jerry@upstairs.io", password: "Upstairs1!", password_confirmation: "Upstairs1!", phone: "5555551212", username: "jerry")
 jane = User.create(email: "jane@upstairs.io", password: "Upstairs1!", password_confirmation: "Upstairs1!", phone: "5555551213", username: "jane")
@@ -91,3 +83,7 @@ Post.all.each do |post|
     end
   end
 end
+
+=end
+
+verifier = User.create(email: "verifier@upstairs.io", password: "Upstairs1!", password_confirmation: "Upstairs1!", phone: "5555551218", username: "verfier")

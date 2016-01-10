@@ -38,6 +38,68 @@ class User < ActiveRecord::Base
     profile_building_chosen!
   end
 
+  def grant(membership, membership_type)
+     user = membership.user
+     building = membership.building
+     raise "Invalid membership type" unless Membership.membership_types.include?(membership_type)
+     case membership_type
+       when Membership::MEMBERSHIP_TYPE_LANDLORD
+         raise "Unable to grant permission" unless permitted_to_grant_landlordship?(building)
+	 user.make_landlord(building)
+       when Membership::MEMBERSHIP_TYPE_MANAGER
+         raise "Unable to grant permission" unless permitted_to_grant_managership?(building)
+	 user.make_manager(building)
+       when Membership::MEMBERSHIP_TYPE_TENANT
+         raise "Unable to grant tenant membership" unless permitted_to_grant_tenantship?(building)
+	 user.make_tenant(building)
+       when Membership::MEMBERSHIP_TYPE_GUEST
+	 user.make_guest(building)
+     end
+  end
+
+  def revoke(membership, membership_type)
+     user = membership.user
+     building = membership.building
+     raise "Invalid membership type" unless Membership.membership_types.include?(membership_type)
+     case membership_type
+       when Membership::MEMBERSHIP_TYPE_LANDLORD
+         raise "Unable to revoke permission" unless permitted_to_revoke_landlordship?(building)
+	 user.revoke_landlord(building)
+       when Membership::MEMBERSHIP_TYPE_MANAGER
+         raise "Unable to revoke permission" unless permitted_to_revoke_managership?(building)
+	 user.revoke_manager(building)
+       when Membership::MEMBERSHIP_TYPE_TENANT
+         raise "Unable to revoke tenant membership" unless permitted_to_revoke_tenantship?(building)
+	 user.revoke_tenant(building)
+       when Membership::MEMBERSHIP_TYPE_GUEST
+	 user.revoke_guest(building)
+     end
+  end
+
+  def permitted_to_grant_landlordship?(building)
+    admin?
+  end
+
+  def permitted_to_revoke_landlordship?(building)
+    admin?
+  end
+
+  def permitted_to_grant_managership?(building)
+    admin? or landlord_of?(building)
+  end
+
+  def permitted_to_revoke_managership?(building)
+    admin? or landlord_of?(building)
+  end
+
+  def permitted_to_grant_tenantship?(building)
+    admin? or landlord_of?(building)
+  end
+
+  def permitted_to_revoke_tenantship?(building)
+    admin? or landlord_of?(building)
+  end
+
   def leave(building)
     memberships.where(building_id: building.id).destroy_all
   end
@@ -66,6 +128,10 @@ class User < ActiveRecord::Base
     add_role(:verifier)
   end
 
+  def make_admin
+    add_role(:admin)
+  end
+
   def owns?(obj)
     id == obj.user_id
   end
@@ -74,9 +140,6 @@ class User < ActiveRecord::Base
     use_my_username? && username.present? ? username : 'anonymous'
   end
 
-  def manager_of?(building)
-    has_role?(:landlord, building) || has_role?(:manager, building)
-  end
 
   def primary_residence
     (memberships.any?) ? memberships.first.building : nil
@@ -106,20 +169,93 @@ class User < ActiveRecord::Base
     (buildings.any?) ? buildings.first : nil
   end
 
+  def landlord_of?(building)
+    memberships.exists?(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD)
+  end
+
+  def tenant_of?(building)
+    memberships.exists?(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+  end
+
   def make_landlord(building)
-    add_role(ROLE_LANDLORD, building)
+    memberships.where(building_id: building.id).destroy_all
+    memberships.create!(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD)
   end
 
   def revoke_landlord(building)
-    remove_role(ROLE_LANDLORD, building)
+    memberships.where(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD).destroy_all
+  end
+
+  def manager_of?(building)
+    memberships.exists?(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER)
+  end
+
+  def landlordships
+    memberships.landlord
+  end
+
+  def managerships
+    memberships.manager
+  end
+
+  def landlorship_of(building:)
+    memberships.find_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD)
+  end
+
+  def managership_of(building:)
+    memberships.find_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER)
+  end
+
+  def tenantship_of(building:)
+    memberships.find_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+  end
+
+  def guestship_of(building:)
+    memberships.find_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
+  end
+
+  def membership_of(building:)
+    memberships.find_by(building_id: building.id)
+  end
+
+  def tenantships
+    memberships.tenant
+  end
+
+  def guestships
+    memberships.guest
   end
 
   def make_manager(building)
-    add_role(ROLE_MANAGER, building)
+    memberships.find_or_create_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER)
   end
 
   def revoke_manager(building)
-    remove_role(ROLE_MANAGER, building)
+    memberships.where(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER).destroy_all
+  end
+
+  def make_tenant(building)
+    memberships.find_or_create_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+  end
+
+  def revoke_tenant(building)
+    memberships.where(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT).destroy_all
+  end
+
+  def make_guest(building)
+    memberships.find_or_create_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
+  end
+
+  def revoke_guest(building)
+    memberships.where(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST).destroy_all
+  end
+
+  def change_membership(membership_type: membership_type, building: building)
+    memberships.where(building_id: building.id).update_all(membership_type: membership_type) if Membership.membership_types.include?(membership_type)
+  end
+
+  def clear_all_memberships(building)
+    memberships.where(building_id: building.id).destroy_all
   end
 
   def apply_invitation
@@ -139,31 +275,23 @@ class User < ActiveRecord::Base
   end
 
   def landlord?
-    roles.where(resource_type: 'Building', name: ROLE_LANDLORD).exists?
-  end
-
-  def landlord_of?(building)
-    roles.where(resource_type: 'Building', name: ROLE_LANDLORD, resource_id: building.id).exists?
+    landlordships.any?
   end
 
   def manager?
-    roles.where(name: ROLE_MANAGER).exists?
+    managerships.any?
   end
 
   def owned_properties
-    roles.where(resource_type: 'Building', name: ROLE_LANDLORD).collect(&:resource).uniq
+    landlordships.collect(&:building)
   end
 
   def managed_properties
-    roles.where(resource_type: 'Building', name: ROLE_MANAGER).collect(&:resource).uniq
+    managerships.collect(&:building)
   end
 
   def to_param
     slug
-  end
-
-  def owner_or_manager_of?(building)
-     false
   end
 
   def verify_ownership(building:, verifier:, verification_request:)

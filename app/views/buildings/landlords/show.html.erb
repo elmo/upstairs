@@ -1,22 +1,9 @@
-<div class="content-posts">
-<h5><%= building_short_address(@building) -%></h5>
-<%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
-<h5>Latest Posts</h5>
-<% if @posts.any?  %>
-  <% @posts.each_with_index do |post,i| -%>
-    <%= render partial: '/posts/post', locals: { post: post, i: i } %> 
-  <% end %>
-<% end %>
+<h4>Manage <%= @building.address -%> </h4>
 
-<p><%= link_to 'see all posts', building_posts_path(@building) -%></p>
+<%= render partial: '/buildings/landlords/managers' %>
 
-<h5>Upcoming Events</h5>
+<%= render partial: '/buildings/landlords/tenants' %>
 
-<% if @events.any? %>
-  <% @events.each do |event| %>
-  <% end %>
-<% else %>
-  <p>There are no upcoming events for this building.</p>
-  <%= link_to 'create a new event' , new_building_event_path(@building ) %>
-<% end %>
-</div>
+<%= render partial: '/buildings/landlords/guests' %>
+
+<%= render partial: '/buildings/landlords/tickets' %>

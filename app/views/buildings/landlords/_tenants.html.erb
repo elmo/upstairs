@@ -1,0 +1,18 @@
+<h4>Tenants (<%= @building.tenants.count -%>)</h4>
+
+<% @building.tenants.each do |tenant| %>
+  <p><%= tenant.email-%> 
+    <%= link_to 'make manager of building', 
+	grant_building_membership_path(@building, 
+					tenant.membership_of(building: @building) ,
+					membership_type: Membership::MEMBERSHIP_TYPE_MANAGER), 
+	method: :put -%>
+     |
+    <%= link_to 'evict from building', 
+	revoke_building_membership_path(@building, 
+					tenant.membership_of(building: @building) ,
+					membership_type: Membership::MEMBERSHIP_TYPE_TENANT), 
+	method: :put -%>
+  </p>
+<% end %>
+

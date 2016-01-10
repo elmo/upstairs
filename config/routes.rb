@@ -69,7 +69,12 @@ Upstairs::Application.routes.draw do
       get 'landlord_onboarding'
       get 'invite_your_landlord'
     end
-    resources :memberships, only: [:create, :destroy, :index]
+    resources :memberships, only: [:create, :destroy, :index] do
+      member do
+        put 'grant'
+        put 'revoke'
+      end
+    end
     resources :posts do
       collection do
         get 'tips'
