@@ -1,0 +1,3 @@
+<p>Opened by <%= @ticket.user.email -%> <%= time_ago_in_words(@ticket.created_at) -%> ago
+<%= render partial: '/users/ticket_actions' -%>
+</p>

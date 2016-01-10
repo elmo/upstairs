@@ -1,22 +1,10 @@
-<div class="content-posts">
-    <h1 class="inline">Tickets</h1>
-<small><%= pluralize(@building.tickets.open.count, 'open ticket')-%></small>
-<small><%= pluralize(@building.tickets.closed.count, 'closed ticket')-%></small>
-<!-- <p><!--%= link_to 'File a New Ticket', new_building_ticket_path(@building) %></p>
-<!--%= render partial: '/buildings/no_landlord' %> -->
-<br/>
+<%= render partial: 'summary' -%>
+
 <% if @tickets.empty? %>
-<p>There are no tickets for this building.</p>
+<p>There are no tickets matching your query.</p>
 <% else %>
-<tickets>
-  <left><strong>summary</strong></left>
-  <middle><strong>severity</strong></middle>
-  <right><strong>status</strong></right>
   <% @tickets.each do |ticket| %>
-    <%= render partial: 'ticket', locals: {ticket: ticket } -%> 
+   <%= render partial: 'ticket', locals: {ticket: ticket } -%> 
+   <br />
   <% end %>
 <% end %>
-</tickets>
-</div>
-
-

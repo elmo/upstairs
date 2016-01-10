@@ -1,0 +1,17 @@
+<% if @ticket.open? %>
+  <%= link_to 'close', close_building_ticket_path(@building, @ticket), method: :put -%>
+<% else %>
+  <%= link_to 're-open', open_building_ticket_path(@building, @ticket), method: :put -%>
+<% end %>
+
+<% if @ticket.escalateable? %>
+<%= link_to 'escalate', escalate_building_ticket_path(@building,@ticket), method: :put -%>
+<% end %>
+
+<% if @ticket.deescalateable? %>
+<%= link_to 'deescalate', deescalate_building_ticket_path(@building, @ticket), method: :put -%>
+<% end %>
+
+<% if @ticket.owned_by?(current_user)%>
+<%= link_to 'edit', edit_building_ticket_path(@building, @ticket), method: :get-%>
+<% end %>
