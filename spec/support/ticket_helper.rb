@@ -3,8 +3,8 @@ def create_valid_ticket
 		   user: @user,
 		   title: 'title',
 		   body: 'body',
-		   severity: 'low',
-		   status: 'new')
+		   severity: Ticket::SEVERITY_MINOR,
+		   status: Ticket::SEVERITY_SERIOUS)
 end
 
 def load_building_with_one_ticket
@@ -23,8 +23,8 @@ def load_building_with_one_ticket
 		   user: @user,
 		   title: 'title',
 		   body: 'body',
-		   severity: 'low',
-		   status: 'new')
+		   severity: Ticket::SEVERITY_MINOR,
+		   status: Ticket::STATUS_NEW)
 end
 
 def valid_ticket_params

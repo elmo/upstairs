@@ -74,6 +74,39 @@ RSpec.describe TicketsController, type: :controller do
     end
   end
 
+  describe 'PUT attribute methods' do
+    before(:each) do
+      request.env['HTTP_REFERER'] = 'http://www.upstairs.io'
+      create_valid_ticket
+      @ticket.update_attributes(severity: Ticket::SEVERITY_SERIOUS)
+    end
+
+    it 'open' do
+      put :open, id: @ticket.to_param, building_id: @building.to_param
+      expect(response).to redirect_to 'http://www.upstairs.io'
+      expect(Ticket.last.status).to eq Ticket::STATUS_OPEN
+    end
+
+    it 'close' do
+      put :close, id: @ticket.to_param, building_id: @building.to_param
+      expect(response).to redirect_to 'http://www.upstairs.io'
+      expect(Ticket.last.status).to eq Ticket::STATUS_CLOSED
+    end
+
+    it 'escalate' do
+      put :escalate, id: @ticket.to_param, building_id: @building.to_param
+      expect(response).to redirect_to 'http://www.upstairs.io'
+      expect(Ticket.last.severity).to eq Ticket::SEVERITY_SEVERE
+    end
+
+    it 'deescalate' do
+      put :deescalate, id: @ticket.to_param, building_id: @building.to_param
+      expect(response).to redirect_to 'http://www.upstairs.io'
+      expect(Ticket.last.severity).to eq Ticket::SEVERITY_MINOR
+    end
+
+  end
+
   describe 'PUT update' do
     describe 'with valid params' do
       let(:new_attributes) { { title: 'new title', body: 'new body', severity: 'medium', status: 'closed' } }

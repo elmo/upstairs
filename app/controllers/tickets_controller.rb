@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_building
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy,:open,:close,:escalate,:deescalate]
   layout 'building'
 
   # GET /tickets
@@ -12,11 +12,13 @@ class TicketsController < ApplicationController
     scope = scope.severe if params[:severity] == Ticket::SEVERITY_SEVERE
     scope = scope.serious if params[:severity] == Ticket::SEVERITY_SERIOUS
     scope = scope.minor if params[:severity] == Ticket::SEVERITY_MINOR
-    @tickets = scope.order(severity: :desc).page(params[:page]).per(5)
+    scope = scope.where(["title like ? or body like ? ", "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
+    @tickets = scope.page(params[:page]).order(severity: :desc).page(params[:page]).per(5)
   end
 
   # GET /tickets/1
   def show
+    @paginated_comments = @ticket.comments.where(parent_comment_id: nil).page(params[:comment_page]).per(1)
   end
 
   # GET /tickets/new
@@ -26,6 +28,30 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1/edit
   def edit
+  end
+
+  # PUT /tickets/1/open
+  def open
+    @ticket.open!
+    redirect_to :back
+  end
+
+  # PUT /tickets/1/close
+  def close
+    @ticket.close!
+    redirect_to :back
+  end
+
+  # PUT /tickets/1/escalate
+  def escalate
+    @ticket.escalate!
+    redirect_to :back
+  end
+
+  # PUT /tickets/1/deescalate
+  def deescalate
+    @ticket.deescalate!
+    redirect_to :back
   end
 
   # POST /tickets
