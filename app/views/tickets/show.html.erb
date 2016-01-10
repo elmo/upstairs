@@ -1,13 +1,23 @@
-<div class="content-posts">
-<div class="ticket">
-<h4><%= @ticket.title %> <%= ticket_severity_badge(@ticket) -%> <%= ticket_status_badge(@ticket)-%> </h4>
-<%= @ticket.body %> 
-<br >
+<%= render partial: 'summary' -%>
+<h5>
+  <%= @ticket.title %> 
+  <%= ticket_severity_badge(@ticket) -%> 
+  <%= ticket_status_badge(@ticket)-%> 
+</h5>
+
+<% if current_user.landlord_of?(@building) %>
+<%= render partial: '/buildings/landlords/ticket_creator' %>
+<% elsif current_user.owner_of?(@ticket)  %>
+<%= render partial: '/users/ticket_owner' %>
+<% end %>
+
+<p class="body">
+<%= simple_format(@ticket.body)  %> 
+</p>
+
 <% @ticket.photos.each do |photo| %>
   <%= cl_image_tag(photo.path, { size: '200x300', crop: :fit }) %>
 <% end %>
-<br clear="all">
+
 <%= render partial: '/comments/comments', locals: {commentable: @ticket}  %>
 <p><%= link_to 'list all tickets' , building_tickets_path(@building) -%> </p>
-</div>
-</div>

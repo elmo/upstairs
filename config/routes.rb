@@ -81,7 +81,14 @@ Upstairs::Application.routes.draw do
       end
     end
     resources :alerts
-    resources :tickets
+    resources :tickets do
+      member do
+        put 'open'
+        put 'close'
+        put 'escalate'
+        put 'deescalate'
+      end
+    end
     resources :messages do
       member do
         put 'read'
