@@ -1,0 +1,18 @@
+<h4>Guests (<%= @building.guests.count -%>)</h4>
+<% @building.guests.each do |guest| %>
+  <p><%= guest.email-%> 
+
+  <%= link_to 'make manager', 
+	grant_building_membership_path(@building, 
+					guest.membership_of(building: @building),
+					membership_type: Membership::MEMBERSHIP_TYPE_MANAGER), 
+	method: :put -%>
+  |
+  <%= link_to 'make tenant', 
+	grant_building_membership_path(@building, 
+					guest.membership_of(building: @building),
+					membership_type: Membership::MEMBERSHIP_TYPE_TENANT), 
+	method: :put -%>
+  </p>
+
+<% end %>

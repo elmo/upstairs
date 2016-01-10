@@ -6,7 +6,13 @@ class TicketsController < ApplicationController
 
   # GET /tickets
   def index
-    @tickets = @building.tickets.page(params[:page]).per(10)
+    scope = @building.tickets
+    scope = scope.open if params[:status] == Ticket::STATUS_OPEN
+    scope = scope.closed if params[:status] == Ticket::STATUS_CLOSED
+    scope = scope.severe if params[:severity] == Ticket::SEVERITY_SEVERE
+    scope = scope.serious if params[:severity] == Ticket::SEVERITY_SERIOUS
+    scope = scope.minor if params[:severity] == Ticket::SEVERITY_MINOR
+    @tickets = scope.order(severity: :desc).page(params[:page]).per(5)
   end
 
   # GET /tickets/1
