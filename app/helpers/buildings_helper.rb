@@ -98,10 +98,10 @@ module BuildingsHelper
     end
   def alerts_icon(user:, building:)
     content_tag(:div, id: 'alert_1', class: 'menu_item') do
-      content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
         link_to(building_alerts_path(building)) do
-          content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text') +
-          (building.alerts_for_user(current_user).any? ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
+            
+            content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
+          content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text') 
       end
     end
   end
@@ -132,6 +132,13 @@ module BuildingsHelper
         content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text')
       end
     end
+  end 
+def send_message_user(user:, building:)
+      content_tag(:div,'request',id: 'request', class: 'btn') do
+      link_to new_building_user_message_path(building, user.slug) do
+          content_tag(:div, 'G', id: 'icon_5', class: 'icon_button')
+      end
+    end
   end
 
   def invite_someone_icon(user:, building:)
@@ -152,7 +159,7 @@ module BuildingsHelper
 
  end
 
-def upstairs_home_page_icon(id: nil, klass: nil)
+def upstairs_home_page_icon()
     content_tag(:div, 'home', id: 'home' ) do
       link_to(root_url) do
         content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
@@ -160,7 +167,7 @@ def upstairs_home_page_icon(id: nil, klass: nil)
     end
 
  end
-def upstairs_home_page_icon_small(id: nil, klass: nil)
+def upstairs_home_page_icon_small()
     content_tag(:div, 'home', id: 'home' ) do
       link_to(root_url) do
         content_tag(:div, 'u', id: 'icon_10', class: 'home_icon_menu_small')

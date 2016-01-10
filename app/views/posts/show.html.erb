@@ -1,21 +1,22 @@
 <div class="content-posts">
 <h1>Building Note</h1>
-<h2 class="inline"><%= @post.title -%></h2>
-<p><%= by_line(@post, with_icon: true) -%></p>
-<div class="post-body">
-  <% if @selected_photo.present? %>
-    <%= cl_image_tag(@selected_photo.path, { size: '300x500', crop: :fit }) %> 
-  <% end %>
-  <br />
-  <%= simple_format(@post.body) -%>
-  <p>
-    <% @post.photos.each_with_index do |photo,i| %>
-      <%= link_to params.merge(photo_index: i) do %>
-      <%= cl_image_tag( photo.path, { size: '60x100', crop: :fit }) %>
-    <% end %>
-  <% end %>
-  </p>
-  <br clear="both">
-  <%= render partial: '/comments/comments', locals: { commentable: @post}  %>
-</div>
+<div>
+    <h2 class="inline"><%= @post.title -%></h2>
+    <p><%= by_line(@post, with_icon: true) -%></p>
+    <div class="post-body">
+      <% if @selected_photo.present? %>
+        <%= cl_image_tag(@selected_photo.path, { size: '300x500', crop: :fit }) %> 
+      <% end %>
+      <br />
+      <%= simple_format(@post.body) -%>
+      <p>
+        <% @post.photos.each_with_index do |photo,i| %>
+          <%= link_to params.merge(photo_index: i) do %>
+          <%= cl_image_tag( photo.path, { size: '60x100', crop: :fit }) %>
+        <% end %>
+      <% end %>
+      </p>
+      <br clear="both">
+      <%= render partial: '/comments/comments', locals: { commentable: @post}  %>
+    </div>
 </div>

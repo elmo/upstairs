@@ -13,7 +13,12 @@ body {
   @include outer-container;
 }
 
-
+.icon_button{
+    font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+    font-size: 46px;
+    line-height: 34px;
+    margin-top: -14px;
+}
 centered {
  @include pad();
  @include span-columns(8);

@@ -1,3 +1,17 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.eventPage{
+    @include outer-container;  
+    margin-top: 20px;
+    padding: 10px;
+    
+}
+.right_side{
+    @include span-columns(3);
+}
+#events-calendar{
+    margin: 0px; 
+    @include span-columns(9);
+    
+}

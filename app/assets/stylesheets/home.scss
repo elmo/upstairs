@@ -4,12 +4,6 @@
 
 $medium-screen: em(640) !default;
 $large-screen: em(860) !default;
-@font-face {
-    font-family: 'Raleway-Bold';
-    src:url('Raleway-Bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-} 
 
 /* Only edit this if you know what you are doing! */
 img {  display: block; margin: 0px; border: none; padding: 0px; }

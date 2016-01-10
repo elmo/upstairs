@@ -120,12 +120,6 @@ body {
     float: left;
 }
 
-#inner-building-content {
-    height: 100%;
-    overflow: scroll;
-
-
-}
 .content-default{
     padding-left: 10px;
     padding-top: 10px;
@@ -557,8 +551,9 @@ body {
 }
 
 #news_element_icon {
-    top: 18px;
-    left: 16px;
+    position: relative;
+    margin-top: 3px;
+    margin-bottom: -15px;
     width: 11px;
     height: 11px;
 }
@@ -814,10 +809,7 @@ body {
   }
 }
 
-#news_element_icon{
-    position: relative;
-    
-}
+
 .content-Neighbor{
     padding-left: 10px;
 }
