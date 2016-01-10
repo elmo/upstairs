@@ -4,7 +4,7 @@ class Membership < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :building
   validates_presence_of :membership_type
-  validates_uniqueness_of :building, scope: :user
+  validates_uniqueness_of :building, scope: [:user,:membership_type]
   has_paper_trail
   MEMBERSHIP_TYPE_GUEST = 'Guest'
   MEMBERSHIP_TYPE_TENANT = 'Tenant'

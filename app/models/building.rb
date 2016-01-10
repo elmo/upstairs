@@ -38,10 +38,6 @@ class Building < ActiveRecord::Base
     memberships.where(user_id: user.id).exists?
   end
 
-  def guests
-    users.joins(:memberships).where( memberships: {membership_type: Membership::MEMBERSHIP_TYPE_GUEST} )
-  end
-
   def grant_guestship(user)
     memberships.find_or_create_by(user: user, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
   end
@@ -65,10 +61,6 @@ class Building < ActiveRecord::Base
     memberships.where(user: user, membership_type: Membership::MEMBERSHIP_TYPE_TENANT).destroy_all
   end
 
-  def tenants
-    users.joins(:memberships).where( memberships: {membership_type: Membership::MEMBERSHIP_TYPE_TENANT } )
-  end
-
   def has_tenant?(user)
     users.joins(:memberships)
          .where( memberships: {
@@ -85,7 +77,7 @@ class Building < ActiveRecord::Base
   end
 
   def landlord
-    users.joins(:memberships).where( memberships: {membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD} ).first
+    memberships.landlord.collect(&:user).first
   end
 
   def is_landlord?(user)
@@ -96,7 +88,15 @@ class Building < ActiveRecord::Base
   end
 
   def managers
-    users.joins(:memberships).where( memberships: {membership_type: Membership::MEMBERSHIP_TYPE_MANAGER} )
+    memberships.manager.collect(&:user)
+  end
+
+  def tenants
+    memberships.tenant.collect(&:user)
+  end
+
+  def guests
+    memberships.guest.collect(&:user)
   end
 
   def grant_managership(user)

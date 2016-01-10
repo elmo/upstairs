@@ -1,4 +1,11 @@
-<h3>Open Tickets </h3>
+<h4>Tickets (<%= @building.tickets.count -%>) </h4>
+<p>
+Open: <%= link_to @building.tickets.open.count, building_tickets_path(@building, status: Ticket::STATUS_OPEN ) %> 
+Closed: <%= link_to @building.tickets.closed.count, building_tickets_path(@building, status: Ticket::STATUS_CLOSED) %> 
+Severe: <%= link_to @building.tickets.severe.count, building_tickets_path(@building, severity: Ticket::SEVERITY_SEVERE) %> 
+Serious: <%= link_to @building.tickets.serious.count, building_tickets_path(@building, severity: Ticket::SEVERITY_SERIOUS) %> 
+Minor: <%= link_to @building.tickets.minor.count, building_tickets_path(@building, severity: Ticket::SEVERITY_MINOR) %> 
+</p>
 <% @building.tickets.open.order('created_at DESC').each do |ticket| -%>
-  <%= render partial: '/tickets/ticket', locals: {ticket: ticket } %>
+<%= render partial: '/tickets/ticket', locals: {ticket: ticket } %>
 <% end %>

@@ -227,8 +227,7 @@ class User < ActiveRecord::Base
   end
 
   def make_manager(building)
-    memberships.where(building_id: building.id).destroy_all
-    memberships.create!(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER)
+    memberships.find_or_create_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER)
   end
 
   def revoke_manager(building)
@@ -236,8 +235,7 @@ class User < ActiveRecord::Base
   end
 
   def make_tenant(building)
-    memberships.where(building_id: building.id).destroy_all
-    memberships.create!(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+    memberships.find_or_create_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
   end
 
   def revoke_tenant(building)
@@ -245,8 +243,7 @@ class User < ActiveRecord::Base
   end
 
   def make_guest(building)
-    memberships.where(building_id: building.id).destroy_all
-    memberships.create!(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
+    memberships.find_or_create_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
   end
 
   def revoke_guest(building)
@@ -255,6 +252,10 @@ class User < ActiveRecord::Base
 
   def change_membership(membership_type: membership_type, building: building)
     memberships.where(building_id: building.id).update_all(membership_type: membership_type) if Membership.membership_types.include?(membership_type)
+  end
+
+  def clear_all_memberships(building)
+    memberships.where(building_id: building.id).destroy_all
   end
 
   def apply_invitation
