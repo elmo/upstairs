@@ -118,7 +118,10 @@ class BuildingsController < ApplicationController
   end
 
   def set_template_directory
+    @subdirectory = 'guests'
     @subdirectory = 'landlords' if current_user.landlord_of?(@building)
+    @subdirectory = 'managers' if current_user.manager_of?(@building)
+    @subdirectory = 'tenants' if current_user.tenant_of?(@building)
   end
 
   def ask_about_ownership
