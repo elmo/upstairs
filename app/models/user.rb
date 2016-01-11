@@ -169,10 +169,6 @@ class User < ActiveRecord::Base
     (buildings.any?) ? buildings.first : nil
   end
 
-  def landlord_of?(building)
-    memberships.exists?(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD)
-  end
-
   def tenant_of?(building)
     memberships.exists?(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
   end
@@ -276,6 +272,10 @@ class User < ActiveRecord::Base
 
   def landlord?
     landlordships.any?
+  end
+
+  def landlord_of?(building)
+    memberships.exists?(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD)
   end
 
   def manager?

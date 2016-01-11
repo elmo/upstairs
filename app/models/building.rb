@@ -11,6 +11,7 @@ class Building < ActiveRecord::Base
   has_many :users, through: :memberships
   has_many :verifications, dependent: :destroy
   has_many :verification_requests, dependent: :destroy
+  has_many :messages, dependent: :destroy
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   belongs_to :actionable, polymorphic: true
   validates_presence_of :address
@@ -31,7 +32,7 @@ class Building < ActiveRecord::Base
   scope :verified, -> { joins(:verifications) }
 
   def membership(user)
-    memberships.where(user_id: user.id).first
+    memberships.where(user_id: user.id).last
   end
 
   def is_member?(user)

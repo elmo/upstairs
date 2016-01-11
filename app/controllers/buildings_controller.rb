@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_building, only: [:show, :edit, :update, :gallery,:declare_ownership,:landlord_onboarding,:invite_your_landlord]
+  before_action :set_building, only: [:show, :edit, :update, :gallery,:declare_ownership,:landlord_onboarding,:invite_your_landlord, :residents, :building, :managers, :guests]
   before_action :set_template_directory, except: [:find, :choose, :index, :new]
   #before_action :ask_about_ownership, only: [:show]
   layout :get_layout
@@ -10,11 +10,27 @@ class BuildingsController < ApplicationController
 
   # GET /buildings/1
   def show
-    @users = @building.users
-    @posts = @building.posts.page(params[:page]).per(1).order('created_at desc')
-    @events = @building.events.page(params[:page]).per(1).order('starts asc')
-    #@notifications = @building.notifications.order('created_at desc').limit(5)
     render template: "/buildings/#{@subdirectory}/show"
+  end
+
+  def residents
+    render template: "/buildings/#{@subdirectory}/residents"
+  end
+
+  def building
+    render template: "/buildings/#{@subdirectory}/building"
+  end
+
+  def managers
+    render template: "/buildings/#{@subdirectory}/managers"
+  end
+
+  def guests
+    render template: "/buildings/#{@subdirectory}/guests"
+  end
+
+  def vendors
+    render template: "/buildings/#{@subdirectory}/vendors"
   end
 
   def choose
@@ -102,7 +118,10 @@ class BuildingsController < ApplicationController
   end
 
   def set_template_directory
-    @subdirectory = @building.membership(current_user).membership_type.downcase.pluralize
+    @subdirectory = 'guests'
+    @subdirectory = 'landlords' if current_user.landlord_of?(@building)
+    @subdirectory = 'managers' if current_user.manager_of?(@building)
+    @subdirectory = 'tenants' if current_user.tenant_of?(@building)
   end
 
   def ask_about_ownership
