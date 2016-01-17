@@ -1,0 +1,8 @@
+<h1>Unit detail </h1>
+<p>
+  <strong>Name:</strong>
+  <%= @unit.name %>
+</p>
+
+<%= link_to 'Edit', edit_building_unit_path(@building, @unit) %> |
+<%= link_to 'Back', building_units_path(@building) %>

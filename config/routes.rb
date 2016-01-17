@@ -1,4 +1,5 @@
 Upstairs::Application.routes.draw do
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => '/attachinary' unless Rails.env.test?
 
@@ -112,6 +113,10 @@ Upstairs::Application.routes.draw do
 
     resources :users, only: [:show, :welcome] do
       resources :messages
+    end
+
+    resources :units do
+      resources :comments
     end
 
     resources :photos
