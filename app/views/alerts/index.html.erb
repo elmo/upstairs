@@ -4,25 +4,23 @@
 <% if @alerts.any? %>
     <div class="alertList">
     <% @alerts.each do |alert| %>
-      <div class="note alert_fiche">
-        <!--%= link_to alert.message, building_alert_path(@building, alert) %><br /-->
-          <div class="header_fiche">    
-              <div class="colorAlert"></div>
-                <div class="photo" style="<%= show_user_bg(alert.user, 'large', 'fit') %>"></div>
-                <div class="user-name"><%= link_to username_or_anonymous(alert.user), building_user_path(@building, alert.user.slug) -%></div>
-                
-            </div>
-            <div class="post-text" >
-              <%= truncate(alert.message, length: 25, omission: '... (continued)' ) -%> 
-                <% if alert.owned_by?(current_user) %>
-                    <%= link_to 'edit', edit_building_alert_path(@building, alert) -%>
-                  <% end %>
-             </div>
-          
-          
-       </div>
-    </div>
-    <% end %>
+         <div class="note alert_fiche">     
+                <div class="colorAlert"></div>
+                <div class="alert-text" >
+                    <div class="text-alert">
+                        <%= truncate(alert.message, length: 50, omission: '... (continued)' ) -%> 
+                        <% if alert.owned_by?(current_user) %>
+                            <%= link_to 'edit', edit_building_alert_path(@building, alert) -%>
+                        <% end %>
+                    </div>
+                    <div class="alert_details">
+                        <div class="user-name">
+                        <div class="photo" style="<%= show_user_bg(alert.user, 'small', 'fit') %>"></div><%= link_to username_or_anonymous(alert.user), building_user_path(@building, alert.user.slug) -%></div>
+                     </div>
+                 </div>
+          </div>
+        <% end %>  
+    </div>     
 <%= paginate(@alerts) -%>
 <% else %>
   <% if params[:searchTextField].present? %>

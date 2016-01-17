@@ -5,7 +5,7 @@
     <% @memberships.each do |membership| %>
         <div class="note member_fiche">
             <div class="header_fiche">              
-                <div class="photo" style="<%= show_user_bg(membership.user, 'large', 'fit') %>"></div>
+                <div class="photo" style="<%= show_user_bg(membership.user, 'medium', 'fit') %>"></div>
                 <div class="member_details">
                     <div class="user-name"><%= link_to username_or_anonymous(membership.user), building_user_path(@building, membership.user.slug) -%></div>
                     <div class="move_in">Moved in <%= time_ago_in_words(membership.user.created_at) -%> ago</div>
