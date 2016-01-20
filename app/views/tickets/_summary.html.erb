@@ -1,11 +1,19 @@
-<h5>Tickets (<%= @building.tickets.count -%>) </h5>
-<p>
-Open: <%= link_to @building.tickets.open.count, building_tickets_path(@building, status: Ticket::STATUS_OPEN ) %> 
-Closed: <%= link_to @building.tickets.closed.count, building_tickets_path(@building, status: Ticket::STATUS_CLOSED) %> 
-Severe: <%= link_to @building.tickets.severe.count, building_tickets_path(@building, severity: Ticket::SEVERITY_SEVERE) %> 
-Serious: <%= link_to @building.tickets.serious.count, building_tickets_path(@building, severity: Ticket::SEVERITY_SERIOUS) %> 
-Minor: <%= link_to @building.tickets.minor.count, building_tickets_path(@building, severity: Ticket::SEVERITY_MINOR) %> 
-</p>
-<p>
-<%= link_to 'file a new ticket', new_building_ticket_path(@building) -%>
-</p>
+<h3>Tickets (<%= @building.tickets.count -%>) </h3>
+
+<div class="content-posts">
+    <div class="tickets-header">
+        <p>
+        Open: <%= link_to @building.tickets.open.count, building_tickets_path(@building, status: Ticket::STATUS_OPEN ) %> 
+        Closed: <%= link_to @building.tickets.closed.count, building_tickets_path(@building, status: Ticket::STATUS_CLOSED) %> 
+        Severe: <%= link_to @building.tickets.severe.count, building_tickets_path(@building, severity: Ticket::SEVERITY_SEVERE) %> 
+        Serious: <%= link_to @building.tickets.serious.count, building_tickets_path(@building, severity: Ticket::SEVERITY_SERIOUS) %> 
+        Minor: <%= link_to @building.tickets.minor.count, building_tickets_path(@building, severity: Ticket::SEVERITY_MINOR) %> 
+        </p>
+    </div>
+    <div class="alertList">
+        
+        <p>
+        <%= link_to 'file a new ticket', new_building_ticket_path(@building) -%>
+        </p>
+    </div>
+</div>

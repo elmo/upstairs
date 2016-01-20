@@ -1,6 +1,4 @@
-<div id="header"  >
-    <div id="rectangle_8"  ></div>
-    
+<div id="header" class="header" >
     <nav id="nav" role="navigation" class="nav filters">
         <a href="#nav" title="Show navigation">Show navigation</a>
         <a href="#" title="Hide navigation">Hide navigation</a>
@@ -27,15 +25,16 @@
             </li>
         </ul>
     </nav>
-    <div id="rectangle_2"  ></div>
     
     <div id="searchC"   >
+        <div id="rectangle_2"  ></div>
+        <%= text_field_tag :searchTextField %>
         <%= form_tag building_posts_path(@building), method: :get  do %>
         <%= submit_tag 's', id: 'search',  class:'icon' %>
-        <%= text_field_tag :searchTextField %>
         <% end %>
+        <div id="rectangle_2"  ></div>
     </div>
-    <div id="rectangle_2"  ></div>
+    <div class="alert_list"><%= recent_alerts -%></div>
 </div>
 <%= form_tag building_posts_url(@building), method: :get do %>
 

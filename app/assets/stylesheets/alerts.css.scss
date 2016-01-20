@@ -1,4 +1,16 @@
 $radius: 3px;
+
+.alert{
+    display: inline-flex;
+    width: 30px;
+    height: 50px;   
+}
+.alert_list{
+    display: flex;
+    overflow: hidden;
+    height: 60px;  
+    padding: 10px
+}
 div.member {
   border: 1px solid black;
   float: left;
