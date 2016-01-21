@@ -1,5 +1,5 @@
-<h1>Editing Unit</h1>
+<h1>Update Information for <%= link_to @unit.name, building_unit_path(@building, @unit) %></h1>
 
 <%= render 'form' %>
-<%= link_to 'Show', building_unit_path(@building, @unit) %> |
-<%= link_to 'Back', building_units_path(@building) %>
+
+<%= link_to 'list all building units', building_units_path(@building) %>

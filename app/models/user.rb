@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   has_many :verifications, dependent: :destroy
   belongs_to :invitation
+  belongs_to :tenancy
   belongs_to :sender, foreign_key: 'sender_id', class_name: 'User'
   after_create :apply_invitation
   before_save :set_slug

@@ -64,6 +64,10 @@ Upstairs::Application.routes.draw do
     resources :verifications, only: [:new, :create]
   end
 
+  resources :units  do
+    resources :tenancies
+  end
+
   resources :buildings do
     member do
       get 'declare_ownership'

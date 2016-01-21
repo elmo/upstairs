@@ -12,6 +12,8 @@ RSpec.describe Building, type: :model do
   it { should have_many(:users) }
   it { should have_many(:tickets) }
   it { should have_many(:verifications) }
+  it { should have_many(:units) }
+  it { should have_many(:tenancies) }
   it { should validate_presence_of(:address) }
   it { should validate_presence_of(:latitude) }
   it { should validate_presence_of(:longitude) }
@@ -278,6 +280,26 @@ RSpec.describe Building, type: :model do
     it "returns notification associated with alert" do
       expect( @building.alert_notification_for_user(user: @user, alert: @alert)).to eq Notification.last
     end
+  end
+
+  describe "tenancies" do
+    before(:each) do
+      load_valid_building_with_unit
+      load_user
+    end
+
+    it "creating tenancy, increases tenancies for building" do
+      Tenancy.create(user: @user, unit: @unit, building: @building)
+      expect(@building.tenancies.count).to eq 1
+      expect(@building.tenancies.first.user).to eq @user
+    end
+
+    it "destroying tenancy, decreases tenancies for building" do
+      @tenancy = Tenancy.create(user: @user, unit: @unit, building: @building)
+      expect { @tenancy.destroy}.to change(Tenancy, :count).by(-1)
+      expect(@building.tenancies.count).to eq 0
+    end
+
   end
 
 end

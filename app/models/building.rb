@@ -13,6 +13,7 @@ class Building < ActiveRecord::Base
   has_many :verification_requests, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :units, dependent: :destroy
+  has_many :tenancies, through: :units
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   belongs_to :actionable, polymorphic: true
   validates_presence_of :address

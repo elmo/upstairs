@@ -5,22 +5,29 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th colspan="1">Unit</th>
     </tr>
   </thead>
 
   <tbody>
     <% @units.each do |unit| %>
       <tr>
-        <td><%= unit.name %></td>
-        <td><%= unit.user_id %></td>
-        <td><%= link_to 'details', building_unit_path(@building,unit) %></td>
-        <td><%= link_to 'Edit', edit_building_unit_path(@building, unit) %></td>
-	<td><%= link_to 'Destroy', building_unit_path(@building,unit), 
+        <td><%= link_to unit.name, building_unit_path(@building,unit) %>
+           <small>
+            <%= link_to 'edit unit information', edit_building_unit_path(@building, unit) %>
+	    <% if unit.tenancy.blank? %>
+	    <%= link_to 'delete unit', building_unit_path(@building,unit), 
 		  method: :delete, 
 		  data: { confirm: 'Are you sure?' } %>
+	  <% end %>
+           </small>
+	</td>
+	<td>
+          <% if unit.tenancy.present? %>
+           <%= unit.tenancy.user.email -%> 
+          <% else %>
+	     <%= link_to 'assign to tenant', new_unit_tenancy_path(unit) %>
+	  <% end %>
 	</td>
       </tr>
     <% end %>
@@ -30,6 +37,9 @@
 <%= paginate(@units) %>
 
 <% end %>
-<br>
 
+<br />
+
+<p>
 <%= link_to 'Enter a New Unit', new_building_unit_path(@building) %>
+</p>
