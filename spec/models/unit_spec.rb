@@ -29,24 +29,24 @@ RSpec.describe Unit, type: :model do
     end
 
     it "creates tenancy when none exists" do
-      expect {@unit.create_for_tenancy_for(user: @user) }.to change(Tenancy, :count).by(1)
+      expect {@unit.create_tenancy_for(user: @user) }.to change(Tenancy, :count).by(1)
     end
 
     it "creates tenancy when none exists" do
-      expect(@unit.create_for_tenancy_for(user: @user)).to be_truthy
+      expect(@unit.create_tenancy_for(user: @user)).to be_truthy
     end
 
     it "doesn't created another tenancy when one exists" do
-      @unit.create_for_tenancy_for(user: @user)
+      @unit.create_tenancy_for(user: @user)
       @unit.reload
-      expect {@unit.create_for_tenancy_for(user: @user) }.to change(Tenancy, :count).by(0)
+      expect {@unit.create_tenancy_for(user: @user) }.to change(Tenancy, :count).by(0)
     end
 
     it "destroys existing, creates a new tenancy if the users are different" do
-      @unit.create_for_tenancy_for(user: @user)
+      @unit.create_tenancy_for(user: @user)
       @unit.reload
       first_tenancy = Tenancy.last
-      expect {@unit.create_for_tenancy_for(user: @user2) }.to change(Tenancy, :count).by(0)
+      expect {@unit.create_tenancy_for(user: @user2) }.to change(Tenancy, :count).by(0)
       last_tenancy = Tenancy.last
       expect(first_tenancy.id).not_to eq last_tenancy.id
     end

@@ -48,6 +48,45 @@ RSpec.describe Tenancy, type: :model do
     it "is associated with the building" do
       expect(@tenancy.building).to eq(@building)
     end
+  end
 
+
+  describe "update_membership" do
+    before(:each) do
+     load_user
+    end
+
+    it "calls update membership" do
+      Tenancy.any_instance.should_receive(:update_membership).exactly(1).times
+      Tenancy.create!(user: @user, unit: @unit, building: @building)
+    end
+
+    it "creates a new membership record,if none exists" do
+      expect { Tenancy.create!(user: @user, unit: @unit, building: @building) }.to change(Membership, :count).by(1)
+      expect(Membership.last.membership_type).to eq Membership::MEMBERSHIP_TYPE_TENANT
+    end
+
+    describe "when a guest membership exits" do
+      before(:each) do
+        @user.join(@building)
+      end
+
+      it "updates and existing membership" do
+        expect(Membership.count).to eq 1
+        expect(Membership.first.membership_type).to eq Membership::MEMBERSHIP_TYPE_GUEST
+      end
+
+      it "creating tenancy, changes associated membership" do
+        expect(Membership.first.membership_type).to eq Membership::MEMBERSHIP_TYPE_GUEST
+        Tenancy.create!(user: @user, unit: @unit, building: @building)
+	expect(Membership.last.membership_type).to eq Membership::MEMBERSHIP_TYPE_TENANT
+      end
+
+      it "doesn't create an new membership" do
+        expect{
+          Tenancy.create!(user: @user, unit: @unit, building: @building)
+	}.to change(Membership, :count).by(0)
+      end
+    end
   end
 end

@@ -21,4 +21,8 @@ class Membership < ActiveRecord::Base
    [MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT, MEMBERSHIP_TYPE_LANDLORD, MEMBERSHIP_TYPE_MANAGER]
   end
 
+  def promote_to_tenant_of!(building:)
+    update_attributes(membership_type: MEMBERSHIP_TYPE_TENANT, building_id: building.id)
+  end
+
 end

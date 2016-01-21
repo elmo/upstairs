@@ -5,7 +5,7 @@ class Unit < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, scope: :building_id
 
-  def create_for_tenancy_for(user:)
+  def create_tenancy_for(user:)
      if self.tenancy.present?
        return true if self.tenancy.user.id == user.id
        self.tenancy.destroy
