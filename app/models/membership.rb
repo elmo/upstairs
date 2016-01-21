@@ -15,9 +15,14 @@ class Membership < ActiveRecord::Base
   scope :tenant, -> { where(membership_type: MEMBERSHIP_TYPE_TENANT ) }
   scope :landlord, -> { where(membership_type: MEMBERSHIP_TYPE_LANDLORD ) }
   scope :manager, -> { where(membership_type: MEMBERSHIP_TYPE_MANAGER) }
+  scope :rentable, -> { where(["membership_type in (?) ", [MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT]]) }
 
   def self.membership_types
    [MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT, MEMBERSHIP_TYPE_LANDLORD, MEMBERSHIP_TYPE_MANAGER]
+  end
+
+  def promote_to_tenant_of!(building:)
+    update_attributes(membership_type: MEMBERSHIP_TYPE_TENANT, building_id: building.id)
   end
 
 end

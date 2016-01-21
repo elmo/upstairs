@@ -15,3 +15,13 @@ desc "setup building"
   end
 
 end
+
+desc "setup building"
+task :setup_units => :environment do
+  Membership.tenant.each_with_index do |membership, i|
+    building = membership.building  
+    user = membership.user
+    unit = building.units.create(name: "unit #{i}")
+    Tenancy.create!(user: membership.user, building: building, unit: unit)
+  end
+end

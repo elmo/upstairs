@@ -1,0 +1,5 @@
+<h1>Update Information for <%= link_to @unit.name, building_unit_path(@building, @unit) %></h1>
+
+<%= render 'form' %>
+
+<%= link_to 'list all building units', building_units_path(@building) %>

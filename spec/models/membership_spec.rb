@@ -58,4 +58,18 @@ RSpec.describe Membership, type: :model do
       expect(@building.users.first).to eq @user
     end
   end
+
+  describe "promote_to_tenant_of!" do
+    before(:each) do
+      load_valid_building
+      load_user
+      @membership = Membership.create(user: @user, building: @building, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
+    end
+
+    it "updates membership_type" do
+      expect { @membership.promote_to_tenant_of!(building: @building) }.to change(@membership, :membership_type).from(Membership::MEMBERSHIP_TYPE_GUEST).to(Membership::MEMBERSHIP_TYPE_TENANT)
+    end
+
+  end
+
 end

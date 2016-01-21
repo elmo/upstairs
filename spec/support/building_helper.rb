@@ -15,6 +15,11 @@ def load_unverified_builiding
   load_valid_building
 end
 
+def load_valid_building_with_unit
+  load_valid_building
+  @unit = create(:unit, building: @building)
+end
+
 def load_verified_building
   @landlord = create(:landlord)
   @landlord.make_landlord(@building)
