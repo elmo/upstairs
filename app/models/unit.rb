@@ -8,6 +8,9 @@ class Unit < ActiveRecord::Base
   scope :occupied, -> { joins(:tenancy) }
   scope :vacant, -> { where(user_id: nil) }
 
+  STATUS_OCCUPIED = 'occupied'
+  STATUS_VACANT = 'vacant'
+
   def create_tenancy_for(user:)
      if self.tenancy.present?
        return true if self.tenancy.user.id == user.id
