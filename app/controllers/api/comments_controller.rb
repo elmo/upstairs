@@ -18,5 +18,4 @@ class Api::CommentsController < ApplicationController
     @commentable = Ticket.find(params[:ticket_id]) if params[:ticket_id]
     @commentable = Event.find(params[:event_id]) if params[:event_id]
   end
-
 end

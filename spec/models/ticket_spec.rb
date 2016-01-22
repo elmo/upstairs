@@ -17,33 +17,32 @@ RSpec.describe Ticket, type: :model do
       expect(@ticket).to respond_to(:photos)
     end
 
-    describe "bang methods" do
+    describe 'bang methods' do
       before(:each) do
         Ticket.any_instance.stub(:create_notifications).and_return(false)
         load_user
         create_valid_ticket
       end
 
-      it "open!" do
+      it 'open!' do
         @ticket.update_attributes(status: Ticket::STATUS_CLOSED)
-        expect{ @ticket.open! }.to change(@ticket, :status).from(Ticket::STATUS_CLOSED).to(Ticket::STATUS_OPEN)
+        expect { @ticket.open! }.to change(@ticket, :status).from(Ticket::STATUS_CLOSED).to(Ticket::STATUS_OPEN)
       end
 
-      it "close!" do
+      it 'close!' do
         @ticket.update_attributes(status: Ticket::STATUS_OPEN)
-        expect{ @ticket.close! }.to change(@ticket, :status).from(Ticket::STATUS_OPEN).to(Ticket::STATUS_CLOSED)
+        expect { @ticket.close! }.to change(@ticket, :status).from(Ticket::STATUS_OPEN).to(Ticket::STATUS_CLOSED)
       end
 
-      it "escalate!" do
+      it 'escalate!' do
         @ticket.update_attributes(severity: Ticket::SEVERITY_SERIOUS)
-        expect{ @ticket.escalate! }.to change(@ticket, :severity).from(Ticket::SEVERITY_SERIOUS).to(Ticket::SEVERITY_SEVERE)
+        expect { @ticket.escalate! }.to change(@ticket, :severity).from(Ticket::SEVERITY_SERIOUS).to(Ticket::SEVERITY_SEVERE)
       end
 
-      it "deescalate!" do
+      it 'deescalate!' do
         @ticket.update_attributes(severity: Ticket::SEVERITY_SERIOUS)
-        expect{ @ticket.deescalate! }.to change(@ticket, :severity).from(Ticket::SEVERITY_SERIOUS).to(Ticket::SEVERITY_MINOR)
+        expect { @ticket.deescalate! }.to change(@ticket, :severity).from(Ticket::SEVERITY_SERIOUS).to(Ticket::SEVERITY_MINOR)
       end
-
     end
 
     describe 'postable'  do

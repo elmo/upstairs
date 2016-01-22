@@ -71,17 +71,17 @@ class UnitsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_unit
-      @unit = @building.units.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_unit
+    @unit = @building.units.find(params[:id])
+  end
 
-    def set_building
-      @building = Building.friendly.find(params[:building_id])
-    end
+  def set_building
+    @building = Building.friendly.find(params[:building_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def unit_params
-      params.require(:unit).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def unit_params
+    params.require(:unit).permit(:name)
+  end
 end

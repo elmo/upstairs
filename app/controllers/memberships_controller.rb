@@ -1,6 +1,6 @@
 class MembershipsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_building, only: [:create, :destroy, :index,:grant,:revoke]
+  before_action :set_building, only: [:create, :destroy, :index, :grant, :revoke]
   before_action :set_membership, only: [:grant, :revoke]
   layout 'building'
 

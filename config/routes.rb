@@ -1,5 +1,4 @@
 Upstairs::Application.routes.draw do
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => '/attachinary' unless Rails.env.test?
 
@@ -32,22 +31,22 @@ Upstairs::Application.routes.draw do
     end
     resources :buildings, only: [:show] do
       resources :posts do
-         collection do
-           get 'tips'
-         end
-         resources :comments
+        collection do
+          get 'tips'
+        end
+        resources :comments
       end
       resources :events do
-         collection do
-           get 'calendar'
-         end
-         resources :comments
+        collection do
+          get 'calendar'
+        end
+        resources :comments
       end
       resources :alerts do
-         resources :comments
+        resources :comments
       end
       resources :tickets do
-         resources :comments
+        resources :comments
       end
     end
   end

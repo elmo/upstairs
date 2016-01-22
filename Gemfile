@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.1.6"
+ruby '2.1.6'
 gem 'rails', '4.2'
 
 gem 'active_model_serializers'
@@ -57,6 +57,5 @@ group :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
 end
-
 
 gem 'jquery-rails'

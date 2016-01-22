@@ -7,19 +7,18 @@ RSpec.describe Membership, type: :model do
   it { should validate_presence_of(:building) }
   it { should validate_presence_of(:membership_type) }
 
-
-  describe "constants" do
-   it "membership_types" do
-     expect(Membership::MEMBERSHIP_TYPE_GUEST).to eq 'Guest'
-     expect(Membership::MEMBERSHIP_TYPE_TENANT).to eq 'Tenant'
-     expect(Membership::MEMBERSHIP_TYPE_LANDLORD).to eq 'Landlord'
-     expect(Membership::MEMBERSHIP_TYPE_MANAGER).to eq 'Manager'
+  describe 'constants' do
+    it 'membership_types' do
+      expect(Membership::MEMBERSHIP_TYPE_GUEST).to eq 'Guest'
+      expect(Membership::MEMBERSHIP_TYPE_TENANT).to eq 'Tenant'
+      expect(Membership::MEMBERSHIP_TYPE_LANDLORD).to eq 'Landlord'
+      expect(Membership::MEMBERSHIP_TYPE_MANAGER).to eq 'Manager'
     end
   end
 
-  describe "membership_types" do
+  describe 'membership_types' do
     it "are only 'Guest', 'Tenant', 'Landlord', 'Manager' " do
-      expect(Membership.membership_types).to eq  ["Guest", "Tenant", "Landlord", "Manager"]
+      expect(Membership.membership_types).to eq %w(Guest Tenant Landlord Manager)
     end
   end
 
@@ -59,17 +58,15 @@ RSpec.describe Membership, type: :model do
     end
   end
 
-  describe "promote_to_tenant_of!" do
+  describe 'promote_to_tenant_of!' do
     before(:each) do
       load_valid_building
       load_user
       @membership = Membership.create(user: @user, building: @building, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
     end
 
-    it "updates membership_type" do
+    it 'updates membership_type' do
       expect { @membership.promote_to_tenant_of!(building: @building) }.to change(@membership, :membership_type).from(Membership::MEMBERSHIP_TYPE_GUEST).to(Membership::MEMBERSHIP_TYPE_TENANT)
     end
-
   end
-
 end

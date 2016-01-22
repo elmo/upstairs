@@ -7,7 +7,7 @@ RSpec.describe TicketsController, type: :controller do
     load_valid_building
     load_user
     sign_in(@user)
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('bandit', 'smokey')
   end
 
   describe 'GET index' do
@@ -104,7 +104,6 @@ RSpec.describe TicketsController, type: :controller do
       expect(response).to redirect_to 'http://www.upstairs.io'
       expect(Ticket.last.severity).to eq Ticket::SEVERITY_MINOR
     end
-
   end
 
   describe 'PUT update' do

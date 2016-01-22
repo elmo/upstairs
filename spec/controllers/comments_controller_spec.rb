@@ -33,7 +33,7 @@ RSpec.describe CommentsController, type: :controller do
     @commentable = create(:post, user: @user, postable: @building)
     @post = create(:post, user: @user, postable: @building)
     sign_in(@user)
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('bandit', 'smokey')
   end
 
   describe 'GET index' do

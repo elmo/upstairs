@@ -29,7 +29,7 @@ class TenanciesController < ApplicationController
     @user = User.find(tenancy_params[:user_id])
     respond_to do |format|
       if @unit.create_tenancy_for(user: @user)
-        format.html { redirect_to building_units_path(@building), notice: 'Tenancy was successfully saved.'}
+        format.html { redirect_to building_units_path(@building), notice: 'Tenancy was successfully saved.' }
       else
         format.html { render :new }
       end
@@ -59,19 +59,19 @@ class TenanciesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tenancy
-      @tenancy = @building.tenancies.find(params[:id])
-    end
 
-    def set_unit_and_building
-      @unit = Unit.find(params[:unit_id])
-      @building = @unit.building
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tenancy
+    @tenancy = @building.tenancies.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tenancy_params
-      params[:tenancy].permit(:user_id)
-    end
+  def set_unit_and_building
+    @unit = Unit.find(params[:unit_id])
+    @building = @unit.building
+  end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def tenancy_params
+    params[:tenancy].permit(:user_id)
+  end
 end

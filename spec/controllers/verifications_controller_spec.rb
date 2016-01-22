@@ -5,7 +5,7 @@ RSpec.describe VerificationsController, type: :controller do
     Building.any_instance.stub(:geocode).and_return(true)
     Building.any_instance.stub(:reverse_geocode).and_return(true)
     request.env['HTTP_REFERER'] = 'http://www.upstairs.io'
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('bandit', 'smokey')
     load_valid_building
     load_verifier
     load_user

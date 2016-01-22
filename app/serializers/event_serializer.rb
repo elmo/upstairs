@@ -9,5 +9,4 @@ class EventSerializer < ActiveModel::Serializer
   def building
     object.building
   end
-
 end

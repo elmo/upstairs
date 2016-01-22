@@ -11,7 +11,7 @@ class PostsController < ApplicationController
       @category = Category.friendly.find(params[:c])
       scope = scope.where(category_id: @category.id)
     end
-    scope = scope.where(["title like ? or body like ? ", "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
+    scope = scope.where(['title like ? or body like ? ', "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
     scope.page(params[:page])
     @posts = scope.page(params[:page]).order('created_at desc').per(10)
     respond_to do |format|

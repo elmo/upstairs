@@ -3,5 +3,5 @@ def create_valid_event
 end
 
 def valid_event_params
-  { title: 'title', body: 'body' , starts: (Date.today + 2.days).to_s }
+  { title: 'title', body: 'body', starts: (Date.today + 2.days).to_s }
 end

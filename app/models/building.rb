@@ -47,9 +47,9 @@ class Building < ActiveRecord::Base
 
   def is_guest?(user)
     users.joins(:memberships)
-         .where( memberships: {
-		   membership_type: Membership::MEMBERSHIP_TYPE_GUEST,
-		   user_id: user.id } ).exists?
+      .where(memberships: {
+               membership_type: Membership::MEMBERSHIP_TYPE_GUEST,
+               user_id: user.id }).exists?
   end
 
   def revoke_guestship(user)
@@ -66,9 +66,9 @@ class Building < ActiveRecord::Base
 
   def has_tenant?(user)
     users.joins(:memberships)
-         .where( memberships: {
-		  membership_type: Membership::MEMBERSHIP_TYPE_TENANT,
-		  user_id: user.id } ).exists?
+      .where(memberships: {
+               membership_type: Membership::MEMBERSHIP_TYPE_TENANT,
+               user_id: user.id }).exists?
   end
 
   def grant_landlordship(user)
@@ -85,9 +85,9 @@ class Building < ActiveRecord::Base
 
   def is_landlord?(user)
     users.joins(:memberships)
-         .where( memberships: {
-		   membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD,
-		   user_id: user.id } ).exists?
+      .where(memberships: {
+               membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD,
+               user_id: user.id }).exists?
   end
 
   def managers
@@ -112,14 +112,14 @@ class Building < ActiveRecord::Base
 
   def is_manager?(user)
     users.joins(:memberships)
-         .where( memberships: {
-		   membership_type: Membership::MEMBERSHIP_TYPE_MANAGER,
-		   user_id: user.id } ).exists?
+      .where(memberships: {
+               membership_type: Membership::MEMBERSHIP_TYPE_MANAGER,
+               user_id: user.id }).exists?
   end
 
   def promote_to_tenant(user)
     memberships.where(user_id: user.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
-               .update_all(membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+      .update_all(membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
   end
 
   def public_name

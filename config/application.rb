@@ -60,17 +60,17 @@ module Upstairs
 
     # Enable the asset pipeline
     config.assets.initialize_on_precompile = false
-    #config.assets.enabled = true
+    # config.assets.enabled = true
     config.serve_static_files = false
     config.assets.digest = true
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.assets.precompile += [
       'homebundle.css',
       'userbundle.css'
-     ]
-     config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+    ]
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
     # Version of your assets, change this if you want to expire all your assets
-    #config.assets.version = '1.0'
+    # config.assets.version = '1.0'
     config.quite_assets = true
   end
 end
