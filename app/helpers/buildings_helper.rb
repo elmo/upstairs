@@ -99,9 +99,9 @@ module BuildingsHelper
   def alerts_icon(user:, building:)
     content_tag(:div, id: 'alert_1', class: 'menu_item') do
         link_to(building_alerts_path(building)) do
-            
+
             content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
-          content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text') 
+          content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text')
       end
     end
   end
@@ -132,7 +132,7 @@ module BuildingsHelper
         content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text')
       end
     end
-  end 
+  end
 def send_message_user(user:, building:)
       content_tag(:div,'request',id: 'request', class: 'btn') do
       link_to new_building_user_message_path(building, user.slug) do
@@ -160,13 +160,19 @@ def send_message_user(user:, building:)
  end
 
 def upstairs_home_page_icon()
-    content_tag(:div, 'home', id: 'home' ) do
+  content_tag(:div, 'home', id: 'home' ) do
+    if @building.present?
+      link_to building_url(@building) do
+        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
+      end
+    else
       link_to(root_url) do
         content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
       end
     end
+  end
+end
 
- end
 def upstairs_home_page_icon_small()
     content_tag(:div, 'home', id: 'home' ) do
       link_to(root_url) do
