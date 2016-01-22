@@ -10,8 +10,14 @@ class Message < ActiveRecord::Base
   before_save :set_slug
   after_create :create_notifications
 
+  scope :to_user, -> (user) {where(recipient_id: user.id ) }
+  scope :from_user, -> (user) {where(sender_id: user.id ) }
   scope :read, -> { where(read: true) }
   scope :unread, -> { where(read: true) }
+
+  MESSAGE_UNREAD = 'unread'
+  MESSAGE_FROM = 'from'
+  MESSAGE_TO = 'to'
 
   def to_param
     slug

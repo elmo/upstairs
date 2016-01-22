@@ -2,12 +2,19 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_message, only: [:show, :edit, :update, :destroy, :read, :unread]
   before_action :set_building
-  before_action :set_recipient, except: [:inbox, :outbox]
   layout 'building'
 
   # GET /messages
   def index
-    @messages = Message.all
+    params[:filter] ||= Message::MESSAGE_TO
+    scope = current_user
+    scope = scope.received_messages.unread if params[:filter] == Message::MESSAGE_UNREAD
+    scope = scope.received_messages if params[:filter] == Message::MESSAGE_TO
+    scope = scope.sent_messages.from_user(current_user) if params[:filter] ==  Message::MESSAGE_FROM
+    if params[:searchTextField].present?
+      scope = scope.where(['body like ? ', "%#{params[:searchTextField]}%"])
+    end
+   @messages = scope.page(params[:page]).order(created_at: :desc)
   end
 
   # GET /messages/1
@@ -27,25 +34,18 @@ class MessagesController < ApplicationController
 
   # POST /messages
   def create
+    set_recipient
     @message = Message.new(message_params)
     @message.sender = current_user
     @message.recipient = @recipient
     @message.building = @building
     if @message.save
-      return_to_url = (session[:message_return_to].present?) ? session[:message_return_to] : outbox_path(@building, current_user)
+      return_to_url = (session[:message_return_to].present?) ? session[:message_return_to] : building_messages_url(@building)
       session[:message_return_to] = nil
       redirect_to return_to_url, notice: "Message to #{@recipient.public_name} was successfully has been sent."
     else
       render :new
     end
-  end
-
-  def outbox
-    @messages = current_user.sent_messages.order('created_at DESC').page(params[:page]).per(10)
-  end
-
-  def inbox
-    @messages = current_user.received_messages.order('created_at DESC').page(params[:page]).per(10)
   end
 
   # PATCH/PUT /messages/1

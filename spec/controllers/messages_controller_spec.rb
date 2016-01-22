@@ -3,11 +3,12 @@ RSpec.describe MessagesController, type: :controller do
   let(:valid_attributes) { { body: 'body' } }
   let(:invalid_attributes) { { body: nil } }
 
+  describe "recipient"  do
   before(:each) do
     load_valid_building
     @sender = create(:user, email: 'sender@email.com')
     @recipient = create(:user, email: 'recipient@email.com')
-    sign_in(@sender)
+    sign_in(@recipient)
     Message.any_instance.stub(:create_notifications).and_return(true)
     request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('bandit', 'smokey')
   end
@@ -35,39 +36,6 @@ RSpec.describe MessagesController, type: :controller do
     end
   end
 
-  describe 'POST create' do
-    describe 'with valid params' do
-      it 'creates a new Message' do
-        expect do
-          post :create, building_id: @building.to_param, user_id: @recipient.slug, message: valid_attributes
-        end.to change(Message, :count).by(1)
-      end
-
-      it 'assigns a newly created message as @message' do
-        post :create, building_id: @building.to_param, user_id: @recipient.slug, message: valid_attributes
-        expect(assigns(:message)).to be_a(Message)
-        expect(assigns(:message)).to be_persisted
-      end
-
-      it 'redirects to the created message' do
-        post :create, building_id: @building.to_param, user_id: @recipient.slug, message: valid_attributes
-        expect(response).to redirect_to outbox_path(@building, @sender)
-      end
-    end
-
-    describe 'with invalid params' do
-      it 'assigns a newly created but unsaved message as @message' do
-        post :create, building_id: @building.to_param, message: invalid_attributes
-        expect(assigns(:message)).to be_a_new(Message)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, building_id: @building.to_param, message: invalid_attributes
-        expect(response).to render_template('new')
-      end
-    end
-  end
-
   describe 'read/unread' do
     before(:each) do
       request.env['HTTP_REFERER'] = '/home'
@@ -86,4 +54,50 @@ RSpec.describe MessagesController, type: :controller do
       expect(assigns(:message).read).to be false
     end
   end
+end
+
+  describe 'POST create' do
+
+    before(:each) do
+      load_valid_building
+      @sender = create(:user, email: 'sender@email.com')
+      @recipient = create(:user, email: 'recipient@email.com')
+      sign_in(@sender)
+      Message.any_instance.stub(:create_notifications).and_return(true)
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('bandit', 'smokey')
+      session[:message_return_to] = 'http://test.host/buildings/123-main-street-san-francisco-ca-94121/messages'
+    end
+
+    describe 'with valid params' do
+      it 'creates a new Message' do
+        expect do
+          post :create, building_id: @building.to_param, user_id: @recipient.slug, message: valid_attributes
+        end.to change(Message, :count).by(1)
+      end
+
+      it 'assigns a newly created message as @message' do
+        post :create, building_id: @building.to_param, user_id: @recipient.slug, message: valid_attributes
+        expect(assigns(:message)).to be_a(Message)
+        expect(assigns(:message)).to be_persisted
+      end
+
+      it 'redirects to the created message' do
+        post :create, building_id: @building.to_param, user_id: @recipient.slug, message: valid_attributes
+        expect(response).to redirect_to building_messages_path(@building)
+      end
+    end
+
+    describe 'with invalid params' do
+      it 'assigns a newly created but unsaved message as @message' do
+        post :create, building_id: @building.to_param, message: invalid_attributes
+        expect(assigns(:message)).to be_a_new(Message)
+      end
+
+      it "re-renders the 'new' template" do
+        post :create, building_id: @building.to_param, message: invalid_attributes
+        expect(response).to render_template('new')
+      end
+    end
+  end
+
 end

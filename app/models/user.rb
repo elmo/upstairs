@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :notifications, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :verifications, dependent: :destroy
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
+  has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   belongs_to :invitation
   belongs_to :tenancy
   belongs_to :sender, foreign_key: 'sender_id', class_name: 'User'
@@ -143,26 +145,6 @@ class User < ActiveRecord::Base
 
   def primary_residence
     (memberships.any?) ? memberships.first.building : nil
-  end
-
-  def sent_messages
-    Message.where(sender_id: id)
-  end
-
-  def received_messages
-    Message.where(recipient_id: id)
-  end
-
-  def received_messages_count
-    Message.where(recipient_id: id).count
-  end
-
-  def sent_messages_count
-    Message.where(sender_id: id).count
-  end
-
-  def has_unread_messages?
-    Message.where(recipient_id: id, read: false).any?
   end
 
   def default_building
