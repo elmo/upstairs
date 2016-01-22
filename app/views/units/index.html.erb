@@ -38,6 +38,7 @@
 		  method: :delete, 
 		  data: { confirm: 'Are you sure?' }
 	   %>
+	  <%= link_to 'send message', new_building_user_message_path(@building, unit.tenancy.user)  -%>
           <% else %>
 	     <%= link_to 'assign to tenant', new_unit_tenancy_path(unit) %>
 	  <% end %>

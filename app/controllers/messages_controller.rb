@@ -16,6 +16,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
+    session[:message_return_to] = request.referer
     @message = Message.new(sender: current_user, recipient: @recipient)
     @message.building = @building
   end
@@ -31,7 +32,9 @@ class MessagesController < ApplicationController
     @message.recipient = @recipient
     @message.building = @building
     if @message.save
-      redirect_to outbox_path(@building, current_user), notice: "Message to #{@recipient.public_name} was successfully has been sent."
+      return_to_url = (session[:message_return_to].present?) ? session[:message_return_to] : outbox_path(@building, current_user)
+      session[:message_return_to] = nil
+      redirect_to return_to_url, notice: "Message to #{@recipient.public_name} was successfully has been sent."
     else
       render :new
     end
