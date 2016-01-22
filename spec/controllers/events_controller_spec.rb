@@ -10,7 +10,7 @@ RSpec.describe EventsController, type: :controller do
     load_valid_building
     load_user
     sign_in(@user)
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('bandit', 'smokey')
   end
 
   describe 'GET index' do

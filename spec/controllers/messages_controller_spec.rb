@@ -9,7 +9,7 @@ RSpec.describe MessagesController, type: :controller do
     @recipient = create(:user, email: 'recipient@email.com')
     sign_in(@sender)
     Message.any_instance.stub(:create_notifications).and_return(true)
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('bandit', 'smokey')
   end
 
   describe 'GET index' do
@@ -68,23 +68,22 @@ RSpec.describe MessagesController, type: :controller do
     end
   end
 
-  describe "read/unread" do
+  describe 'read/unread' do
     before(:each) do
-      request.env["HTTP_REFERER"] = '/home'
+      request.env['HTTP_REFERER'] = '/home'
       create_valid_message
     end
 
-    it "marks as read" do
+    it 'marks as read' do
       @message.update_attributes(read: false)
       put :read, building_id: @building.to_param, id: @message.to_param
-      expect( assigns(:message).read).to be true
+      expect(assigns(:message).read).to be true
     end
 
-    it "marks as unread" do
+    it 'marks as unread' do
       @message.update_attributes(read: true)
       put :unread, building_id: @building.to_param, id: @message.to_param
-      expect( assigns(:message).read).to be false
+      expect(assigns(:message).read).to be false
     end
   end
-
 end

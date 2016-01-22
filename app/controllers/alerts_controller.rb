@@ -8,7 +8,7 @@ class AlertsController < ApplicationController
   def index
     @alert = @building.alerts.new(user: current_user)
     scope = @building.alerts
-    scope = scope.where(["message like ? ", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
+    scope = scope.where(['message like ? ', "%#{params[:searchTextField]}%"]) if params[:searchTextField]
     @alerts = scope.order('created_at desc').page(params[:page]).per(10)
   end
 

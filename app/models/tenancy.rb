@@ -12,13 +12,11 @@ class Tenancy < ActiveRecord::Base
 
   def update_membership
     existing_guest_membership = user.memberships.find_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
-    (existing_guest_membership.present?) ? existing_guest_membership.promote_to_tenant_of!(building: building)
-                                         : user.memberships.find_or_create_by!(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+    (existing_guest_membership.present?) ? existing_guest_membership.promote_to_tenant_of!(building: building) : user.memberships.find_or_create_by!(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
     unit.update_attributes(user_id: user_id)
   end
 
   def void_unit
-    unit.update_attributes(user_id: nil )
+    unit.update_attributes(user_id: nil)
   end
-
 end

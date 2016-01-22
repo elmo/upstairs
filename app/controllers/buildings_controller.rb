@@ -1,8 +1,8 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_building, only: [:show, :edit, :update, :gallery,:declare_ownership,:landlord_onboarding,:invite_your_landlord, :residents, :building, :managers, :guests]
+  before_action :set_building, only: [:show, :edit, :update, :gallery, :declare_ownership, :landlord_onboarding, :invite_your_landlord, :residents, :building, :managers, :guests]
   before_action :set_template_directory, except: [:find, :choose, :index, :new]
-  #before_action :ask_about_ownership, only: [:show]
+  # before_action :ask_about_ownership, only: [:show]
   layout :get_layout
 
   def index
@@ -47,14 +47,14 @@ class BuildingsController < ApplicationController
   end
 
   def landlord_onboarding
-   current_user.profile_building_ownership_declared!
-   current_user.make_landlord(@building)
-   render template: "/buildings/#{@subdirectory}/invite_your_landlord"
+    current_user.profile_building_ownership_declared!
+    current_user.make_landlord(@building)
+    render template: "/buildings/#{@subdirectory}/invite_your_landlord"
   end
 
   def invite_your_landlord
-   current_user.profile_building_ownership_declared!
-   render template: "/buildings/#{@subdirectory}/invite_your_landlord"
+    current_user.profile_building_ownership_declared!
+    render template: "/buildings/#{@subdirectory}/invite_your_landlord"
   end
 
   # GET /buildings/new
@@ -114,7 +114,7 @@ class BuildingsController < ApplicationController
   end
 
   def get_layout
-    return %w(index choose).include?(action_name) ? 'users' : 'building'
+    %w(index choose).include?(action_name) ? 'users' : 'building'
   end
 
   def set_template_directory

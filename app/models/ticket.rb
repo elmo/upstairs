@@ -37,11 +37,11 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.statuses
-   [ STATUS_OPEN, STATUS_CLOSED]
+    [STATUS_OPEN, STATUS_CLOSED]
   end
 
   def self.severities
-   [ SEVERITY_MINOR, SEVERITY_SERIOUS, SEVERITY_SEVERE]
+    [SEVERITY_MINOR, SEVERITY_SERIOUS, SEVERITY_SEVERE]
   end
 
   def open?
@@ -61,11 +61,11 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.escalateable_severities
-    [SEVERITY_MINOR,SEVERITY_SERIOUS]
+    [SEVERITY_MINOR, SEVERITY_SERIOUS]
   end
 
   def self.deescalateable_severities
-    [SEVERITY_SERIOUS,SEVERITY_SEVERE]
+    [SEVERITY_SERIOUS, SEVERITY_SEVERE]
   end
 
   def open!
@@ -78,7 +78,7 @@ class Ticket < ActiveRecord::Base
 
   def escalate!
     update_attributes(severity: SEVERITY_SEVERE) if severity == SEVERITY_SERIOUS
-    update_attributes(severity: SEVERITY_SERIOUS ) if severity == SEVERITY_MINOR
+    update_attributes(severity: SEVERITY_SERIOUS) if severity == SEVERITY_MINOR
   end
 
   def deescalate!

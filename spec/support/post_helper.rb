@@ -8,7 +8,7 @@ def create_valid_tip
 end
 
 def load_building_with_one_post
-  Timecop.freeze(2015,1,1) do
+  Timecop.freeze(2015, 1, 1) do
     Building.any_instance.stub(:geocode).and_return(true)
     Building.any_instance.stub(:reverse_geocode).and_return(true)
     @address = '123 Main Street, San Francisco, CA 94121'

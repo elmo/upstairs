@@ -9,5 +9,4 @@ class PostSerializer < ActiveModel::Serializer
   def comments_count
     object.comments.count
   end
-
 end

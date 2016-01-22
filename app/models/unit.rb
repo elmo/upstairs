@@ -12,12 +12,10 @@ class Unit < ActiveRecord::Base
   STATUS_VACANT = 'vacant'
 
   def create_tenancy_for(user:)
-     if self.tenancy.present?
-       return true if self.tenancy.user.id == user.id
-       self.tenancy.destroy
-     end
-     Tenancy.create(unit_id: self.id, user_id: user.id, building_id: building.id)
+    if tenancy.present?
+      return true if tenancy.user.id == user.id
+      tenancy.destroy
+    end
+    Tenancy.create(unit_id: id, user_id: user.id, building_id: building.id)
   end
-
-
 end

@@ -1,14 +1,14 @@
 def create_valid_ticket
   @ticket = create(:ticket, building: @building,
-		   user: @user,
-		   title: 'title',
-		   body: 'body',
-		   severity: Ticket::SEVERITY_MINOR,
-		   status: Ticket::SEVERITY_SERIOUS)
+                            user: @user,
+                            title: 'title',
+                            body: 'body',
+                            severity: Ticket::SEVERITY_MINOR,
+                            status: Ticket::SEVERITY_SERIOUS)
 end
 
 def load_building_with_one_ticket
-  Timecop.freeze(2015,1,1) do
+  Timecop.freeze(2015, 1, 1) do
     Building.any_instance.stub(:geocode).and_return(true)
     Building.any_instance.stub(:reverse_geocode).and_return(true)
     @address = '123 Main Street, San Francisco, CA 94121'
@@ -20,13 +20,13 @@ def load_building_with_one_ticket
   end
   @user = create(:user, email: "#{SecureRandom.hex(6)}-user@email.com")
   @ticket = create(:ticket, building: @building,
-		   user: @user,
-		   title: 'title',
-		   body: 'body',
-		   severity: Ticket::SEVERITY_MINOR,
-		   status: Ticket::STATUS_NEW)
+                            user: @user,
+                            title: 'title',
+                            body: 'body',
+                            severity: Ticket::SEVERITY_MINOR,
+                            status: Ticket::STATUS_NEW)
 end
 
 def valid_ticket_params
-  { title: 'title', body: 'body' , status: Ticket::STATUS_OPEN, severity: Ticket::SEVERITY_MINOR}
+  { title: 'title', body: 'body', status: Ticket::STATUS_OPEN, severity: Ticket::SEVERITY_MINOR }
 end

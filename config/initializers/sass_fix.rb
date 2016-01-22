@@ -1,7 +1,7 @@
 module Sass
   module Tree
     class ImportNode < RootNode
-      def _dump(f)
+      def _dump(_f)
         Marshal.dump([@imported_filename, children])
       end
 

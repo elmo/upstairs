@@ -27,22 +27,22 @@ RSpec.describe Alert, type: :model do
       expect { Alert.create(user: @user, building: @building, message: 'message') }.to change(Notification, :count).by(1)
     end
 
-    describe "owned_by?" do
-      it "true when creator matches passed in user" do
+    describe 'owned_by?' do
+      it 'true when creator matches passed in user' do
         @alert = Alert.create(user: @user, building: @building, message: 'message')
         expect(@alert.owned_by?(@user)).to be true
       end
 
-      it "false when creator does not matche passed in user" do
+      it 'false when creator does not matche passed in user' do
         @alert = Alert.create(user: @user, building: @building, message: 'message')
-	@other_user = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
+        @other_user = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
         expect(@alert.owned_by?(@other_user)).to be false
       end
     end
 
-    describe "recent" do
+    describe 'recent' do
       before(:each) do
-        Timecop.freeze(2015,1,1)
+        Timecop.freeze(2015, 1, 1)
       end
       it 'older than 12 hours are not recent ' do
         Alert.create(user: @user, building: @building, message: 'message', created_at: Time.zone.now - 13.hours)
@@ -61,5 +61,4 @@ RSpec.describe Alert, type: :model do
       expect(Alert.for_user(@user).count).to eq 1
     end
   end
-
 end

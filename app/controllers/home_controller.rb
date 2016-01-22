@@ -7,5 +7,4 @@ class HomeController < ApplicationController
   def get_layout
     action_name == 'home' ? 'home' : 'users'
   end
-
 end

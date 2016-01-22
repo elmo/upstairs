@@ -24,5 +24,4 @@ class UsersController < ApplicationController
   def get_building
     @building = Building.friendly.find(params[:building_id])
   end
-
 end
