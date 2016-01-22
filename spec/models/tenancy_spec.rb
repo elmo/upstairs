@@ -87,6 +87,42 @@ RSpec.describe Tenancy, type: :model do
           Tenancy.create!(user: @user, unit: @unit, building: @building)
 	}.to change(Membership, :count).by(0)
       end
+
+      it "updates unit user id" do
+        Tenancy.create!(user: @user, unit: @unit, building: @building)
+	@unit.reload
+	expect(@unit.user_id).to eq @user.id
+      end
     end
+  end
+
+  describe "void_unit" do
+    before(:each) do
+      load_user
+      @user.join(@building)
+      @tenancy = Tenancy.create(user: @user, unit: @unit, building: @building)
+    end
+
+    it "voids unit" do
+      expect(@tenancy.unit.user_id).to eq @user.id
+      @tenancy.destroy
+      expect(@tenancy.unit.user_id).to be_nil
+    end
+  end
+
+  describe "scopes" do
+    before(:each) do
+      load_user
+      @user.join(@building)
+    end
+
+    it "occupied/vacant" do
+      expect(@building.units.occupied.count).to eq 0
+      expect(@building.units.vacant.count).to eq 1
+      @tenancy = Tenancy.create(user: @user, unit: @unit, building: @building)
+      expect(@building.units.occupied.count).to eq 1
+      expect(@building.units.vacant.count).to eq 0
+    end
+
   end
 end

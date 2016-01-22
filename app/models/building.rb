@@ -139,6 +139,18 @@ class Building < ActiveRecord::Base
     verifications.exists?
   end
 
+  def occupied_percentage
+    units_count = units.count
+    return 0 if units_count == 0
+    Float(units.occupied.count) / Float(units_count) * 100
+  end
+
+  def vacant_percentage
+    units_count = units.count
+    return 0 if units_count == 0
+    Float(units.vacant.count) / Float(units_count) * 100
+  end
+
   private
 
   def set_invitation_link
