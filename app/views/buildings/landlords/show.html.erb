@@ -25,7 +25,11 @@
 <h5>Building</h5>
 <ul>
   <li>
-    <%= link_to 'Units', building_units_path(@building) -%>
+    <small>
+      <%= link_to "Units (#{@building.units.count})", building_units_path(@building) -%>
+      <%= link_to "Occupied (#{@building.units.occupied.count})", building_units_path(@building, status: Unit::STATUS_OCCUPIED ) -%>
+      <%= link_to "Vacant(#{@building.units.vacant.count})", building_units_path(@building, status: Unit::STATUS_VACANT) -%>
+    </small>
   </li>
 
   <li>

@@ -7,7 +7,12 @@ class UnitsController < ApplicationController
   # GET /units.json
   def index
     @unit = @building.units.new
-    @units = @building.units.includes(:tenancy).order('name').page.per(10)
+    scope = @building.units.includes(:tenancy)
+    if params[:status]
+      scope = scope.occupied if params[:status] == Unit::STATUS_OCCUPIED
+      scope = scope.vacant if params[:status] == Unit::STATUS_VACANT
+    end
+    @units = scope.order('name').page(params[:page]).per(5)
   end
 
   # GET /units/1
