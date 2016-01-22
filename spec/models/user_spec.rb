@@ -183,12 +183,12 @@ RSpec.describe User, type: :model do
 
     it 'sender has sent message' do
       expect(@sender.sent_messages.first).to eq @message
-      expect(@sender.sent_messages_count).to eq 1
+      expect(@sender.sent_messages.count).to eq 1
     end
 
     it 'recipient has recieved message' do
       expect(@recipient.received_messages.first).to eq @message
-      expect(@recipient.received_messages_count).to eq 1
+      expect(@recipient.received_messages.count).to eq 1
     end
   end
 

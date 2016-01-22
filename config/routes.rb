@@ -19,8 +19,6 @@ Upstairs::Application.routes.draw do
   get '/privacy' => 'home#privacy', as: :privacy
   get '/help' => 'home#help', as: :help
   get '/find' => 'buildings#choose', as: :find_building
-  get '/buildings/:building_id/inbox' => 'messages#inbox', as: :inbox
-  get '/buildings/:building_id/outbox' => 'messages#outbox', as: :outbox
   get '/buildings/:building_id/calendar' => 'events#index', as: :calendar
 
   get '/welcome' => 'users#welcome', :via  => :get

@@ -4,7 +4,7 @@
     (<%= @building.tickets.open.count -%> open) <%= link_to "Tickets", building_tickets_path(@building) -%>
   </li>
   <li>
-  (<%= @building.messages.unread.count -%> new) <%= link_to 'Messages', building_messages_path(@building) -%>
+  <%= link_to 'Messages', inbox_path(@building) -%>
   </li>
   <li>
   (<%= @building.tenants.count -%>)
@@ -16,7 +16,6 @@
   </li>
 
   <li>
-  (3)
    <%= link_to 'Pending Approvals', '#' -%>
   </li>
 
