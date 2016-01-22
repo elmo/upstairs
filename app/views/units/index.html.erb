@@ -1,20 +1,27 @@
-<h1>Listing Units for <%= @building.address -%></h1>
+<h2>Units</h2>
 
 <% if @units.empty? %>
+  <p>There are no units configured for this building.</p>
 <% else  %>
+
+<%= render partial: 'summary' -%>
+
 <table>
   <thead>
     <tr>
       <th colspan="1">Unit</th>
+      <th colspan="2">Tenant</th>
     </tr>
   </thead>
 
   <tbody>
     <% @units.each do |unit| %>
       <tr>
-        <td><%= link_to unit.name, building_unit_path(@building,unit) %>
+	<td>
+           <strong> <%= unit.name %> </strong>
            <small>
-            <%= link_to 'edit unit information', edit_building_unit_path(@building, unit) %>
+	   <%= link_to 'details', building_unit_path(@building,unit) %>
+            <%= link_to 'edit', edit_building_unit_path(@building, unit) %>
 	    <% if unit.tenancy.blank? %>
 	    <%= link_to 'delete unit', building_unit_path(@building,unit), 
 		  method: :delete, 
@@ -23,23 +30,28 @@
            </small>
 	</td>
 	<td>
+	  <small>
           <% if unit.tenancy.present? %>
            <%= unit.tenancy.user.email -%> 
+	   <%= link_to 'end tenancy', 
+	          unit_tenancy_path(unit, unit.tenancy), 
+		  method: :delete, 
+		  data: { confirm: 'Are you sure?' }
+	   %>
           <% else %>
 	     <%= link_to 'assign to tenant', new_unit_tenancy_path(unit) %>
 	  <% end %>
+	   </small>
 	</td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= paginate(@units) %>
+<p> <%= paginate(@units) %> </p>
 
 <% end %>
 
-<br />
+<h2>Enter a new unit</h2>
 
-<p>
-<%= link_to 'Enter a New Unit', new_building_unit_path(@building) %>
-</p>
+<%= render partial: 'form' -%>

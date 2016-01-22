@@ -5,6 +5,9 @@ class Unit < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, scope: :building_id
 
+  scope :occupied, -> { joins(:tenancy) }
+  scope :vacant, -> { where(user_id: nil) }
+
   def create_tenancy_for(user:)
      if self.tenancy.present?
        return true if self.tenancy.user.id == user.id
@@ -12,5 +15,6 @@ class Unit < ActiveRecord::Base
      end
      Tenancy.create(unit_id: self.id, user_id: user.id, building_id: building.id)
   end
+
 
 end

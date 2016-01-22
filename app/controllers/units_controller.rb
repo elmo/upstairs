@@ -6,6 +6,7 @@ class UnitsController < ApplicationController
   # GET /units
   # GET /units.json
   def index
+    @unit = @building.units.new
     @units = @building.units.includes(:tenancy).order('name').page.per(10)
   end
 
