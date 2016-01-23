@@ -10,6 +10,8 @@ class BuildingsController < ApplicationController
 
   # GET /buildings/1
   def show
+    @posts = @building.posts.page(params[:page]).order('created_at desc').per(5)
+    @events = @building.events.page(params[:page]).order('created_at desc').per(5)
     render template: "/buildings/#{@subdirectory}/show"
   end
 
