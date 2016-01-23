@@ -6,6 +6,7 @@ class Alert < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :building
   validates_presence_of :message
+  validates_length_of :message, maximum: 160, message: "Message is too long"
 
   after_create :create_notifications
   after_create :create_actionable

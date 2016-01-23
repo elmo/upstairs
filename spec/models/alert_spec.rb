@@ -6,6 +6,7 @@ RSpec.describe Alert, type: :model do
   it  { should have_many(:notifications) }
   it  { should validate_presence_of(:user) }
   it  { should validate_presence_of(:building) }
+  it  { should validate_length_of(:message).is_at_most(160).with_message(/Message is too long/) }
 
   describe 'alert' do
     before(:each) do
