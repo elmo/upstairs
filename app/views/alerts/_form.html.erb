@@ -1,4 +1,5 @@
 <%= simple_form_for([@building, @alert]) do |f| %>
-  <%= f.input :message %>
+  <%= f.error_notification %>
+  <%= f.input :message, input_html: { maxlength: 160, rows: 4, cols: 40  }  %>
   <%= f.button :submit %>
 <% end %>
