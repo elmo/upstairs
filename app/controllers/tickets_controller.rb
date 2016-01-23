@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_building
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy,:open,:close,:escalate,:deescalate]
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy, :open, :close, :escalate, :deescalate]
   layout 'building'
 
   # GET /tickets
@@ -12,7 +12,7 @@ class TicketsController < ApplicationController
     scope = scope.severe if params[:severity] == Ticket::SEVERITY_SEVERE
     scope = scope.serious if params[:severity] == Ticket::SEVERITY_SERIOUS
     scope = scope.minor if params[:severity] == Ticket::SEVERITY_MINOR
-    scope = scope.where(["title like ? or body like ? ", "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
+    scope = scope.where(['title like ? or body like ? ', "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
     @tickets = scope.page(params[:page]).order(severity: :desc).page(params[:page]).per(5)
   end
 

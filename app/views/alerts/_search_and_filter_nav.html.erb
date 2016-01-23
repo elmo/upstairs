@@ -14,14 +14,14 @@
     <div id="rectangle_2"  ></div>
     
     <div id="searchC"   >
-        <%= form_tag building_posts_path(@building), method: :get  do %>
+        <%= form_tag building_alerts_path(@building), method: :get  do %>
         <%= submit_tag 's', id: 'search',  class:'icon' %>
         <%= text_field_tag :searchTextField %>
         <% end %>
     </div>
     <div id="rectangle_2"  ></div>
 </div>
-<%= form_tag building_posts_url(@building), method: :get do %>
+<%= form_tag building_alerts_url(@building), method: :get do %>
 
 <% end %>
 

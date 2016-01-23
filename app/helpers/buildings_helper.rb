@@ -59,121 +59,126 @@ module BuildingsHelper
     end if (controller_name != 'invitations')
   end
 
-
   def user_settings_icon(user:, building:)
     content_tag(:div, 'settings', id: 'setting', class: 'menu_item' ) do
       link_to(edit_user_registration_path) do
         content_tag(:div, 'o', id: 'icon_7', class: 'icon_menu') +
           content_tag(:div, I18n.t(:settings) ,id: 'setting_1', class: 'menu_item_text')
-        end
       end
+    end
     end
   end
 
- def user_logout_icon(user:, building:)
+def user_logout_icon(user:, building:)
   content_tag(:div, 'exit', id: 'exit', class: 'menu_item' ) do
     link_to(destroy_user_session_path, method: :delete ) do
       content_tag(:div, 'w', id: 'icon_7', class: 'icon_menu') +
       content_tag(:div, I18n.t(:log_out) ,id: 'exit_1', class: 'menu_item_text')
     end
   end
- end
+end
 
-  def other_tenants_icon(user:, building:)
-    content_tag(:div,'others', id: 'others', class: 'menu_item') do
-      link_to(building_memberships_path(building)) do
-          content_tag(:div, controller_name == 'memberships' ? 'J' : 'I', id: 'icon_4', class: 'icon_menu') +
-        content_tag(:div, 'other tenants' ,id: 'other_tenants', class: 'menu_item_text')
-      end
+def other_tenants_icon(user:, building:)
+  content_tag(:div,'others', id: 'others', class: 'menu_item') do
+    link_to(building_memberships_path(building)) do
+      content_tag(:div, controller_name == 'memberships' ? 'J' : 'I', id: 'icon_4', class: 'icon_menu') +
+    content_tag(:div, 'other tenants' ,id: 'other_tenants', class: 'menu_item_text')
     end
   end
+end
 
-  def bulletin_board_icon(user:, building:)
-      content_tag(:div, id: 'bulletin', class: 'menu_item') do
-        link_to(building_posts_path(building)) do
-          content_tag(:div, controller_name == 'posts' ? 'D' : 'C', id: 'icon', class: 'icon_menu') +
-         content_tag(:div, I18n.t(:bulletin_board), id: 'bulletin_board', class: 'menu_item_text')
-        end
-      end
-    end
-  def alerts_icon(user:, building:)
-    content_tag(:div, id: 'alert_1', class: 'menu_item') do
-        link_to(building_alerts_path(building)) do
-            
-            content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
-          content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text') 
-      end
+def bulletin_board_icon(user:, building:)
+  content_tag(:div, id: 'bulletin', class: 'menu_item') do
+    link_to(building_posts_path(building)) do
+      content_tag(:div, controller_name == 'posts' ? 'D' : 'C', id: 'icon', class: 'icon_menu') +
+     content_tag(:div, I18n.t(:bulletin_board), id: 'bulletin_board', class: 'menu_item_text')
     end
   end
-
-  def calendar_icon(user:, building:)
-    content_tag(:div, 'calendar', id: 'calendar', class: 'menu_item') do
-      link_to(building_events_path(building)) do
-          content_tag(:div, controller_name == 'events' ? 'B' : 'A', id: 'icon_2', class: 'icon_menu') +
-        content_tag(:div, I18n.t(:calendar), id: 'calendar_1', class: 'menu_item_text')
-      end
-    end
   end
 
-  def messages_icon(user:, building:)
-    content_tag(:div, 'message', id: 'message', class: 'menu_item') do
-      link_to(inbox_path(building)) do
-        content_tag(:div,controller_name == 'messages' ? 'H' : 'G', id: 'icon_3', class: 'icon_menu') +
-        content_tag(:div, I18n.t(:message), id: 'message_1', class: 'menu_item_text') +
-        ((current_user.has_unread_messages?) ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
-      end
+def alerts_icon(user:, building:)
+  content_tag(:div, id: 'alert_1', class: 'menu_item') do
+    link_to(building_alerts_path(building)) do
+      content_tag(:div, controller_name == 'alerts' ? 'F' : 'E', id: 'icon', class: 'icon_menu') +
+    content_tag(:div, I18n.t(:alerts) ,id: 'alert_2', class: 'menu_item_text')
     end
   end
+end
 
-  def building_repairs_icon(user:, building:)
-      content_tag(:div,'request',id: 'request', class: 'menu_item') do
-      link_to building_tickets_path(building) do
-        content_tag(:div, controller_name == 'tickets' ? 'L' : 'K', id: 'icon_5', class: 'icon_menu') +
-        content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text')
-      end
+def calendar_icon(user:, building:)
+  content_tag(:div, 'calendar', id: 'calendar', class: 'menu_item') do
+    link_to(building_events_path(building)) do
+      content_tag(:div, controller_name == 'events' ? 'B' : 'A', id: 'icon_2', class: 'icon_menu') +
+    content_tag(:div, I18n.t(:calendar), id: 'calendar_1', class: 'menu_item_text')
     end
-  end 
+  end
+end
+
+def messages_icon(user:, building:)
+  content_tag(:div, 'message', id: 'message', class: 'menu_item') do
+    link_to(building_messages_path(building)) do
+      content_tag(:div,controller_name == 'messages' ? 'H' : 'G', id: 'icon_3', class: 'icon_menu') +
+      content_tag(:div, I18n.t(:message), id: 'message_1', class: 'menu_item_text') +
+      ((current_user.received_messages.unread.any?) ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
+    end
+  end
+end
+
+def building_repairs_icon(user:, building:)
+  content_tag(:div,'request',id: 'request', class: 'menu_item') do
+    link_to building_tickets_path(building) do
+    content_tag(:div, controller_name == 'tickets' ? 'L' : 'K', id: 'icon_5', class: 'icon_menu')   +
+    content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text'  )
+  end
+  end
+end
+
 def send_message_user(user:, building:)
-      content_tag(:div,'request',id: 'request', class: 'btn') do
-      link_to new_building_user_message_path(building, user.slug) do
-          content_tag(:div, 'G', id: 'icon_5', class: 'icon_button')
-      end
+  content_tag(:div,'request',id: 'request', class: 'btn') do
+    link_to new_building_user_message_path(building, user.slug)  do
+    content_tag(:div, 'G', id: 'icon_5', class: 'icon_butto  n')
+  end
+  end
+end
+
+def invite_someone_icon(user:, building:)
+  content_tag(:div,'invite',id: 'invite', class: 'menu_item') do
+    link_to(new_building_user_invitation_path(building)) do
+    content_tag(:div, controller_name == 'invitations' ? 'N' : 'M', id: 'icon_7', class: 'icon_menu')   +
+    content_tag(:div, I18n.t(:invite_someone), id: 'invite_someone', class: 'menu_item_text'  )
+  end
+  end
+end
+
+def building_public_profile_icon(building: building, user: user)
+  content_tag(:div, 'profile', id: 'profil', class: 'menu_item' ) do
+    link_to(building_user_path(building,user)) do
+      content_tag(:div,  controller_name == 'users' ? 'R' : 'Q', id: 'icon_8', class: 'icon_menu') +
+    content_tag(:div, I18n.t(:profile) , id: 'profil_1', class: 'menu_item_text')
     end
   end
-
-  def invite_someone_icon(user:, building:)
-      content_tag(:div,'invite',id: 'invite', class: 'menu_item') do
-      link_to(new_building_user_invitation_path(building)) do
-        content_tag(:div, controller_name == 'invitations' ? 'N' : 'M', id: 'icon_7', class: 'icon_menu') +
-        content_tag(:div, I18n.t(:invite_someone), id: 'invite_someone', class: 'menu_item_text')
-      end
-    end
-  end
-  def building_public_profile_icon(building: building, user: user)
-    content_tag(:div, 'profile', id: 'profil', class: 'menu_item' ) do
-      link_to(building_user_path(building,user)) do
-          content_tag(:div,  controller_name == 'users' ? 'R' : 'Q', id: 'icon_8', class: 'icon_menu') +
-        content_tag(:div, I18n.t(:profile) , id: 'profil_1', class: 'menu_item_text')
-      end
-    end
-
  end
 
-def upstairs_home_page_icon()
-    content_tag(:div, 'home', id: 'home' ) do
+def upstairs_home_page_icon
+  content_tag(:div, 'home', id: 'home' ) do
+    if @building.present?
+      link_to building_url(@building) do
+        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
+      end
+    else
       link_to(root_url) do
         content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
       end
     end
+  end
+end
 
- end
-def upstairs_home_page_icon_small()
-    content_tag(:div, 'home', id: 'home' ) do
-      link_to(root_url) do
-        content_tag(:div, 'u', id: 'icon_10', class: 'home_icon_menu_small')
-      end
+def upstairs_home_page_icon_small
+  content_tag(:div, 'home', id: 'home' ) do
+    link_to(root_url) do
+      content_tag(:div, 'u', id: 'icon_10', class: 'home_icon_menu_small')
     end
-
+  end
  end
 
 def user_logout_icon(user:, building:)

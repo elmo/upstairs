@@ -40,43 +40,22 @@ RSpec.describe Message, type: :model do
     end
   end
 
-  describe "user messages" do
-     before(:each) do
-       load_valid_building
-       @sender = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
-       @recipient = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
-       @valid_attributes = { sender: @sender, recipient: @recipient, building: @building, body: 'message body' }
-     end
+  describe 'read/unread state' do
+    before(:each) do
+      load_valid_building
+      @sender = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
+      @recipient = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
+      @valid_attributes = { sender: @sender, recipient: @recipient, building: @building, body: 'message body' }
+    end
 
-     it "changes sender sent counts" do
-       expect { Message.create!(@valid_attributes) }.to change(@sender, :sent_messages_count).by(1)
-     end
+    it 'mark_as_read!' do
+      @message = Message.create(@valid_attributes.merge(read: false))
+      expect { @message.mark_as_read! }.to change(@message, :read).from(false).to(true)
+    end
 
-     it "changes recipient recieved count" do
-       expect { Message.create!(@valid_attributes) }.to change(@recipient, :received_messages_count).by(1)
-     end
-
-     it "changes recipient recieved count" do
-       expect { Message.create!(@valid_attributes) }.to change(@recipient, :has_unread_messages?).from(false).to(true)
-     end
-  end
-
-  describe "read/unread state" do
-     before(:each) do
-       load_valid_building
-       @sender = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
-       @recipient = create(:user, email: "#{SecureRandom.hex(5)}-@email.com")
-       @valid_attributes = { sender: @sender, recipient: @recipient, building: @building, body: 'message body' }
-     end
-
-     it "mark_as_read!" do
-       @message = Message.create(@valid_attributes.merge(read: false))
-       expect { @message.mark_as_read! }.to change(@message, :read).from(false).to(true)
-     end
-
-     it "mark_as_unread!" do
-       @message = Message.create(@valid_attributes.merge(read: true))
-       expect { @message.mark_as_unread! }.to change(@message, :read).from(true).to(false)
-     end
+    it 'mark_as_unread!' do
+      @message = Message.create(@valid_attributes.merge(read: true))
+      expect { @message.mark_as_unread! }.to change(@message, :read).from(true).to(false)
+    end
   end
 end

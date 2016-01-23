@@ -1,0 +1,13 @@
+<h2>Summary</h2>
+<table>
+  <tr>
+    <td>Total Units: <%= @building.units.count -%></td>
+    <td>Total Occupied: <%= @building.units.occupied.count -%>
+                  (<%= number_to_percentage(@building.occupied_percentage, precision: 0) -%>)
+    </td>
+    <td>Total Vacant: <%= @building.units.vacant.count -%>
+                (<%= number_to_percentage(@building.vacant_percentage, precision: 0) -%>)
+    </td>
+    </td>
+  </tr>
+</table>

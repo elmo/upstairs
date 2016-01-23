@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook,:google]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :google]
 
   has_many :activities, dependent: :destroy
   has_many :buildings, through: :memberships
@@ -13,7 +13,10 @@ class User < ActiveRecord::Base
   has_many :notifications, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :verifications, dependent: :destroy
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
+  has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   belongs_to :invitation
+  belongs_to :tenancy
   belongs_to :sender, foreign_key: 'sender_id', class_name: 'User'
   after_create :apply_invitation
   before_save :set_slug
@@ -39,65 +42,65 @@ class User < ActiveRecord::Base
   end
 
   def grant(membership, membership_type)
-     user = membership.user
-     building = membership.building
-     raise "Invalid membership type" unless Membership.membership_types.include?(membership_type)
-     case membership_type
-       when Membership::MEMBERSHIP_TYPE_LANDLORD
-         raise "Unable to grant permission" unless permitted_to_grant_landlordship?(building)
-	 user.make_landlord(building)
-       when Membership::MEMBERSHIP_TYPE_MANAGER
-         raise "Unable to grant permission" unless permitted_to_grant_managership?(building)
-	 user.make_manager(building)
-       when Membership::MEMBERSHIP_TYPE_TENANT
-         raise "Unable to grant tenant membership" unless permitted_to_grant_tenantship?(building)
-	 user.make_tenant(building)
-       when Membership::MEMBERSHIP_TYPE_GUEST
-	 user.make_guest(building)
-     end
+    user = membership.user
+    building = membership.building
+    fail 'Invalid membership type' unless Membership.membership_types.include?(membership_type)
+    case membership_type
+      when Membership::MEMBERSHIP_TYPE_LANDLORD
+        fail 'Unable to grant permission' unless permitted_to_grant_landlordship?(building)
+        user.make_landlord(building)
+      when Membership::MEMBERSHIP_TYPE_MANAGER
+        fail 'Unable to grant permission' unless permitted_to_grant_managership?(building)
+        user.make_manager(building)
+      when Membership::MEMBERSHIP_TYPE_TENANT
+        fail 'Unable to grant tenant membership' unless permitted_to_grant_tenantship?(building)
+        user.make_tenant(building)
+      when Membership::MEMBERSHIP_TYPE_GUEST
+        user.make_guest(building)
+    end
   end
 
   def revoke(membership, membership_type)
-     user = membership.user
-     building = membership.building
-     raise "Invalid membership type" unless Membership.membership_types.include?(membership_type)
-     case membership_type
-       when Membership::MEMBERSHIP_TYPE_LANDLORD
-         raise "Unable to revoke permission" unless permitted_to_revoke_landlordship?(building)
-	 user.revoke_landlord(building)
-       when Membership::MEMBERSHIP_TYPE_MANAGER
-         raise "Unable to revoke permission" unless permitted_to_revoke_managership?(building)
-	 user.revoke_manager(building)
-       when Membership::MEMBERSHIP_TYPE_TENANT
-         raise "Unable to revoke tenant membership" unless permitted_to_revoke_tenantship?(building)
-	 user.revoke_tenant(building)
-       when Membership::MEMBERSHIP_TYPE_GUEST
-	 user.revoke_guest(building)
-     end
+    user = membership.user
+    building = membership.building
+    fail 'Invalid membership type' unless Membership.membership_types.include?(membership_type)
+    case membership_type
+      when Membership::MEMBERSHIP_TYPE_LANDLORD
+        fail 'Unable to revoke permission' unless permitted_to_revoke_landlordship?(building)
+        user.revoke_landlord(building)
+      when Membership::MEMBERSHIP_TYPE_MANAGER
+        fail 'Unable to revoke permission' unless permitted_to_revoke_managership?(building)
+        user.revoke_manager(building)
+      when Membership::MEMBERSHIP_TYPE_TENANT
+        fail 'Unable to revoke tenant membership' unless permitted_to_revoke_tenantship?(building)
+        user.revoke_tenant(building)
+      when Membership::MEMBERSHIP_TYPE_GUEST
+        user.revoke_guest(building)
+    end
   end
 
-  def permitted_to_grant_landlordship?(building)
+  def permitted_to_grant_landlordship?(_building)
     admin?
   end
 
-  def permitted_to_revoke_landlordship?(building)
+  def permitted_to_revoke_landlordship?(_building)
     admin?
   end
 
   def permitted_to_grant_managership?(building)
-    admin? or landlord_of?(building)
+    admin? || landlord_of?(building)
   end
 
   def permitted_to_revoke_managership?(building)
-    admin? or landlord_of?(building)
+    admin? || landlord_of?(building)
   end
 
   def permitted_to_grant_tenantship?(building)
-    admin? or landlord_of?(building)
+    admin? || landlord_of?(building)
   end
 
   def permitted_to_revoke_tenantship?(building)
-    admin? or landlord_of?(building)
+    admin? || landlord_of?(building)
   end
 
   def leave(building)
@@ -140,29 +143,8 @@ class User < ActiveRecord::Base
     use_my_username? && username.present? ? username : 'anonymous'
   end
 
-
   def primary_residence
     (memberships.any?) ? memberships.first.building : nil
-  end
-
-  def sent_messages
-    Message.where(sender_id: id)
-  end
-
-  def received_messages
-    Message.where(recipient_id: id)
-  end
-
-  def received_messages_count
-    Message.where(recipient_id: id).count
-  end
-
-  def sent_messages_count
-    Message.where(sender_id: id).count
-  end
-
-  def has_unread_messages?
-    Message.where(recipient_id: id, read: false).any?
   end
 
   def default_building
@@ -336,7 +318,7 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.email = auth.info.email
       user.username = auth.info.try(:name)
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
     end
   end
 

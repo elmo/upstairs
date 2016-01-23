@@ -12,6 +12,8 @@ RSpec.describe Building, type: :model do
   it { should have_many(:users) }
   it { should have_many(:tickets) }
   it { should have_many(:verifications) }
+  it { should have_many(:units) }
+  it { should have_many(:tenancies) }
   it { should validate_presence_of(:address) }
   it { should validate_presence_of(:latitude) }
   it { should validate_presence_of(:longitude) }
@@ -111,20 +113,20 @@ RSpec.describe Building, type: :model do
     end
   end
 
-  describe "guests" do
+  describe 'guests' do
     before(:each) do
       load_valid_building
       load_user
     end
 
-    it "guests" do
+    it 'guests' do
       expect(@building.guests).to be_empty
       @building.grant_guestship(@user)
       expect(@building.guests).to_not be_empty
       expect(@building.is_guest?(@user)).to eq true
     end
 
-    it "revoke_guestship" do
+    it 'revoke_guestship' do
       @building.grant_guestship(@user)
       expect(@building.is_guest?(@user)).to eq true
       @building.revoke_guestship(@user)
@@ -132,13 +134,13 @@ RSpec.describe Building, type: :model do
     end
   end
 
-  describe "changing memebership type" do
+  describe 'changing memebership type' do
     before(:each) do
       load_valid_building
       load_user
     end
 
-    it "promotes guest to tenant" do
+    it 'promotes guest to tenant' do
       @building.grant_guestship(@user)
       expect(@building.is_guest?(@user)).to eq true
       @building.promote_to_tenant(@user)
@@ -148,54 +150,54 @@ RSpec.describe Building, type: :model do
     end
   end
 
-  describe "tenantship" do
+  describe 'tenantship' do
     before(:each) do
       load_valid_building
       load_user
     end
 
-    it "tenants" do
-     expect(@building.tenants).to be_empty
-     @building.grant_tenantship(@user)
-     expect(@building.tenants).to_not be_empty
-     expect(@building.has_tenant?(@user)).to eq true
+    it 'tenants' do
+      expect(@building.tenants).to be_empty
+      @building.grant_tenantship(@user)
+      expect(@building.tenants).to_not be_empty
+      expect(@building.has_tenant?(@user)).to eq true
     end
 
-    it "grants tenantship" do
-     expect { @building.grant_tenantship(@user)}.to change(Membership, :count).by(1)
-     expect(@building.has_tenant?(@user)).to eq true
+    it 'grants tenantship' do
+      expect { @building.grant_tenantship(@user) }.to change(Membership, :count).by(1)
+      expect(@building.has_tenant?(@user)).to eq true
     end
 
-    it "revokes tenantship" do
-     @building.grant_tenantship(@user)
-     expect( @building.has_tenant?(@user)).to eq true
-     @building.revoke_tenantship(@user)
-     expect( @building.has_tenant?(@user)).to eq false
+    it 'revokes tenantship' do
+      @building.grant_tenantship(@user)
+      expect(@building.has_tenant?(@user)).to eq true
+      @building.revoke_tenantship(@user)
+      expect(@building.has_tenant?(@user)).to eq false
     end
   end
 
-  describe "landlordship" do
+  describe 'landlordship' do
     before(:each) do
       load_valid_building
       load_user
     end
 
-    it "landlord" do
-     expect(@building.landlord).to be_nil
+    it 'landlord' do
+      expect(@building.landlord).to be_nil
     end
 
-    it "is_landlord?" do
-     expect(@building.is_landlord?(@user)).to eq false
-     @building.grant_landlordship(@user)
-     expect(@building.is_landlord?(@user)).to eq true
+    it 'is_landlord?' do
+      expect(@building.is_landlord?(@user)).to eq false
+      @building.grant_landlordship(@user)
+      expect(@building.is_landlord?(@user)).to eq true
     end
 
-    it "grant_landlordship" do
+    it 'grant_landlordship' do
       @building.grant_landlordship(@user)
       expect(@building.landlord).to eq @user
     end
 
-    it "revoke_landlordship" do
+    it 'revoke_landlordship' do
       @building.grant_landlordship(@user)
       expect(@building.landlord).to eq @user
       @building.revoke_landlordship(@user)
@@ -203,28 +205,28 @@ RSpec.describe Building, type: :model do
     end
   end
 
-  describe "managership" do
+  describe 'managership' do
     before(:each) do
       load_valid_building
       load_user
     end
 
-    it "managers" do
-     expect(@building.managers).to be_empty
+    it 'managers' do
+      expect(@building.managers).to be_empty
     end
 
-    it "is_manager?" do
-     expect(@building.is_manager?(@user)).to eq false
-     @building.grant_managership(@user)
-     expect(@building.is_manager?(@user)).to eq true
+    it 'is_manager?' do
+      expect(@building.is_manager?(@user)).to eq false
+      @building.grant_managership(@user)
+      expect(@building.is_manager?(@user)).to eq true
     end
 
-    it "grant_managership" do
+    it 'grant_managership' do
       @building.grant_managership(@user)
       expect(@building.managers.first).to eq @user
     end
 
-    it "revoke_managership" do
+    it 'revoke_managership' do
       @building.grant_managership(@user)
       expect(@building.managers.first).to eq @user
       @building.revoke_managership(@user)
@@ -268,16 +270,34 @@ RSpec.describe Building, type: :model do
     end
   end
 
-  describe "alert_notification_for_user" do
+  describe 'alert_notification_for_user' do
     before(:each) do
       load_valid_building
       load_user
       @user.join(@building)
       @alert = Alert.create(building: @building, user: @user)
     end
-    it "returns notification associated with alert" do
-      expect( @building.alert_notification_for_user(user: @user, alert: @alert)).to eq Notification.last
+    it 'returns notification associated with alert' do
+      expect(@building.alert_notification_for_user(user: @user, alert: @alert)).to eq Notification.last
     end
   end
 
+  describe 'tenancies' do
+    before(:each) do
+      load_valid_building_with_unit
+      load_user
+    end
+
+    it 'creating tenancy, increases tenancies for building' do
+      Tenancy.create(user: @user, unit: @unit, building: @building)
+      expect(@building.tenancies.count).to eq 1
+      expect(@building.tenancies.first.user).to eq @user
+    end
+
+    it 'destroying tenancy, decreases tenancies for building' do
+      @tenancy = Tenancy.create(user: @user, unit: @unit, building: @building)
+      expect { @tenancy.destroy }.to change(Tenancy, :count).by(-1)
+      expect(@building.tenancies.count).to eq 0
+    end
+  end
 end

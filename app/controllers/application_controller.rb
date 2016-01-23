@@ -18,11 +18,15 @@ class ApplicationController < ActionController::Base
     sign_in_url = new_user_session_url
     return stored_location_for(resource) if stored_location_for(resource).present?
     return welcome_path if resource.brand_new?
-    return buildings_path if resource.welcomed? and !resource.building_chosen?
+    return buildings_path if resource.welcomed? && !resource.building_chosen?
     if resource.primary_residence.present?
       return building_path(resource.primary_residence)
     end
     root_path
+  end
+
+  def after_update_path_for(resource)
+    redirect_to :back
   end
 
   def not_found
@@ -32,13 +36,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_resource
-    if devise_controller? or (controller_name == 'users' and action_name != 'show')
-     'users'
+    if devise_controller? || (controller_name == 'users' && action_name != 'show')
+      'users'
     elsif controller_name == 'home'
       'home'
     else
-     'building'
+      'building'
     end
   end
-
 end

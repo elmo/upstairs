@@ -183,12 +183,12 @@ RSpec.describe User, type: :model do
 
     it 'sender has sent message' do
       expect(@sender.sent_messages.first).to eq @message
-      expect(@sender.sent_messages_count).to eq 1
+      expect(@sender.sent_messages.count).to eq 1
     end
 
     it 'recipient has recieved message' do
       expect(@recipient.received_messages.first).to eq @message
-      expect(@recipient.received_messages_count).to eq 1
+      expect(@recipient.received_messages.count).to eq 1
     end
   end
 
@@ -255,64 +255,62 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "ships" do
+  describe 'ships' do
     before(:each) do
       load_valid_building
       load_user
     end
 
-    it "creates landlord membership role" do
+    it 'creates landlord membership role' do
       @user.make_landlord(@building)
       expect(@user.landlordships.count).to eq 1
     end
 
-    it "creates manager membership role" do
+    it 'creates manager membership role' do
       @user.make_manager(@building)
       expect(@user.managerships.count).to eq 1
     end
 
-    it "creates tenant role" do
+    it 'creates tenant role' do
       @user.make_tenant(@building)
       expect(@user.tenantships.count).to eq 1
     end
 
-    it "creates guest role" do
+    it 'creates guest role' do
       @user.make_guest(@building)
       expect(@user.guestships.count).to eq 1
     end
 
-    describe "revocations" do
-
-      it "creates landlord membership role" do
+    describe 'revocations' do
+      it 'creates landlord membership role' do
         @user.make_landlord(@building)
         expect(@user.landlordships.count).to eq 1
         @user.revoke_landlord(@building)
         expect(@user.landlordships.count).to eq 0
       end
 
-      it "creates manager membership role" do
+      it 'creates manager membership role' do
         @user.make_manager(@building)
         expect(@user.managerships.count).to eq 1
         @user.revoke_manager(@building)
         expect(@user.managerships.count).to eq 0
       end
 
-      it "creates tenant role" do
+      it 'creates tenant role' do
         @user.make_tenant(@building)
         expect(@user.tenantships.count).to eq 1
         @user.revoke_tenant(@building)
         expect(@user.tenantships.count).to eq 0
       end
 
-      it "creates guest role" do
+      it 'creates guest role' do
         @user.make_guest(@building)
         expect(@user.guestships.count).to eq 1
         @user.revoke_guest(@building)
         expect(@user.guestships.count).to eq 0
       end
-
-    end #revocations
-  end #..ships
+    end # revocations
+  end # ..ships
 
   describe 'landlord_of_building?' do
     before(:each) do
@@ -330,7 +328,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "change membership" do
+  describe 'change membership' do
     before(:each) do
       load_valid_building
       load_user
@@ -338,95 +336,94 @@ RSpec.describe User, type: :model do
     end
 
     it "changes membership to 'tenant' " do
-       expect(@user.guestships.count).to eq 1
-       @user.change_membership(building: @building, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
-       expect(@user.tenantships.count).to eq 1
+      expect(@user.guestships.count).to eq 1
+      @user.change_membership(building: @building, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+      expect(@user.tenantships.count).to eq 1
     end
 
     it "does not change membership to 'foo' " do
-       expect(@user.guestships.count).to eq 1
-       @user.change_membership(building: @building, membership_type: 'foo')
-       expect(@user.guestships.count).to eq 1
+      expect(@user.guestships.count).to eq 1
+      @user.change_membership(building: @building, membership_type: 'foo')
+      expect(@user.guestships.count).to eq 1
     end
   end
 
-  describe "grant/revoke" do
+  describe 'grant/revoke' do
     before(:each) do
       load_valid_building
       load_user
     end
 
-    describe "permissions" do
-      describe "permitted_to_grant_landlordship?" do
-         it "true when admin" do
-           @user.make_admin
-	   expect(@user.permitted_to_grant_landlordship?(@building)).to eq true
-         end
+    describe 'permissions' do
+      describe 'permitted_to_grant_landlordship?' do
+        it 'true when admin' do
+          @user.make_admin
+          expect(@user.permitted_to_grant_landlordship?(@building)).to eq true
+        end
 
-         it "false when not admin" do
-	   expect(@user.permitted_to_grant_landlordship?(@building)).to eq false
-         end
+        it 'false when not admin' do
+          expect(@user.permitted_to_grant_landlordship?(@building)).to eq false
+        end
       end
 
-      describe "permitted_to_revoke_landlordship?" do
-         it "true when admin" do
-           @user.make_admin
-	   expect(@user.permitted_to_revoke_landlordship?(@building)).to eq true
-         end
+      describe 'permitted_to_revoke_landlordship?' do
+        it 'true when admin' do
+          @user.make_admin
+          expect(@user.permitted_to_revoke_landlordship?(@building)).to eq true
+        end
 
-         it "false when not admin" do
-	   expect(@user.permitted_to_revoke_landlordship?(@building)).to eq false
-         end
+        it 'false when not admin' do
+          expect(@user.permitted_to_revoke_landlordship?(@building)).to eq false
+        end
       end
 
-      describe "permitted_to_grant_manager?" do
-         it "true when owner of building" do
-           @user.make_landlord(@building)
-	   expect(@user.permitted_to_grant_managership?(@building)).to eq true
-         end
+      describe 'permitted_to_grant_manager?' do
+        it 'true when owner of building' do
+          @user.make_landlord(@building)
+          expect(@user.permitted_to_grant_managership?(@building)).to eq true
+        end
 
-         it "false when not owner of building" do
-	   expect(@user.permitted_to_grant_managership?(@building)).to eq false
-         end
+        it 'false when not owner of building' do
+          expect(@user.permitted_to_grant_managership?(@building)).to eq false
+        end
       end
 
-      describe "permitted_to_revoke_manager?" do
+      describe 'permitted_to_revoke_manager?' do
+        it 'true when landlord of building' do
+          @user.make_landlord(@building)
+          expect(@user.permitted_to_revoke_managership?(@building)).to eq true
+        end
 
-         it "true when landlord of building" do
-           @user.make_landlord(@building)
-	   expect(@user.permitted_to_revoke_managership?(@building)).to eq true
-         end
-
-         it "false when not landlord of building" do
-	   expect(@user.permitted_to_revoke_managership?(@building)).to eq false
-         end
+        it 'false when not landlord of building' do
+          expect(@user.permitted_to_revoke_managership?(@building)).to eq false
+        end
       end
 
-      describe "permitted_to_grant_tenantship?" do
-         it "true when owner of building" do
-           @user.make_landlord(@building)
-	   expect(@user.permitted_to_grant_tenantship?(@building)).to eq true
-         end
+      describe 'permitted_to_grant_tenantship?' do
+        it 'true when owner of building' do
+          @user.make_landlord(@building)
+          expect(@user.permitted_to_grant_tenantship?(@building)).to eq true
+        end
 
-         it "false when not owner of building" do
-	   expect(@user.permitted_to_grant_tenantship?(@building)).to eq false
-         end
+        it 'false when not owner of building' do
+          expect(@user.permitted_to_grant_tenantship?(@building)).to eq false
+        end
       end
 
-      describe "permitted_to_revoke_tenant?" do
-         it "true when landlord of building" do
-           @user.make_landlord(@building)
-	   expect(@user.permitted_to_revoke_tenantship?(@building)).to eq true
-         end
+      describe 'permitted_to_revoke_tenant?' do
+        it 'true when landlord of building' do
+          @user.make_landlord(@building)
+          expect(@user.permitted_to_revoke_tenantship?(@building)).to eq true
+        end
 
-         it "false when not landlord of building" do
-	   expect(@user.permitted_to_revoke_tenantship?(@building)).to eq false
-         end
+        it 'false when not landlord of building' do
+          expect(@user.permitted_to_revoke_tenantship?(@building)).to eq false
+        end
       end
     end
   end
 
-  describe "grant/revoke" do
+  describe 'grant/revoke' do
     before(:each) do
       load_valid_building
       load_user
@@ -435,61 +432,56 @@ RSpec.describe User, type: :model do
       load_landlord(@building)
     end
 
-    describe "grants" do
-
-      it "landlordship" do
+    describe 'grants' do
+      it 'landlordship' do
         load_admin
         @admin.grant(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD)
-	expect(@user.landlordships).to eq @user.memberships
+        expect(@user.landlordships).to eq @user.memberships
       end
 
-      it "landlordship raises when user is not admin" do
+      it 'landlordship raises when user is not admin' do
         load_landlord(@building)
-        expect{ @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD) }.to raise_error("Unable to grant permission")
+        expect { @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD) }.to raise_error('Unable to grant permission')
       end
 
-      it "managership" do
+      it 'managership' do
         @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
-	expect(@user.managerships.count).to eq 1
+        expect(@user.managerships.count).to eq 1
       end
 
-      it "tenantship" do
+      it 'tenantship' do
         @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
-	expect(@user.tenantships.count).to eq 1
+        expect(@user.tenantships.count).to eq 1
       end
-
     end
 
-    describe "revokes" do
-
-      it "landlordship" do
+    describe 'revokes' do
+      it 'landlordship' do
         load_admin
         @admin.grant(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD)
-	expect(@user.landlordships).to eq @user.memberships
+        expect(@user.landlordships).to eq @user.memberships
         @admin.revoke(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD)
-	expect(@user.landlordships).to be_empty
+        expect(@user.landlordships).to be_empty
       end
 
-      it "landlordship raises when user is not admin" do
+      it 'landlordship raises when user is not admin' do
         load_landlord(@building)
-        expect{ @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD) }.to raise_error("Unable to revoke permission")
+        expect { @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_LANDLORD) }.to raise_error('Unable to revoke permission')
       end
 
-
-      it "managership" do
+      it 'managership' do
         @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
-	expect(@user.managerships.count).to eq 1
+        expect(@user.managerships.count).to eq 1
         @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_MANAGER)
-	expect(@user.managerships).to be_empty
+        expect(@user.managerships).to be_empty
       end
 
-      it "tenantship" do
+      it 'tenantship' do
         @landlord.grant(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
-	expect(@user.tenantships.count).to eq 1
+        expect(@user.tenantships.count).to eq 1
         @landlord.revoke(@membership, Membership::MEMBERSHIP_TYPE_TENANT)
-	expect(@user.tenantships).to be_empty
+        expect(@user.tenantships).to be_empty
       end
-
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110153334) do
+ActiveRecord::Schema.define(version: 20160123191553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160110153334) do
   create_table "alerts", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "building_id"
-    t.string   "message"
+    t.text     "message"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -212,6 +212,14 @@ ActiveRecord::Schema.define(version: 20160110153334) do
 
   add_index "short_urls", ["token"], name: "index_short_urls_on_token", using: :btree
 
+  create_table "tenancies", force: :cascade do |t|
+    t.integer  "unit_id"
+    t.integer  "user_id"
+    t.integer  "building_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "building_id"
@@ -225,6 +233,16 @@ ActiveRecord::Schema.define(version: 20160110153334) do
 
   add_index "tickets", ["building_id", "severity"], name: "index_tickets_on_building_id_and_severity", using: :btree
   add_index "tickets", ["building_id", "status"], name: "index_tickets_on_building_id_and_status", using: :btree
+
+  create_table "units", force: :cascade do |t|
+    t.integer  "building_id"
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "units", ["building_id"], name: "index_units_on_building_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                    default: "",   null: false

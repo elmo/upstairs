@@ -19,8 +19,6 @@ Upstairs::Application.routes.draw do
   get '/privacy' => 'home#privacy', as: :privacy
   get '/help' => 'home#help', as: :help
   get '/find' => 'buildings#choose', as: :find_building
-  get '/buildings/:building_id/inbox' => 'messages#inbox', as: :inbox
-  get '/buildings/:building_id/outbox' => 'messages#outbox', as: :outbox
   get '/buildings/:building_id/calendar' => 'events#index', as: :calendar
 
   get '/welcome' => 'users#welcome', :via  => :get
@@ -31,22 +29,22 @@ Upstairs::Application.routes.draw do
     end
     resources :buildings, only: [:show] do
       resources :posts do
-         collection do
-           get 'tips'
-         end
-         resources :comments
+        collection do
+          get 'tips'
+        end
+        resources :comments
       end
       resources :events do
-         collection do
-           get 'calendar'
-         end
-         resources :comments
+        collection do
+          get 'calendar'
+        end
+        resources :comments
       end
       resources :alerts do
-         resources :comments
+        resources :comments
       end
       resources :tickets do
-         resources :comments
+        resources :comments
       end
     end
   end
@@ -61,6 +59,10 @@ Upstairs::Application.routes.draw do
       put 'reject'
     end
     resources :verifications, only: [:new, :create]
+  end
+
+  resources :units  do
+    resources :tenancies
   end
 
   resources :buildings do
@@ -112,6 +114,10 @@ Upstairs::Application.routes.draw do
 
     resources :users, only: [:show, :welcome] do
       resources :messages
+    end
+
+    resources :units do
+      resources :comments
     end
 
     resources :photos

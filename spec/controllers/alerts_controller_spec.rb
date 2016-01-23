@@ -1,13 +1,13 @@
 require 'rails_helper'
 RSpec.describe AlertsController, type: :controller do
-  let(:valid_attributes) {{message: 'message'}}
-  let(:invalid_attributes) {{message: nil}}
+  let(:valid_attributes) { { message: 'message' } }
+  let(:invalid_attributes) { { message: nil } }
 
   before(:each) do
     load_valid_building
     load_user
     sign_in(@user)
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("bandit","smokey")
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('bandit', 'smokey')
   end
 
   describe 'GET index' do

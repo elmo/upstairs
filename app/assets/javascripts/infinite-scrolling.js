@@ -1,3 +1,5 @@
+/*
+ * Do we still need this? 
 $(document).ready(function() {
   if ($('.pagination').length) {
     $(window).scroll(function() {
@@ -10,3 +12,4 @@ $(document).ready(function() {
     return $(window).scroll();
   }
 });
+*/

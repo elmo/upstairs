@@ -75,9 +75,8 @@ module ApplicationHelper
   def by_line(obj, with_icon: false)
     content_tag(:span, class: 'byline') do
       ((with_icon && obj.user.avatar.present?) ? cl_image_tag(obj.user.avatar.path, size: '40x40', crop: :fit) : '') +
-      link_to(username_or_anonymous(obj.user), building_user_path(obj.building, obj.user.slug)) +
+        link_to(username_or_anonymous(obj.user), building_user_path(obj.building, obj.user.slug)) +
         ' at ' + obj.created_at.strftime(upstairs_time_format)
-
     end
   end
 
@@ -235,33 +234,37 @@ module ApplicationHelper
   end
 
   def search_and_filter_nav
-   case current_section
-   when 'bulletin board'
-     render partial: '/posts/search_and_filter_nav'
-   when 'alerts'
-     render partial: '/alerts/search_and_filter_nav'
-   when  'calendar'
-     render partial: '/events/search_and_filter_nav'
-   when 'messages'
-     render partial: '/messages/search_and_filter_nav'
-    when 'members'
-     render partial: '/memberships/search_and_filter_nav'
-    when 'tickets'
-     render partial: '/tickets/search_and_filter_nav'
-    when 'invitations'
-     render partial: '/invitations/search_and_filter_nav'
-    when 'buildings'
-     render partial: '/buildings/search_and_filter_nav'
-    when 'users'
-     render partial: '/users/search_and_filter_nav'
-    end
+    case current_section
+    when 'bulletin board'
+      render partial: '/posts/search_and_filter_nav'
+    when 'alerts'
+      render partial: '/alerts/search_and_filter_nav'
+    when  'calendar'
+      render partial: '/events/search_and_filter_nav'
+    when 'messages'
+      render partial: '/messages/search_and_filter_nav'
+     when 'members'
+       render partial: '/memberships/search_and_filter_nav'
+     when 'tickets'
+       render partial: '/tickets/search_and_filter_nav'
+     when 'invitations'
+       render partial: '/invitations/search_and_filter_nav'
+     when 'buildings'
+       render partial: '/buildings/search_and_filter_nav'
+     when 'users'
+       render partial: '/users/search_and_filter_nav'
+     end
   end
-
 end
- def favicon_link_tag(source='fav_icon.ico', options={})
-        tag('link', {
-          :rel  => 'shortcut icon',
-          :type => 'image/x-icon',
-          :href => path_to_image(source)
-        }.merge!(options.symbolize_keys))
-      end
+
+def favicon_link_tag(source = 'fav_icon.ico', options = {})
+  tag('link', {
+    rel: 'shortcut icon',
+    type: 'image/x-icon',
+    href: path_to_image(source)
+  }.merge!(options.symbolize_keys))
+ end
+
+def text_message_cta
+  render partial: '/layouts/text_message_cta'
+end

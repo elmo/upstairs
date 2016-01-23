@@ -12,6 +12,8 @@ class Building < ActiveRecord::Base
   has_many :verifications, dependent: :destroy
   has_many :verification_requests, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :units, dependent: :destroy
+  has_many :tenancies, through: :units
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   belongs_to :actionable, polymorphic: true
   validates_presence_of :address
@@ -45,9 +47,9 @@ class Building < ActiveRecord::Base
 
   def is_guest?(user)
     users.joins(:memberships)
-         .where( memberships: {
-		   membership_type: Membership::MEMBERSHIP_TYPE_GUEST,
-		   user_id: user.id } ).exists?
+      .where(memberships: {
+               membership_type: Membership::MEMBERSHIP_TYPE_GUEST,
+               user_id: user.id }).exists?
   end
 
   def revoke_guestship(user)
@@ -64,9 +66,9 @@ class Building < ActiveRecord::Base
 
   def has_tenant?(user)
     users.joins(:memberships)
-         .where( memberships: {
-		  membership_type: Membership::MEMBERSHIP_TYPE_TENANT,
-		  user_id: user.id } ).exists?
+      .where(memberships: {
+               membership_type: Membership::MEMBERSHIP_TYPE_TENANT,
+               user_id: user.id }).exists?
   end
 
   def grant_landlordship(user)
@@ -83,9 +85,9 @@ class Building < ActiveRecord::Base
 
   def is_landlord?(user)
     users.joins(:memberships)
-         .where( memberships: {
-		   membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD,
-		   user_id: user.id } ).exists?
+      .where(memberships: {
+               membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD,
+               user_id: user.id }).exists?
   end
 
   def managers
@@ -110,14 +112,14 @@ class Building < ActiveRecord::Base
 
   def is_manager?(user)
     users.joins(:memberships)
-         .where( memberships: {
-		   membership_type: Membership::MEMBERSHIP_TYPE_MANAGER,
-		   user_id: user.id } ).exists?
+      .where(memberships: {
+               membership_type: Membership::MEMBERSHIP_TYPE_MANAGER,
+               user_id: user.id }).exists?
   end
 
   def promote_to_tenant(user)
     memberships.where(user_id: user.id, membership_type: Membership::MEMBERSHIP_TYPE_GUEST)
-               .update_all(membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
+      .update_all(membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
   end
 
   def public_name
@@ -135,6 +137,18 @@ class Building < ActiveRecord::Base
 
   def owner_verified?
     verifications.exists?
+  end
+
+  def occupied_percentage
+    units_count = units.count
+    return 0 if units_count == 0
+    Float(units.occupied.count) / Float(units_count) * 100
+  end
+
+  def vacant_percentage
+    units_count = units.count
+    return 0 if units_count == 0
+    Float(units.vacant.count) / Float(units_count) * 100
   end
 
   private
