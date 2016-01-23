@@ -1,7 +1,4 @@
-<h3>Alerts</h3>
-<div class="content-posts">
-<br clear="all">
-<!--%= render partial: 'form' -%-->
+<h4>Alerts</h4>
 <% if @alerts.any? %>
   <ul>
     <% @alerts.each do |alert| %>
@@ -24,4 +21,5 @@
     <p>There are no alerts for this building.</p>
   <% end %>
 <% end %>
-</div>
+
+<%= text_message_cta -%>

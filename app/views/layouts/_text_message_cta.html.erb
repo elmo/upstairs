@@ -1,0 +1,40 @@
+<% if !current_user.receives_text_messages? %>
+<div class="modal">
+  <input class="modal-state" id="text-message-cta" type="checkbox" />
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="text-message-cta"></div>
+      <h1>Add your phone number to get Building Alerts right away, when they matter most.</h1>
+      <p class="modal-intro">Your profile needs to a valid phone number and click the box marked 'Upstairs can send me text messages' to give Upstairs permission to send you text messages.</p>
+      <%= render partial: '/devise/registrations/text_message_fields' -%>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+  $("#text-message-cta").on("change", function() {
+    if ($(this).is(":checked")) {
+      $("body").addClass("modal-open");
+    } else {
+      $("body").removeClass("modal-open");
+    }
+  });
+
+  $(".modal-fade-screen, .modal-close").on("click", function() {
+    $(".modal-state:checked").prop("checked", false).change();
+  });
+
+  $(".modal-inner").on("click", function(e) {
+    e.stopPropagation();
+  });
+});
+</script>
+
+<script>
+$(function() {
+ $("#text-message-cta").prop("checked", true);
+});
+</script>
+<% end %>
+

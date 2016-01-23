@@ -1,0 +1,17 @@
+<%= form_for(current_user, url: registration_path(current_user), html: { method: :put }) do |f| %>
+
+  <div class="field">
+    <%= f.label :phone , I18n.t(:phone_number) %>
+    <%= f.text_field :phone , autocomplete: "on", placeholder: I18n.t(:entery_your_phone_number_hear) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ok_to_send_text_messages, I18n.t(:ok_to_send_me_text_messages) %>
+    <%= f.check_box :ok_to_send_text_messages %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit I18n.t(:save_my_profile_changes) %>
+  </div>
+
+<% end %>
