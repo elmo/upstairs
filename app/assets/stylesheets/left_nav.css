@@ -9,6 +9,10 @@
     font-family: Icon_set_upstairs-Regular;
     src: asset-url('Icon_set_upstairs-Regular.otf');
 }
+@font-face {
+    font-family: ElegantIcons;
+    src: asset-url('ElegantIcons.ttf');
+}
 .homeLogo{
     height: 80px;
     
