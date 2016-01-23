@@ -1,6 +1,5 @@
-<div class="content-posts">
-  <p class="alert">
-    <%= simple_format(@alert.message) -%>
-  </p>
-</div>
-<%# comments -%>
+<h4>View alert</h4>
+<p class="alert">
+ <%= simple_format(@alert.message) -%>
+ <%= by_line(@alert, with_icon: true) -%>
+</p>
