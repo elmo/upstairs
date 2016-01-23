@@ -256,10 +256,15 @@ module ApplicationHelper
      end
   end
 end
+
 def favicon_link_tag(source = 'fav_icon.ico', options = {})
   tag('link', {
     rel: 'shortcut icon',
     type: 'image/x-icon',
     href: path_to_image(source)
   }.merge!(options.symbolize_keys))
-     end
+ end
+
+def text_message_cta
+  render partial: '/layouts/text_message_cta'
+end

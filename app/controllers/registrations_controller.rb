@@ -42,7 +42,7 @@ class RegistrationsController < Devise::RegistrationsController
     if @user.update_attributes(account_update_params)
       set_flash_message :notice, :updated
       sign_in @user, bypass: true
-      redirect_to after_update_path_for(@user)
+      redirect_to :back
     else
       render 'edit'
     end
@@ -69,10 +69,6 @@ class RegistrationsController < Devise::RegistrationsController
     else
       home_path
     end
-  end
-
-  def after_update_path_for(_resource)
-    edit_user_registration_path
   end
 
   def update_resource(resource, params)

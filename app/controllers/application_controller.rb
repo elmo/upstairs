@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def after_update_path_for(resource)
+    redirect_to :back
+  end
+
   def not_found
     fail ActionController::RoutingError.new('Not Found')
   end

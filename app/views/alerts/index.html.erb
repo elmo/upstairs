@@ -1,5 +1,4 @@
 <h4>Alerts</h4>
-<div class="content-posts">
 <% if @alerts.any? %>
   <ul>
     <% @alerts.each do |alert| %>
@@ -22,4 +21,5 @@
     <p>There are no alerts for this building.</p>
   <% end %>
 <% end %>
-</div>
+
+<%= text_message_cta -%>
