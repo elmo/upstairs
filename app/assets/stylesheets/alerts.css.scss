@@ -1,0 +1,147 @@
+$radius: 3px;
+.alertAllBt,
+.alert {
+    border-radius: 3px;
+    line-height: 18px;
+    color: white;
+    padding: 10px;
+    display: block;
+    float: left;
+    height: 40px;
+    margin-right: 10px;
+    background-color: rgba(255, 0, 6, 0.3);
+
+} 
+.alertAllBt{
+    
+    margin: 10px;
+    a {
+        color: white;
+        white-space: nowrap;
+        text-transform:capitalize;
+    }
+}
+.alertMsg{
+    display: block;
+    float: left;
+    margin-right: 5px;
+    
+}
+.alertsHeaderModule{
+    display: flex;
+}
+.alertDelete{
+    display: block;
+    float: left;
+    a {
+        
+        color:white;
+        font-family: ElegantIcons;
+        
+    }
+    
+}
+.alert_list{
+    display: inline-block;
+    overflow: hidden;
+    height: 40px;
+    margin: 10px;
+}
+div.member {
+  border: 1px solid black;
+  float: left;
+  padding: 1em;
+  margin: 1em;
+}
+.header_fiche{
+    display: flex;
+    flex-direction: row;
+}
+.alertList{
+    display: flex;
+    flex-direction: row;          
+    font-family:  Raleway-light;
+    flex-wrap: wrap;
+    width: 100%;
+    
+}
+.user-name{
+    width: 100%;
+    text-align: center;
+}
+.colorAlert{
+    display: flex;
+    background-color: red;
+    width: 10px;   
+        @include border-left-radius($radius);
+}
+.alert_fiche{
+    flex-grow: 1;
+    min-width: 150px;
+    display: flex;
+    background: #ffffff;
+    flex-direction:row;
+    justify-content: space-between;
+    border-radius: 8px;
+    max-height: 100px;
+    .photo{    
+        height: 20px;
+        width: 20px;
+        background-size: 20px;  
+        margin: 0px;
+        margin-right: auto;
+        margin-left: auto;
+        flex: 0 0 20px;
+        border-radius: 50%;
+    }
+    .post-text {
+        padding: 5px;
+    }
+    .alert_details{
+        display: flex;
+        flex-direction: row;
+        
+    }
+    .alert-text{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 10px;
+        justify-content: space-between;
+    }
+    .user-name{
+        a{
+           float: left; 
+            margin-top: -2px;
+        }
+        .photo{
+            float: left;
+            margin-right: 5px;
+        }
+        
+    }
+    .text-alert{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+.member_details{
+    padding: 10px;  
+}   
+.btn {
+    align-items: flex-end;
+    border-radius: $radius;
+    font-family: Raleway-Light;
+    text-transform:uppercase;
+    color: #919191;
+    font-size: 16px;
+    padding: 10px 20px 10px 20px;
+    border: solid #e0e0e0 1px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+  background: #f2f2f2;
+  text-decoration: none;
+}

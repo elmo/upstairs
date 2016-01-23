@@ -9,6 +9,10 @@
     font-family: Icon_set_upstairs-Regular;
     src: asset-url('Icon_set_upstairs-Regular.otf');
 }
+@font-face {
+    font-family: ElegantIcons;
+    src: asset-url('ElegantIcons.ttf');
+}
 .homeLogo{
     height: 80px;
     
@@ -201,11 +205,12 @@ body {
 #header {
     /* top: 0px; */
     /* left: 1px; */
-    height: 45px;
+    height: 60px;
     width: 100%;
     /* position: absolute; */
     /* margin-bottom: 30px; */
-    display: block;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 #rectangle_8 {
@@ -600,7 +605,8 @@ body {
 /* Add your custom CSS here */
 
 .nav {
-    height: 40px;   
+    height: 40px;  
+    display: flex;
 }
 
 .nav > a {
@@ -622,6 +628,8 @@ body {
 
 .nav > ul {
     height: 3.75em;
+    width: 190px;
+
 }
 
 .nav > ul > li {
@@ -651,6 +659,10 @@ body {
     color: #565656; 
     
 }   
+.header{
+    background: white;
+    display: flex;
+}
 .nav > ul > li > ul > li:Hover  {
      text-decoration: none;
     @include transition( background 0.1s linear);
@@ -665,8 +677,14 @@ body {
     height: 60px;
     float: right;
     background: white;
+    display: flex;
+    
 }
 
+#searchC > form {
+    display: flex;
+    
+}
 #searchC > form > input[type='text']{
     margin-top: 15px;
     margin-left: 10px;
@@ -717,8 +735,6 @@ body {
 }
 .left_nav_profile{
     width: 100%;
-    
-    
 }
 .left_nav_profile li{
     width: 100%;
@@ -789,6 +805,8 @@ body {
     transition: width 0.1s linear;
     width: 0px;
     display: none;
+    margin-top: 13;
+    margin-left: 10px;
     
 }
 .accordion {  

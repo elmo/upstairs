@@ -30,21 +30,34 @@ div.member {
     height:initial;
     border-radius: 8px;
     .photo{
+        width: 120px;
+        height: 120px;
         margin: 0px;
         margin-right: auto;
         margin-left: auto;
+       // flex: 0 0 120px;
+        border-radius: 0px
         
+    }
+    .icon_button {
+        font-family: Icon_set_upstairs-Regular, Arial, Helvetica, sans-serif;
+        font-size: 26px;
+        line-height: 16px;
+        margin-top: -8px;
+    }
+    .header_fiche{
+        margin-bottom: 0px;
+        flex-direction: column;
     }
 }
 .member_details{
+    //padding: 10px;  
+}
+.member_action{
     padding: 10px;  
 }
-.header_fiche{
-    margin-bottom: 20px;
-    
-}
 .move_in{
-    font-size: 14px;    
+    font-size: 10px;    
     text-align: center; 
     
 }
