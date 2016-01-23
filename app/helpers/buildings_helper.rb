@@ -136,7 +136,7 @@ end
 def send_message_user(user:, building:)
   content_tag(:div,'request',id: 'request', class: 'btn') do
     link_to new_building_user_message_path(building, user.slug)  do
-    content_tag(:div, 'G', id: 'icon_5', class: 'icon_butto  n')
+    content_tag(:div, 'G', id: 'icon_5', class: 'icon_button')
   end
   end
 end
