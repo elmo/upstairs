@@ -10,10 +10,14 @@
                 <div class="colorAlert"></div>
                 <div class="alert-text" >
                     <div class="text-alert">
+                        <div class="alertMsg">
                         <%= truncate(alert.message, length: 50, omission: '... (continued)' ) -%> 
+                        </div>
+                        <div class="editeBtn">
                         <% if alert.owned_by?(current_user) %>
                             <%= link_to 'edit', edit_building_alert_path(@building, alert) -%>
                         <% end %>
+                        </div>
                     </div>
                     <div class="alert_details">
                         <div class="user-name">
