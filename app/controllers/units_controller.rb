@@ -12,7 +12,7 @@ class UnitsController < ApplicationController
       scope = scope.occupied if params[:status] == Unit::STATUS_OCCUPIED
       scope = scope.vacant if params[:status] == Unit::STATUS_VACANT
     end
-    @units = scope.order('name').page(params[:page]).per(5)
+    @units = scope.order('name').page(params[:page]).per(10)
   end
 
   # GET /units/1
