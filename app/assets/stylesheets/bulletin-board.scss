@@ -35,8 +35,6 @@
     $card-image-hover-color: #F8F2B4;
     $card-height:350px;
     $card-category_color-height:120px;
-    @include flex-basis(15em);
-    @include flex-grow(1);
     @include transition (all 0.2s ease-in-out);
     //border-radius: $base-border-radius;
     //border: $card-border;
@@ -45,6 +43,7 @@
     margin: 0 $card-margin $base-spacing $card-margin;
     height:calc(100%/2) ;
     height: 370px; 
+    flex: 2 2 15em;
 
   
 
