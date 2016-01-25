@@ -1,0 +1,41 @@
+<div id="menu">
+    <div class="group homeLogo" >
+        <%= upstairs_home_page_icon_small %>
+        <%= upstairs_home_page_icon %>
+    </div>
+    <div class="group" id="dashboard">
+        <div id="split">
+            <div id="rectangle_7_copy_3"  ></div>
+            <div id="rectangle_7_copy_2"  ></div>
+        </div> 
+
+        <%= manage_posts_icon %>
+        <%= manage_events_icon %>
+        <%= manage_messages_icon %>
+        <%= manage_tenants_icon %>
+    </div> 
+
+    <div class="group" id="actions" >
+         <div id="split">
+            <div id="rectangle_7_copy_3"  ></div>
+            <div id="rectangle_7_copy_2"  ></div>
+        </div>   
+        <%= manage_alerts_icon %>
+        <%= manage_repairs_icon %>
+    </div> 
+
+    <div class="group" id="settings">
+        <div id="split">
+            <div id="rectangle_7_copy_3"  ></div>
+            <div id="rectangle_7_copy_2"  ></div>
+        </div> 
+        <%= user_settings_icon(user: current_user) %>
+    </div>  <div class="group" id="logOut">
+        <div id="split">
+            <div id="rectangle_7_copy_3"  ></div>
+            <div id="rectangle_7_copy_2"  ></div>
+        </div>
+        <%= user_logout_icon(user: current_user, building: nil) %>
+    </div> 
+
+</div> 

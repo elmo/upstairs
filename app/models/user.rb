@@ -272,6 +272,10 @@ class User < ActiveRecord::Base
     managerships.collect(&:building)
   end
 
+  def owned_and_managed_properties
+    memberships.where(membership_type: [Membership::MEMBERSHIP_TYPE_LANDLORD, Membership::MEMBERSHIP_TYPE_MANAGER] ).collect(&:building)
+  end
+
   def to_param
     slug
   end

@@ -183,6 +183,10 @@ module ApplicationHelper
     '400x400'
   end
 
+  def manage_namespace?
+    controller.class.parent == Manage
+  end
+
   def current_section
     case controller_name
       when 'posts'
@@ -233,7 +237,20 @@ module ApplicationHelper
     end
   end
 
+  def left_nav
+    if manage_namespace?
+      render partial: '/layouts/manage/left_nav', locals: { section: current_section }
+    else
+      render partial: '/layouts/left_nav', locals: { section: current_section }
+    end
+  end
+
+  def manage_search_and_filter_nav
+    render partial: '/layouts/manage/search_and_filter_nav'
+  end
+
   def search_and_filter_nav
+    return manage_search_and_filter_nav if manage_namespace?
     case current_section
     when 'bulletin board'
       render partial: '/posts/search_and_filter_nav'

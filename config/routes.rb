@@ -24,6 +24,16 @@ Upstairs::Application.routes.draw do
   get '/welcome' => 'users#welcome', :via  => :get
   put '/acknowledge' => 'users#acknowledge'
 
+  namespace :manage do
+    resources :buildings
+    resources :posts
+    resources :messages
+    resources :memberships
+    resources :alerts
+    resources :tickets
+    resources :events
+  end
+
   namespace :api do
     resources :user, only: [:show] do
     end
