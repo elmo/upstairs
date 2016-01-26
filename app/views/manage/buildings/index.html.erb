@@ -1,7 +1,28 @@
+<h1>My Buildings</h1>
+
+<%= render partial: '/manage/subnav' -%>
+
+<table class="table">
+<tr>
+  <th>Address</th>
+  <th>People</th>
+</tr>
 <% @buildings.each do |building| %>
-  <div id="manage_building_<%= building.id-%>" class="manage-building"> 
-    <%= building.name -%>
-    <%= building.address -%>
-    <%= link_to 'visit' ,  building_path(building) -%>
-</div>
+   <tr>
+    <td>
+      <%= building.address -%>
+      <%= link_to 'visit' ,  building_path(building) -%>
+    </td>
+    <td>
+      <%= link_to "users (#{building.users.count})", manage_memberships_path(building_id: building.to_param)  -%>
+      <%= link_to "tenants (#{building.memberships.tenant.count})", manage_memberships_path(building_id: building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) -%>
+      <%= link_to "guests(#{building.memberships.guest.count})", manage_memberships_path(building_id: building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) -%>
+      <%= link_to "managers(#{building.memberships.manager.count})", manage_memberships_path(building_id: building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) -%>
+    </td>
+   </tr>
+</table>
 <% end %>
+
+<p>
+<%= paginate(@buildings) %>
+</p>

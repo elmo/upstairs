@@ -1,0 +1,26 @@
+<% if @building.present? %>
+  <h2>People (<%= link_to @building.users.count, manage_memberships_path(building_id: @building.slug) -%>) </h2>
+<% else %>
+  <h2>People (<%= link_to "#{User.managed_by(user: current_user, membership_type: params[:membership_type] ).count}", manage_memberships_path(building_id: nil )  -%>) </h2>
+<% end %>
+
+<p>
+  <%= link_to "users (#{@building.users.count})", manage_memberships_path(building_id: @building.to_param)  -%>
+  <%= link_to "tenants (#{@building.memberships.tenant.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) -%>
+  <%= link_to "guests(#{@building.memberships.guest.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) -%>
+  <%= link_to "managers(#{@building.memberships.manager.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) -%>
+<p>
+
+
+<table class="table">
+<% @members.each do |user| %>
+  <tr>
+   <td><%= user.email -%></td>
+   <td><%= user.memberships.where(building_id: current_user.owned_and_managed_properties).collect(&:membership_type).join(',') %></td>
+</tr>
+<% end %>
+</table>
+
+<p>
+  <%= paginate(@members) -%>
+</p>

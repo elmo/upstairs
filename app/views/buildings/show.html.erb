@@ -1,13 +1,21 @@
+<h5><%= @building.address -%></h5>
+
+<% if current_user.landlord_or_manager_of?(@building) %>
+  <%= link_to 'manage', manage_building_path(@building) -%>
+<% end %>
+
 <div class="content-posts">
-<h5><%= building_short_address(@building) -%></h5>
+
 <%= render partial: '/alerts/recent' if @building.alerts.recent.any? %>
+
 <h5>Latest Posts</h5>
 <% if @posts.any?  %>
   <% @posts.each_with_index do |post,i| -%>
     <%= render partial: '/posts/post', locals: { post: post, i: i } %> 
+    <br />
   <% end %>
 <% end %>
-<p><%= link_to 'see all posts', building_posts_path(@building) -%></p>
+
 <h5>Upcoming Events</h5>
 <% if @events.any? %>
   <% @events.each do |event| %>
@@ -16,4 +24,5 @@
   <p>There are no upcoming events for this building.</p>
   <%= link_to 'create a new event' , new_building_event_path(@building ) %>
 <% end %>
+<br clear="all">
 </div>

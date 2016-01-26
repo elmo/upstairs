@@ -181,11 +181,17 @@ def upstairs_home_page_icon_small
   end
  end
 
-def user_logout_icon(user:, building:)
-  content_tag(:div, 'exit', id: 'exit', class: 'menu_item' ) do
-    link_to(destroy_user_session_path, method: :delete ) do
-      content_tag(:div, 'w', id: 'icon_7', class: 'icon_menu') +
-      content_tag(:div, I18n.t(:log_out) ,id: 'exit_1', class: 'menu_item_text')
+def manage_upstairs_home_page_icon
+  content_tag(:div, 'home', id: 'home' ) do
+    if @building.present?
+      link_to building_url(@building) do
+        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
+      end
+    else
+      link_to(manage_buildings_path) do
+        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
+      end
     end
   end
- end
+end
+
