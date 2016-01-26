@@ -24,6 +24,21 @@ Upstairs::Application.routes.draw do
   get '/welcome' => 'users#welcome', :via  => :get
   put '/acknowledge' => 'users#acknowledge'
 
+  namespace :manage do
+    resources :buildings do
+      resources :units
+    end
+    resources :posts
+    resources :messages
+    resources :memberships
+    resources :alerts
+    resources :tickets
+    resources :events
+    resources :units do
+      resources :tenancies
+    end
+  end
+
   namespace :api do
     resources :user, only: [:show] do
     end
@@ -59,10 +74,6 @@ Upstairs::Application.routes.draw do
       put 'reject'
     end
     resources :verifications, only: [:new, :create]
-  end
-
-  resources :units  do
-    resources :tenancies
   end
 
   resources :buildings do

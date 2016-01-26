@@ -1,5 +1,4 @@
-class UnitsController < ApplicationController
-  before_action :authenticate_user!
+class Manage::UnitsController < Manage::ManageController
   before_action :set_building
   before_action :set_unit, only: [:show, :edit, :update, :destroy]
 
@@ -12,6 +11,7 @@ class UnitsController < ApplicationController
       scope = scope.occupied if params[:status] == Unit::STATUS_OCCUPIED
       scope = scope.vacant if params[:status] == Unit::STATUS_VACANT
     end
+    scope = scope.where(['name like ?', "%#{params[:searchTextField]}%"]) if params[:searchTextField]
     @units = scope.order('name').page(params[:page]).per(10)
   end
 
@@ -36,7 +36,7 @@ class UnitsController < ApplicationController
 
     respond_to do |format|
       if @unit.save
-        format.html { redirect_to building_units_path(@building), notice: 'Unit was successfully created.' }
+        format.html { redirect_to manage_building_units_path(@building), notice: 'Unit was successfully created.' }
         format.json { render :show, status: :created, location: @unit }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class UnitsController < ApplicationController
   def update
     respond_to do |format|
       if @unit.update(unit_params)
-        format.html { redirect_to building_unit_path(@unit), notice: 'Unit was successfully updated.' }
+        format.html { redirect_to manage_building_unit_path(@building, @unit), notice: 'Unit was successfully updated.' }
         format.json { render :show, status: :ok, location: @unit }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class UnitsController < ApplicationController
   def destroy
     @unit.destroy
     respond_to do |format|
-      format.html { redirect_to building_units_url(@building), notice: 'Unit was successfully destroyed.' }
+      format.html { redirect_to manage_building_units_url(@building), notice: 'Unit was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

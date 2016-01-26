@@ -1,0 +1,7 @@
+<p>
+<% if !params[:searchTextField].present? %>
+Filter: <strong><%= (params[:status].present?) ? params[:status] : 'All' %></strong>
+<% else %>
+Search: <strong>"<%= params[:searchTextField] -%>"</strong>
+<% end %>
+</p>

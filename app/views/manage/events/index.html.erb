@@ -1,0 +1,7 @@
+<% @buildings.each do |building| %>
+  <div id="manage_building_<%= building.id-%>" class="manage-building"> 
+    <%= building.name -%>
+    <%= building.address -%>
+    <%= link_to 'visit' ,  building_path(building) -%>
+</div>
+<% end %>

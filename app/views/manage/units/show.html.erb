@@ -1,5 +1,5 @@
 <h4><%= @building.address -%> </h4>
-<p class="small"><%= link_to 'edit', edit_building_unit_path(@building, @unit) -%> </p>
+<p class="small"><%= link_to 'edit', edit_manage_building_unit_path(@building, @unit) -%> </p>
 
 <h4><%= @unit.name %></h4>
 
@@ -10,5 +10,5 @@ Rented to <%= @unit.tenancy.user.email -%>
 <% end %>
 
 <p>
-<%= link_to 'List all building units', building_units_path(@building) %>
+<%= link_to 'List all building units', manage_building_units_path(@building) %>
 </p>

@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <td>Units: (<%= link_to @building.units.count, manage_building_units_path(@building) -%>) </td>
+    <td>Occupied: <%= link_to @building.units.occupied.count, manage_building_units_path(@building, status: Unit::STATUS_OCCUPIED) -%>
+                  (<%= number_to_percentage(@building.occupied_percentage, precision: 0) -%>)
+    </td>
+    <td>Vacant: <%= link_to @building.units.vacant.count, manage_building_units_path(@building, status: Unit::STATUS_VACANT) -%>
+                (<%= number_to_percentage(@building.vacant_percentage, precision: 0) -%>)
+    </td>
+    </td>
+  </tr>
+</table>
