@@ -18,4 +18,10 @@ class Unit < ActiveRecord::Base
     end
     Tenancy.create(unit_id: id, user_id: user.id, building_id: building.id)
   end
+
+
+  def self.statuses
+    [STATUS_OCCUPIED, STATUS_VACANT]
+  end
+
 end

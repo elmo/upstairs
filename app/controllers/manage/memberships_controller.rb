@@ -9,11 +9,20 @@ class Manage::MembershipsController < ApplicationController
         scope = scope.tenant if params[:membership_type] == Membership::MEMBERSHIP_TYPE_TENANT
         scope = scope.manager if params[:membership_type] == Membership::MEMBERSHIP_TYPE_MANAGER
       end
-      scope = scope.page(params[:page]).per(10)
       members = scope.collect(&:user)
-      @members = Kaminari.paginate_array(members).page(params[:page]).per(10)
+      @members = Kaminari.paginate_array(members).page(params[:page]).per(5)
     else
-      @members = User.managed_by(user: current_user, membership_type: params[:membership_type] )
+      members = User.managed_by(user: current_user, membership_type: params[:membership_type] )
+      @members = Kaminari.paginate_array(members).page(params[:page]).per(5)
+    end
+  end
+
+  def destroy
+    @building = Building.friendly.where(slug: params[:building_id]).first
+    if @building.present? and current_user.landlord_or_manager_of?(@building)
+      @membership = @building.memberships.find(params[:id])
+      @membership.destroy
+      redirect_to :back
     end
   end
 

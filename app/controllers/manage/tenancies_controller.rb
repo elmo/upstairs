@@ -1,5 +1,4 @@
-class TenanciesController < ApplicationController
-  before_action :authenticate_user!
+class Manage::TenanciesController < Manage::ManageController
   before_action :set_unit_and_building
   before_action :set_tenancy, only: [:show, :edit, :update, :destroy]
 
@@ -29,7 +28,7 @@ class TenanciesController < ApplicationController
     @user = User.find(tenancy_params[:user_id])
     respond_to do |format|
       if @unit.create_tenancy_for(user: @user)
-        format.html { redirect_to building_units_path(@building), notice: 'Tenancy was successfully saved.' }
+        format.html { redirect_to manage_building_units_path(@building), notice: 'Tenancy was successfully saved.' }
       else
         format.html { render :new }
       end
@@ -41,7 +40,7 @@ class TenanciesController < ApplicationController
   def update
     respond_to do |format|
       if @tenancy.update(tenancy_params)
-        format.html { redirect_to builing_tenancy_path(@building, @tenancy), notice: 'Tenancy was successfully updated.' }
+        format.html { redirect_to building_tenancy_path(@building, @tenancy), notice: 'Tenancy was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -53,7 +52,7 @@ class TenanciesController < ApplicationController
   def destroy
     @tenancy.destroy
     respond_to do |format|
-      format.html { redirect_to building_units_path(@building), notice: 'Tenancy was successfully created.' }
+      format.html { redirect_to manage_building_units_path(@building), notice: 'Tenancy was successfully created.' }
       format.json { head :no_content }
     end
   end

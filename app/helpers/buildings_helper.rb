@@ -181,17 +181,3 @@ def upstairs_home_page_icon_small
   end
  end
 
-def manage_upstairs_home_page_icon
-  content_tag(:div, 'home', id: 'home' ) do
-    if @building.present?
-      link_to building_url(@building) do
-        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
-      end
-    else
-      link_to(manage_buildings_path) do
-        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
-      end
-    end
-  end
-end
-

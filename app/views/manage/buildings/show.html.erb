@@ -1,2 +1,18 @@
-<h2><%= link_to "Users (#{@building.users.count})", manage_memberships_path(building_id: @building.slug) -%></h2>
+<h1>Building Detail</h1>
 
+<h2>Statistics</h2>
+
+<h2>Units </h2>
+<p>
+  <%= link_to "Units (#{@building.units.count})", manage_building_units_path(@building) -%>
+  <%= link_to "Occupied (#{@building.units.occupied.count})", manage_building_units_path(@building, status: Unit::STATUS_OCCUPIED ) -%>
+  <%= link_to "Vacant(#{@building.units.vacant.count})", manage_building_units_path(@building, status: Unit::STATUS_VACANT) -%>
+</p>
+
+<h2>Users</h2>
+<p>
+  <%= link_to "Users (#{@building.users.count})", manage_memberships_path(building_id: @building.slug) -%>
+  <%= link_to "tenants (#{@building.memberships.tenant.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) -%>
+  <%= link_to "guests(#{@building.memberships.guest.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) -%>
+  <%= link_to "managers(#{@building.memberships.manager.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) -%>
+</p>

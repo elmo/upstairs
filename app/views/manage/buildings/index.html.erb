@@ -1,6 +1,5 @@
 <h1>My Buildings</h1>
 
-<%= render partial: '/manage/subnav' -%>
 
 <table class="table">
 <tr>
@@ -11,7 +10,8 @@
    <tr>
     <td>
       <%= building.address -%>
-      <%= link_to 'visit' ,  building_path(building) -%>
+      <%= link_to 'manage', manage_building_path(building) -%>
+      <%= link_to 'visit', building_path(building) -%>
     </td>
     <td>
       <%= link_to "users (#{building.users.count})", manage_memberships_path(building_id: building.to_param)  -%>

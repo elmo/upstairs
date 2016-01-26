@@ -1,4 +1,4 @@
-module ManageHelper
+module Manage::LeftNavHelper
 
    def manage_events_icon
      content_tag(:div, 'calendar', id: 'calendar', class: 'menu_item') do
@@ -65,6 +65,14 @@ def manage_upstairs_home_page_icon_small
   end
 end
 
+def manage_upstairs_home_page_icon
+  content_tag(:div, 'home', id: 'home' ) do
+      link_to(manage_buildings_path) do
+        content_tag(:div, 'v', id: 'icon_9', class: 'home_icon_menu')
+      end
+    end
+end
+
 def user_logout_icon(user:, building:)
   content_tag(:div, 'exit', id: 'exit', class: 'menu_item' ) do
     link_to(destroy_user_session_path, method: :delete ) do
@@ -72,4 +80,5 @@ def user_logout_icon(user:, building:)
       content_tag(:div, I18n.t(:log_out) ,id: 'exit_1', class: 'menu_item_text')
     end
   end
- end
+
+end
