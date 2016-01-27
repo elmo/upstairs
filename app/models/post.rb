@@ -11,6 +11,10 @@ class Post < ActiveRecord::Base
   after_create :create_notifications
   after_create :create_actionable
 
+  scope :managed_by, lambda  { |user|
+    where(["postable_type = 'Building' and postable_id in (?) ", user.owned_and_managed_properties.collect(&:id)])
+  }
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
   has_paper_trail

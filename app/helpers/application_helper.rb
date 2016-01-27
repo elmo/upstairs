@@ -248,6 +248,8 @@ module ApplicationHelper
   def manage_search_and_filter_nav
     if controller_name == 'units'
       render partial: '/manage/units/search_and_filter_nav'
+    elsif controller_name == 'posts'
+      render partial: '/manage/posts/search_and_filter_nav'
     else
       render partial: '/layouts/manage/search_and_filter_nav'
     end
