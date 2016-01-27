@@ -1,7 +1,39 @@
-<% @buildings.each do |building| %>
-  <div id="manage_building_<%= building.id-%>" class="manage-building"> 
-    <%= building.name -%>
-    <%= building.address -%>
-    <%= link_to 'visit' ,  building_path(building) -%>
-</div>
+<h2>Alerts</h2>
+
+<% if @alerts.empty? %>
+  <% if params[:searchTextField].blank? %>
+    <p>There are no alerts configured for this building.</p>
+  <% else %>
+     <p>There are no alerts matching your search.</p>
+  <% end %>
+<%  else %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Address</th>
+      <th>User</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alerts.each do |alert| %>
+      <tr>
+	 <td> 
+          <%= alert.message %>
+	  <%= link_to 'view',   manage_alert_path(alert.id) %> 
+	  <%= link_to 'manage', manage_alert_path(alert.id) %> 
+	</td> 
+	 <td><%= alert.building.address %></td>
+	 <td><%= alert.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= paginate(@alerts) %>
+</p>
+
 <% end %>
