@@ -250,6 +250,8 @@ module ApplicationHelper
       render partial: '/manage/units/search_and_filter_nav'
     elsif controller_name == 'posts'
       render partial: '/manage/posts/search_and_filter_nav'
+    elsif controller_name == 'events'
+      render partial: '/manage/events/search_and_filter_nav'
     else
       render partial: '/layouts/manage/search_and_filter_nav'
     end
