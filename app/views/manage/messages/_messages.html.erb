@@ -1,0 +1,25 @@
+<% @messages.each do |message| %>
+<div id="message_<%=message.id-%>">
+<% if action_name == "inbox"%>
+<%= user_profile_image(message.building, message.sender, 'small', 'fit') -%>
+<%= link_to message.sender.public_name , building_user_path(message.building, message.sender ) %> 
+<% elsif action_name =="outbox"%>
+<%= user_profile_image(message.building, message.recipient, 'small', 'fit') -%>
+<%= link_to message.recipient.public_name , building_user_path(message.building, message.recipient) %>
+<% end %>
+<%= link_to message.created_at.strftime(upstairs_time_format), building_message_path(message.building, message)  %> 
+<p>
+   <%= message.body -%>
+   <small>
+      <%= link_to 'reply', new_building_user_message_path(message.building, message.sender, parent_id: message.id ) -%>
+      <%= message.id -%>
+      <% if !message.read? %>
+      <%= link_to 'mark as read', read_building_message_path(message.building, message), method: :put %> 
+      <% else %>
+      <%= link_to 'mark as unread', unread_building_message_path(message.building, message) , method: :put %> 
+      <% end %>
+   </small> 
+</p>
+</div>
+<% end %>
+<%= paginate(@messages) -%>

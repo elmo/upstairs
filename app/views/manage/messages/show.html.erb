@@ -1,0 +1,10 @@
+<div class="content-posts">
+<h1>Message</h1>
+<h2><%= @message.sender.public_name %> sent you message:</h2>
+<p>
+<%= @message.body %>
+</p>
+<p>
+<%= link_to 'all messages', manage_messages_path -%>
+</p>
+</div>

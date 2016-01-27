@@ -1,0 +1,16 @@
+<%= simple_form_for([:manage, @building, @recipient, @message]) do |f| %>
+  <strong>From:</strong> <%= current_user.public_name %><br/>
+  <strong>To:</strong> <%= @recipient.public_name %>
+  </p>
+
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :body %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Send' %>
+  </div>
+
+<% end %>
