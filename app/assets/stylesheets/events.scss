@@ -15,3 +15,8 @@
     @include span-columns(9);
     
 }
+.event{
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+}
