@@ -7,11 +7,12 @@ class Event < ActiveRecord::Base
   validates_presence_of :body
   after_create :create_notifications
 
+  #extend FriendlyId
+  #friendly_id :slug_candidates, use: :slugged
+
   scope :managed_by, lambda {|user|
     where(building_id: user.owned_and_managed_properties.collect(&:id) )
   }
-
-  extend FriendlyId
 
   has_attachments :photos, dependent: :destroy
 
@@ -26,6 +27,10 @@ class Event < ActiveRecord::Base
   def commenters
     comments.collect(&:user).uniq
   end
+
+  #def slug_candidates
+  #  [:title]
+  #end
 
   private
 
