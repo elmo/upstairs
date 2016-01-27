@@ -1,7 +1,41 @@
-<% @buildings.each do |building| %>
-  <div id="manage_building_<%= building.id-%>" class="manage-building"> 
-    <%= building.name -%>
-    <%= building.address -%>
-    <%= link_to 'visit' ,  building_path(building) -%>
-</div>
+<h2>Posts</h2>
+
+<%= render partial: '/manage/tickets/search_summary' %>
+
+<% if @tickets.empty? %>
+  <% if params[:searchTextField].blank? %>
+    <p>There are no tickets configured for this building.</p>
+  <% else %>
+     <p>There are no tickets matching your search.</p>
+  <% end %>
+<%  else %>
+<%= render partial: 'summary' -%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+	<td><%= ticket.title %>
+	  <%= link_to 'view', building_ticket_path(ticket.building, ticket) %> 
+	  <%= link_to 'manage', manage_ticket_path(ticket.id) %> 
+	</td> 
+	 <td><%= ticket.user.email %></td>
+	 <td><%= ticket.category.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= paginate(@tickets) %>
+</p>
+
 <% end %>
