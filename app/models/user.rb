@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :verifications, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
+  has_many :members, class_name: 'User', through: :memberships
   belongs_to :invitation
   belongs_to :tenancy
   belongs_to :sender, foreign_key: 'sender_id', class_name: 'User'
@@ -260,8 +261,20 @@ class User < ActiveRecord::Base
     memberships.exists?(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_LANDLORD)
   end
 
+  def landlord_or_manager_of?(building)
+    memberships.exists?(building_id: building.id, membership_type: [Membership::MEMBERSHIP_TYPE_LANDLORD, Membership::MEMBERSHIP_TYPE_MANAGER])
+  end
+
+  def only_a_guest_of?(building)
+    memberships.count == 1 and guest?
+  end
+
   def manager?
     managerships.any?
+  end
+
+  def guest?
+    guestships.any?
   end
 
   def owned_properties
@@ -270,6 +283,10 @@ class User < ActiveRecord::Base
 
   def managed_properties
     managerships.collect(&:building)
+  end
+
+  def owned_and_managed_properties
+    memberships.where(membership_type: [Membership::MEMBERSHIP_TYPE_LANDLORD, Membership::MEMBERSHIP_TYPE_MANAGER] ).collect(&:building)
   end
 
   def to_param
@@ -320,6 +337,13 @@ class User < ActiveRecord::Base
       user.username = auth.info.try(:name)
       user.password = Devise.friendly_token[0, 20]
     end
+  end
+
+  def self.managed_by(user:, membership_type: nil)
+    building_ids = user.owned_and_managed_properties.collect(&:id)
+    return [] if building_ids.empty?
+    return Membership.where(building_id: building_ids).collect(&:user) if membership_type.blank?
+    return Membership.where(building_id: building_ids, membership_type: membership_type ).collect(&:user)
   end
 
   private

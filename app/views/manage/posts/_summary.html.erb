@@ -1,0 +1,9 @@
+<table>
+  <tr>
+    <% Category.all.each do |category| %>
+      <td> 
+         <%= link_to category.name, manage_posts_path(category_id: category.id )-%> 
+      </td>
+    <% end %>
+  </tr>
+</table>

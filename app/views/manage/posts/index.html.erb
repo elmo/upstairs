@@ -1,0 +1,41 @@
+<h2>Posts</h2>
+
+<%= render partial: '/manage/posts/search_summary' %>
+
+<% if @posts.empty? %>
+  <% if params[:searchTextField].blank? %>
+    <p>There are no posts configured for this building.</p>
+  <% else %>
+     <p>There are no posts matching your search.</p>
+  <% end %>
+<%  else %>
+<%= render partial: 'summary' -%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+	<td><%= post.title %>
+	  <%= link_to 'view', building_post_path(post.building, post) %> 
+	  <%= link_to 'manage', manage_post_path(post.id) %> 
+	</td> 
+	 <td><%= post.user.email %></td>
+	 <td><%= post.category.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= paginate(@posts) %>
+</p>
+
+<% end %>

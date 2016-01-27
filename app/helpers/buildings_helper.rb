@@ -59,7 +59,7 @@ module BuildingsHelper
     end if (controller_name != 'invitations')
   end
 
-  def user_settings_icon(user:, building:)
+  def user_settings_icon(user:, building: nil)
     content_tag(:div, 'settings', id: 'setting', class: 'menu_item' ) do
       link_to(edit_user_registration_path) do
         content_tag(:div, 'o', id: 'icon_7', class: 'icon_menu') +
@@ -69,7 +69,7 @@ module BuildingsHelper
     end
   end
 
-def user_logout_icon(user:, building:)
+def user_logout_icon(user: , building: nil)
   content_tag(:div, 'exit', id: 'exit', class: 'menu_item' ) do
     link_to(destroy_user_session_path, method: :delete ) do
       content_tag(:div, 'w', id: 'icon_7', class: 'icon_menu') +
@@ -127,9 +127,9 @@ end
 def building_repairs_icon(user:, building:)
   content_tag(:div,'request',id: 'request', class: 'menu_item') do
     link_to building_tickets_path(building) do
-    content_tag(:div, controller_name == 'tickets' ? 'L' : 'K', id: 'icon_5', class: 'icon_menu')   +
-    content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text'  )
-  end
+      content_tag(:div, controller_name == 'tickets' ? 'L' : 'K', id: 'icon_5', class: 'icon_menu')   +
+      content_tag(:div, I18n.t(:tickets), id: 'request_a_repair', class: 'menu_item_text'  )
+    end
   end
 end
 
@@ -181,11 +181,3 @@ def upstairs_home_page_icon_small
   end
  end
 
-def user_logout_icon(user:, building:)
-  content_tag(:div, 'exit', id: 'exit', class: 'menu_item' ) do
-    link_to(destroy_user_session_path, method: :delete ) do
-      content_tag(:div, 'w', id: 'icon_7', class: 'icon_menu') +
-      content_tag(:div, I18n.t(:log_out) ,id: 'exit_1', class: 'menu_item_text')
-    end
-  end
- end

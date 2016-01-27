@@ -14,6 +14,7 @@ class Building < ActiveRecord::Base
   has_many :messages, dependent: :destroy
   has_many :units, dependent: :destroy
   has_many :tenancies, through: :units
+
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   belongs_to :actionable, polymorphic: true
   validates_presence_of :address
@@ -21,6 +22,7 @@ class Building < ActiveRecord::Base
   validates_presence_of :latitude
   validates_presence_of :longitude
   before_save :set_invitation_link
+
   resourcify
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
@@ -28,6 +30,7 @@ class Building < ActiveRecord::Base
   before_validation :reverse_geocode
   HOMEPAGE_WORD_MAX = 80
   extend FriendlyId
+
   friendly_id :address, use: :slugged
   has_paper_trail
   has_attachments :photos

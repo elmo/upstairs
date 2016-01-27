@@ -1,0 +1,40 @@
+<div id="header" class="header" >
+    <nav id="nav" role="navigation" class="nav filters">
+        <a href="#nav" title="Show navigation">Show navigation</a>
+        <a href="#" title="Hide navigation">Hide navigation</a>
+        <ul class="accordion">
+            
+            <li>
+                <a href="javascript:void(0)" class="js-accordion-trigger">
+                    <div id="filters_title" >Filters</div>
+                     <div id="arrow" >T</div>
+                </a>
+                <ul class="submenu">
+                    <li>
+                      <%= link_to 'clear categories', manage_events_url -%> 
+                    </li>
+                </ul> 
+            </li>
+        </ul>
+    </nav>
+    
+    <div id="searchC"   >
+        <div id="rectangle_2"  ></div>
+        <%= text_field_tag :searchTextField %>
+        <%= form_tag manage_events_path, method: :get  do %>
+        <%= submit_tag 's', id: 'search',  class:'icon' %>
+        <% end %>
+        <div id="rectangle_2"  ></div>
+    </div>
+</div>
+<%= form_tag manage_events_url, method: :get do %>
+
+<% end %>
+
+
+        
+        
+
+
+
+

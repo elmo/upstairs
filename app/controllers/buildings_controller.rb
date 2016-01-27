@@ -2,7 +2,6 @@ class BuildingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_building, only: [:show, :edit, :update, :gallery, :declare_ownership, :landlord_onboarding, :invite_your_landlord, :residents, :building, :managers, :guests]
   before_action :set_template_directory, except: [:find, :choose, :index, :new]
-  # before_action :ask_about_ownership, only: [:show]
   layout :get_layout
 
   def index
@@ -12,27 +11,11 @@ class BuildingsController < ApplicationController
   def show
     @posts = @building.posts.page(params[:page]).order('created_at desc').per(5)
     @events = @building.events.page(params[:page]).order('created_at desc').per(5)
-    render template: "/buildings/#{@subdirectory}/show"
-  end
-
-  def residents
-    render template: "/buildings/#{@subdirectory}/residents"
-  end
-
-  def building
-    render template: "/buildings/#{@subdirectory}/building"
-  end
-
-  def managers
-    render template: "/buildings/#{@subdirectory}/managers"
+    return guests if current_user.only_a_guest_of?(@building)
   end
 
   def guests
     render template: "/buildings/#{@subdirectory}/guests"
-  end
-
-  def vendors
-    render template: "/buildings/#{@subdirectory}/vendors"
   end
 
   def choose
@@ -121,8 +104,6 @@ class BuildingsController < ApplicationController
 
   def set_template_directory
     @subdirectory = 'guests'
-    @subdirectory = 'landlords' if current_user.landlord_of?(@building)
-    @subdirectory = 'managers' if current_user.manager_of?(@building)
     @subdirectory = 'tenants' if current_user.tenant_of?(@building)
   end
 

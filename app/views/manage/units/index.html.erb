@@ -1,0 +1,60 @@
+<h2>Units</h2>
+
+<%= render partial: '/manage/units/search_summary' %>
+
+<% if @units.empty? %>
+  <% if params[:searchTextField].blank? %>
+    <p>There are no units configured for this building.</p>
+  <% else %>
+     <p>There are no units matching your search.</p>
+  <% end %>
+<%  else %>
+<%= render partial: 'summary' -%>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="1">Unit</th>
+      <th colspan="2">Tenant</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @units.each do |unit| %>
+      <tr>
+	<td>
+           <strong> <%= unit.name %> </strong>
+           <small>
+	   <%= link_to 'details', manage_building_unit_path(@building,unit) %>
+            <%= link_to 'edit', edit_manage_building_unit_path(@building, unit) %>
+	    <% if unit.tenancy.blank? %>
+	      <%= link_to 'delete unit', manage_building_unit_path(@building,unit), 
+		  method: :delete, 
+		  data: { confirm: "Are you sure that you would like to remove this unit from this builiding? You can change the name of the unit by editing it." } %>
+	     <% end %>
+           </small>
+	</td>
+	<td>
+	  <small>
+          <% if unit.tenancy.present? %>
+           <%= unit.tenancy.user.email -%> 
+	   <%= link_to 'end tenancy', 
+	          manage_unit_tenancy_path(unit, unit.tenancy), 
+		  method: :delete, 
+		  data: { confirm: "Are you sure that you would like to end the tenancy of #{unit.tenancy.user.email} of #{unit.name}?" }
+	   %>
+	  <%= link_to 'send message', new_building_user_message_path(@building, unit.tenancy.user)  -%>
+          <% else %>
+	     <%= link_to 'assign to tenant', new_manage_unit_tenancy_path(unit) %>
+	  <% end %>
+	   </small>
+	</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p> <%= paginate(@units) %> </p>
+<% end %>
+<h2>Enter a new unit</h2>
+<%= render partial: 'form' -%>

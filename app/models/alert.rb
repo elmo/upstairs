@@ -17,6 +17,10 @@ class Alert < ActiveRecord::Base
       .where(["notifications.user_id = ? and notifications.notifiable_type = 'Alert'", user.id])
   }
 
+  scope :managed_by, lambda {|user|
+    where(building_id: user.owned_and_managed_properties.collect(&:id) )
+  }
+
   def owned_by?(u)
     user.id == u.id
   end
