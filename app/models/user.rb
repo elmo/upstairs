@@ -22,14 +22,6 @@ class User < ActiveRecord::Base
   after_create :apply_invitation
   before_save :set_slug
 
-  #scope :managed_by, lambda  { |user|  joins(:memberships).where(building_id: user.owned_and_managed_properties.collect(&:id) ) }
-
-  #scope :for_user, lambda  { |user|
-  #  joins(:notifications)
-  #    .where(["notifications.user_id = ? and notifications.notifiable_type = 'Alert'", user.id])
-  #}
-
-
   rolify
 
   ROLE_LANDLORD = 'Landlord'
