@@ -1,22 +1,31 @@
-<h2>Posts</h2>
+<h2>Tickets</h2>
 
 <%= render partial: '/manage/tickets/search_summary' %>
 
+<%= render partial: 'summary' -%>
+
 <% if @tickets.empty? %>
   <% if params[:searchTextField].blank? %>
-    <p>There are no tickets configured for this building.</p>
+    <p>There are no tickets filed for this building
+<% if params[:status].present? %>
+with the status <b><%= params[:status].downcase -%></b>
+<% end -%>
+<% if params[:severity].present? %>
+with the severity <b><%= params[:severity].downcase -%></b>
+<% end -%>.
+</p>
   <% else %>
      <p>There are no tickets matching your search.</p>
   <% end %>
 <%  else %>
-<%= render partial: 'summary' -%>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
       <th>User</th>
-      <th>Category</th>
+      <th>Status</th>
+      <th>Severity</th>
     </tr>
   </thead>
 
@@ -24,18 +33,20 @@
     <% @tickets.each do |ticket| %>
       <tr>
 	<td><%= ticket.title %>
-	  <%= link_to 'view', building_ticket_path(ticket.building, ticket) %> 
-	  <%= link_to 'manage', manage_ticket_path(ticket.id) %> 
+	  <%= link_to 'view', manage_ticket_path(ticket.id) %> 
 	</td> 
 	 <td><%= ticket.user.email %></td>
-	 <td><%= ticket.category.name %></td>
+	 <td><%= ticket.status %></td>
+	 <td><%= ticket.severity %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <p>
   <%= paginate(@tickets) %>
 </p>
-
 <% end %>
+
+<p>
+  <%= link_to 'create a new ticket' , new_manage_ticket_path -%>
+</p>

@@ -25,6 +25,12 @@ class Ticket < ActiveRecord::Base
   scope :serious, -> { where(severity: SEVERITY_SERIOUS) }
   scope :severe, -> { where(severity: SEVERITY_SEVERE) }
 
+  scope :managed_by, lambda  { |user|
+    where(building_id: user.owned_and_managed_properties.collect(&:id) )
+  }
+
+  #extend FriendlyId
+
   resourcify
   has_attachments :photos, dependent: :destroy
 
@@ -34,6 +40,10 @@ class Ticket < ActiveRecord::Base
 
   def owned_by?(user)
     user_id == user.id
+  end
+
+  def owned_or_manged_by?(user)
+    owned_by?(user) or user.owned_and_managed_properties.collect(&:id).include?(building.id)
   end
 
   def self.statuses

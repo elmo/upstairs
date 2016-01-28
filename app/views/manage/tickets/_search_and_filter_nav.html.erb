@@ -32,9 +32,9 @@
     
     <div id="searchC"   >
         <%= form_tag manage_tickets_url(building_id: @building.slug) , method: :get  do %>
-        <%= submit_tag 's', id: 'search',  class:'icon' %>
+        <%= submit_tag 's', id: 'search',  class: 'icon' %>
         <%= text_field_tag :searchTextField %>
-        <% end %>
+    <% end %>
     </div>
     <div id="rectangle_2"  ></div>
 </div>
