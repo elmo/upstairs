@@ -1,0 +1,12 @@
+<table>
+  <tr>
+     <td>
+       <strong>Total:</strong> (<%= link_to Ticket.managed_by(current_user).count, manage_tickets_path %>)
+       <strong>Open:</strong> (<%=  link_to Ticket.managed_by(current_user).open.count, manage_tickets_path(status: Ticket::STATUS_OPEN) %>)
+       <strong>Closed:</strong> (<%= link_to Ticket.managed_by(current_user).closed.count, manage_tickets_path(status: Ticket::STATUS_CLOSED) %>)
+       <strong>Minor:</strong> (<%= link_to Ticket.managed_by(current_user).minor.count, manage_tickets_path(severity: Ticket::SEVERITY_MINOR) %>)
+       <strong>Serious:</strong> (<%= link_to Ticket.managed_by(current_user).minor.count, manage_tickets_path(severity: Ticket::SEVERITY_SERIOUS) %>)
+       <strong>Severe:</strong> (<%= link_to Ticket.managed_by(current_user).severe.count, manage_tickets_path(severity: Ticket::SEVERITY_SEVERE) %>)
+     </td>
+  </tr>
+</table>

@@ -1,0 +1,39 @@
+<h1>Tickets</h1>
+<h2><%= @ticket.title %></h2>
+
+<p>
+ <small>
+   <strong>Building:</strong>
+   <%= @ticket.building.address -%>
+   <%= link_to 'manage', manage_building_path(@ticket.building) -%> </p>
+   <strong>Status:</strong><%= @ticket.status -%> 
+   <strong>Severity:</strong><%= @ticket.severity-%> 
+   <% if @ticket.owned_or_manged_by?(current_user)%>
+      <%= link_to 'update', edit_manage_ticket_path(@ticket) -%> </p>
+   <% end %>
+  </small>
+</p>
+
+<p>
+<small><%= link_to username_or_email(current_user), manage_membership_path(@ticket.user) -%> reported this issue <small><%= time_ago_in_words(@ticket.created_at) %></small> ago.</small>
+</p>
+
+<p>
+<%= simple_format(@ticket.body) %>
+</p>
+
+<% @ticket.photos.each do |photo| %>
+   <%= cl_image_tag(photo.path, { size: '200x300', crop: :fit }) %>
+<% end %>
+
+<% if @ticket.owned_or_manged_by?(current_user)%>
+<p>
+<small>
+<%= link_to 'add more photos', edit_manage_ticket_path(@ticket) -%> </p>
+</small>
+</p>
+<% end %>
+
+</p>
+<%= link_to 'List all building tickets', manage_tickets_path %>
+</p>

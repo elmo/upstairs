@@ -26,4 +26,9 @@ end
     height, width = dimensions.split('x')
     cl_image_tag('anonymous.png', width: width, height: height, crop: :fit, id: 'photo')
   end
+
+  def username_or_email(user)
+    (user.username.present?) ? user.username : user.email
+  end
+
 end
