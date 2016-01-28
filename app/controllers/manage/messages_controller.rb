@@ -8,6 +8,11 @@ class Manage::MessagesController < Manage::ManageController
     scope = scope.received_messages.unread if params[:filter] == Message::MESSAGE_UNREAD
     scope = scope.received_messages if params[:filter] == Message::MESSAGE_TO
     scope = scope.sent_messages.from_user(current_user) if params[:filter] ==  Message::MESSAGE_FROM
+    if params[:read].present?
+      scope = scope.read if params[:read] ==  'true'
+      scope = scope.unread if params[:read] ==  'false'
+    end
+
     if params[:searchTextField].present?
       scope = scope.where(['body like ? ', "%#{params[:searchTextField]}%"])
     end

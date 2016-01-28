@@ -7,12 +7,12 @@
 <% if @tickets.empty? %>
   <% if params[:searchTextField].blank? %>
     <p>There are no tickets filed for this building
-<% if params[:status].present? %>
-with the status <b><%= params[:status].downcase -%></b>
-<% end -%>
-<% if params[:severity].present? %>
-with the severity <b><%= params[:severity].downcase -%></b>
-<% end -%>.
+  <% if params[:status].present? %>
+   with the status <b><%= params[:status].downcase -%></b>
+  <% end -%>
+  <% if params[:severity].present? %>
+   with the severity <b><%= params[:severity].downcase -%></b>
+  <% end -%>.
 </p>
   <% else %>
      <p>There are no tickets matching your search.</p>
@@ -22,6 +22,7 @@ with the severity <b><%= params[:severity].downcase -%></b>
 <table>
   <thead>
     <tr>
+      <th>Building</th>
       <th>Title</th>
       <th>User</th>
       <th>Status</th>
@@ -32,10 +33,13 @@ with the severity <b><%= params[:severity].downcase -%></b>
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
+	<td><%= link_to ticket.building.address, manage_building_path(ticket.building) %></td>
 	<td><%= ticket.title %>
-	  <%= link_to 'view', manage_ticket_path(ticket.id) %> 
+	<small> <%= link_to 'manage', manage_ticket_path(ticket.id) %> 
+		<%= time_ago_in_words(ticket.created_at) %> ago 
+	</small>
 	</td> 
-	 <td><%= ticket.user.email %></td>
+	 <td><%= signature(ticket.user) %></td>
 	 <td><%= ticket.status %></td>
 	 <td><%= ticket.severity %></td>
       </tr>
@@ -46,7 +50,6 @@ with the severity <b><%= params[:severity].downcase -%></b>
   <%= paginate(@tickets) %>
 </p>
 <% end %>
-
 <p>
   <%= link_to 'create a new ticket' , new_manage_ticket_path -%>
 </p>

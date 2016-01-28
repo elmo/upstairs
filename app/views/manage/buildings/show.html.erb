@@ -1,18 +1,34 @@
-<h1>Building Detail</h1>
+<h1>Manage Building</h1>
+<h4><%= @building.address -%></h4>
+<h4>Units </h4>
 
-<h2>Statistics</h2>
-
-<h2>Units </h2>
 <p>
   <%= link_to "Units (#{@building.units.count})", manage_building_units_path(@building) -%>
   <%= link_to "Occupied (#{@building.units.occupied.count})", manage_building_units_path(@building, status: Unit::STATUS_OCCUPIED ) -%>
   <%= link_to "Vacant(#{@building.units.vacant.count})", manage_building_units_path(@building, status: Unit::STATUS_VACANT) -%>
 </p>
 
-<h2>Users</h2>
+<h4>Tickets</h4>
 <p>
-  <%= link_to "Users (#{@building.users.count})", manage_memberships_path(building_id: @building.slug) -%>
-  <%= link_to "tenants (#{@building.memberships.tenant.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) -%>
-  <%= link_to "guests(#{@building.memberships.guest.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) -%>
-  <%= link_to "managers(#{@building.memberships.manager.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) -%>
+<%= link_to "Total (#{@building.tickets.count})", manage_tickets_path %>
+<%= link_to "Open (#{@building.tickets.open.count})", manage_tickets_path(status: Ticket::STATUS_OPEN) %>
+<%= link_to "Closed (#{@building.tickets.closed.count})", manage_tickets_path(status: Ticket::STATUS_CLOSED) %>
+<%= link_to "Minor (#{@building.tickets.minor.count})", manage_tickets_path(severity: Ticket::SEVERITY_MINOR) %>
+<%= link_to "Serious (#{@building.tickets.minor.count})", manage_tickets_path(severity: Ticket::SEVERITY_SERIOUS) %>
+<%= link_to "Severe (#{@building.tickets.severe.count})", manage_tickets_path(severity: Ticket::SEVERITY_SEVERE) %>
+</p>
+
+<h4>Users</h4>
+<p>
+<%= link_to "Users (#{@building.users.count})", manage_memberships_path(building_id: @building.slug) -%>
+<%= link_to "tenants (#{@building.memberships.tenant.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) -%>
+<%= link_to "guests(#{@building.memberships.guest.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) -%>
+<%= link_to "managers(#{@building.memberships.manager.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) -%>
+</p>
+
+<h4>Events</h4>
+<p>
+  <%= link_to "events(#{@building.events.count})", manage_events_path(building_id: @building.to_param, ) -%>
+  <%= link_to "past(#{@building.events.past.count})", manage_events_path(starts: Event::PAST ) -%>
+  <%= link_to "future(#{@building.events.future.count})", manage_events_path(starts: Event::FUTURE ) -%>
 </p>

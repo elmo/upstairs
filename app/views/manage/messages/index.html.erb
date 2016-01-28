@@ -1,12 +1,6 @@
 <h1>Messages</h1>
 
-<% if params[:filter] == Message::MESSAGE_TO %>
-<h2>Inbox</h2> 
-<small> <%= link_to 'Sent messages' , params.merge(filter: Message::MESSAGE_FROM ) -%></small>
-<% elsif params[:filter] == Message::MESSAGE_FROM %>
-<h2>Outbox</h2> 
-<small><%= link_to 'Received messages' , params.merge(filter: Message::MESSAGE_TO ) -%></small>
-<% end %>
+<%= render partial: 'filter_messages' %>
 
 <% if @messages.empty? %>
   <p>There are no messages matching your search.</p>
@@ -21,13 +15,11 @@
    <tr>
      <td>
      <% if [Message::MESSAGE_TO, Message::MESSAGE_UNREAD].include?(params[:filter]) %>
-       <%= user_profile_image(message.building, message.sender, 'small', 'fit') -%>
-       <%= link_to message.sender.public_name , building_user_path(message.building, message.sender ) %> 
+       <%= signature(message.sender) %> 
      <% elsif params[:filter] == Message::MESSAGE_FROM  %>
-       <%= user_profile_image(message.building, message.recipient, 'small', 'fit') -%>
        <%= link_to message.recipient.public_name , building_user_path(message.building, message.recipient) %>
      <% end %>
-       <%= link_to message.created_at.strftime(upstairs_time_format), building_message_path(message.building, message)  %> 
+       <small><%= time_ago_in_words(message.created_at)%> ago</small>
      </td>
 
      <td>
