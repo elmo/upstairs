@@ -15,7 +15,7 @@
 </p>
 
 <p>
-<small><%= link_to username_or_email(current_user), manage_membership_path(@ticket.user) -%> reported this issue <small><%= time_ago_in_words(@ticket.created_at) %></small> ago.</small>
+<small><%= signature(@ticket.user) -%> reported this issue <%= time_ago_in_words(@ticket.created_at) %> ago.</small>
 </p>
 
 <p>

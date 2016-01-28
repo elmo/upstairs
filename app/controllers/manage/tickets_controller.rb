@@ -10,6 +10,16 @@ class Manage::TicketsController < Manage::ManageController
     scope = scope.serious if params[:severity] == Ticket::SEVERITY_SERIOUS
     scope = scope.minor if params[:severity] == Ticket::SEVERITY_MINOR
     scope = scope.where(['title like ? or body like ? ', "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
+    if params[:user_id]
+      @user = User.find_by(slug: params[:user_id] )
+      scope = scope.where(user_id: @user.id)
+    end
+
+    if params[:building_id]
+      @building = Building.find_by(slug: params[:user_id] )
+      scope = scope.where(building_id: @building.id)
+    end
+
     @tickets = scope.page(params[:page]).order(severity: :desc).page(params[:page]).per(5)
   end
 

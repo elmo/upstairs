@@ -8,9 +8,11 @@ class User < ActiveRecord::Base
   has_many :buildings, through: :memberships
   has_many :comments, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :tickets, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :verifications, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
@@ -344,6 +346,10 @@ class User < ActiveRecord::Base
     return [] if building_ids.empty?
     return Membership.where(building_id: building_ids).collect(&:user) if membership_type.blank?
     return Membership.where(building_id: building_ids, membership_type: membership_type ).collect(&:user)
+  end
+
+  def username_or_email
+    username.present? ? username : email
   end
 
   private

@@ -6,10 +6,13 @@ class Event < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :body
   after_create :create_notifications
-
+  PAST = 'past'
+  FUTURE = 'future'
   scope :managed_by, lambda {|user|
     where(building_id: user.owned_and_managed_properties.collect(&:id) )
   }
+  scope :past, -> { where(["starts < ? ", Time.now ]) }
+  scope :future, -> { where(["starts > ? ", Time.now ]) }
 
   extend FriendlyId
 

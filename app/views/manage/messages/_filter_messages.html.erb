@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <td>
+      <% if params[:filter] == Message::MESSAGE_TO %>
+        <h2>Inbox</h2><%= link_to 'Sent messages' , params.merge(filter: Message::MESSAGE_FROM ) -%>
+      <% elsif params[:filter] == Message::MESSAGE_FROM %>
+      <h2>Outbox</h2> 
+        <%= link_to 'Received messages' , params.merge(filter: Message::MESSAGE_TO ) -%>
+      <% end %>
+      <% if params[:filter] == Message::MESSAGE_TO %>
+        <%= link_to "all (#{current_user.received_messages.count})", manage_messages_path %>
+        <%= link_to "read (#{current_user.received_messages.read.count})", manage_messages_path(read: 'true' ) %>
+        <%= link_to "unread (#{current_user.received_messages.unread.count})", manage_messages_path(read: 'false' ) %>
+      <% end %>
+    <td>
+  <tr>
+</table>

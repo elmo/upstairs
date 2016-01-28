@@ -26,4 +26,8 @@ class Manage::MembershipsController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find_by(slug: params[:id])
+  end
+
 end
