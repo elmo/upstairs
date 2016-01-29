@@ -1,23 +1,26 @@
 class Manage::MessagesController < Manage::ManageController
   before_action :set_building, except: [:index]
-  before_action :set_message, only: [:show, :edit, :update, :destroy, :read, :unread]
+  before_action :set_message, only: [:show, :edit, :update, :destroy, :mark_as_read, :mark_as_unread]
   before_action :set_recipient, only: [:new]
 
   # GET /messages
   def index
     params[:filter] ||= Message::MESSAGE_TO
-    scope = current_user
-    scope = scope.received_messages.unread if params[:filter] == Message::MESSAGE_UNREAD
-    scope = scope.received_messages if params[:filter] == Message::MESSAGE_TO
-    scope = scope.sent_messages.from_user(current_user) if params[:filter] ==  Message::MESSAGE_FROM
+    if params[:filter] ==  Message::MESSAGE_FROM
+      scope = current_user.sent_messages.from_user(current_user)
+    else
+      scope = current_user.received_messages.to_user(current_user)
+    end
+
     if params[:read].present?
-      scope = scope.read if params[:read] ==  'true'
-      scope = scope.unread if params[:read] ==  'false'
+      scope = scope.where(is_read: true) if params[:read] == 'true'
+      scope = scope.where(is_read: false) if params[:read] == 'false'
     end
 
     if params[:searchTextField].present?
       scope = scope.where(['body like ? ', "%#{params[:searchTextField]}%"])
     end
+
    @messages = scope.page(params[:page]).order(created_at: :desc)
   end
 
@@ -59,13 +62,13 @@ class Manage::MessagesController < Manage::ManageController
     end
   end
 
-  def read
-    @message.mark_as_read!
+  def mark_as_read
+    @message.update_attribute(:is_read, true)
     redirect_to :back
   end
 
-  def unread
-    @message.mark_as_unread!
+  def mark_as_unread
+    @message.update_attributes!(is_read: false)
     redirect_to :back
   end
 
@@ -77,9 +80,8 @@ class Manage::MessagesController < Manage::ManageController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_message
-    @message = Message.find_by_slug(params[:id])
+    @message = Message.find(params[:id])
   end
 
   def set_recipient
@@ -92,7 +94,7 @@ class Manage::MessagesController < Manage::ManageController
 
   # Only allow a trusted parameter "white list" through.
   def message_params
-    params.require(:message).permit(:sender_id, :recipient_id, :body, :messageble_type, :messageble_id, :user_id, :sender_id, :building_id)
+    params.require(:message).permit(:sender_id, :recipient_id, :body, :messageble_type, :messageble_id, :user_id, :sender_id, :building_id, :is_read)
   end
 
 end

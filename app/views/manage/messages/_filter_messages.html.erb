@@ -9,8 +9,8 @@
       <% end %>
       <% if params[:filter] == Message::MESSAGE_TO %>
         <%= link_to "all (#{current_user.received_messages.count})", manage_messages_path %>
-        <%= link_to "read (#{current_user.received_messages.read.count})", manage_messages_path(read: 'true' ) %>
-        <%= link_to "unread (#{current_user.received_messages.unread.count})", manage_messages_path(read: 'false' ) %>
+        <%= link_to "read (#{Message.received_messages_count(current_user, read: true)})", manage_messages_path(read: 'true' ) %>
+        <%= link_to "unread (#{Message.received_messages_count(current_user, read: false)})", manage_messages_path(read: 'false' ) %>
       <% end %>
     <td>
   <tr>

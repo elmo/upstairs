@@ -1,9 +1,7 @@
+<strong>From:</strong> <%= current_user.public_name %><br/>
+<strong>To:</strong> <%= @message.recipient.public_name %>
 <%= simple_form_for([:manage, @building, @message]) do |f| %>
   <%= f.hidden_field :recipient_id -%>
-  <strong>From:</strong> <%= current_user.public_name %><br/>
-  <strong>To:</strong> <%= @message.recipient.public_name %>
-  </p>
-
   <%= f.error_notification %>
 
   <div class="form-inputs">

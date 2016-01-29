@@ -28,7 +28,12 @@ Upstairs::Application.routes.draw do
     resources :messages, only: :index
     resources :buildings do
       resources :units
-       resources :messages
+       resources :messages do
+         member do
+           put 'mark_as_read'
+           put 'mark_as_unread'
+         end
+       end
     end
     resources :posts
       resources :memberships
