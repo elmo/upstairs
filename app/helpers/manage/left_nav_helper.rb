@@ -23,7 +23,7 @@ module Manage::LeftNavHelper
         link_to  manage_messages_path do
          content_tag(:div,controller_name == 'messages' ? 'H' : 'G', id: 'icon_3', class: 'icon_menu') +
          content_tag(:div, I18n.t(:message), id: 'message_1', class: 'menu_item_text') +
-         ((current_user.received_messages.unread.any?) ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
+         ((current_user.received_messages.is_unread.any?) ? image_tag('news_element_icon.png', id: 'news_element_icon') : '')
       end
     end
     end

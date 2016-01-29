@@ -29,10 +29,10 @@
      <td>
        <%= link_to 'reply', new_building_user_message_path(message.building, message.sender, parent_id: message.id ) -%>
        <% if params[:filter] == Message::MESSAGE_TO %>
-         <% if !message.read?  %>
-            <%= link_to 'mark as read', read_building_message_path(message.building, message), method: :put %> 
+         <% if message.is_read?  %>
+           <%= link_to 'mark as unread', mark_as_unread_manage_building_message_path(message.building, message.id) , method: :put %> 
           <% elsif  %>
-           <%= link_to 'mark as unread', unread_building_message_path(message.building, message) , method: :put %> 
+            <%= link_to 'mark as read', mark_as_read_manage_building_message_path(message.building, message.id), method: :put %> 
          <% end %>
        <% end %>
      </td>
