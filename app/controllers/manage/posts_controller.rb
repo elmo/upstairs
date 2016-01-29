@@ -20,14 +20,17 @@ class Manage::PostsController < Manage::ManageController
     end
 
     scope = scope.where(['title like ? or body like ? ', "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]
-    @posts = scope.includes(:comments).order(created_at: :desc).page(params[:page]).per(10)
+    @posts = scope.includes(:comments).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   private
+
+  def set_post
+    @post = Post.friendly.find(params[:id])
+  end
 
   def post_params
     params[:post].permit(:title, :body, :category_id, :searchTextField, :c,  photos: [])

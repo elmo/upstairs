@@ -1,7 +1,17 @@
 <h1>Manage Building</h1>
 <h4><%= @building.address -%></h4>
-<h4>Units </h4>
 
+<h4>Alerts</h4>
+<p>
+  <%= link_to "All (#{@building.alerts.count})", manage_alerts_path(building_id: @building.to_param) -%>
+</p>
+
+<h4>Post</h4>
+<p>
+  <%= link_to "All (#{@building.posts.count})", manage_posts_path(building_id: @building.to_param) -%>
+</p>
+
+<h4>Units </h4>
 <p>
   <%= link_to "Units (#{@building.units.count})", manage_building_units_path(@building) -%>
   <%= link_to "Occupied (#{@building.units.occupied.count})", manage_building_units_path(@building, status: Unit::STATUS_OCCUPIED ) -%>
@@ -32,3 +42,4 @@
   <%= link_to "past(#{@building.events.past.count})", manage_events_path(starts: Event::PAST ) -%>
   <%= link_to "future(#{@building.events.future.count})", manage_events_path(starts: Event::FUTURE ) -%>
 </p>
+

@@ -24,10 +24,10 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-	<td><%= link_to post.postable.address, manage_building_path(post.building) %></td>
+	<td><%= link_to post.postable.short_name, manage_building_path(post.building) %></td>
 	<td><%= post.title %>
-	  <%= link_to 'view', building_post_path(post.building, post) %> 
-	  <%= link_to 'manage', manage_post_path(post.id) %> 
+	  <%= link_to 'view', building_post_path(post.building, post.to_param) %> 
+	  <%= link_to 'manage', manage_post_path(post.to_param) %> 
 	</td> 
          <td><%= link_to post.category.name, params.merge(category_id: post.category.id) %></td>
 	<td><%= signature(post.user) %>

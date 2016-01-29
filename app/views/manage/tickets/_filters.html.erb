@@ -12,7 +12,7 @@
   <tr>
     <td> 
        <% current_user.owned_and_managed_properties.each do |building| %>
-         <%= link_to building.address, manage_tickets_path(buidling_id: building.to_param) -%>
+	       <%= link_to "#{building.address} (#{building.tickets.count})", manage_tickets_path(buidling_id: building.to_param) -%>
        <% end %>
     </td> 
   </tr>

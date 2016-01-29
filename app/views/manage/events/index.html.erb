@@ -21,7 +21,7 @@
     <% @events.each do |event| %>
       <tr>
 	 <td> 
-          <%= link_to event.building.address , manage_building_path(event.building) %>
+          <%= link_to event.building.short_name, manage_building_path(event.building) %>
 	 </td> 
 	 <td> 
           <%= event.title %>
