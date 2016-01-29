@@ -1,44 +1,33 @@
-<% if @building.present? %>
-  <h2>People (<%= link_to @building.users.count, manage_memberships_path(building_id: @building.slug) -%>) </h2>
-<% else %>
-  <h2>People (<%= link_to "#{User.managed_by(user: current_user, membership_type: params[:membership_type] ).count}", manage_memberships_path(building_id: nil )  -%>) </h2>
-<% end %>
+<h2>People</h2>
 
-<% if @building.present? %>
-<p>
-  <%= link_to "users (#{@building.users.count})", manage_memberships_path(building_id: @building.to_param)  -%>
-  <%= link_to "tenants (#{@building.memberships.tenant.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) -%>
-  <%= link_to "guests(#{@building.memberships.guest.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) -%>
-  <%= link_to "managers(#{@building.memberships.manager.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) -%>
-<p>
-<% end  %>
-
-<% if @members.empty? %>
+<%= render partial: 'search_filters' %>
+<% if @users.empty? %>
 <p>There are no people matching your search.</p>
 <% else %>
 
 <table class="table">
  <tr>
- <th>Email</th>
- <th>Member Types</th>
+ <th>User</th>
  </tr>
-<% @members.each do |member| %>
+<% @users.each do |user| %>
   <tr>
-   <td><%= signature(member) -%></td>
-   <td>
-     <% member.memberships.includes(:building).where(building_id: current_user.owned_and_managed_properties).each do |membership| %>
+   <td><%= signature(user) -%>
+     <% user.memberships.includes(:building).where(building_id: current_user.owned_and_managed_properties).each do |membership| %>
        <% if !membership.landlord?  %>
-         <%= link_to "remove #{membership.membership_type.downcase}", 
-		       manage_membership_path(membership.to_param, building_id: membership.building.to_param),
-		       data: { confirm: "Are you sure that you would like to remove #{membership.user.email} as a #{membership.membership_type.downcase} from #{membership.building.address} ?" }, 
-		       method: :delete %> 
-       <% end %>
+         <br />
+         <small>
+	 <%= building_membership_relationship(membership) -%>
+	 <%= remove_building_relationship_link(membership) -%>
+	 <%= new_message_link(membership) -%>
+         </small>
      <% end %> 
+    <% end %> 
    </td>
 </tr>
 <% end %>
+
 </table>
 <p>
-  <%= paginate(@members) -%>
+  <%= paginate(@users) -%>
 </p>
 <% end %>

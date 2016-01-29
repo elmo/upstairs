@@ -1,0 +1,30 @@
+<p>
+  <% current_user.owned_and_managed_properties.each do |building| -%>
+	  <%= link_to "#{building.short_name} (#{building.users.count})", manage_memberships_path(building_id: building.to_param)-%> 
+  <% end %>
+</p>
+<p>
+<% if @building.present? %>
+<%= link_to "users (#{@building.users.count})", 
+      manage_memberships_path(building_id: @building.to_param) %>
+<%= link_to "tenants (#{@building.memberships.tenant.count})", 
+      manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) %>
+<%= link_to "guests (#{@building.memberships.guest.count})", 
+      manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) %>
+<%= link_to "managers (#{@building.memberships.manager.count})", 
+     manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) %>
+<% else %>
+<%= link_to "users (#{User.managed_by(current_user).count})", 
+      manage_memberships_path(building_id: @building.to_param)  -%>
+
+<%= link_to "tenants (#{User.managed_by_with_membership_type(current_user, Membership::MEMBERSHIP_TYPE_TENANT).count})", 
+	manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) -%>
+
+<%= link_to "guests (#{User.managed_by_with_membership_type(current_user,Membership::MEMBERSHIP_TYPE_GUEST).count})", 
+	manage_memberships_path(building_id: @building, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) -%>
+
+<%= link_to "managers (#{User.managed_by_with_membership_type(current_user, Membership::MEMBERSHIP_TYPE_MANAGER).count})", 
+	manage_memberships_path(building_id: @building.to_param, 
+				membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) -%>
+<% end  %>
+</p>

@@ -1,5 +1,7 @@
 class Manage::MessagesController < Manage::ManageController
+  before_action :set_building, except: [:index]
   before_action :set_message, only: [:show, :edit, :update, :destroy, :read, :unread]
+  before_action :set_recipient, only: [:new]
 
   # GET /messages
   def index
@@ -36,15 +38,13 @@ class Manage::MessagesController < Manage::ManageController
 
   # POST /messages
   def create
-    set_recipient
     @message = Message.new(message_params)
     @message.sender = current_user
-    @message.recipient = @recipient
     @message.building = @building
     if @message.save
-      return_to_url = (session[:message_return_to].present?) ? session[:message_return_to] : building_messages_url(@building)
+      return_to_url = (session[:message_return_to].present?) ? session[:message_return_to] : manage_messages_url
       session[:message_return_to] = nil
-      redirect_to return_to_url, notice: "Message to #{@recipient.public_name} was successfully has been sent."
+      redirect_to return_to_url, notice: "Message to #{@message.recipient.public_name} was successfully has been sent."
     else
       render :new
     end
@@ -84,6 +84,10 @@ class Manage::MessagesController < Manage::ManageController
 
   def set_recipient
     @recipient = User.find_by_slug(params[:user_id])
+  end
+
+  def set_building
+    @building = Building.friendly.find(params[:building_id])
   end
 
   # Only allow a trusted parameter "white list" through.
