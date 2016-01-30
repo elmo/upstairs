@@ -10,7 +10,6 @@ class Event < ActiveRecord::Base
   PAST = 'past'
   FUTURE = 'future'
 
-
   #extend FriendlyId
   #friendly_id :slug_candidates, use: :slugged
 
