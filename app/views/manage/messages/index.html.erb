@@ -7,7 +7,7 @@
 <% else  %>
 <table class="table">
   <tr>
-    <th>user</th>
+    <th><%= (params[:filter] == Message::MESSAGE_TO) ? 'From' : 'To' -%></th>
     <th>message</th>
     <th>actions</th>
   </tr>
@@ -19,6 +19,7 @@
      <% elsif params[:filter] == Message::MESSAGE_FROM  %>
        <%= link_to message.recipient.public_name , building_user_path(message.building, message.recipient) %>
      <% end %>
+       <br />
        <small><%= time_ago_in_words(message.created_at)%> ago</small>
      </td>
 

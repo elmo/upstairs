@@ -12,27 +12,20 @@
 <%= render partial: 'summary' -%>
 
 <table>
-  <thead>
-    <tr>
-      <th>Buidling</th>
-      <th>Title</th>
-      <th>Category</th>
-      <th>User</th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-	<td><%= link_to post.postable.short_name, manage_building_path(post.building) %></td>
-	<td><%= post.title %>
-	  <%= link_to 'view', building_post_path(post.building, post.to_param) %> 
-	  <%= link_to 'manage', manage_post_path(post.to_param) %> 
+	<td>
+	  <small>
+	   building: <%= manange_building_link(post.building) -%><br />
+           category: <%= link_to post.category.name, params.merge(category_id: post.category.id) %>
+	   by: <%= signature(post.user) %> <%= created_at(post) %> ago
+	  <%= view_post_link(post) %> 
+	  <%= manage_post_link(post) %> 
+	  <br />
+	  </small>
+	   <%= simple_format(post.title) %>
 	</td> 
-         <td><%= link_to post.category.name, params.merge(category_id: post.category.id) %></td>
-	<td><%= signature(post.user) %>
-	    <%= time_ago_in_words(post.created_at) %> ago
-	</td>
       </tr>
     <% end %>
   </tbody>

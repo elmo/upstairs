@@ -36,6 +36,7 @@
 	<td><%= link_to ticket.building.short_name, manage_building_path(ticket.building) %></td>
 	<td><%= ticket.title %>
 	<small> <%= link_to 'manage', manage_ticket_path(ticket.id) %> 
+		<br />
 		<%= time_ago_in_words(ticket.created_at) %> ago 
 	</small>
 	</td> 

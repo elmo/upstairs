@@ -2,7 +2,7 @@
 
 <%= render partial: '/manage/events/search_summary' %>
 
-<%= render partial: 'summary' -%>
+<%= render partial: 'filters' -%>
 
 <% if @events.empty? %>
   <p>There are no events matching your search.</p>
@@ -12,8 +12,7 @@
   <thead>
     <tr>
       <th>Building</th>
-      <th>Title</th>
-      <th>User</th>
+      <th>Event</th>
     </tr>
   </thead>
 
@@ -24,10 +23,13 @@
           <%= link_to event.building.short_name, manage_building_path(event.building) %>
 	 </td> 
 	 <td> 
-          <%= event.title %>
-	  <%= link_to 'manage', manage_event_path(event.id) %> 
+          <%= simple_format(event.title) %>
+	  <small>
+	    starts: <%= event.starts.strftime(upstairs_time_format) %>
+	    <%= link_to 'manage', manage_event_path(event.id) %> 
+	    created by: <%= signature(event.user) %>
+	  </small>
 	</td> 
-	 <td><%= signature(event.user) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,8 +1,7 @@
 <h2>Alerts</h2>
-
+Building:
 <% current_user.owned_and_managed_properties.each do |building| %>
-	<%= link_to "#{building.short_name} (#{building.alerts.count})", 
-              manage_alerts_path(buidling: building.to_param) -%>
+  <%= link_to "#{building.short_name} (#{building.alerts.count})", manage_alerts_path(buidling: building.to_param) -%>
 <% end %>
 
 <% if @alerts.empty? %>
