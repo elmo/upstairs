@@ -1,7 +1,56 @@
-<% @buildings.each do |building| %>
-  <div id="manage_building_<%= building.id-%>" class="manage-building"> 
-    <%= building.name -%>
-    <%= building.address -%>
-    <%= link_to 'visit' ,  building_path(building) -%>
-</div>
+<h2>Tickets</h2>
+
+<%= render partial: '/manage/tickets/search_summary' %>
+
+<%= render partial: 'filters' -%>
+
+<% if @tickets.empty? %>
+  <% if params[:searchTextField].blank? %>
+    <p>There are no tickets filed for this building
+  <% if params[:status].present? %>
+   with the status <b><%= params[:status].downcase -%></b>
+  <% end -%>
+  <% if params[:severity].present? %>
+   with the severity <b><%= params[:severity].downcase -%></b>
+  <% end -%>.
+</p>
+  <% else %>
+     <p>There are no tickets matching your search.</p>
+  <% end %>
+<%  else %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Building</th>
+      <th>Title</th>
+      <th>User</th>
+      <th>Status</th>
+      <th>Severity</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+	<td><%= link_to ticket.building.short_name, manage_building_path(ticket.building) %></td>
+	<td><%= ticket.title %>
+	<small> <%= link_to 'manage', manage_ticket_path(ticket.id) %> 
+		<br />
+		<%= time_ago_in_words(ticket.created_at) %> ago 
+	</small>
+	</td> 
+	 <td><%= signature(ticket.user) %></td>
+	 <td><%= ticket.status %></td>
+	 <td><%= ticket.severity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>
+  <%= paginate(@tickets) %>
+</p>
 <% end %>
+<p>
+  <%= link_to 'create a new ticket' , new_manage_ticket_path -%>
+</p>

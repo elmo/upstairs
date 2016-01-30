@@ -25,12 +25,18 @@ Upstairs::Application.routes.draw do
   put '/acknowledge' => 'users#acknowledge'
 
   namespace :manage do
+    resources :messages, only: :index
     resources :buildings do
       resources :units
+       resources :messages do
+         member do
+           put 'mark_as_read'
+           put 'mark_as_unread'
+         end
+       end
     end
     resources :posts
-    resources :messages
-    resources :memberships
+      resources :memberships
     resources :alerts
     resources :tickets
     resources :events

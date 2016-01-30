@@ -8,9 +8,9 @@ class Manage::EventsController < Manage::ManageController
       scope = Event.managed_by(current_user)
     end
 
-    if params[:c]
-      @category = Category.friendly.find(params[:c])
-      scope = scope.where(category_id: @category.id)
+    if params[:starts]
+      scope = scope.past if params[:starts] == 'past'
+      scope = scope.future if params[:starts] == 'future'
     end
 
     scope = scope.where(['title like ? or body like ? ', "%#{params[:searchTextField]}%", "%#{params[:searchTextField]}%"]) if params[:searchTextField]

@@ -2,21 +2,17 @@
 
 <%= render partial: '/manage/events/search_summary' %>
 
+<%= render partial: 'filters' -%>
+
 <% if @events.empty? %>
-  <% if params[:searchTextField].blank? %>
-    <p>There are no events configured for this building.</p>
-  <% else %>
-     <p>There are no events matching your search.</p>
-  <% end %>
+  <p>There are no events matching your search.</p>
 <%  else %>
-<%= render partial: 'summary' -%>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Address</th>
-      <th>User</th>
+      <th>Building</th>
+      <th>Event</th>
     </tr>
   </thead>
 
@@ -24,12 +20,16 @@
     <% @events.each do |event| %>
       <tr>
 	 <td> 
-          <%= event.title %>
-	  <%= link_to 'view',   manage_event_path(event.id) %> 
-	  <%= link_to 'manage', manage_event_path(event.id) %> 
+          <%= link_to event.building.short_name, manage_building_path(event.building) %>
+	 </td> 
+	 <td> 
+          <%= simple_format(event.title) %>
+	  <small>
+	    starts: <%= event.starts.strftime(upstairs_time_format) %>
+	    <%= link_to 'manage', manage_event_path(event.id) %> 
+	    created by: <%= signature(event.user) %>
+	  </small>
 	</td> 
-	 <td><%= event.building.address %></td>
-	 <td><%= event.user.email %></td>
       </tr>
     <% end %>
   </tbody>

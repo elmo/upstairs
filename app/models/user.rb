@@ -8,9 +8,11 @@ class User < ActiveRecord::Base
   has_many :buildings, through: :memberships
   has_many :comments, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :tickets, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :verifications, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
@@ -33,6 +35,35 @@ class User < ActiveRecord::Base
   PROFILE_STATUS_WELCOMED = 5
   PROFILE_STATUS_BUILDING_CHOSEN = 10
   PROFILE_STATUS_BUILDING_OWNERSHIP_DECLARED = 15
+
+  scope :managed_by, lambda  { |user|
+    User.where(id: Membership.select(:user_id).where(building_id: user.owned_and_managed_properties.collect(&:id) ).distinct )
+  }
+
+  scope :managed_by_within_building, lambda  { |user, building_id|
+    User.where(id: Membership.select(:user_id).where(building_id: building_id ).distinct )
+  }
+
+
+  scope :managed_by_with_membership_type, lambda  { |user,membership_type|
+      User.where(id: Membership.select(:user_id)
+		      .where(building_id: user.owned_and_managed_properties.collect(&:id),
+			     membership_type: membership_type).distinct )
+  }
+
+  scope :managed_by_with_membership_type_within_building, lambda  { |user, membership_type, building_id|
+      User.where(id: Membership.select(:user_id)
+		      .where(building_id: building_id, membership_type: membership_type).distinct )
+  }
+
+  extend FriendlyId
+
+ # def self.managed_by(user:, membership_type: nil)
+ #   building_ids = user.owned_and_managed_properties.collect(&:id)
+ #   return [] if building_ids.empty?
+ #   return Membership.where(building_id: building_ids).collect(&:user) if membership_type.blank?
+ #   return Membership.where(building_id: building_ids, membership_type: membership_type ).collect(&:user)
+ # end
 
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
@@ -339,11 +370,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.managed_by(user:, membership_type: nil)
-    building_ids = user.owned_and_managed_properties.collect(&:id)
-    return [] if building_ids.empty?
-    return Membership.where(building_id: building_ids).collect(&:user) if membership_type.blank?
-    return Membership.where(building_id: building_ids, membership_type: membership_type ).collect(&:user)
+
+  def username_or_email
+    username.present? ? username : email
   end
 
   private

@@ -14,6 +14,7 @@ class Building < ActiveRecord::Base
   has_many :messages, dependent: :destroy
   has_many :units, dependent: :destroy
   has_many :tenancies, through: :units
+  has_many :users, -> {distinct},  through: :memberships, class_name: 'User', foreign_key: 'user_id'
 
   belongs_to :landlord, class_name: 'User', foreign_key: 'landlord_id'
   belongs_to :actionable, polymorphic: true
@@ -35,6 +36,7 @@ class Building < ActiveRecord::Base
   has_paper_trail
   has_attachments :photos
   scope :verified, -> { joins(:verifications) }
+
 
   def membership(user)
     memberships.where(user_id: user.id).last
@@ -128,6 +130,11 @@ class Building < ActiveRecord::Base
   def public_name
     address
   end
+
+  def short_name
+    address.split(',').first
+  end
+
 
   def alerts_for_user(user)
     alerts.recent.joins(:notifications)

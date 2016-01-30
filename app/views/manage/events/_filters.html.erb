@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <td>
+      <% if @building.present? %>
+        <%= link_to "events(#{@building.events.count})", manage_events_path -%>
+        <%= link_to "past(#{@building.events.past.count})", manage_events_path(starts: Event::PAST ) -%>
+        <%= link_to "future(#{@building.events.future.count})", manage_events_path(starts: Event::FUTURE ) -%>
+      <% else  %>
+        <%= link_to "events(#{Event.managed_by(current_user).count})", manage_events_path -%>
+        <%= link_to "past(#{Event.managed_by(current_user).past.count})", manage_events_path(starts: Event::PAST ) -%>
+        <%= link_to "future(#{Event.managed_by(current_user).future.count})", manage_events_path(starts: Event::FUTURE ) -%>
+      <% end %>
+    </td>
+  </tr>
+</table>

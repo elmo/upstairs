@@ -1,9 +1,22 @@
+<% if @building.present? %>
+
 <table>
   <tr>
-    <% Category.all.each do |category| %>
-      <td> 
-         <%= link_to category.name, manage_posts_path(category_id: category.id )-%> 
-      </td>
-    <% end %>
+    <td> 
+      <p>Categories:
+       <% Category.all.each do |category| %>
+	       <%= link_to "#{category.name} (#{@building.posts.within_category(category).count})", 
+		       manage_posts_path(category_id: category.id, building_id: @building.to_param )-%> 
+       <% end %>
+
+      </p>
+      <p>Buildings:
+       <% current_user.owned_and_managed_properties.each do |building| %>
+	   <%= link_to "#{building.short_name} (#{@building.posts.count})", manage_tickets_path(buidling: building.to_param) -%>
+       <% end %>
+      </p>
+    </td> 
   </tr>
 </table>
+
+<% end %>

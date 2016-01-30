@@ -15,6 +15,8 @@ class Post < ActiveRecord::Base
     where(["postable_type = 'Building' and postable_id in (?) ", user.owned_and_managed_properties.collect(&:id)])
   }
 
+  scope :within_category, lambda { |category| where(category_id: category.id) }
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
   has_paper_trail

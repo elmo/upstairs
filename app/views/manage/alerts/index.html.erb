@@ -1,18 +1,16 @@
 <h2>Alerts</h2>
+Building:
+<% current_user.owned_and_managed_properties.each do |building| %>
+  <%= link_to "#{building.short_name} (#{building.alerts.count})", manage_alerts_path(buidling: building.to_param) -%>
+<% end %>
 
 <% if @alerts.empty? %>
-  <% if params[:searchTextField].blank? %>
-    <p>There are no alerts configured for this building.</p>
-  <% else %>
-     <p>There are no alerts matching your search.</p>
-  <% end %>
+  <p>There are no alerts matching your search.</p>
 <%  else %>
-
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Address</th>
       <th>User</th>
     </tr>
   </thead>
@@ -22,11 +20,12 @@
       <tr>
 	 <td> 
           <%= alert.message %>
-	  <%= link_to 'view',   manage_alert_path(alert.id) %> 
 	  <%= link_to 'manage', manage_alert_path(alert.id) %> 
 	</td> 
-	 <td><%= alert.building.address %></td>
-	 <td><%= alert.user.email %></td>
+	<td>
+		<%= signature(alert.user) %> 
+		(<%= link_to alert.building.short_name, manage_building_path(alert.building) %>)
+	</td>
       </tr>
     <% end %>
   </tbody>

@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_message, only: [:show, :edit, :update, :destroy, :read, :unread]
-  before_action :set_building
+  before_action :set_building, except: [:create]
   layout 'building'
 
   # GET /messages
@@ -17,22 +17,18 @@ class MessagesController < ApplicationController
    @messages = scope.page(params[:page]).order(created_at: :desc)
   end
 
-  # GET /messages/1
   def show
   end
 
-  # GET /messages/new
   def new
     session[:message_return_to] = request.referer
     @message = Message.new(sender: current_user, recipient: @recipient)
     @message.building = @building
   end
 
-  # GET /messages/1/edit
   def edit
   end
 
-  # POST /messages
   def create
     set_recipient
     @message = Message.new(message_params)
@@ -48,7 +44,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /messages/1
   def update
     if @message.update(message_params)
       redirect_to @message, notice: 'Message was successfully updated.'
@@ -65,12 +60,6 @@ class MessagesController < ApplicationController
   def unread
     @message.mark_as_unread!
     redirect_to :back
-  end
-
-  # DELETE /messages/1
-  def destroy
-    @message.destroy
-    redirect_to messages_url, notice: 'Message was successfully destroyed.'
   end
 
   private

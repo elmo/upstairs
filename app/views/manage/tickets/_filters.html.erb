@@ -1,0 +1,21 @@
+<table>
+  <tr>
+     <td>
+       Status:
+       <%= link_to "Open (#{Ticket.managed_by(current_user).open.count})", manage_tickets_path(status: Ticket::STATUS_OPEN) %>
+       <%= link_to "Closed (#{Ticket.managed_by(current_user).closed.count})", manage_tickets_path(status: Ticket::STATUS_CLOSED) %>
+       Severity:
+       <%= link_to "Minor (#{Ticket.managed_by(current_user).minor.count})", manage_tickets_path(severity: Ticket::SEVERITY_MINOR) %>
+       <%= link_to "Serious (#{Ticket.managed_by(current_user).minor.count})", manage_tickets_path(severity: Ticket::SEVERITY_SERIOUS) %>
+       <%= link_to "Severe (#{Ticket.managed_by(current_user).severe.count})", manage_tickets_path(severity: Ticket::SEVERITY_SEVERE) %>
+     </td>
+  </tr>
+  <tr>
+    <td> 
+       Building: 
+       <% current_user.owned_and_managed_properties.each do |building| %>
+	 <%= link_to "#{building.address} (#{building.tickets.count})", manage_tickets_path(buidling_id: building.to_param) -%>
+       <% end %>
+    </td> 
+  </tr>
+</table>

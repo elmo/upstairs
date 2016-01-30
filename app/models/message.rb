@@ -12,8 +12,8 @@ class Message < ActiveRecord::Base
 
   scope :to_user, -> (user) {where(recipient_id: user.id ) }
   scope :from_user, -> (user) {where(sender_id: user.id ) }
-  scope :read, -> { where(read: true) }
-  scope :unread, -> { where(read: true) }
+  scope :is_read, -> { where(is_read: true) }
+  scope :is_unread, -> { where(is_read: false ) }
 
   MESSAGE_UNREAD = 'unread'
   MESSAGE_FROM = 'from'
@@ -24,11 +24,15 @@ class Message < ActiveRecord::Base
   end
 
   def mark_as_read!
-    update_attributes(read: true)
+    self.update_attributes(is_read: true)
   end
 
   def mark_as_unread!
-    update_attributes(read: false)
+    self.update_attributes(is_read: false)
+  end
+
+  def self.received_messages_count(user, read: false)
+    Message.to_user(user).where(recipient_id: user, is_read: read).count
   end
 
   private
