@@ -121,16 +121,10 @@ Upstairs::Application.routes.draw do
         put 'unread'
       end
     end
-    resources :invitations do
-      get 'redeem'
-    end
+
     resources :verification_requests, only: [:new, :create]
     resources :photos
     resources :events
-    resources :user_invitations, controller: 'invitations', type: 'UserInvitation'
-    resources :landlord_invitations, controller: 'invitations', type: 'LandlordInvitation'
-    resources :manager_invitations, controller: 'invitations', type: 'ManagerInvitation'
-
     resources :users, only: [:show, :welcome] do
       resources :messages
     end

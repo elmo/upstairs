@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :invitable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :google]
 
   has_many :activities, dependent: :destroy
@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :posts, dependent: :destroy
-  has_many :invitations, dependent: :destroy
+  #has_many :invitations, dependent: :destroy
+  has_many :invitations, :class_name => self.to_s, :as => :invited_by
   has_many :memberships, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :tickets, dependent: :destroy

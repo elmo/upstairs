@@ -3,16 +3,15 @@
   @alert  ||= @building.alerts.new
   @ticket ||= @building.tickets.new
   @post   ||= @building.posts.new
-  @invitation ||= @building.invitations.new
 %>
 <ul class="add_menu submenu">
-    <li>
-        <div class="modal">
-          <label for="post-modal">
-            <div class="modal-trigger">
-              <%= content_tag(:div, 'C' , id: 'icon_7', class: 'icon_menu') -%> 
-                <%= content_tag(:div, 'Create a new Note', id: 'invite_someone', class: 'menu_item_text_add')-%>
-              </div>
+   <li>
+      <div class="modal">
+        <label for="post-modal">
+          <div class="modal-trigger">
+             <%= content_tag(:div, 'C' , id: 'icon_7', class: 'icon_menu') -%> 
+             <%= content_tag(:div, 'Create a new Note', id: 'invite_someone', class: 'menu_item_text_add')-%>
+          </div>
           </label>
           <input class="modal-state" id="post-modal" type="checkbox" />
 
@@ -27,31 +26,8 @@
             </div>
           </div>
         </div>
-    </li>
-  <li> 
-    <div class="modal">
-      <label for="invitation-modal">
-        <div class="modal-trigger">
-            <%= content_tag(:div, 'M' , id: 'icon_7', class: 'icon_menu') -%> 
-            <%= content_tag(:div, I18n.t(:invite_someone), id: 'invite_someone', class: 'menu_item_text_add')-%>
-          
-        </div>
-      </label>
-      <input class="modal-state" id="invitation-modal" type="checkbox" />
-
-      <div class="modal-fade-screen">
-        <div class="modal-inner">
-          <div class="modal-close" for="invitation-modal"></div>
-          <h1><%= I18n.t(:invite_someone)%></h1>
-          <p class="modal-intro">Create a new Event.</p>
-          <p class="modal-content">
-            <%= render partial: '/invitations/form'%>
-          </p>
-        </div>
-      </div>
-    </div>
-  </li>
-  <li>
+   </li>
+   <li>
       <div class="modal">
           <label for="ticket-modal">
             <div class="modal-trigger">
@@ -143,14 +119,3 @@
 <a href="javascript:void(0)" class="js-accordion-trigger">
   <div id="add"><%= image_tag"icon_plus.png", id: "icon_plus" %></div>
 </a>
-
-
-
-
-
-
-
-
-
-
-
