@@ -6,15 +6,10 @@ class Event < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :body
   after_create :create_notifications
-<<<<<<< HEAD
 
-  #extend FriendlyId
-  #friendly_id :slug_candidates, use: :slugged
-
-=======
   PAST = 'past'
   FUTURE = 'future'
->>>>>>> master
+    
   scope :managed_by, lambda {|user|
     where(building_id: user.owned_and_managed_properties.collect(&:id) )
   }
