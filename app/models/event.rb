@@ -9,7 +9,11 @@ class Event < ActiveRecord::Base
 
   PAST = 'past'
   FUTURE = 'future'
-    
+
+
+  #extend FriendlyId
+  #friendly_id :slug_candidates, use: :slugged
+
   scope :managed_by, lambda {|user|
     where(building_id: user.owned_and_managed_properties.collect(&:id) )
   }
