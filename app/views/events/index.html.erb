@@ -3,8 +3,8 @@
     <div class="right_side">
     <% @events.each do |event| %>
       <div class="event note">
+          <div class="link"><%= link_to event.title, building_event_path(@building, event, view: params[:view] )  %></div>
          <div class="date"><%= event.starts.strftime(upstairs_time_format) -%></div>
-         <div class="link"><%= link_to event.title, building_event_path(@building, event, view: params[:view] )  -%></div>
          <div class="text"><p> <%= event.body -%></p></div>
        </div>
     <% end %>
