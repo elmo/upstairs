@@ -1,0 +1,38 @@
+<h1>Manager Invitations</h1>
+
+<% if @manager_invitations.empty? %>
+ <p>You have sent no invitations to managers </p>
+<% else %>
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Sent At</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @manager_invitations.each do |manager_invitation| %>
+      <tr>
+        <td><%= manager_invitation.email  %></td>
+        <td><%= manager_invitation.created_at.strftime(upstairs_time_format) %></td>
+        <td><%= manager_invitation.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+
+<p>
+<%= paginate(@manager_invitations) -%>
+</p>
+
+<p>
+  <%= link_to 'Invite someone to be manager', new_manage_manager_invitation_path %>
+</p>
+
+<p>
+<%= link_to 'back to my buildings' , manage_buildings_path  %>
+</p>

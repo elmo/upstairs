@@ -1,8 +1,9 @@
 Upstairs::Application.routes.draw do
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => '/attachinary' unless Rails.env.test?
 
-  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', omniauth_callbacks: 'callbacks' }
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', omniauth_callbacks: 'callbacks', invitations: 'users/invitations' }
 
   devise_scope :user do
     get '/join' => 'devise/registrations#new'
@@ -25,6 +26,7 @@ Upstairs::Application.routes.draw do
   put '/acknowledge' => 'users#acknowledge'
 
   namespace :manage do
+    resources :manager_invitations
     resources :messages, only: :index
     resources :buildings do
       resources :units
