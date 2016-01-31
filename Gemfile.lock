@@ -94,6 +94,9 @@ GEM
       countries (~> 1.2.0)
       sort_alphabetical (~> 1.0)
     currencies (0.4.2)
+    devise_invitable (1.5.5)
+      actionmailer (>= 3.2.6, < 5)
+      devise (>= 3.2.0)
     diff-lcs (1.2.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
@@ -346,6 +349,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   country_select
   devise!
+  devise_invitable
   factory_girl
   factory_girl_rails
   faker

@@ -1,2 +1,0 @@
-class ManagerInvitation < Invitation
-end

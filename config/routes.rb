@@ -1,8 +1,9 @@
 Upstairs::Application.routes.draw do
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Attachinary::Engine => '/attachinary' unless Rails.env.test?
 
-  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', omniauth_callbacks: 'callbacks' }
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', omniauth_callbacks: 'callbacks', invitations: 'users/invitations' }
 
   devise_scope :user do
     get '/join' => 'devise/registrations#new'
@@ -25,6 +26,7 @@ Upstairs::Application.routes.draw do
   put '/acknowledge' => 'users#acknowledge'
 
   namespace :manage do
+    resources :invitations
     resources :messages, only: :index
     resources :buildings do
       resources :units
@@ -119,16 +121,10 @@ Upstairs::Application.routes.draw do
         put 'unread'
       end
     end
-    resources :invitations do
-      get 'redeem'
-    end
+
     resources :verification_requests, only: [:new, :create]
     resources :photos
     resources :events
-    resources :user_invitations, controller: 'invitations', type: 'UserInvitation'
-    resources :landlord_invitations, controller: 'invitations', type: 'LandlordInvitation'
-    resources :manager_invitations, controller: 'invitations', type: 'ManagerInvitation'
-
     resources :users, only: [:show, :welcome] do
       resources :messages
     end
