@@ -33,6 +33,7 @@
 <%= link_to "Users (#{@building.users.count})", manage_memberships_path(building_id: @building.slug) -%>
 <%= link_to "tenants (#{@building.memberships.tenant.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_TENANT) -%>
 <%= link_to "guests(#{@building.memberships.guest.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_GUEST) -%>
+
 <%= link_to "managers(#{@building.memberships.manager.count})", manage_memberships_path(building_id: @building.to_param, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER) -%>
 </p>
 
@@ -43,3 +44,8 @@
   <%= link_to "future(#{@building.events.future.count})", manage_events_path(starts: Event::FUTURE ) -%>
 </p>
 
+<h4><%= link_to "Invitations (#{current_user.invitations.count})", manage_invitations_path %> </h4>
+
+<p>
+  <%= link_to 'new invitation', new_user_invitation_path(invitation_type: 'manager') -%>
+</p>

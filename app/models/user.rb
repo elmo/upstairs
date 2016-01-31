@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :invitable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :google]
 
   has_many :activities, dependent: :destroy
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :posts, dependent: :destroy
-  has_many :invitations, dependent: :destroy
+  has_many :invitations, :class_name => self.to_s, :as => :invited_by
   has_many :memberships, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :tickets, dependent: :destroy
@@ -18,9 +18,11 @@ class User < ActiveRecord::Base
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :members, class_name: 'User', through: :memberships
+  has_many :manager_invitations, dependent: :destroy
   belongs_to :invitation
   belongs_to :tenancy
   belongs_to :sender, foreign_key: 'sender_id', class_name: 'User'
+  belongs_to :invited_to_building, foreign_key: 'invited_to_building_id', class_name: 'Building'
   after_create :apply_invitation
   before_save :set_slug
 
@@ -57,13 +59,7 @@ class User < ActiveRecord::Base
   }
 
   extend FriendlyId
-
- # def self.managed_by(user:, membership_type: nil)
- #   building_ids = user.owned_and_managed_properties.collect(&:id)
- #   return [] if building_ids.empty?
- #   return Membership.where(building_id: building_ids).collect(&:user) if membership_type.blank?
- #   return Membership.where(building_id: building_ids, membership_type: membership_type ).collect(&:user)
- # end
+  friendly_id :slug_candidates, use: :slugged
 
   has_paper_trail
   has_attachment :avatar, accept: [:jpg, :png, :gif]
@@ -84,6 +80,9 @@ class User < ActiveRecord::Base
       when Membership::MEMBERSHIP_TYPE_MANAGER
         fail 'Unable to grant permission' unless permitted_to_grant_managership?(building)
         user.make_manager(building)
+      when Membership::MEMBERSHIP_TYPE_VENDOR
+        fail 'Unable to grant permission' unless permitted_to_grant_vendorship?(building)
+        user.make_vendor(building)
       when Membership::MEMBERSHIP_TYPE_TENANT
         fail 'Unable to grant tenant membership' unless permitted_to_grant_tenantship?(building)
         user.make_tenant(building)
@@ -244,6 +243,14 @@ class User < ActiveRecord::Base
     memberships.where(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_MANAGER).destroy_all
   end
 
+  def make_vendor(building)
+    memberships.find_or_create_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_VENDOR)
+  end
+
+  def revoke_vendor(building)
+    memberships.where(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_VENDOR).destroy_all
+  end
+
   def make_tenant(building)
     memberships.find_or_create_by(building_id: building.id, membership_type: Membership::MEMBERSHIP_TYPE_TENANT)
   end
@@ -374,6 +381,7 @@ class User < ActiveRecord::Base
   def username_or_email
     username.present? ? username : email
   end
+
 
   private
 
