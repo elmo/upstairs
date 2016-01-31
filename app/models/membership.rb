@@ -6,10 +6,12 @@ class Membership < ActiveRecord::Base
   validates_presence_of :membership_type
   validates_uniqueness_of :building, scope: [:user, :membership_type]
   has_paper_trail
+
   MEMBERSHIP_TYPE_GUEST = 'Guest'
   MEMBERSHIP_TYPE_TENANT = 'Tenant'
   MEMBERSHIP_TYPE_LANDLORD = 'Landlord'
   MEMBERSHIP_TYPE_MANAGER = 'Manager'
+  MEMBERSHIP_TYPE_VENDOR = 'Vendor'
 
   scope :guest, -> { where(membership_type:  MEMBERSHIP_TYPE_GUEST) }
   scope :tenant, -> { where(membership_type: MEMBERSHIP_TYPE_TENANT) }
@@ -39,6 +41,10 @@ class Membership < ActiveRecord::Base
 
   def guest?
     membership_type == MEMBERSHIP_TYPE_GUEST
+  end
+
+  def vendor?
+    membership_type == MEMBERSHIP_TYPE_VENDOR
   end
 
 end

@@ -26,7 +26,7 @@ Upstairs::Application.routes.draw do
   put '/acknowledge' => 'users#acknowledge'
 
   namespace :manage do
-    resources :manager_invitations
+    resources :invitations
     resources :messages, only: :index
     resources :buildings do
       resources :units
