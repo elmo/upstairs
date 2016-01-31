@@ -371,6 +371,7 @@ class User < ActiveRecord::Base
     username.present? ? username : email
   end
 
+
   private
 
   def set_slug

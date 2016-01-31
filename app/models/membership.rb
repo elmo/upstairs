@@ -20,7 +20,7 @@ class Membership < ActiveRecord::Base
   scope :rentable, -> { where(['membership_type in (?) ', [MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT]]) }
 
   def self.membership_types
-    [MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT, MEMBERSHIP_TYPE_LANDLORD, MEMBERSHIP_TYPE_MANAGER]
+    [MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT, MEMBERSHIP_TYPE_LANDLORD, MEMBERSHIP_TYPE_MANAGER,MEMBERSHIP_TYPE_VENDOR]
   end
 
   def promote_to_tenant_of!(building:)
@@ -45,6 +45,17 @@ class Membership < ActiveRecord::Base
 
   def vendor?
     membership_type == MEMBERSHIP_TYPE_VENDOR
+  end
+
+  def self.allowed_send_invitation_type?(roles, invitation_type)
+    allowed_roles = {
+      MEMBERSHIP_TYPE_GUEST    => [ MEMBERSHIP_TYPE_GUEST],
+      MEMBERSHIP_TYPE_TENANT   => [ MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT],
+      MEMBERSHIP_TYPE_VENDOR   => [ MEMBERSHIP_TYPE_GUEST],
+      MEMBERSHIP_TYPE_MANAGER  => [ MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT, MEMBERSHIP_TYPE_VENDOR, MEMBERSHIP_TYPE_MANAGER],
+      MEMBERSHIP_TYPE_LANDLORD => [ MEMBERSHIP_TYPE_GUEST, MEMBERSHIP_TYPE_TENANT, MEMBERSHIP_TYPE_VENDOR, MEMBERSHIP_TYPE_MANAGER]
+    }[invitation_type]
+    (roles & allowed_roles).any?
   end
 
 end

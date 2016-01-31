@@ -30,8 +30,8 @@
 
 <p>
 Invite a new:
-<% Membership.membership_types.each do |invitation_type| %>
-  <%= link_to "#{invitation_type.downcase}", new_user_invitation_path(invitation_type: invitation_type.downcase ) -%>
-<% end %>
+<% Membership.membership_types.each  do |invitation_type| %>
+  <%= link_to "#{invitation_type.downcase}", new_user_invitation_path(invitation_type: invitation_type.downcase) -%>
+<% end  %>
 </p>
 
