@@ -25,6 +25,11 @@ Upstairs::Application.routes.draw do
   get '/welcome' => 'users#welcome', :via  => :get
   put '/acknowledge' => 'users#acknowledge'
 
+  namespace :vendor do
+    resources :buildings, only: [:index, :show]
+    resources :tickets
+  end
+
   namespace :manage do
     resources :invitations
     resources :messages, only: :index
@@ -93,7 +98,6 @@ Upstairs::Application.routes.draw do
       get 'building'
       get 'managers'
       get 'guests'
-      get 'vendors'
     end
     resources :memberships, only: [:create, :destroy, :index] do
       member do

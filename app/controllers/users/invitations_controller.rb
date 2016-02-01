@@ -37,7 +37,7 @@ class Users::InvitationsController < Devise::InvitationsController
     case resource.invitation_type
      when Membership::MEMBERSHIP_TYPE_MANAGER
        resource.invited_by.owned_and_managed_properties.each { |building| resource.make_manager(building) }
-     when Membership::MEMBERSHIP_TYPE_VENDOjR
+     when Membership::MEMBERSHIP_TYPE_VENDOR
        resource.invited_by.owned_and_managed_properties.each { |building| resource.make_vendor(building) }
      when Membership::MEMBERSHIP_TYPE_TENANT
         resource.make_tenant(resource.invited_to_building)
@@ -49,8 +49,10 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def after_accept_path_for(resource)
      case resource.invitation_type
-       when Membership::MEMBERSHIP_TYPE_MANAGER, Membership::MEMBERSHIP_TYPE_VENDOR
+       when Membership::MEMBERSHIP_TYPE_MANAGER, Membership::MEMBERSHIP_TYPE_LANDLORD
          manage_buildings_path
+       when Membership::MEMBERSHIP_TYPE_VENDOR
+         vendor_buildings_path
        when Membership::MEMBERSHIP_TYPE_TENANT, Membership:: MEMBERSHIP_TYPE_GUEST
          if resource.invited_to_building.present?
            building_path(resource.invited_to_building)
