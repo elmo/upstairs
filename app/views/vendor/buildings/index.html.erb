@@ -7,7 +7,7 @@
 <% @buildings.each do |building| %>
    <tr>
     <td>
-      <%= building.address -%>
+      <%= link_to building.address, vendor_building_path(building) -%>
     </td>
    </tr>
 </table>

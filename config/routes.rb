@@ -26,7 +26,8 @@ Upstairs::Application.routes.draw do
   put '/acknowledge' => 'users#acknowledge'
 
   namespace :vendor do
-    resources :buildings, only: [:index]
+    resources :buildings, only: [:index, :show]
+    resources :tickets
   end
 
   namespace :manage do
