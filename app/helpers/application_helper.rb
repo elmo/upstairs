@@ -187,6 +187,10 @@ module ApplicationHelper
     controller.class.parent == Manage
   end
 
+  def vendor_namespace?
+    controller.class.parent == Vendor
+  end
+
   def current_section
     case controller_name
       when 'posts'
@@ -240,6 +244,8 @@ module ApplicationHelper
   def left_nav
     if manage_namespace?
       render partial: '/layouts/manage/left_nav', locals: { section: current_section }
+    elsif vendor_namespace?
+      render partial: '/layouts/vendor/left_nav', locals: { section: current_section }
     else
       render partial: '/layouts/left_nav', locals: { section: current_section }
     end
@@ -257,8 +263,13 @@ module ApplicationHelper
     end
   end
 
+  def vendor_search_and_filter_nav
+    render partial: '/layouts/vendor/search_and_filter_nav'
+  end
+
   def search_and_filter_nav
     return manage_search_and_filter_nav if manage_namespace?
+    return vendor_search_and_filter_nav if vendor_namespace?
     case current_section
     when 'bulletin board'
       render partial: '/posts/search_and_filter_nav'

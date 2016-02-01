@@ -382,6 +382,9 @@ class User < ActiveRecord::Base
     username.present? ? username : email
   end
 
+  def client_buildings
+    memberships.vendor.collect(&:building)
+  end
 
   private
 
