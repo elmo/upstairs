@@ -1,0 +1,21 @@
+<h1>Vendor Dashboard</h1>
+<h2><%= current_user.email -%></h2>
+<h4><%= link_to "Assigned Tickets(#{Assignment.assigned_to_user(current_user).count})", vendor_membership_assignments_path %></h4>
+
+<% if @assignments.empty? %>
+  <p>There are now tickets assigned to you.</p>
+<% else %>
+  <table>
+    <tr>
+      <th>Building</th>
+      <th>Ticket</th>
+      <th>Created</th>
+      <th>Assigned </th>
+      <th>Accepted</th>
+      <th>Completed</th>
+    </tr>
+  <% @assignments.each do |assignment| %>
+     <%= render partial: '/vendor/assignments/assignment', locals: {assignment: assignment} -%>
+  <% end %>
+  </table>
+<% end %>

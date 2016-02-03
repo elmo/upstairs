@@ -8,6 +8,9 @@ RSpec.describe User, type: :model do
   it { should have_many(:notifications) }
   it { should have_many(:replies) }
   it { should have_many(:verifications) }
+  it { should have_many(:assignments) }
+  it { should have_many(:work_assignments) }
+  it { should have_many(:assigned_tickets) }
   it { should belong_to(:invitation) }
 
   describe 'join' do

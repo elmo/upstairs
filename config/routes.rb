@@ -28,10 +28,30 @@ Upstairs::Application.routes.draw do
   namespace :vendor do
     resources :buildings, only: [:index, :show]
     resources :tickets
+    resource :membership do
+      resources :assignments do
+        member do
+          put 'complete'
+          put 'reopen'
+          put 'accept'
+          put 'relinquish'
+        end
+      end
+      resources :tickets
+      get :show, on: :member
+    end
   end
 
   namespace :manage do
     resources :invitations
+    resources :assignments do
+      member do
+        put 'complete'
+        put 'reopen'
+        put 'accept'
+        put 'relinquish'
+      end
+    end
     resources :messages, only: :index
     resources :buildings do
       resources :units
@@ -45,7 +65,11 @@ Upstairs::Application.routes.draw do
     resources :posts
       resources :memberships
     resources :alerts
-    resources :tickets
+
+    resources :tickets do
+      resources :assignments
+    end
+
     resources :events
     resources :units do
       resources :tenancies

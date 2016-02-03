@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131150935) do
+ActiveRecord::Schema.define(version: 20160202175532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 20160131150935) do
 
   add_index "alerts", ["building_id"], name: "index_alerts_on_building_id", using: :btree
   add_index "alerts", ["user_id"], name: "index_alerts_on_user_id", using: :btree
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "assigned_to"
+    t.integer  "ticket_id"
+    t.datetime "accepted_at"
+    t.datetime "completed_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "attachinary_files", force: :cascade do |t|
     t.integer  "attachinariable_id"
