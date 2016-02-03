@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @manage_assignment.user_id %>
+</p>
+
+<p>
+  <strong>Assigned to:</strong>
+  <%= @manage_assignment.assigned_to %>
+</p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @manage_assignment.ticket_id %>
+</p>
+
+<p>
+  <strong>Accepted at:</strong>
+  <%= @manage_assignment.accepted_at %>
+</p>
+
+<p>
+  <strong>Completed at:</strong>
+  <%= @manage_assignment.completed_at %>
+</p>
+
+<%= link_to 'Edit', edit_manage_assignment_path(@manage_assignment) %> |
+<%= link_to 'Back', manage_assignments_path %>

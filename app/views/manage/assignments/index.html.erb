@@ -1,0 +1,57 @@
+<h1>Assignments</h1>
+
+<% if @assignments.any? %>
+<table>
+  <thead>
+    <tr>
+      <th>Building</th>
+      <th>Ticket</th>
+      <th>Created</th>
+      <th>Assigned </th>
+      <th>Accepted</th>
+      <th>Completed</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= link_to assignment.ticket.building.short_name, manage_building_path(assignment.ticket.building) %></td>
+        <td><%= assignment.ticket.title %></td>
+	<td><small><%= signature(assignment.assignee) %> </small></td>
+	<td><small><%= time_ago_in_words(assignment.created_at) %> ago</small></td>
+	<td>
+         <small>
+         <% if assignment.accepted? %>
+	   <%= assignment.accepted_at.strftime(upstairs_time_format) %>
+           <%= link_to 'relinquish', relinquish_manage_assignment_path(assignment), method: :put -%>
+	 <% else %>
+           <%= link_to 'accept', accept_manage_assignment_path(assignment), method: :put -%> 
+         <% end %>
+         </small>
+	</td>
+	<td>
+         <small>
+         <% if assignment.completed? %>
+	   <%= assignment.completed_at.strftime(upstairs_time_format) %>
+           <%= link_to 'reopen', reopen_manage_assignment_path(assignment), method: :put -%> 
+	 <% else %>
+           <%= link_to 'complete', complete_manage_assignment_path(assignment), method: :put -%> 
+         <% end %>
+         </small>
+	</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= paginate(@assignments) -%>
+</p>
+
+<% else %>
+<p> 
+There are now assigments.
+</p>
+<% end %>
+

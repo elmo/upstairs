@@ -27,6 +27,7 @@
       <th>User</th>
       <th>Status</th>
       <th>Severity</th>
+      <th>Assigned</th>
     </tr>
   </thead>
 
@@ -43,6 +44,16 @@
 	 <td><%= signature(ticket.user) %></td>
 	 <td><%= ticket.status %></td>
 	 <td><%= ticket.severity %></td>
+	 <td>
+           <% if ticket.assignment.blank? -%>
+             <%= link_to 'assign', new_manage_ticket_assignment_path(ticket)  %>
+           <% else %>
+	     <small>
+               <%= signature(ticket.assignment.assignee) -%>
+               <%= time_ago_in_words(ticket.assignment.created_at)-%> ago
+	     </small>
+           <% end %>
+	 </td>
       </tr>
     <% end %>
   </tbody>
