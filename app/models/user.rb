@@ -22,11 +22,9 @@ class User < ActiveRecord::Base
   has_many :assignments, dependent: :destroy
   has_many :work_assignments, class_name: 'Assignment', foreign_key: 'assigned_to'
   has_many :assigned_tickets, through: :work_assignments, source: :ticket
-  #belongs_to :invitation
   belongs_to :tenancy
   belongs_to :sender, foreign_key: 'sender_id', class_name: 'User'
   belongs_to :invited_to_building, foreign_key: 'invited_to_building_id', class_name: 'Building'
-  after_create :apply_invitation
   before_save :set_slug
 
   rolify
