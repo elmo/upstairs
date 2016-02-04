@@ -9,6 +9,7 @@ Upstairs::Application.routes.draw do
     get '/join' => 'devise/registrations#new'
     get '/login' => 'devise/sessions#new'
     get '/invite/:id' => 'invitations#welcome', as: :invite
+    get '/landing' => 'users#landing', as: :landing
   end
 
   root to: 'home#home'
