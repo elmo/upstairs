@@ -45,6 +45,8 @@ Completed <%= @assignment.completed_at.strftime(upstairs_time_format) -%>
 </small>
 </p>
 
+<%= render partial: '/vendor/comments/comments', locals: {commentable: @assignment, comments: @comments } %>
+
 <p>
 <%= link_to "back to my assigned tickets", vendor_membership_assignments_path %>
 </p>

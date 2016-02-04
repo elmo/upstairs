@@ -1,0 +1,20 @@
+<% if comments.empty? %>
+  <p>There are no comments for <%= commentable.class.to_s -%> #<%= commentable.id-%>.</p>
+<% else %>
+  <h5>Comments:</h5>
+  <% comments.each do |comment| %>
+    <p>
+      <%= simple_format(comment.body) -%>
+      <small>submitted by <%= signature(comment.user) -%> <%= time_ago_in_words(comment.created_at) -%> ago </small>
+      <small><%= vendor_delete_link(commentable: commentable, comment: comment) -%></small>
+    </p>
+    <% end %>
+<% end %>
+
+<p>
+<%= paginate(comments) %>
+</p>
+
+<p>
+<%= link_to "add a new comment for #{commentable.generic_name}", new_polymorphic_path([:vendor, commentable, Comment.new] )%>
+</p>
