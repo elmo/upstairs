@@ -25,6 +25,7 @@ class Manage::TicketsController < Manage::ManageController
 
   def show
     @ticket = Ticket.find(params[:id])
+    @comments = @ticket.comments.order(created_at: :asc).page(params[:page]).per(10)
   end
 
   def new

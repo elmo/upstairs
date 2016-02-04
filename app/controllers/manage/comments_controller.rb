@@ -44,6 +44,7 @@ class Manage::CommentsController < Manage::ManageController
 
   def set_commentable
     @commentable = Assignment.find(params[:assignment_id]) if params[:assignment_id]
+    @commentable = Ticket.find(params[:ticket_id]) if params[:ticket_id]
   end
 
   def comment_params
