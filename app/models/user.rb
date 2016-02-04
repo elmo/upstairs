@@ -384,7 +384,6 @@ class User < ActiveRecord::Base
     end
   end
 
-
   def username_or_email
     username.present? ? username : email
   end
