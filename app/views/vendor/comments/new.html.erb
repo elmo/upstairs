@@ -1,0 +1,9 @@
+<h5>New Comment</h5>
+
+<strong>Ticket title:</strong> <%= @commentable.ticket.title -%><br />
+
+<p>
+<%= simple_format(@commentable.ticket.body) -%>
+</p>
+
+<%= render 'form' %>

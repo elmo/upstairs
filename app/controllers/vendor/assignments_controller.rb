@@ -15,6 +15,7 @@ class Vendor::AssignmentsController < Vendor::VendorController
   end
 
   def show
+    @comments = @assignment.comments.order(created_at: :asc).page(params[:page]).per(10)
   end
 
   def edit

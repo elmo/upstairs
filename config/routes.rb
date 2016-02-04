@@ -29,6 +29,9 @@ Upstairs::Application.routes.draw do
   namespace :vendor do
     resources :buildings, only: [:index, :show]
     resources :tickets
+    resources :assignments do
+      resources :comments
+    end
     resource :membership do
       resources :assignments do
         member do
