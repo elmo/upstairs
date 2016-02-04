@@ -73,6 +73,7 @@ Upstairs::Application.routes.draw do
 
     resources :tickets do
       resources :assignments
+      resources :comments
     end
 
     resources :events

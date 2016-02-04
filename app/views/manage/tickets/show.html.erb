@@ -40,6 +40,8 @@
   <small> assinged to <%= link_to @ticket.assignment.assignee.username_or_email, manage_assignment_path(@ticket.assignment)  -%> <%= time_ago_in_words(@ticket.assignment.created_at)-%> ago </small>
 <% end %>
 
+<%= render partial: '/manage/comments/comments', locals: {commentable: @ticket, comments: @comments } -%>
+
 </p>
 <%= link_to 'List all building tickets', manage_tickets_path %>
 </p>

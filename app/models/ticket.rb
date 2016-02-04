@@ -101,6 +101,10 @@ class Ticket < ActiveRecord::Base
     User.managers_and_vendors_for(building.landlord)
   end
 
+  def generic_name
+    "#{self.class.to_s}: ##{id}"
+  end
+
   private
 
   def create_notifications

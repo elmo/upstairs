@@ -1,9 +1,5 @@
 <h5>New Comment</h5>
-<strong>Ticket title:</strong> <%= @commentable.ticket.title -%><br />
-<strong>Ticket description:</strong> <%= @commentable.ticket.body -%>
 
-<p>
-<%= simple_format(@commentable.ticket.body) -%>
-</p>
+<%= render partial: '/manage/comments/commentable', locals: {commentable: @commentable } %>
 
 <%= render 'form' %>

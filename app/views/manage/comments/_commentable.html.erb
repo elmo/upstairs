@@ -1,0 +1,16 @@
+<% if @commentable.respond_to?(:generic_name) %>
+  <%= @commentable.generic_name  -%>
+  <br />
+<% end %>
+
+<% if @commentable.respond_to?(:title) %>
+<strong>Title: </strong>
+<%= @commentable.title -%>
+  <br />
+<% end %>
+
+<% if @commentable.respond_to?(:body) %>
+<strong>Body: </strong>
+<%= @commentable.body -%>
+  <br />
+<% end%>
