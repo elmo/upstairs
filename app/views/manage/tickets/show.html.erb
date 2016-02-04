@@ -34,6 +34,12 @@
 </p>
 <% end %>
 
+<% if @ticket.assignment.blank? -%>
+  <%= link_to 'assign', new_manage_ticket_assignment_path(@ticket)  %>
+<% else %>
+  <small> assinged to <%= link_to @ticket.assignment.assignee.username_or_email, manage_assignment_path(@ticket.assignment)  -%> <%= time_ago_in_words(@ticket.assignment.created_at)-%> ago </small>
+<% end %>
+
 </p>
 <%= link_to 'List all building tickets', manage_tickets_path %>
 </p>
