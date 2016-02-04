@@ -2,6 +2,7 @@ class Assignment < ActiveRecord::Base
   belongs_to :user
   belongs_to :assignee, class_name: 'User', foreign_key: 'assigned_to'
   belongs_to :ticket
+  has_many :comments, as: :commentable, dependent: :destroy
   validates_presence_of :ticket
   validates_presence_of :user
   validates_presence_of :assignee
@@ -37,5 +38,8 @@ class Assignment < ActiveRecord::Base
     accepted_at.present?
   end
 
+  def generic_name
+    "#{self.class.to_s}: ##{id}"
+  end
 
 end

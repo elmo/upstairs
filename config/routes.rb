@@ -52,6 +52,7 @@ Upstairs::Application.routes.draw do
         put 'accept'
         put 'relinquish'
       end
+      resources :comments
     end
     resources :messages, only: :index
     resources :buildings do

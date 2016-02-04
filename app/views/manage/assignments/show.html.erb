@@ -33,6 +33,9 @@ Assigned by <%= signature(@assignment.user) -%> <%= @assignment.created_at.strft
 <small> Accepted <%= @assignment.accepted_at.strftime(upstairs_time_format) -%></small>
 <% end %>
 
+<%= render partial: '/manage/comments/comments', 
+	locals: {commentable: @assignment, comments: @comments } %>
+
 <p>
 <%= link_to "list all tickets", manage_assignments_path %>
 </p>

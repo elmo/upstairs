@@ -19,6 +19,10 @@ class Manage::AssignmentsController < Manage::ManageController
     @assignment = Assignment.new(ticket: @ticket)
   end
 
+  def show
+    @comments = @assignment.comments.order(created_at: :asc).page(params[:page]).per(10)
+  end
+
   # GET /manage/assignments/1/edit
   def edit
   end
