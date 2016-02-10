@@ -25,6 +25,7 @@ class Manage::AssignmentsController < Manage::ManageController
 
   # GET /manage/assignments/1/edit
   def edit
+   @ticket = @assignment.ticket
   end
 
   # POST /manage/assignments

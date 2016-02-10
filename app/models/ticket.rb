@@ -105,6 +105,13 @@ class Ticket < ActiveRecord::Base
     "#{self.class.to_s}: ##{id}"
   end
 
+  def notifiable_users(except_user: nil)
+   user_ids = self.comments.collect(&:user_id).uniq
+   user_ids.delete(except_user.id) if except_user.present?
+   return [] if user_ids.empty?
+   User.where(id: user_ids )
+  end
+
   private
 
   def create_notifications

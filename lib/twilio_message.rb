@@ -5,7 +5,7 @@ class TwilioMessage
 
   FROM_NUMBER = '+16179368426'
 
-  def initialize(to, body, url = nil)
+  def initialize(to:, body:, url: nil)
     @to = to
     @body = body
     @url = url
@@ -16,10 +16,7 @@ class TwilioMessage
 
   def deliver
     client = Twilio::REST::Client.new
-    if @url.blank?
-      client.messages.create(from: FROM_NUMBER, to: @to, body: @body)
-    else
-      client.messages.create(from: FROM_NUMBER, to: @to, body: @body, media_url: @url)
-    end
+    (@url.blank?) ? client.messages.create(from: FROM_NUMBER, to: @to, body: @body)
+                  : client.messages.create(from: FROM_NUMBER, to: @to, body: @body, media_url: @url)
   end
 end

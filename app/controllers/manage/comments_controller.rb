@@ -15,6 +15,7 @@ class Manage::CommentsController < Manage::ManageController
 
   def create
     @comment = @commentable.comments.new(comment_params)
+    @comment.sending_context = SENDING_CONTEXT_MANAGER
     @comment.user = current_user
     if @comment.save
       redirect_to polymorphic_url([:manage, @commentable]), notice: 'Comment was successfully created.'
