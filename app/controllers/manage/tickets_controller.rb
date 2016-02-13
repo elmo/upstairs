@@ -16,7 +16,7 @@ class Manage::TicketsController < Manage::ManageController
     end
 
     if params[:building_id]
-      @building = Building.find_by(slug: params[:user_id] )
+      @building = Building.find_by(slug: params[:building_id] )
       scope = scope.where(building_id: @building.id)
     end
 
