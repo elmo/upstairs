@@ -1,0 +1,41 @@
+<h1>Assignment Details</h1>
+
+<p>
+<strong>Address:</strong>
+<%= @assignment.ticket.building.address -%>
+</p>
+
+<p>
+<strong>Title:</strong>
+<%= @assignment.ticket.title -%>
+</p>
+
+<p>
+<strong>Description:</strong>
+<%= @assignment.ticket.body -%>
+</p>
+<p>
+<strong>Status:</strong>
+<%= @assignment.ticket.status -%>
+</p>
+<p>
+<strong>Severity:</strong>
+<%= @assignment.ticket.severity -%>
+</p>
+
+<p>
+<small>
+Assigned by <%= signature(@assignment.user) -%> <%= @assignment.created_at.strftime(upstairs_time_format) %>  
+</small>
+</p>
+
+<% if @assignment.accepted?  %>
+<small> Accepted <%= @assignment.accepted_at.strftime(upstairs_time_format) -%></small>
+<% end %>
+
+<%= render partial: '/manage/comments/comments', 
+	locals: {commentable: @assignment, comments: @comments } %>
+
+<p>
+<%= link_to "list all tickets", manage_assignments_path %>
+</p>

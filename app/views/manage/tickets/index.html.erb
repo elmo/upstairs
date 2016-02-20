@@ -22,27 +22,37 @@
 <table>
   <thead>
     <tr>
-      <th>Building</th>
       <th>Title</th>
-      <th>User</th>
-      <th>Status</th>
-      <th>Severity</th>
+      <th>Status / Severity</th>
+      <th>Assigned</th>
     </tr>
   </thead>
 
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
-	<td><%= link_to ticket.building.short_name, manage_building_path(ticket.building) %></td>
-	<td><%= ticket.title %>
-	<small> <%= link_to 'manage', manage_ticket_path(ticket.id) %> 
+	<td><%= ticket.title %> (<%= link_to ticket.building.short_name, manage_tickets_path(building_id: ticket.building.slug) %>) 
+	<small> <%= link_to 'manage', manage_ticket_path(ticket.id) %>
 		<br />
-		<%= time_ago_in_words(ticket.created_at) %> ago 
+	        submitted by <%= signature(ticket.user) %> <%= time_ago_in_words(ticket.created_at) %> ago 
 	</small>
 	</td> 
-	 <td><%= signature(ticket.user) %></td>
-	 <td><%= ticket.status %></td>
-	 <td><%= ticket.severity %></td>
+	<td>
+           <%= ticket.status %>
+	   <%= ticket.severity %>
+	   <small><%= link_to 'edit', edit_manage_ticket_path(ticket) %></small>
+	 </td>
+	 <td>
+           <% if ticket.assignment.blank? -%>
+             <%= link_to 'assign', new_manage_ticket_assignment_path(ticket)  %>
+           <% else %>
+	     <small>
+               <%= link_to ticket.assignment.assignee.username_or_email, manage_assignment_path(ticket.assignment) %>
+               <%= time_ago_in_words(ticket.assignment.created_at)-%> ago
+	       <%= link_to 'reassign', edit_manage_assignment_path(ticket.assignment) -%>
+	     </small>
+           <% end %>
+	 </td>
       </tr>
     <% end %>
   </tbody>

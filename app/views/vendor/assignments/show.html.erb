@@ -1,0 +1,52 @@
+<h1>Assignment Details</h1>
+
+<p>
+<strong>Address:</strong>
+<%= @assignment.ticket.building.address -%>
+</p>
+
+<p>
+<strong>Title:</strong>
+<%= @assignment.ticket.title -%>
+</p>
+
+<p>
+<strong>Description:</strong>
+<%= @assignment.ticket.body -%>
+</p>
+<p>
+<strong>Status:</strong>
+<%= @assignment.ticket.status -%>
+</p>
+<p>
+<strong>Severity:</strong>
+<%= @assignment.ticket.severity -%>
+</p>
+
+<p>
+Assigned to you by <%= signature(@assignment.user) -%> <%= @assignment.created_at.strftime(upstairs_time_format) %>  
+</p>
+
+<p>
+<small>
+<% if @assignment.accepted?  %>
+Accepted <%= @assignment.accepted_at.strftime(upstairs_time_format) -%>  
+  <%= link_to 'relinquish', relinquish_vendor_membership_assignment_path(@assignment), method: :put %>
+<% else %>
+  <%= link_to 'accept', accept_vendor_membership_assignment_path(@assignment), method: :put %> 
+<% end %>
+
+<% if @assignment.completed?  %>
+Completed <%= @assignment.completed_at.strftime(upstairs_time_format) -%>  
+ <%= link_to 'reopen', reopen_vendor_membership_assignment_path(@assignment), method: :put %> 
+<% else %>
+  <%= link_to 'mark as completed', complete_vendor_membership_assignment_path(@assignment), method: :put %> 
+<% end %>
+</small>
+</p>
+
+<%= render partial: '/vendor/comments/comments', locals: {commentable: @assignment, comments: @comments } %>
+
+<p>
+<%= link_to "back to my assigned tickets", vendor_membership_assignments_path %>
+</p>

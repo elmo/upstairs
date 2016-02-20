@@ -1,0 +1,18 @@
+<h1>Buildings - Vendor Dashboard</h1>
+
+<table class="table">
+<tr>
+  <th>Address</th>
+</tr>
+<% @buildings.each do |building| %>
+   <tr>
+    <td>
+      <%= link_to building.address, vendor_building_path(building) -%>
+    </td>
+   </tr>
+</table>
+<% end %>
+
+<p>
+  <%= paginate(@buildings) %>
+</p>

@@ -1,0 +1,29 @@
+      <tr>
+        <td><%= link_to assignment.ticket.building.short_name, vendor_membership_assignments_path(assignment.ticket.building, building_id: assignment.ticket.building.id) %></td>
+	<td>
+          <%= assignment.ticket.title %>
+	  <small><%= link_to 'view', vendor_membership_assignment_path(assignment) -%></small>
+	</td>
+	<td><small><%= signature(assignment.assignee) %> </small></td>
+	<td><small><%= time_ago_in_words(assignment.created_at) %> ago</small></td>
+	<td>
+         <small>
+         <% if assignment.accepted? %>
+	   <%= assignment.accepted_at.strftime(upstairs_time_format) %>
+           <%= link_to 'relinquish', relinquish_vendor_membership_assignment_path(assignment), method: :put -%>
+	 <% else %>
+           <%= link_to 'accept', accept_vendor_membership_assignment_path(assignment), method: :put -%> 
+         <% end %>
+         </small>
+	</td>
+	<td>
+         <small>
+         <% if assignment.completed? %>
+	   <%= assignment.completed_at.strftime(upstairs_time_format) %>
+           <%= link_to 'reopen', reopen_vendor_membership_assignment_path(assignment), method: :put -%> 
+	 <% else %>
+           <%= link_to 'complete', complete_vendor_membership_assignment_path(assignment), method: :put -%> 
+         <% end %>
+         </small>
+	</td>
+      </tr>

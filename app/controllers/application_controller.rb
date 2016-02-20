@@ -16,14 +16,8 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     sign_in_url = new_user_session_url
-    return manage_buildings_path if resource.landlord_or_manager?
     return stored_location_for(resource) if stored_location_for(resource).present?
-    return welcome_path if resource.brand_new?
-    return buildings_path if resource.welcomed? && !resource.building_chosen?
-    if resource.primary_residence.present?
-      return building_path(resource.primary_residence)
-    end
-    root_path
+    return landing_path
   end
 
   def after_update_path_for(resource)
@@ -43,4 +37,16 @@ class ApplicationController < ActionController::Base
       'building'
     end
   end
+
+  def membership_landing_url(membership)
+    case membership.membership_type
+      when Membership::MEMBERSHIP_TYPE_GUEST, Membership::MEMBERSHIP_TYPE_TENANT
+        building_path(membership.building)
+      when Membership::MEMBERSHIP_TYPE_VENDOR
+        vendor_membership_path
+      when Membership::MEMBERSHIP_TYPE_MANAGER, Membership::MEMBERSHIP_TYPE_LANDLORD
+        manage_buildings_path
+     end
+  end
+
 end

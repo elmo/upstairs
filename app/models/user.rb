@@ -19,11 +19,12 @@ class User < ActiveRecord::Base
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :members, class_name: 'User', through: :memberships
   has_many :manager_invitations, dependent: :destroy
-  belongs_to :invitation
+  has_many :assignments, dependent: :destroy
+  has_many :work_assignments, class_name: 'Assignment', foreign_key: 'assigned_to'
+  has_many :assigned_tickets, through: :work_assignments, source: :ticket
   belongs_to :tenancy
   belongs_to :sender, foreign_key: 'sender_id', class_name: 'User'
   belongs_to :invited_to_building, foreign_key: 'invited_to_building_id', class_name: 'Building'
-  after_create :apply_invitation
   before_save :set_slug
 
   rolify
@@ -56,6 +57,12 @@ class User < ActiveRecord::Base
   scope :managed_by_with_membership_type_within_building, lambda  { |user, membership_type, building_id|
       User.where(id: Membership.select(:user_id)
 		      .where(building_id: building_id, membership_type: membership_type).distinct )
+  }
+
+  scope :managers_and_vendors_for, lambda {|user|
+      User.where(id: Membership.select(:user_id)
+		      .where(building_id: user.owned_and_managed_properties.collect(&:id),
+			     membership_type: [Membership::MEMBERSHIP_TYPE_VENDOR, Membership::MEMBERSHIP_TYPE_MANAGER ]).distinct)
   }
 
   extend FriendlyId
@@ -377,11 +384,13 @@ class User < ActiveRecord::Base
     end
   end
 
-
   def username_or_email
     username.present? ? username : email
   end
 
+  def client_buildings
+    memberships.vendor.collect(&:building)
+  end
 
   private
 

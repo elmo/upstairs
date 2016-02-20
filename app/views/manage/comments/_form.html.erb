@@ -1,0 +1,4 @@
+<%= simple_form_for([:manage, @commentable, @comment]) do |f| %>
+  <%= f.input :body, label: 'Enter your comment' %>
+  <%= f.button :submit %>
+<% end %>

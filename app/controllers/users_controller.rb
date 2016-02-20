@@ -2,6 +2,11 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :get_building, only: [:show]
 
+  def landing
+   @memberships = current_user.memberships.order(membership_type: :desc).page(params[:page]).per(20)
+   redirect_to membership_landing_url(@memberships.first) if @memberships.count == 1
+  end
+
   def welcome
   end
 

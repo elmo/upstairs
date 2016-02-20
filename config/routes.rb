@@ -9,6 +9,7 @@ Upstairs::Application.routes.draw do
     get '/join' => 'devise/registrations#new'
     get '/login' => 'devise/sessions#new'
     get '/invite/:id' => 'invitations#welcome', as: :invite
+    get '/landing' => 'users#landing', as: :landing
   end
 
   root to: 'home#home'
@@ -25,8 +26,37 @@ Upstairs::Application.routes.draw do
   get '/welcome' => 'users#welcome', :via  => :get
   put '/acknowledge' => 'users#acknowledge'
 
+  namespace :vendor do
+    resources :buildings, only: [:index, :show]
+    resources :tickets
+    resources :assignments do
+      resources :comments
+    end
+    resource :membership do
+      resources :assignments do
+        member do
+          put 'complete'
+          put 'reopen'
+          put 'accept'
+          put 'relinquish'
+        end
+      end
+      resources :tickets
+      get :show, on: :member
+    end
+  end
+
   namespace :manage do
     resources :invitations
+    resources :assignments do
+      member do
+        put 'complete'
+        put 'reopen'
+        put 'accept'
+        put 'relinquish'
+      end
+      resources :comments
+    end
     resources :messages, only: :index
     resources :buildings do
       resources :units
@@ -40,7 +70,12 @@ Upstairs::Application.routes.draw do
     resources :posts
       resources :memberships
     resources :alerts
-    resources :tickets
+
+    resources :tickets do
+      resources :assignments
+      resources :comments
+    end
+
     resources :events
     resources :units do
       resources :tenancies
@@ -93,7 +128,6 @@ Upstairs::Application.routes.draw do
       get 'building'
       get 'managers'
       get 'guests'
-      get 'vendors'
     end
     resources :memberships, only: [:create, :destroy, :index] do
       member do

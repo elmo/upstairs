@@ -31,4 +31,27 @@ end
     (user.username.present?) ? user.username : user.email
   end
 
+  def membership_landing_link(membership)
+    case membership.membership_type
+      when Membership::MEMBERSHIP_TYPE_GUEST, Membership::MEMBERSHIP_TYPE_TENANT
+        link_to "visit", membership_landing_url(membership)
+      when Membership::MEMBERSHIP_TYPE_VENDOR
+        link_to "manage business relationship", membership_landing_url(membership)
+      when Membership::MEMBERSHIP_TYPE_MANAGER, Membership::MEMBERSHIP_TYPE_LANDLORD
+        link_to "manage", membership_landing_url(membership)
+    end
+  end
+
+  def membership_landing_url(membership)
+    case membership.membership_type
+      when Membership::MEMBERSHIP_TYPE_GUEST, Membership::MEMBERSHIP_TYPE_TENANT
+        building_path(membership.building)
+      when Membership::MEMBERSHIP_TYPE_VENDOR
+        vendor_membership_path
+      when Membership::MEMBERSHIP_TYPE_MANAGER, Membership::MEMBERSHIP_TYPE_LANDLORD
+        manage_buildings_path
+     end
+  end
+
+
 end

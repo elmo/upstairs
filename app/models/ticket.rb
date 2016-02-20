@@ -2,6 +2,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :user
   belongs_to :building
   belongs_to :actionable, polymorphic: true
+  has_one :assignment
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   validates_presence_of :user
@@ -94,6 +95,21 @@ class Ticket < ActiveRecord::Base
   def deescalate!
     update_attributes(severity: SEVERITY_MINOR) if severity == SEVERITY_SERIOUS
     update_attributes(severity: SEVERITY_SERIOUS) if severity == SEVERITY_SEVERE
+  end
+
+  def candidate_assignees
+    User.managers_and_vendors_for(building.landlord)
+  end
+
+  def generic_name
+    "#{self.class.to_s}: ##{id}"
+  end
+
+  def notifiable_users(except_user: nil)
+   user_ids = self.comments.collect(&:user_id).uniq
+   user_ids.delete(except_user.id) if except_user.present?
+   return [] if user_ids.empty?
+   User.where(id: user_ids )
   end
 
   private

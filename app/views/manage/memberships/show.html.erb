@@ -3,6 +3,7 @@
 <p>
 <%= signature(@user) %>
 <%= link_to "Tickets (#{@user.tickets.count})", manage_tickets_path(user_id: @user.slug) %>
-<%= link_to "Posts(#{@user.posts.count})", manage_posts_path(user_id: @user.slug) %>
-<%= link_to "Events(#{@user.events.count})", manage_events_path(user_id: @user.slug) %>
+<%= link_to "Posts (#{@user.posts.count})", manage_posts_path(user_id: @user.slug) %>
+<%= link_to "Events (#{@user.events.count})", manage_events_path(user_id: @user.slug) %>
+<%= link_to "Assignments (#{Assignment.assigned_to_user(@user).count})", manage_assignments_path(user_id: @user.slug) %>
 </p>

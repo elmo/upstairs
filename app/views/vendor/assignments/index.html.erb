@@ -1,0 +1,38 @@
+<h1>Assignments</h1>
+
+<p>
+<%= link_to "All (#{Assignment.assigned_to_user(current_user).count})" , vendor_membership_assignments_path %></h4>
+<%= link_to "Accepted (#{Assignment.assigned_to_user(current_user).completed.count})", vendor_membership_assignments_path(accepted: true) %>
+<%= link_to "Enqueued (#{Assignment.assigned_to_user(current_user).waiting_for_claiming(current_user).count})", vendor_membership_assignments_path(accepted: true) %>
+<%= link_to "Completed (#{Assignment.assigned_to_user(current_user).completed.count})", vendor_membership_assignments_path(completed: true) %>
+<%= link_to "Open (#{Assignment.assigned_to_user(current_user).open.count})", vendor_membership_assignments_path(completed: false) %>
+</p>
+
+<% if @assignments.any? %>
+<table>
+  <thead>
+    <tr>
+      <th>Building</th>
+      <th>Ticket</th>
+      <th>Created</th>
+      <th>Assigned </th>
+      <th>Accepted</th>
+      <th>Completed</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+       <%= render partial: 'assignment', locals: {assignment: assignment }%>
+    <% end %>
+  </tbody>
+</table>
+<p>
+  <%= paginate(@assignments) -%>
+</p>
+<% else %>
+<p> 
+No tickets match your search.
+</p>
+<% end %>
+
