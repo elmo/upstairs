@@ -148,14 +148,6 @@ ActiveRecord::Schema.define(version: 20160202175532) do
   add_index "invitations", ["token"], name: "index_invitations_on_token", using: :btree
   add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
 
-  create_table "manager_invitations", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "email"
-    t.string   "status",     default: "new"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "building_id"
