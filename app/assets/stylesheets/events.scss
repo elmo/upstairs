@@ -8,10 +8,20 @@
     
 }
 .right_side{
-    @include span-columns(3);
+    @include span-columns(4);
 }
 #events-calendar{
     margin: 0px; 
-    @include span-columns(9);
+    @include span-columns(8);
     
+}
+.event{
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+}
+
+.fc-day-grid-container.fc-scroller{
+    
+    max-height: 482px !important;
 }

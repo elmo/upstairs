@@ -1,7 +1,6 @@
-<div id="header"  >
-    <div id="rectangle_8"  ></div>
-    
-    <nav id="nav" role="navigation" class=" nav filters">
+
+<div id="header" class="header" >
+    <nav id="nav" role="navigation" class="nav filters">
         <a href="#nav" title="Show navigation">Show navigation</a>
         <a href="#" title="Hide navigation">Hide navigation</a>
         <ul class="accordion">
@@ -28,19 +27,28 @@
             </li>
         </ul>
     </nav>
-    <div id="rectangle_2"  ></div>
     
     <div id="searchC"   >
-        <%= form_tag building_tickets_path(@building), method: :get  do %>
+        <div id="rectangle_2"  ></div>
+         <%= form_tag building_tickets_path(@building), method: :get  do %>
         <%= submit_tag 's', id: 'search',  class:'icon' %>
         <%= text_field_tag :searchTextField %>
         <% end %>
+        <div id="rectangle_2"  ></div>
     </div>
-    <div id="rectangle_2"  ></div>
+    <%= recent_alerts -%>
 </div>
 <%= form_tag building_tickets_url(@building), method: :get do %>
 
 <% end %>
+
+
+        
+        
+
+
+
+
 
 
         

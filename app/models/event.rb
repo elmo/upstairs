@@ -6,15 +6,18 @@ class Event < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :body
   after_create :create_notifications
+
   PAST = 'past'
   FUTURE = 'future'
+
+  #extend FriendlyId
+  #friendly_id :slug_candidates, use: :slugged
+
   scope :managed_by, lambda {|user|
     where(building_id: user.owned_and_managed_properties.collect(&:id) )
   }
   scope :past, -> { where(["starts < ? ", Time.now ]) }
   scope :future, -> { where(["starts > ? ", Time.now ]) }
-
-  extend FriendlyId
 
   has_attachments :photos, dependent: :destroy
 
@@ -29,6 +32,10 @@ class Event < ActiveRecord::Base
   def commenters
     comments.collect(&:user).uniq
   end
+
+  #def slug_candidates
+  #  [:title]
+  #end
 
   private
 
