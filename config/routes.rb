@@ -26,6 +26,13 @@ Upstairs::Application.routes.draw do
   get '/welcome' => 'users#welcome', :via  => :get
   put '/acknowledge' => 'users#acknowledge'
 
+  resources :messages do
+    member do
+      put 'mark_as_read'
+      put 'mark_as_unread'
+     end
+  end
+
   namespace :vendor do
     resources :buildings, only: [:index, :show]
     resources :tickets

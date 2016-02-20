@@ -1,36 +1,45 @@
-<h1>Messages </h1>
-<div ="message_summary">
-  <%= link_to "unread: (#{current_user.received_messages.unread.count})" , building_messages_path(@building, filter: Message::MESSAGE_UNREAD) -%> |
-  <%= link_to "received: (#{current_user.received_messages.count})" , building_messages_path(@building, filter: Message::MESSAGE_TO) -%> |
-  <%= link_to "sent: (#{current_user.sent_messages.count})" , building_messages_path(@building, filter: Message::MESSAGE_FROM) -%>
-</div>
+<h1>Messages</h1>
+
+<%= render partial: 'filter_messages' %>
 
 <% if @messages.empty? %>
   <p>There are no messages matching your search.</p>
 <% else  %>
+<table class="table">
+  <tr>
+    <th><%= (params[:filter] == Message::MESSAGE_TO) ? 'From' : 'To' -%></th>
+    <th>message</th>
+    <th>actions</th>
+  </tr>
    <% @messages.each do |message| %>
-     <div id="message_<%=message.id-%>">
+   <tr>
+     <td>
      <% if [Message::MESSAGE_TO, Message::MESSAGE_UNREAD].include?(params[:filter]) %>
-       <%= user_profile_image(@building, message.sender, 'small', 'fit') -%>
-       <%= link_to message.sender.public_name , building_user_path(@building, message.sender ) %> 
      <% elsif params[:filter] == Message::MESSAGE_FROM  %>
-       <%= user_profile_image(@building, message.recipient, 'small', 'fit') -%>
-       <%= link_to message.recipient.public_name , building_user_path(@building, message.recipient) %>
+       <%= link_to message.recipient.public_name , building_user_path(message.building, message.recipient) %>
      <% end %>
-     <%= link_to message.created_at.strftime(upstairs_time_format), building_message_path(@building, message)  %> 
-     <p class="message-body">
+       <br />
+       <small><%= time_ago_in_words(message.created_at)%> ago</small>
+     </td>
+
+     <td>
        <%= message.body -%>
-       <small>
-         <%= link_to 'reply', new_building_user_message_path(@building, message.sender, parent_id: message.id ) -%>
-         <%= message.id -%>
-         <% if !message.read? %>
-           <%= link_to 'mark as read', read_building_message_path(@building, message), method: :put %> 
-         <% else %>
-          <%= link_to 'mark as unread', unread_building_message_path(@building, message) , method: :put %> 
+     </td>
+
+     <td>
+       <%= link_to 'reply', new_building_user_message_path(message.building, message.sender, parent_id: message.id ) -%>
+       <% if params[:filter] == Message::MESSAGE_TO %>
+         <% if message.is_read?  %>
+           <%= link_to 'mark as unread', mark_as_unread_message_path(message.building, message.id) , method: :put %> 
+          <% elsif  %>
+            <%= link_to 'mark as read', mark_as_read_message_path(message.building, message.id), method: :put %> 
          <% end %>
-       </small> 
-      </p>
-    </div>
+       <% end %>
+     </td>
+   </tr>
   <% end %>
+</table>
+<p>
   <%= paginate(@messages) -%>
+</p>
 <% end %>

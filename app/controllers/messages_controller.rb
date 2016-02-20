@@ -7,13 +7,21 @@ class MessagesController < ApplicationController
   # GET /messages
   def index
     params[:filter] ||= Message::MESSAGE_TO
-    scope = current_user
-    scope = scope.received_messages.unread if params[:filter] == Message::MESSAGE_UNREAD
-    scope = scope.received_messages if params[:filter] == Message::MESSAGE_TO
-    scope = scope.sent_messages.from_user(current_user) if params[:filter] ==  Message::MESSAGE_FROM
+    if params[:filter] ==  Message::MESSAGE_FROM
+      scope = current_user.sent_messages.from_user(current_user)
+    else
+      scope = current_user.received_messages.to_user(current_user)
+    end
+
+    if params[:read].present?
+      scope = scope.where(is_read: true) if params[:read] == 'true'
+      scope = scope.where(is_read: false) if params[:read] == 'false'
+    end
+
     if params[:searchTextField].present?
       scope = scope.where(['body like ? ', "%#{params[:searchTextField]}%"])
     end
+
    @messages = scope.page(params[:page]).order(created_at: :desc)
   end
 
