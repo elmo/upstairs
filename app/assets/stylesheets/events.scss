@@ -13,15 +13,30 @@
 #events-calendar{
     margin: 0px; 
     @include span-columns(8);
-    
+    max-height: calc(100%* .9  );
 }
 .event{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: inherit;
 }
-
+.event .text, .event .date {
+    text-decoration:  none;
+    color: #333;
+    
+}
 .fc-day-grid-container.fc-scroller{
     
     max-height: 482px !important;
+}
+.eventImg{
+    width: 7em;
+    height: 7em;
+    margin-right: 5px;
+    overflow: hidden;
+    
+}
+.eventTxt{
+    padding: 5px;
+    
 }
