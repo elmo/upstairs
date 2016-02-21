@@ -93,12 +93,12 @@
           </div>
         </div>
   </li> 
-    <!--li> 
+    <li> 
         <div class="modal">
           <label for="event-modal">
             <div class="modal-trigger">
-                <!--%= content_tag(:div, 'G' , id: 'icon_5', class: 'icon_menu') -%> 
-                <!--%= content_tag(:div, 'New Message', id: 'icon', class: 'menu_item_text_add')-%>
+                <%= content_tag(:div, 'G' , id: 'icon_5', class: 'icon_menu') -%> 
+                <%= content_tag(:div, 'New Message', id: 'icon', class: 'menu_item_text_add')-%>
               </div>
           </label>
           <input class="modal-state" id="event-modal" type="checkbox" />
@@ -109,12 +109,12 @@
               <h1>New message</h1>
               <p class="modal-intro">Create a new Message.</p>
               <p class="modal-content">
-                  <!--%= render partial: '/messages/form'%>
+                  <%= render partial: '/messages/form'%>
               </p>
             </div>
           </div>
         </div>
-  </li--> 
+  </li> 
 </ul> 
 <a href="javascript:void(0)" class="js-accordion-trigger">
   <div id="add"><%= image_tag"icon_plus.png", id: "icon_plus" %></div>

@@ -10,18 +10,53 @@
 .right_side{
     @include span-columns(4);
 }
+.conent-posts{
+    padding: 5px;
+    
+}
 #events-calendar{
     margin: 0px; 
     @include span-columns(8);
+    max-height: calc(100%* .9  );
+}
+.eventContent{
+    display: flex;
+    flex-direction: column ;
     
 }
 .event{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: inherit;
 }
-
+.eventDisplay{
+    flex-direction: column;
+    
+}
+.eventDetails{
+    float: left;
+    
+}
+.eventEdit{
+    float: right;
+}
+.event .text, .event .date {
+    text-decoration:  none;
+    color: #333;
+    
+}
 .fc-day-grid-container.fc-scroller{
     
     max-height: 482px !important;
+}
+.eventImg{
+    width: 7em;
+    height: 7em;
+    margin-right: 5px;
+    overflow: hidden;
+    
+}
+.eventTxt{
+    padding: 5px;
+    
 }

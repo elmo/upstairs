@@ -2,13 +2,17 @@
     <div id="events-calendar"></div>
     <div class="right_side">
     <% @events.each do |event| %>
+          <a href="<%= building_event_path(@building, event, view: params[:view] )  %>">
       <div class="event note">
-
-          <div class="link"><%= link_to event.title, building_event_path(@building, event, view: params[:view] )  %></div>
-         <div class="date"><%= event.starts.strftime(upstairs_time_format) -%></div>
-
-         <div class="text"><p> <%= event.body -%></p></div>
+          <div class="eventImg"><%= cl_image_tag(event.photos.first.path, { crop: :fit }) %></div>
+          <div class="eventTxt">
+                <div class="link"><%= event.title %></div>
+                <div class="date"><%= event.starts.strftime(upstairs_time_format) -%></div>
+                <div class="text"><p> <%= event.body -%></p></div>
+          </div>
        </div>
+              </a>
+          
     <% end %>
     </div>
 </div>
