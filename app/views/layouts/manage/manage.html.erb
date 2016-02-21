@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" >
+<head>
+    <%= stylesheet_link_tag 'manage', :media => "all" %>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= cloudinary_js_config %>
+    <title><%= current_title -%></title>
+    <%= favicon_link_tag 'favicon.ico' %>
+  </head>
+  <body>
+    <%= left_nav %>
+    <div id= "content-container">
+      <%= search_and_filter_nav %>
+      <div id="content">
+       <div id="inner-building-content">
+       <%= yield %>
+       </div>
+      </div>
+    </div>
+    </div>
+    <%= render partial: '/layouts/javascript_callbacks' -%>
+  </body>
+</html>
