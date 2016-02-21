@@ -1,25 +1,31 @@
 <div class="conent-posts">
 <h3 class="inline"><%= @event.title %></h3>
-<small>posted by <%= link_to @event.user.public_name, building_user_path(@building, @event.user ) %> 
+<div class="event eventDisplay">
+
+<div class="event">
+<% if @event.photos.any? %>
+<%= cl_image_tag(@event.photos.first.path, { size: '300x500', crop: :fit }) %>
+<% end %>
+<div class="eventContent">
+<div class="eventDetails">posted by <%= link_to @event.user.public_name, building_user_path(@building, @event.user ) %> 
 <% if @event.owned_by?(current_user) %>
-<%= @event.created_at.strftime(upstairs_time_format) -%></small> 
-<small><%= link_to 'edit', edit_building_event_path(@building, @event) %></small> 
+<%= @event.created_at.strftime(upstairs_time_format) -%><div class="eventEdit"><%= link_to 'edit', edit_building_event_path(@building, @event) %></div> </div> 
+
 <% end %>
 <% if !@event.owned_by?(current_user)%>
-<p><%= link_to 'send message to organizer', new_building_user_message_path(@building, @event.user) %></p> 
+<div><%= link_to 'send message to organizer', new_building_user_message_path(@building, @event.user) %></div> 
 <% end %>
-<div class="event">
-<p><strong>Starts:</strong> <%= @event.starts.strftime("%B %d, %Y") %></p>
-<% if @event.photos.any? %>
-<br clear="all">
-<%= cl_image_tag(@event.photos.first.path, { size: '300x500', crop: :fit }) %>
-<br clear="all">
-<% end %>
-<%= @event.body %>
-<br class="inline">
-<div id="comments">
+<div>
+    <strong>Starts:</strong> <%= @event.starts.strftime("%B %d, %Y") %>
+</div><div>
+    <%= @event.body %>
+</div>
+    <div id="comments">
 <%= render partial: '/comments/comments', locals: { commentable: @event}  %>
+    
 </div>
 </div>
 
+</div>
+</div>
 </div>
