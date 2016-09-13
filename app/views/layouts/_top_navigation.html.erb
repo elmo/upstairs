@@ -1,6 +1,6 @@
 <header class="centered-navigation" role="banner">
   <div class="centered-navigation-wrapper">
-    <div class="nav-logo"> 
+    <div class="nav-logo">
         <%= link_to image_tag("logo_white.png"), home_path -%> </div>
     <nav role="navigation" id='centeredmenu'>
         <ul>
@@ -13,11 +13,11 @@
                     <a href="javascript:void(0)"><%= current_user.username_or_email -%></a>
                    </div>
               <ul class='last'>
-                <% if @building.present? and !@building.new_record? -%>    
-                    <li ><%= link_to "Inbox: #{current_user.received_messages.count}", inbox_path(@building) -%></li>
+                <% if @building.present? and !@building.new_record? -%>
+                    <li ><%# link_to "Inbox: #{current_user.received_messages.count}", inbox_path(@building) -%></li>
                 <% end -%>
                 <% current_user.buildings.distinct.each do |building| -%>
-                  <li ><%= link_to building.address[0..12], building_path(building) -%></li> 
+                  <li ><%= link_to building.address[0..12], building_path(building) -%></li>
                 <% end -%>
 		<li><%= link_to I18n.t(:settings), edit_user_registration_path %></li>
                 <li ><%= link_to I18n.t(:log_out), destroy_user_session_path, method: :delete  -%></li>
